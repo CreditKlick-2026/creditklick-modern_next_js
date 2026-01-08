@@ -46,18 +46,7 @@ const nextConfig: NextConfig = {
   // WWW to Non-WWW Redirect (handled via redirects)
   async redirects() {
     return [
-      // Redirect www to non-www
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.creditklick.com',
-          },
-        ],
-        destination: 'https://creditklick.com/:path*',
-        permanent: true, // 301 redirect for SEO
-      },
+      // Redirects have been removed to prevent loops with hosting provider configuration
     ];
   },
 };
