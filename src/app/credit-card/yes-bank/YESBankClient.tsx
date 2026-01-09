@@ -61,7 +61,7 @@ const benefits = [
 
 export default function YESBankClient() {
     return (
-        <div className="pt-16 md:pt-20">
+        <div className="pt-4 md:pt-8">
             {/* Hero */}
             <section className="container mx-auto py-4 md:py-8 px-3 md:px-4">
                 <div className="bg-blue-100 rounded-2xl md:rounded-3xl shadow-lg">
