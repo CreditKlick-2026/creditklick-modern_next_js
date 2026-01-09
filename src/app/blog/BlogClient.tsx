@@ -13,6 +13,11 @@ interface Post {
     slug: string
     category: string
     excerpt?: string
+    metaDescription?: string
+    seo?: {
+        metaDescription?: string
+        metaTitle?: string
+    }
     createdAt: string
     readTime?: number
     featuredImage?: { url: string } | string
@@ -218,7 +223,7 @@ export default function BlogClient() {
                                             <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                                                 {post.title}
                                             </h3>
-                                            <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                                            <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.seo?.metaDescription || post.excerpt || 'Read more about this topic...'}</p>
                                             <div className="flex items-center justify-between text-xs text-gray-500">
                                                 <span>{new Date(post.createdAt).toLocaleDateString('en-IN')}</span>
                                                 <span className="text-blue-600 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
