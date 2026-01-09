@@ -148,7 +148,7 @@ export function Footer() {
                     <div className="text-red-400 text-sm overflow-hidden whitespace-nowrap">
                         <motion.div
                             animate={{ x: "-50%" }}
-                            transition={{ repeat: Infinity, duration: 55, ease: "linear" }}
+                            transition={{ repeat: Infinity, duration: 80, ease: "linear" }}
                             className="flex whitespace-nowrap"
                         >
                             <span className="px-4 flex-shrink-0">
