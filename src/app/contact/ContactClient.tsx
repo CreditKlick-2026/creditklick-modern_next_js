@@ -102,8 +102,11 @@ export function ContactClient() {
                                     </svg>
                                 </div>
                                 <p className="mt-6 text-sm leading-6 text-gray-600">
-                                    1st floor, Plot 112, Udyog Vihar phase 1 Gurgaon Haryana <br /> 122016 <br />
-                                    Registered Office -: C 125/1, sector 2 Noida 201001
+                                    <strong>Corporate Office:</strong><br />
+                                    Plot No. 112, Udyog Vihar Phase-1,<br />
+                                    Sector 20, Gurugram, Haryana 122016<br /><br />
+                                    <strong>Registered Office:</strong><br />
+                                    C 125/1, Sector 2, Noida 201001
                                 </p>
                             </div>
                         </div>
@@ -274,14 +277,14 @@ export function ContactClient() {
                 {/* Map Section */}
                 <div className="h-96 w-full rounded-2xl overflow-hidden shadow-xl border border-gray-100">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.2507659282347!2d77.0499!3d28.4815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI4JzUzLjQiTiA3N8KwMDMnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.0447959153394!2d77.07547797549878!3d28.50135737573001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19459ca9b8a5%3A0x9f94f0c1d3b3c5d7!2sPlot%20No.%20112%2C%20Udyog%20Vihar%20Phase%201%2C%20Sector%2020%2C%20Gurugram%2C%20Haryana%20122016!5e0!3m2!1sen!2sin!4v1704787200000!5m2!1sen!2sin"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
                         allowFullScreen={true}
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title="CreditKlick Location"
+                        title="CreditKlick Office - Plot No. 112, Udyog Vihar Phase-1, Gurugram"
                     />
                 </div>
             </div>
