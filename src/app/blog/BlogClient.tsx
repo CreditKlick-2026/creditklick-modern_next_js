@@ -103,7 +103,7 @@ export default function BlogClient() {
     const getImageUrl = (post: Post) => {
         if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
         if (typeof post.featuredImage === 'string') return post.featuredImage
-        return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=1000"
+        return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=max&q=80&w=1000"
     }
 
     const getAuthorName = (author: Post['author']) => {
@@ -207,7 +207,7 @@ export default function BlogClient() {
                                     className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                                 >
                                     <Link href={`/blog/${post.slug}`}>
-                                        <div className="relative w-full aspect-video overflow-hidden bg-gray-100">
+                                        <div className="relative w-full aspect-video overflow-hidden bg-white">
                                             <img
                                                 src={getImageUrl(post)}
                                                 alt={post.title}
