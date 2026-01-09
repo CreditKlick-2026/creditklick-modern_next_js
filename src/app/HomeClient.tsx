@@ -84,26 +84,61 @@ const RenderAnimation = ({ type }: { type: string }) => {
 }
 function Slidernew() {
     const [current, setCurrent] = useState(0)
+    const [touchStart, setTouchStart] = useState<number | null>(null)
+    const [touchEnd, setTouchEnd] = useState<number | null>(null)
     const sliderIntervalRef = useRef<NodeJS.Timeout | null>(null)
     const length = sliderData.length
+    const minSwipeDistance = 50
+
     const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1)
     const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1)
+
     const startSlider = () => {
         if (sliderIntervalRef.current) clearInterval(sliderIntervalRef.current)
         sliderIntervalRef.current = setInterval(nextSlide, 3000)
     }
+
     const stopSlider = () => {
         if (sliderIntervalRef.current) clearInterval(sliderIntervalRef.current)
     }
+
     useEffect(() => {
         startSlider()
         return () => stopSlider()
     }, [current])
 
+    const onTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(null)
+        setTouchStart(e.targetTouches[0].clientX)
+        stopSlider()
+    }
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        const distance = touchStart - touchEnd
+        const isLeftSwipe = distance > minSwipeDistance
+        const isRightSwipe = distance < -minSwipeDistance
+
+        if (isLeftSwipe) {
+            nextSlide()
+        }
+        if (isRightSwipe) {
+            prevSlide()
+        }
+        startSlider()
+    }
+
     return (
-        <div className="flex items-center justify-between mx-auto container overflow-hidden md:h-96 sm:my-20 my-1"
+        <div className="flex items-center justify-between mx-auto container overflow-hidden md:h-96 sm:my-20 my-1 touch-pan-y"
             onMouseEnter={stopSlider}
             onMouseLeave={startSlider}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
         >
             <div className="m-1 p-1 rounded-full shadow-lg bg-white sm:block hidden z-10">
                 <ChevronLeft className="sm:text-lg text-sm cursor-pointer w-5 h-5" onClick={prevSlide} />
@@ -149,6 +184,7 @@ function Slidernew() {
         </div>
     )
 }
+
 function Product() {
     const productData = [
         { link: '/credit-score', img: credscore, text: 'CREDIT SCORE' },
@@ -159,14 +195,41 @@ function Product() {
         { link: '/calculators', img: calico, text: 'CALCULATORS' }
     ];
 
+    const scrollRef = useRef<HTMLDivElement>(null)
+    const [isPaused, setIsPaused] = useState(false)
+
+    useEffect(() => {
+        const scrollContainer = scrollRef.current
+        if (!scrollContainer) return
+
+        let animationFrameId: number
+
+        const scroll = () => {
+            if (!isPaused && scrollContainer) {
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+                    scrollContainer.scrollLeft = 0;
+                } else {
+                    scrollContainer.scrollLeft += 1;
+                }
+            }
+            animationFrameId = requestAnimationFrame(scroll)
+        }
+        animationFrameId = requestAnimationFrame(scroll)
+
+        return () => cancelAnimationFrame(animationFrameId)
+    }, [isPaused])
+
     return (
-        <div className="my-4 w-full overflow-x-clip overflow-y-visible py-4 bg-white">
-            <div className="relative w-full flex">
-                <motion.div
-                    className="flex gap-4 sm:gap-6 whitespace-nowrap px-4 py-2"
-                    animate={{ x: ["0%", "-50%"] }}
-                    transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-                    style={{ minWidth: "100%" }}
+        <div className="my-4 w-full overflow-hidden py-4 bg-white">
+            <div className="relative w-full">
+                <div
+                    ref={scrollRef}
+                    className="flex gap-4 sm:gap-6 px-4 py-2 overflow-x-auto no-scrollbar"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    onTouchStart={() => setIsPaused(true)}
+                    onTouchEnd={() => setIsPaused(false)}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                 >
                     {[...productData, ...productData, ...productData, ...productData].map((item, i) => (
                         <div key={i} className="flex-shrink-0 w-32 sm:w-40 md:w-44">
@@ -188,7 +251,7 @@ function Product() {
                             </div>
                         </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </div>
     )

@@ -148,7 +148,7 @@ export function Footer() {
                     <div className="text-red-400 text-sm overflow-hidden whitespace-nowrap">
                         <motion.div
                             animate={{ x: ["100%", "-100%"] }}
-                            transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+                            transition={{ repeat: Infinity, duration: 55, ease: "linear" }}
                             className="inline-block"
                         >
                             CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
