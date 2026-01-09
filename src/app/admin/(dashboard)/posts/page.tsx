@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
@@ -27,7 +27,17 @@ import toast from 'react-hot-toast'
 import CategoriesList from './_components/CategoriesList'
 import axios from 'axios'
 
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
+const ReactQuill = dynamic(() => import('react-quill-new'), {
+    ssr: false,
+    loading: () => (
+        <div className="h-full flex items-center justify-center bg-gray-50 rounded-xl border border-gray-200">
+            <div className="text-center">
+                <Loader2 className="w-8 h-8 animate-spin text-blue-600 mx-auto mb-2" />
+                <p className="text-gray-500 text-sm">Loading editor...</p>
+            </div>
+        </div>
+    )
+})
 
 const CATEGORIES = [
     { value: 'credit-cards', label: 'Credit Cards' },
@@ -262,8 +272,8 @@ export default function PostsManagement() {
         }
     }
 
-    // Custom Image Handler for Quill
-    const imageHandler = () => {
+    // Custom Image Handler for Quill - wrapped in useCallback for stable reference
+    const imageHandler = useCallback(() => {
         const input = document.createElement('input')
         input.setAttribute('type', 'file')
         input.setAttribute('accept', 'image/*')
@@ -294,7 +304,7 @@ export default function PostsManagement() {
                 }
             }
         }
-    }
+    }, [])
 
     const modules = useMemo(() => ({
         toolbar: {
@@ -314,7 +324,7 @@ export default function PostsManagement() {
         clipboard: {
             matchVisual: false,
         }
-    }), [])
+    }), [imageHandler])
 
     const handleSeoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target
