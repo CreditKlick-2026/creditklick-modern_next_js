@@ -61,12 +61,55 @@ interface Post {
     ctaBanner?: CtaBanner
 }
 
-// Utility function to convert YouTube URLs in content to embedded videos
+// Utility function to process and clean content formatting
 const processContentWithVideos = (content: string): string => {
     if (!content) return content;
 
-    // Return content unchanged for now - video embeds can be added via HTML in editor
-    return content;
+    let processed = content;
+
+    // 1. Replace all &nbsp; with regular spaces for better text flow
+    processed = processed.replace(/&nbsp;/gi, ' ');
+
+    // 2. Replace multiple consecutive spaces with single space
+    processed = processed.replace(/\s{2,}/g, ' ');
+
+    // 3. Clean up empty headings
+    processed = processed.replace(/<h[1-6][^>]*>\s*<\/h[1-6]>/gi, '');
+
+    // 4. Clean up empty paragraphs
+    processed = processed.replace(/<p[^>]*>\s*<\/p>/gi, '');
+
+    // 5. Remove <strong> tags inside headings (they're already bold)
+    processed = processed.replace(/<(h[1-6])([^>]*)><strong>([^<]*)<\/strong><\/\1>/gi, '<$1$2>$3</$1>');
+
+    // 6. Clean up headings with only strong inside
+    processed = processed.replace(/<(h[1-6])>\s*<strong>([^<]+)<\/strong>\s*<\/\1>/gi, '<$1>$2</$1>');
+
+    // 7. Add proper table styling classes
+    processed = processed.replace(/<table/gi, '<table class="w-full border-collapse my-6 text-sm md:text-base"');
+    processed = processed.replace(/<th/gi, '<th class="bg-blue-600 text-white px-4 py-3 text-left font-semibold border border-blue-500"');
+    processed = processed.replace(/<td/gi, '<td class="px-4 py-3 border border-gray-200"');
+    processed = processed.replace(/<tr>/gi, '<tr class="hover:bg-gray-50 transition-colors">');
+
+    // 8. Style the first row of table as header if no th exists
+    processed = processed.replace(
+        /<tbody>\s*<tr[^>]*>\s*(<td[^>]*><strong>[^<]+<\/strong><\/td>\s*)+<\/tr>/gi,
+        (match) => {
+            return match
+                .replace(/<td/gi, '<th class="bg-blue-600 text-white px-4 py-3 text-left font-semibold border border-blue-500"')
+                .replace(/<\/td>/gi, '</th>');
+        }
+    );
+
+    // 9. Add spacing classes to lists
+    processed = processed.replace(/<ul>/gi, '<ul class="list-disc pl-6 my-4 space-y-2">');
+    processed = processed.replace(/<ol>/gi, '<ol class="list-decimal pl-6 my-4 space-y-2">');
+    processed = processed.replace(/<li>/gi, '<li class="text-gray-700 leading-relaxed">');
+
+    // 10. Style blockquotes
+    processed = processed.replace(/<blockquote>/gi, '<blockquote class="border-l-4 border-blue-500 pl-4 py-2 my-4 bg-blue-50 italic text-gray-700">');
+
+    return processed;
 };
 
 // Default CTA Banner values
