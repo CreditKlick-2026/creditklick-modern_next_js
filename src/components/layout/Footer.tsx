@@ -147,11 +147,16 @@ export function Footer() {
                 <div className="container-custom">
                     <div className="text-red-400 text-sm overflow-hidden whitespace-nowrap">
                         <motion.div
-                            animate={{ x: ["100%", "-100%"] }}
+                            animate={{ x: "-50%" }}
                             transition={{ repeat: Infinity, duration: 55, ease: "linear" }}
-                            className="inline-block"
+                            className="flex whitespace-nowrap"
                         >
-                            CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
+                            <span className="px-4 flex-shrink-0">
+                                CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
+                            </span>
+                            <span className="px-4 flex-shrink-0">
+                                CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
+                            </span>
                         </motion.div>
                     </div>
                 </div>
