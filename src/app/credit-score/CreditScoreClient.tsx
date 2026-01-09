@@ -331,113 +331,131 @@ export default function CreditScoreClient() {
 
     return (
         <div className="min-h-screen">
-            <div className="font-semibold md:text-2xl bg-blue-100 py-6 text-blue-900 text-center tracking-wider">
+            {/* Header - compact on mobile */}
+            <div className="font-semibold text-lg md:text-2xl bg-blue-100 py-3 md:py-6 text-blue-900 text-center tracking-wider">
                 <h1>CHECK FREE CREDIT SCORE</h1>
             </div>
 
-            <div className="h-full mx-auto my-10">
+            {/* Main form container - reduced margins on mobile */}
+            <div className="h-full mx-auto my-4 md:my-10 px-2 md:px-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 w-full justify-around rounded bg-white">
-                    <span className="text-xs gap-x-1 items-center justify-end pr-4 md:hidden flex">
+                    {/* Experian badge - mobile only */}
+                    <span className="text-xs gap-x-1 items-center justify-end pr-4 md:hidden flex py-2">
                         powered by <Image src={experian} alt="Experian" className="w-16 h-auto object-contain" />
                     </span>
 
+                    {/* Left design - desktop only */}
                     <div className="w-2/3 md:block hidden mx-auto">
                         <FormDesign />
                     </div>
 
-                    <div className="md:w-3/3 mx-auto px-4 w-full">
-                        <div className="grid grid-cols-1 md:grid-cols-2 m-auto gap-4 py-4">
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
-                                <div className="mt-2.5">
-                                    <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                    {/* Form section */}
+                    <div className="md:w-3/3 mx-auto px-2 md:px-4 w-full">
+                        <div className="grid grid-cols-2 m-auto gap-2 md:gap-4 py-2 md:py-4">
+                            {/* Full Name */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.name}</div>
+                                <div className="text-xs text-red-500">{formErrors.name}</div>
                             </div>
 
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
-                                <div className="mt-2.5">
-                                    <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                            {/* Email */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.email}</div>
+                                <div className="text-xs text-red-500">{formErrors.email}</div>
                             </div>
 
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">Date Of Birth</label>
-                                <div className="mt-2.5">
-                                    <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                            {/* Date of Birth */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">D.O.B</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.dob}</div>
+                                <div className="text-xs text-red-500">{formErrors.dob}</div>
                             </div>
 
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
-                                <div className="mt-2.5">
-                                    <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                            {/* Pincode */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.pin}</div>
+                                <div className="text-xs text-red-500">{formErrors.pin}</div>
                             </div>
 
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
-                                <div className="mt-2.5">
-                                    <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="eg:AAAAA1214J" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                            {/* PAN */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="AAAAA1214J" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6 uppercase" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.pan}</div>
+                                <div className="text-xs text-red-500">{formErrors.pan}</div>
                             </div>
 
-                            <div className="p-2 h-auto">
-                                <label className="block text-lg uppercase font-semibold leading-6 text-gray-900">Mobile Number</label>
-                                <div className="mt-2.5">
-                                    <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit Number" className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required />
+                            {/* Mobile Number */}
+                            <div className="p-1 md:p-2 h-auto">
+                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Mobile</label>
+                                <div className="mt-1 md:mt-2.5">
+                                    <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
                                 </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.mobile}</div>
+                                <div className="text-xs text-red-500">{formErrors.mobile}</div>
                             </div>
 
-                            <div className="flex-row p-2">
-                                <label className="block text-lg font-semibold leading-6 text-gray-900">GENDER</label>
-                                <div className="text-sm">
-                                    <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} /> <label>MALE</label>
+                            {/* Gender - inline on mobile */}
+                            <div className="p-1 md:p-2">
+                                <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">GENDER</label>
+                                <div className="flex gap-3 mt-1 flex-wrap">
+                                    <label className="text-xs md:text-sm flex items-center gap-1">
+                                        <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} className="w-3 h-3" /> Male
+                                    </label>
+                                    <label className="text-xs md:text-sm flex items-center gap-1">
+                                        <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} className="w-3 h-3" /> Female
+                                    </label>
+                                    <label className="text-xs md:text-sm flex items-center gap-1">
+                                        <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} className="w-3 h-3" /> Others
+                                    </label>
                                 </div>
-                                <div className="text-sm">
-                                    <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} /> <label>FEMALE</label>
-                                </div>
-                                <div className="text-sm">
-                                    <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} /> <label>OTHERS</label>
-                                </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.selectedError}</div>
+                                <div className="text-xs text-red-500">{formErrors.selectedError}</div>
                             </div>
 
-                            <div className="flex-row p-2">
-                                <label className="block text-lg font-semibold leading-6 text-gray-900">EMPLOYMENT STATUS</label>
-                                <div className="text-sm">
-                                    <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} /> <label>SALARIED</label>
+                            {/* Employment Status - inline on mobile */}
+                            <div className="p-1 md:p-2">
+                                <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">STATUS</label>
+                                <div className="flex gap-3 mt-1 flex-wrap">
+                                    <label className="text-xs md:text-sm flex items-center gap-1">
+                                        <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} className="w-3 h-3" /> Salaried
+                                    </label>
+                                    <label className="text-xs md:text-sm flex items-center gap-1">
+                                        <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} className="w-3 h-3" /> Self-Employed
+                                    </label>
                                 </div>
-                                <div className="text-sm">
-                                    <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} /> <label>SELF-EMPLOYED</label>
-                                </div>
-                                <div style={{ color: '#ff6666' }}>{formErrors.status}</div>
+                                <div className="text-xs text-red-500">{formErrors.status}</div>
                             </div>
 
-                            <div className="sm:col-span-2">
+                            {/* Terms and Submit - full width */}
+                            <div className="col-span-2 px-1">
                                 <Switch checked={agreed} onChange={setAgreed}>
-                                    By selecting this, you agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms & Conditions</Link>.
+                                    <span className="text-xs">By selecting this, you agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms</Link>.</span>
                                 </Switch>
-                                <div style={{ color: '#ff6666', textAlign: 'center' }}>{formErrors.agree}</div>
+                                <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
                             </div>
 
-                            <div className="my-4 sm:col-span-2 mx-auto flex flex-col text-center">
+                            <div className="col-span-2 mt-2 mx-auto flex flex-col text-center px-4">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
+                                    className="block w-full rounded-md bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
                                     onClick={handleSubmit}
                                 >
                                     {isLoading ? <span className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Processing...</span> : 'Check Credit Score Now'}
                                 </button>
-                                <p className="text-xs text-center mt-2 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
-                                <p className="text-xs text-center text-green-400">Receive updates via Whatsapp</p>
+                                <p className="text-[10px] text-center mt-1 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
+                                <p className="text-[10px] text-center text-green-400">Receive updates via Whatsapp</p>
                             </div>
                         </div>
 
