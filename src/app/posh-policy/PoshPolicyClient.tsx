@@ -37,6 +37,35 @@ export default function PoshPolicyClient() {
                         Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.
                     </p>
 
+                    {/* PDF Download Section */}
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-8">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="flex items-center gap-4">
+                                <div className="bg-red-100 p-3 rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-gray-800">Download Complete POSH Policy</h4>
+                                    <p className="text-sm text-gray-600">PDF Document • Full Policy Details</p>
+                                </div>
+                            </div>
+                            <a
+                                href="/GENDER_NEUTRAL_POSH_POLICY_UPDATED.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download
+                                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
                         Policy Statement
                     </h3>
@@ -88,11 +117,11 @@ export default function PoshPolicyClient() {
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         For any concerns or complaints, please contact the ICC at:{' '}
-                        <a href="mailto:posh@creditklick.com" className="text-blue-600 hover:underline">posh@creditklick.com</a>
+                        <a href="mailto:support@creditklick.com" className="text-blue-600 hover:underline">support@creditklick.com</a>
                     </p>
 
                     <p className="text-sm text-gray-500 italic">
-                        Last updated: January 2025
+                        Last updated: January 2026
                     </p>
                 </motion.div>
             </div>

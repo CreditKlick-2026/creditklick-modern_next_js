@@ -109,11 +109,11 @@ export default function CookiesPolicyClient() {
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         If you have any questions about our use of cookies, please contact us at:{' '}
-                        <a href="mailto:contact@creditklick.com" className="text-blue-600 hover:underline">contact@creditklick.com</a>
+                        <a href="mailto:support@creditklick.com" className="text-blue-600 hover:underline">support@creditklick.com</a>
                     </p>
 
                     <p className="text-sm text-gray-500 italic">
-                        Last updated: January 2025
+                        Last updated: January 2026
                     </p>
                 </motion.div>
             </div>
