@@ -459,14 +459,17 @@ function Refinestr() {
                             </Link>
                         </div>
                     </div>
-                    <div className="md:shrink-0 m-auto mt-8 lg:mt-0 relative h-[400px] w-full lg:w-1/2">
-                        <Image
-                            src={expertImg}
-                            alt="Credit Expert"
-                            className="object-cover rounded-xl md:max-w-lg bg-white/5 m-auto"
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 50vw"
-                        />
+                    {/* Image container - centered with proper sizing */}
+                    <div className="flex items-center justify-center mt-8 lg:mt-0 lg:w-1/2">
+                        <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-lg aspect-square">
+                            <Image
+                                src={expertImg}
+                                alt="Credit Expert"
+                                className="object-contain rounded-xl bg-white/5"
+                                fill
+                                sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 500px"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
