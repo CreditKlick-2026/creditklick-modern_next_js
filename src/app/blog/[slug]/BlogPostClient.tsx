@@ -267,13 +267,11 @@ const CTABannerSection = ({ ctaBanner }: { ctaBanner: CtaBanner }) => {
             <div className="flex flex-col lg:flex-row">
                 {/* Left Side - Content */}
                 <div className="lg:w-3/5 p-6 lg:p-8 flex items-center justify-center gap-6">
-                    <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-blue-800 mb-1">
+                    <div className="max-w-md">
+                        <h3 className="text-xl lg:text-2xl font-bold text-blue-800 mb-1 leading-tight">
                             {ctaBanner.title}
-                            <br />
-                            <span className="text-gray-700">{ctaBanner.subtitle}</span>
-                            <br />
-                            <span className="text-green-600">{ctaBanner.highlight}</span>
+                            {ctaBanner.subtitle && <span className="text-gray-700"> {ctaBanner.subtitle}</span>}
+                            {ctaBanner.highlight && <span className="text-green-600"> {ctaBanner.highlight}</span>}
                         </h3>
                         <p className="text-sm text-gray-600 mt-2 flex items-center gap-2">
                             <span className="inline-block w-2 h-2 bg-amber-400 rounded-full"></span>
@@ -476,7 +474,7 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-gray-900 leading-[1.2] tracking-tight text-center">
+                        <h1 className="text-2xl sm:text-xl md:text-2xl lg:text-[2.25rem] font-bold text-gray-900 leading-[1.2] tracking-tight text-center">
                             {post.title}
                         </h1>
 
@@ -484,7 +482,7 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
 
                         {/* SubDescription */}
                         {post.subDescription && (
-                            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-light text-center max-w-3xl mx-auto mt-2">
+                            <p className="text-base sm:text-sm md:text-lg md:text-base text-gray-600 leading-relaxed font-light text-center max-w-3xl mx-auto mt-2">
                                 {post.subDescription}
                             </p>
                         )}
@@ -528,21 +526,16 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                         {/* Article Content */}
                         <article className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-8">
                             {/* Featured Image */}
-                            <div className="relative w-full h-48 md:h-72 lg:h-80 mb-4 md:mb-6 rounded-lg md:rounded-xl overflow-hidden">
+                            <div className="relative w-full h-auto mb-4 md:mb-6 rounded-lg md:rounded-xl overflow-hidden bg-gray-50 flex justify-center items-center">
                                 <img
                                     src={getImageUrl(post)}
                                     alt={post.title}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-auto max-h-[600px] object-contain"
                                 />
                             </div>
 
-                            {/* Title - Professional styling */}
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">{post.title}</h1>
 
-                            {/* SubDescription if exists */}
-                            {post.subDescription && (
-                                <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4">{post.subDescription}</p>
-                            )}
+
 
                             {/* Meta - Compact professional layout */}
                             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 pb-4 mb-6 border-b border-gray-100">

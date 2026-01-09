@@ -207,11 +207,11 @@ export default function BlogClient() {
                                     className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                                 >
                                     <Link href={`/blog/${post.slug}`}>
-                                        <div className="relative w-full aspect-video overflow-hidden bg-white">
+                                        <div className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                                             <img
                                                 src={getImageUrl(post)}
                                                 alt={post.title}
-                                                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
                                             />
                                             <div className="absolute top-4 left-4">
                                                 <span className="bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-medium">

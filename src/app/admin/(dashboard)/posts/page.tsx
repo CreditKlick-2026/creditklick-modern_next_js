@@ -530,10 +530,9 @@ export default function PostsManagement() {
                                                     <div className="flex items-center gap-3">
                                                         {post.featuredImage ? (
                                                             <img
-                                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                                                 src={(post.featuredImage as any).url || post.featuredImage}
                                                                 alt={post.title}
-                                                                className="w-12 h-12 rounded-lg object-cover"
+                                                                className="w-16 h-16 rounded-lg object-contain bg-gray-50 border border-gray-200"
                                                             />
                                                         ) : (
                                                             <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -787,11 +786,12 @@ export default function PostsManagement() {
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">Featured Image</label>
                                                 <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-500 transition-colors bg-white">
                                                     {formData.featuredImageUrl ? (
-                                                        <div className="relative inline-block group">
+                                                        <div className="relative group w-full">
                                                             <img
                                                                 src={formData.featuredImageUrl}
                                                                 alt="Featured"
-                                                                className="h-48 rounded-lg shadow-sm object-cover"
+                                                                className="w-full h-auto rounded-lg shadow-sm"
+                                                                style={{ maxWidth: '100%', objectFit: 'contain' }}
                                                             />
                                                             <button
                                                                 type="button"
@@ -800,6 +800,17 @@ export default function PostsManagement() {
                                                             >
                                                                 <X className="w-4 h-4" />
                                                             </button>
+
+                                                            <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                <a
+                                                                    href={formData.featuredImageUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="bg-black/75 text-white text-xs px-2 py-1 rounded hover:bg-black"
+                                                                >
+                                                                    View Original
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     ) : (
                                                         <div className="flex flex-col items-center py-2">
