@@ -89,7 +89,7 @@ export default function PrivacyPolicyClient() {
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         You have the right to access, correct, or delete your personal information. You may also opt out
                         of receiving promotional communications from us. To exercise these rights, please contact us at
-                        privacy@creditklick.com.
+                        support@creditklick.com.
                     </p>
 
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
@@ -97,11 +97,11 @@ export default function PrivacyPolicyClient() {
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         If you have any questions about this Privacy Policy, please contact us at:{' '}
-                        <a href="mailto:privacy@creditklick.com" className="text-blue-600 hover:underline">privacy@creditklick.com</a>
+                        <a href="mailto:support@creditklick.com" className="text-blue-600 hover:underline">support@creditklick.com</a>
                     </p>
 
                     <p className="text-sm text-gray-500 italic">
-                        Last updated: January 2025
+                        Last updated: January 2026
                     </p>
                 </motion.div>
             </div>

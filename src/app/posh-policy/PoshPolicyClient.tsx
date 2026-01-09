@@ -37,6 +37,15 @@ export default function PoshPolicyClient() {
                         Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.
                     </p>
 
+                    {/* PDF Display Section */}
+                    <div className="w-full h-[800px] mb-8 border border-blue-200 rounded-xl overflow-hidden shadow-lg">
+                        <iframe
+                            src="/GENDER_NEUTRAL_POSH_POLICY_UPDATED.pdf"
+                            className="w-full h-full"
+                            title="POSH Policy PDF"
+                        />
+                    </div>
+
                     {/* PDF Download Section */}
                     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-8">
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
