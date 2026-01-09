@@ -95,7 +95,7 @@ export default function CreditCardsClient({ creditCards, creditTable, feesCharge
                         >
                             <div className="relative w-full max-w-lg aspect-square">
                                 <Image
-                                    src="/assets/HeroImages/ccgifw.webp"
+                                    src="/assets/heroimages/ccgifw.webp"
                                     alt="Credit Cards Animation"
                                     fill
                                     className="object-contain"
