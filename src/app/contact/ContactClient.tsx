@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Toaster, toast } from 'react-hot-toast'
 import Image from 'next/image'
+import { contactsAPI } from '@/services/api'
 
 const insideStyles = {
     padding: 20,
@@ -62,15 +63,26 @@ export function ContactClient() {
         }
 
         try {
-            // Simulate API call to replace original firebase logic
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Call backend API
+            const response = await contactsAPI.submit({
+                name: InputName,
+                phone: InputPhone,
+                message: InputMessage,
+                sourcePage: '/contact'
+            });
 
-            setIsSuccess(true);
-            setIsLoading(false);
-            toast.success("Query submitted successfully!");
-        } catch (err) {
-            setError({ other: "Something went wrong. Please try again." });
+            if (response.data.success) {
+                setIsSuccess(true);
+                toast.success(response.data.message || "Query submitted successfully!");
+            } else {
+                throw new Error(response.data.message || 'Submission failed');
+            }
+        } catch (err: any) {
+            const errorMessage = err.response?.data?.message || "Something went wrong. Please try again.";
+            setError({ other: errorMessage });
+            toast.error(errorMessage);
             setIsSuccess(false);
+        } finally {
             setIsLoading(false);
         }
     };
