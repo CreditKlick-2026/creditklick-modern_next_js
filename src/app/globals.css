@@ -460,6 +460,7 @@ video {
 }
 
 @media (min-width: 768px) {
+
   .prose iframe,
   .prose video {
     min-height: 400px;
@@ -471,7 +472,8 @@ video {
 .embed-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
   margin: 1.5rem 0;
@@ -488,4 +490,414 @@ video {
   width: 100%;
   height: 100%;
   border-radius: 0.75rem;
+}
+
+/* ===========================================
+   BLOG PROSE CONTENT STYLING
+   Comprehensive styles for rich text content
+   =========================================== */
+
+/* Base prose container */
+.prose {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #374151;
+}
+
+@media (min-width: 768px) {
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+}
+
+/* Headings */
+.prose h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.prose h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose h5,
+.prose h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .prose h1 {
+    font-size: 2.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.875rem;
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+  }
+
+  .prose h4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Paragraphs */
+.prose p {
+  margin-bottom: 1.25rem;
+  color: #4b5563;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links */
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-decoration-color: #93c5fd;
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.prose a:hover {
+  color: #1d4ed8;
+  text-decoration-color: #2563eb;
+}
+
+/* Lists */
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+  padding-left: 0.25rem;
+}
+
+.prose li::marker {
+  color: #2563eb;
+}
+
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Nested lists */
+.prose li>ul,
+.prose li>ol {
+  margin-left: 0;
+}
+
+/* Strong/Bold */
+.prose strong,
+.prose b {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Italic/Emphasis */
+.prose em,
+.prose i {
+  font-style: italic;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  border-left: 4px solid #2563eb;
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4b5563;
+  background-color: #f9fafb;
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.prose blockquote p {
+  margin-bottom: 0;
+}
+
+/* Code blocks */
+.prose code {
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: #ef4444;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.prose pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .prose table {
+    display: table;
+    font-size: 1rem;
+  }
+}
+
+.prose thead {
+  background-color: #f3f4f6;
+}
+
+.prose th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.prose td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+}
+
+.prose tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.prose tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Horizontal Rule */
+.prose hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 2rem 0;
+}
+
+/* Images */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Underline & Strikethrough */
+.prose u {
+  text-decoration: underline;
+}
+
+.prose s,
+.prose del,
+.prose strike {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+/* Subscript & Superscript */
+.prose sub {
+  vertical-align: sub;
+  font-size: 0.75em;
+}
+
+.prose sup {
+  vertical-align: super;
+  font-size: 0.75em;
+}
+
+/* Definition lists */
+.prose dl {
+  margin: 1.25rem 0;
+}
+
+.prose dt {
+  font-weight: 600;
+  color: #111827;
+  margin-top: 1rem;
+}
+
+.prose dd {
+  margin-left: 1.5rem;
+  color: #4b5563;
+}
+
+/* Figure and Figcaption */
+.prose figure {
+  margin: 1.5rem 0;
+}
+
+.prose figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+/* First paragraph special styling */
+.prose>p:first-of-type {
+  font-size: 1.125rem;
+  color: #374151;
+}
+
+@media (min-width: 768px) {
+  .prose>p:first-of-type {
+    font-size: 1.25rem;
+  }
+}
+
+/* Quill Editor Specific Classes */
+.prose .ql-align-center {
+  text-align: center;
+}
+
+.prose .ql-align-right {
+  text-align: right;
+}
+
+.prose .ql-align-justify {
+  text-align: justify;
+}
+
+.prose .ql-indent-1 {
+  padding-left: 1.5rem;
+}
+
+.prose .ql-indent-2 {
+  padding-left: 3rem;
+}
+
+.prose .ql-indent-3 {
+  padding-left: 4.5rem;
+}
+
+/* Quill video embed */
+.prose .ql-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .prose h1 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .prose h3 {
+    font-size: 1.125rem;
+    margin-top: 1.25rem;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25rem;
+  }
+
+  .prose blockquote {
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .prose table {
+    font-size: 0.8125rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .prose {
+    font-size: 12pt;
+    color: #000;
+  }
+
+  .prose a {
+    color: #000;
+    text-decoration: underline;
+  }
 }

@@ -535,7 +535,7 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="prose prose-sm md:prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-strong:text-gray-900"
+                                className="prose max-w-none"
                                 dangerouslySetInnerHTML={{ __html: processContentWithVideos(post.content) }}
                             />
 
