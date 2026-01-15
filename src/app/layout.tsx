@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,7 @@ import { Toaster } from 'react-hot-toast'
 import { Shell } from "@/components/layout/Shell";
 import { ScrollTop } from "@/components/layout/ScrollTop";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
 
 const inter = Inter({
@@ -139,6 +141,9 @@ export default function RootLayout({
         </Shell>
         <Toaster position="top-center" />
         <CookieConsent />
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
 
         {/* Google Tag Manager */}
         <script

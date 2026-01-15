@@ -117,7 +117,7 @@ export default function PostsManagement() {
     const [posts, setPosts] = useState<PostData[]>([])
     const [loading, setLoading] = useState(true)
     const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0 })
-    const [filters, setFilters] = useState({ search: '', category: '' })
+    const [filters, setFilters] = useState({ search: '', category: '', status: '' })
     const [showEditor, setShowEditor] = useState(false)
     const [editingPost, setEditingPost] = useState<PostData | null>(null)
     const [submitting, setSubmitting] = useState(false)
@@ -181,7 +181,8 @@ export default function PostsManagement() {
             const params: Record<string, unknown> = {
                 page: pagination.page,
                 limit: pagination.limit,
-                nocache: 'true'
+                nocache: 'true',
+                status: filters.status || 'all' // Use filter or default to all
             }
 
             if (filters.search) params.search = filters.search
@@ -490,9 +491,21 @@ export default function PostsManagement() {
                                 ))}
                             </select>
 
+                            <select
+                                value={filters.status}
+                                onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                            >
+                                <option value="">All Statuses</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </div>
+                        <div className="mt-4 flex justify-end">
                             <button
-                                onClick={() => setFilters({ search: '', category: '' })}
-                                className="flex items-center justify-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900"
+                                onClick={() => setFilters({ search: '', category: '', status: '' })}
+                                className="flex items-center justify-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 text-sm"
                             >
                                 <X className="w-4 h-4" />
                                 Clear Filters

@@ -98,20 +98,26 @@ const HourlyChart = ({ data }: { data: { hour: number; views: number; visitors: 
                 </div>
             </div>
             <div className="overflow-x-auto">
-                <div className="flex items-end gap-[3px] h-36 min-w-[600px]">
+                <div className="flex items-end gap-[3px] h-48 min-w-[600px]">
                     {fullData.map((item, index) => (
                         <div key={index} className="flex-1 flex flex-col items-center group cursor-pointer">
                             <div className="relative w-full">
                                 <motion.div
                                     initial={{ height: 0 }}
-                                    animate={{ height: `${Math.max(4, (item.views / maxViews) * 120)}px` }}
+                                    animate={{ height: `${Math.max(4, (item.views / maxViews) * 180)}px` }}
                                     transition={{ duration: 0.5, delay: index * 0.02 }}
-                                    className={`w-full rounded-t transition-colors ${item.hour === currentHour
+                                    className={`w-full rounded-t transition-colors relative ${item.hour === currentHour
                                         ? 'bg-gradient-to-t from-green-500 to-green-400'
                                         : 'bg-gradient-to-t from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500'
                                         }`}
-                                />
-                                <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
+                                >
+                                    {item.views > 0 && (
+                                        <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-medium text-gray-600">
+                                            {item.views}
+                                        </span>
+                                    )}
+                                </motion.div>
+                                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
                                     {item.hour}:00 - {item.views} views
                                 </div>
                             </div>
@@ -151,7 +157,10 @@ const DailyChart = ({ data }: { data: { date: string; views: number; visitors: n
     const chartWidth = Math.max(data.length * 50, 800);
 
     // Helper functions
-    const getX = (index: number) => (index / (data.length - 1)) * chartWidth;
+    const getX = (index: number) => {
+        if (data.length <= 1) return chartWidth / 2;
+        return (index / (data.length - 1)) * chartWidth;
+    };
     const getY = (value: number) => chartHeight - (value / maxViews) * chartHeight;
 
     // Generate Path (Smooth Curve)

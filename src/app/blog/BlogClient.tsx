@@ -114,9 +114,26 @@ export default function BlogClient() {
         return 'CreditKlick Team'
     }
 
+    // Category Mapping (Must match Admin Panel)
+    const categoryLabels: Record<string, string> = {
+        'credit-cards': 'Credit Cards',
+        'loans': 'Loans',
+        'cibil': 'Credit Score',
+        'tips': 'Financial Tips',
+        'news': 'News',
+        'guides': 'Guides',
+        'calculators': 'Calculators',
+        'other': 'Other'
+    }
+
+    const getCategoryLabel = (catValue: string) => {
+        return categoryLabels[catValue] || catValue.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Header */}
+            {/* Hero Section with Animation */}
             {/* Hero Section with Animation */}
             <div className="relative text-white py-20 overflow-hidden bg-blue-900">
                 {/* Animated Background Gradient */}
@@ -241,7 +258,7 @@ export default function BlogClient() {
                                 : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
                                 }`}
                         >
-                            {cat.category} <span className="text-xs opacity-70 ml-1">({cat.count})</span>
+                            {getCategoryLabel(cat.category)} <span className="text-xs opacity-70 ml-1">({cat.count})</span>
                         </button>
                     ))}
                 </div>
@@ -281,7 +298,7 @@ export default function BlogClient() {
                                             />
                                             <div className="absolute top-4 left-4">
                                                 <span className="bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
-                                                    {post.category}
+                                                    {getCategoryLabel(post.category)}
                                                 </span>
                                             </div>
                                         </div>
