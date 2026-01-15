@@ -59,12 +59,24 @@ const blogCategoryIcons: { [key: string]: string } = {
     'cibil': '/assets/icons/3d/cibil.png',
     'CIBIL': '/assets/icons/3d/cibil.png',
     'Cibil': '/assets/icons/3d/cibil.png',
+    'Credit Score': '/assets/icons/3d/cibil.png',
     'tips': '/assets/icons/3d/tips.png',
     'Tips': '/assets/icons/3d/tips.png',
     'guides': '/assets/icons/3d/guides.png',
     'Guides': '/assets/icons/3d/guides.png',
     'calculators': '/assets/icons/3d/calculator_v2.png',
     'Calculators': '/assets/icons/3d/calculator_v2.png'
+}
+
+const categoryLabels: { [key: string]: string } = {
+    'cibil': 'Credit Score',
+    'CIBIL': 'Credit Score',
+    'credit-score': 'Credit Score',
+    'loans': 'Loans',
+    'credit-cards': 'Credit Cards',
+    'tips': 'Tips & Guides',
+    'guides': 'Tips & Guides',
+    'calculators': 'Calculators'
 }
 
 interface Post {
@@ -132,7 +144,7 @@ export function Header() {
                 const response = await postsAPI.getCategories()
                 if (response.data.success && response.data.data) {
                     setBlogCategories(response.data.data.map((cat: { category: string }) => ({
-                        label: cat.category,
+                        label: categoryLabels[cat.category] || cat.category,
                         href: `/blog?category=${encodeURIComponent(cat.category)}`
                     })))
                 }
