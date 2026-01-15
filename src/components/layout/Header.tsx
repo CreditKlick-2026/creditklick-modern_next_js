@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -16,35 +16,55 @@ const navItems = [
     {
         label: 'Credit Card',
         href: '/credit-cards',
-        icon: '/assets/icons/credit_card_icon.png',
+        icon: '/assets/icons/3d/credit-card.png',
         children: [
-            { label: 'AU Bank Credit Card', href: '/credit-card/au-bank', icon: '/assets/icons/au_bank_icon.png' },
-            { label: 'IDFC First Credit Card', href: '/credit-card/idfc-bank', icon: '/assets/icons/idfc_bank_icon.png' },
-            { label: 'SBI Credit Cards', href: '/credit-card/sbi-bank', icon: '/assets/icons/sbi_bank_icon.png' },
-            { label: 'Yes Bank Credit Cards', href: '/credit-card/yes-bank', icon: '/assets/icons/yes_bank_icon.png' },
+            { label: 'AU Bank Credit Card', href: '/credit-card/au-bank', icon: '/assets/icons/3d/au-credit-card.png' },
+            { label: 'IDFC First Credit Card', href: '/credit-card/idfc-bank', icon: '/assets/icons/3d/idfc-credit-card.png' },
+            { label: 'SBI Credit Cards', href: '/credit-card/sbi-bank', icon: '/assets/icons/3d/sbi-credit-card.png' },
+            { label: 'Yes Bank Credit Cards', href: '/credit-card/yes-bank', icon: '/assets/icons/3d/yes-credit-card.png' },
         ]
     },
     {
         label: 'Loans',
         href: '/loans',
-        icon: '/assets/icons/loans_icon.png',
+        icon: '/assets/icons/3d/loans.png',
         children: [
-            { label: 'Personal Loan', href: '/loan/personal-loan', icon: '/assets/icons/personal_loan_icon.png' },
-            { label: 'Home Loan', href: '/loan/home-loan', icon: '/assets/icons/home_loan_icon.png' },
-            { label: 'Business Loan', href: '/loan/business-loan', icon: '/assets/icons/business_loan_icon.png' },
+            { label: 'Personal Loan', href: '/loan/personal-loan', icon: '/assets/icons/3d/personal-loan.png' },
+            { label: 'Home Loan', href: '/loan/home-loan', icon: '/assets/icons/3d/home-loan.png' },
+            { label: 'Business Loan', href: '/loan/business-loan', icon: '/assets/icons/3d/business-loan.png' },
         ]
     },
-    { label: 'Credit Refine', href: '/refine', icon: '/assets/icons/credit_refine_icon.png' },
-    { label: 'Calculators', href: '/calculators', icon: '/assets/icons/calculator_icon.png' },
+    { label: 'Credit Refine', href: '/refine', icon: '/assets/icons/3d/credit-refine.png' },
+    {
+        label: 'Calculators',
+        href: '/calculators',
+        icon: '/assets/icons/3d/calculator_v2.png',
+        children: [
+            { label: 'EMI Calculator', href: '/emi', icon: '/assets/icons/3d/emi-calculator.png' },
+            { label: 'AU Value Calculator', href: '/calculator/au', icon: '/assets/icons/3d/au-calculator.png' },
+            { label: 'IDFC Value Calculator', href: '/calculator/idfc', icon: '/assets/icons/3d/idfc-calculator.png' },
+            { label: 'SBI Simply Save', href: '/calculator/sbi-save', icon: '/assets/icons/3d/sbi-save-calculator.png' },
+            { label: 'SBI Simply Click', href: '/calculator/sbi-click', icon: '/assets/icons/3d/sbi-click-calculator.png' },
+            { label: 'Yes Bank Value', href: '/calculator/yes', icon: '/assets/icons/3d/yes-calculator.png' },
+        ]
+    },
 ]
 
 const blogCategoryIcons: { [key: string]: string } = {
-    'loans': '/assets/icons/loans_icon.png',
-    'credit-cards': '/assets/icons/credit_card_icon.png',
-    'cibil': '/assets/icons/cibil_icon.png',
-    'tips': '/assets/icons/tips_icon.png',
-    'guides': '/assets/icons/guides_icon.png',
-    'calculators': '/assets/icons/calculator_icon.png'
+    'loans': '/assets/icons/3d/loans.png',
+    'Loans': '/assets/icons/3d/loans.png',
+    'credit-cards': '/assets/icons/3d/credit-card.png',
+    'Credit Cards': '/assets/icons/3d/credit-card.png',
+    'Credit Card': '/assets/icons/3d/credit-card.png',
+    'cibil': '/assets/icons/3d/cibil.png',
+    'CIBIL': '/assets/icons/3d/cibil.png',
+    'Cibil': '/assets/icons/3d/cibil.png',
+    'tips': '/assets/icons/3d/tips.png',
+    'Tips': '/assets/icons/3d/tips.png',
+    'guides': '/assets/icons/3d/guides.png',
+    'Guides': '/assets/icons/3d/guides.png',
+    'calculators': '/assets/icons/3d/calculator_v2.png',
+    'Calculators': '/assets/icons/3d/calculator_v2.png'
 }
 
 interface Post {
@@ -68,6 +88,7 @@ export function Header() {
     const [searchResults, setSearchResults] = useState<Post[]>([])
     const [isSearching, setIsSearching] = useState(false)
     const [mobileExpandedItem, setMobileExpandedItem] = useState<string | null>(null)
+    const searchRef = useRef<HTMLDivElement>(null)
 
     const pathname = usePathname()
     const router = useRouter()
@@ -146,6 +167,21 @@ export function Header() {
             document.body.style.overflow = 'unset'
         }
     }, [showLoginModal])
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+                setIsSearchOpen(false)
+            }
+        }
+
+        if (isSearchOpen) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isSearchOpen])
 
     const handleLogout = () => {
         Cookies.remove('accessToken')
@@ -256,25 +292,26 @@ export function Header() {
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-20 py-2">
                         <Link href="/" className="flex items-center">
-                            <Image src="/assets/Images/creditklic_next_gen.png" alt="CreditKlick" width={96} height={40} className="max-w-24 h-auto" priority />
+                            <Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={96} height={40} className="max-w-24 h-auto" priority />
                         </Link>
 
                         <div className="flex items-center">
-                            <ul className="flex items-center">
+                            <ul className="flex items-center ">
                                 {navItems.map((item) => (
                                     <li key={item.label} className="relative px-4" onMouseEnter={() => item.children && setOpenDropdown(item.label)} onMouseLeave={() => setOpenDropdown(null)}>
-                                        <Link href={item.href} className="flex items-center py-2 font-semibold uppercase tracking-wider text-sm hover:text-blue-600 transition-colors">
+                                        <Link href={item.href} className={`flex items-center py-2 font-semibold uppercase tracking-wider text-sm transition-colors ${item.label === 'Credit Refine' ? 'text-blue-600' : 'hover:text-blue-600'}`}>
                                             {item.label}
                                             {item.children && <ChevronDown className="ml-1 h-4 w-4" />}
                                         </Link>
                                         <AnimatePresence>
                                             {item.children && openDropdown === item.label && (
-                                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
-                                                    <ul className="py-3 px-4 space-y-1">
+                                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className={`absolute top-full left-0 mt-3 bg-white rounded-2xl shadow-xl border-2 border-black ${item.label === 'Loans' ? 'w-64' : item.label === 'Calculators' ? 'w-[450px]' : 'w-72'}`}>
+                                                    <div className="absolute -top-[9px] left-8 w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45"></div>
+                                                    <ul className={`py-1 px-1 relative bg-white rounded-xl ${item.label === 'Calculators' ? 'grid grid-flow-col grid-rows-3 gap-2' : 'space-y-1'}`}>
                                                         {item.children.map((child) => (
                                                             <li key={child.href}>
-                                                                <Link href={child.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all">
-                                                                    {child.icon && <Image src={child.icon} alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />}
+                                                                <Link href={child.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all">
+                                                                    {child.icon && <Image src={child.icon} alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />}
                                                                     <span>{child.label}</span>
                                                                 </Link>
                                                             </li>
@@ -293,18 +330,19 @@ export function Header() {
                                     </Link>
                                     <AnimatePresence>
                                         {openDropdown === 'Blogs' && (
-                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
-                                                <ul className="py-3 px-4 space-y-1 max-h-[60vh] overflow-y-auto">
+                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-3 w-[450px] bg-white rounded-2xl shadow-xl border-2 border-black">
+                                                <div className="absolute -top-[9px] left-8 w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45"></div>
+                                                <ul className="py-1 px-1 grid grid-flow-col grid-rows-3 gap-2 max-h-[60vh] overflow-y-auto relative bg-white rounded-xl">
                                                     <li>
-                                                        <Link href="/blog" className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all">
-                                                            <Image src="/assets/icons/blog_icon.png" alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />
+                                                        <Link href="/blog" className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all">
+                                                            <Image src="/assets/icons/3d/blog.png" alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />
                                                             <span>All Posts</span>
                                                         </Link>
                                                     </li>
-                                                    {blogCategories.map((cat, i) => (
+                                                    {blogCategories.slice(0, 5).map((cat, i) => (
                                                         <li key={i}>
-                                                            <Link href={cat.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all capitalize">
-                                                                {blogCategoryIcons[cat.label] && <Image src={blogCategoryIcons[cat.label]} alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />}
+                                                            <Link href={cat.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all capitalize">
+                                                                {blogCategoryIcons[cat.label] && <Image src={blogCategoryIcons[cat.label]} alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />}
                                                                 <span>{cat.label}</span>
                                                             </Link>
                                                         </li>
@@ -317,59 +355,62 @@ export function Header() {
                             </ul>
                         </div>
 
-                        {/* Search */}
-                        <div className="relative mr-4 z-50">
-                            <AnimatePresence>
-                                {isSearchOpen && (
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
-                                        <motion.form initial={{ width: 0, opacity: 0 }} animate={{ width: 240, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.3 }} onSubmit={handleSearch} className="overflow-hidden bg-white shadow-sm rounded-lg">
-                                            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search blogs..." className="w-full pl-3 pr-8 py-2 text-sm border border-blue-200 rounded-lg focus:outline-none focus:border-blue-500 bg-white" autoFocus />
-                                            {isSearching && <Loader2 className="absolute right-2 top-2.5 h-4 w-4 animate-spin text-blue-500" />}
-                                        </motion.form>
-                                    </div>
+                        {/* Search and Auth Container */}
+                        <div className="flex items-center gap-4">
+                            {/* Search */}
+                            <div className="relative z-50" ref={searchRef}>
+                                <AnimatePresence>
+                                    {isSearchOpen && (
+                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
+                                            <motion.form initial={{ width: 0, opacity: 0 }} animate={{ width: 200, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.3 }} onSubmit={handleSearch} className="overflow-hidden bg-white shadow-sm rounded-lg">
+                                                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search blogs..." className="w-full pl-3 pr-8 py-2 text-sm border border-blue-200 rounded-lg focus:outline-none focus:border-blue-500 bg-white" autoFocus />
+                                                {isSearching && <Loader2 className="absolute right-2 top-2.5 h-4 w-4 animate-spin text-blue-500" />}
+                                            </motion.form>
+                                        </div>
+                                    )}
+                                </AnimatePresence>
+
+                                {isSearchOpen && searchQuery.length >= 2 && searchResults.length > 0 && (
+                                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-12 right-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-2 z-[60]">
+                                        <div className="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50 border-b border-gray-100 mb-1">Top Results</div>
+                                        {searchResults.map((post) => (
+                                            <div key={post._id} onClick={() => handleResultClick(post.slug)} className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-start gap-3 transition-colors">
+                                                <div><h4 className="text-sm font-medium text-gray-800 line-clamp-2 leading-snug">{post.title}</h4><span className="text-xs text-blue-500">{post.category}</span></div>
+                                            </div>
+                                        ))}
+                                    </motion.div>
                                 )}
-                            </AnimatePresence>
 
-                            {isSearchOpen && searchQuery.length >= 2 && searchResults.length > 0 && (
-                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-12 right-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-2 z-[60]">
-                                    <div className="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50 border-b border-gray-100 mb-1">Top Results</div>
-                                    {searchResults.map((post) => (
-                                        <div key={post._id} onClick={() => handleResultClick(post.slug)} className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-start gap-3 transition-colors">
-                                            <div><h4 className="text-sm font-medium text-gray-800 line-clamp-2 leading-snug">{post.title}</h4><span className="text-xs text-blue-500">{post.category}</span></div>
-                                        </div>
-                                    ))}
-                                </motion.div>
-                            )}
+                                <button onClick={() => setIsSearchOpen(!isSearchOpen)} className={`p-2 rounded-full transition-colors z-50 relative ${isSearchOpen ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-100'}`}>
+                                    <Search className="w-5 h-5" />
+                                </button>
+                            </div>
 
-                            <button onClick={() => setIsSearchOpen(!isSearchOpen)} className={`p-2 rounded-full transition-colors z-50 relative ${isSearchOpen ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-100'}`}>
-                                <Search className="w-5 h-5" />
-                            </button>
-                        </div>
-
-                        {/* Auth */}
-                        <div className="flex items-center space-x-4">
-                            {isLoggedIn ? (
-                                <div className="relative" onMouseEnter={() => setProfileDropdown(true)} onMouseLeave={() => setProfileDropdown(false)}>
-                                    <Link href="/profile" className="flex items-center cursor-pointer">
-                                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
-                                            <User className="h-5 w-5 text-blue-600" />
-                                        </div>
-                                    </Link>
-                                    <AnimatePresence>
-                                        {profileDropdown && (
-                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border overflow-hidden">
-                                                <ul className="py-2 font-semibold">
-                                                    <li><Link href="/profile" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">PROFILE</Link></li>
-                                                    <li><Link href="/report-analysis" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">REPORT ANALYSIS</Link></li>
-                                                    <li className="border-t border-gray-100 mt-1"><button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-50 hover:text-red-600 text-red-500 transition-colors">LOG OUT</button></li>
-                                                </ul>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            ) : (
-                                <button className="font-semibold uppercase tracking-wider text-blue-600 hover:text-blue-800 cursor-pointer" onClick={handleLoginClick}>Log In</button>
-                            )}
+                            {/* Auth */}
+                            <div className="flex items-center space-x-4">
+                                {isLoggedIn ? (
+                                    <div className="relative" onMouseEnter={() => setProfileDropdown(true)} onMouseLeave={() => setProfileDropdown(false)}>
+                                        <Link href="/profile" className="flex items-center cursor-pointer">
+                                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
+                                                <User className="h-5 w-5 text-blue-600" />
+                                            </div>
+                                        </Link>
+                                        <AnimatePresence>
+                                            {profileDropdown && (
+                                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border overflow-hidden">
+                                                    <ul className="py-2 font-semibold">
+                                                        <li><Link href="/profile" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">PROFILE</Link></li>
+                                                        <li><Link href="/report-analysis" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">REPORT ANALYSIS</Link></li>
+                                                        <li className="border-t border-gray-100 mt-1"><button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-50 hover:text-red-600 text-red-500 transition-colors">LOG OUT</button></li>
+                                                    </ul>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                ) : (
+                                    <button className="font-semibold uppercase tracking-wider text-blue-600 hover:text-blue-800 cursor-pointer" onClick={handleLoginClick}>Log In</button>
+                                )}
+                            </div>
                         </div>
                     </nav>
                 </div>
@@ -378,7 +419,7 @@ export function Header() {
             {/* Mobile Header */}
             <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white shadow-lg">
                 <div className="flex items-center justify-between px-4 h-16">
-                    <Link href="/"><Image src="/assets/Images/creditklic_next_gen.png" alt="CreditKlick" width={80} height={32} className="max-w-[80px] h-auto mt-1" priority /></Link>
+                    <Link href="/"><Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={80} height={32} className="max-w-[80px] h-auto mt-1" priority /></Link>
                     <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-3">
                         {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
@@ -422,11 +463,32 @@ export function Header() {
                                                     <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpandedItem === item.label ? 'rotate-180' : ''}`} />
                                                 </button>
                                                 {mobileExpandedItem === item.label && (
-                                                    <div className="ml-4 border-l-2 border-blue-100 pl-4 py-2 space-y-1">
+                                                    <div className={`ml-4 border-l-2 border-blue-100 pl-4 py-2 ${item.label === 'Calculators' ? 'grid grid-cols-2 gap-2 pr-2' : 'space-y-1'}`}>
                                                         {item.children.map((child) => (
-                                                            <Link key={child.label} href={child.href} className="flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all" onClick={() => setIsMobileMenuOpen(false)}>
-                                                                {child.icon && <Image src={child.icon} alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />}
-                                                                <span>{child.label}</span>
+                                                            <Link
+                                                                key={child.label}
+                                                                href={child.href}
+                                                                className={
+                                                                    item.label === 'Calculators'
+                                                                        ? "flex flex-col items-center justify-center gap-1 p-2 bg-gray-50 rounded-xl border border-gray-100 hover:bg-blue-50 transition-colors"
+                                                                        : "flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all"
+                                                                }
+                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                            >
+                                                                {child.icon && (
+                                                                    <Image
+                                                                        src={child.icon}
+                                                                        alt=""
+                                                                        width={32}
+                                                                        height={32}
+                                                                        className={`object-contain mix-blend-multiply ${item.label === 'Calculators' ? 'w-10 h-10 mb-1' : 'w-8 h-8'}`}
+                                                                    />
+                                                                )}
+                                                                <span className={item.label === 'Calculators' ? "text-[10px] font-bold text-center leading-tight uppercase text-gray-700" : ""}>
+                                                                    {item.label === 'Calculators'
+                                                                        ? child.label.replace(/Calculator|Value/g, '').trim()
+                                                                        : child.label}
+                                                                </span>
                                                             </Link>
                                                         ))}
                                                     </div>
@@ -447,7 +509,7 @@ export function Header() {
                                     {mobileExpandedItem === 'Blog' && (
                                         <div className="ml-4 border-l-2 border-blue-100 pl-4 py-2 space-y-1">
                                             <Link href="/blog" className="flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all" onClick={() => setIsMobileMenuOpen(false)}>
-                                                <Image src="/assets/icons/blog_icon.png" alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />
+                                                <Image src="/assets/icons/3d/blog.png" alt="" width={32} height={32} className="w-8 h-8 rounded-lg object-cover shadow-sm" />
                                                 <span>All Posts</span>
                                             </Link>
                                             {blogCategories.map((cat, i) => (

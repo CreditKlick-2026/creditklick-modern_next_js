@@ -341,7 +341,7 @@ const SidebarLinks = ({ currentSlug, relatedPosts, currentCategory }: { ctaBanne
     const categoryNames: { [key: string]: string } = {
         'credit-cards': 'Credit Cards',
         'loans': 'Loans',
-        'cibil': 'CIBIL & Credit Score',
+        'cibil': 'Credit Score',
         'tips': 'Financial Tips',
         'news': 'News',
         'guides': 'Guides',

@@ -6,14 +6,9 @@ export default function PoshPolicyClient() {
     return (
         <>
             {/* Hero / Parallax */}
-            <div className="relative h-64 md:h-80 overflow-hidden bg-blue-50">
-                <div
-                    className="absolute inset-0 bg-fixed bg-center bg-cover"
-                    style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')"
-                    }}
-                ></div>
-                <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
+            {/* Hero / Gradient */}
+            <div className="relative h-64 md:h-80 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50">
+                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-3xl md:text-6xl text-blue-900 font-semibold tracking-widest uppercase text-center px-4">
                         POSH POLICY

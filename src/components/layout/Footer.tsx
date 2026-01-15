@@ -80,7 +80,7 @@ export function Footer() {
                     {/* Brand Section */}
                     <div className="col-span-2 md:col-span-4 lg:col-span-1">
                         <Link href="/" className="inline-block mb-4">
-                            <Image src="/assets/Images/creditklic_next_gen.png" alt="CreditKlick" width={128} height={50} style={{ width: 'auto', height: 'auto' }} className="max-w-32" />
+                            <Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={128} height={50} style={{ width: 'auto', height: 'auto' }} className="max-w-32" />
                         </Link>
                         <p className="text-xs text-gray-300 uppercase tracking-widest mb-4">Headoffice - Plot 112 Udyog Vihar Phase-1 Gurgaon, Haryana, 122016</p>
                         <div className="flex items-center space-x-2 mb-4">
@@ -92,6 +92,7 @@ export function Footer() {
                         </div>
                         <p className="text-xs text-gray-500">© 2022-2026 Incredible Management Services PVT. LTD.</p>
                     </div>
+
 
                     {/* Resources */}
                     <div className="text-left">

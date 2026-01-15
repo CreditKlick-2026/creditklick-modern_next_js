@@ -117,19 +117,85 @@ export default function BlogClient() {
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            {/* Hero Section with Animation */}
+            <div className="relative text-white py-20 overflow-hidden bg-blue-900">
+                {/* Animated Background Gradient */}
+                <motion.div
+                    className="absolute inset-0 z-0 bg-gradient-to-br from-blue-900 via-indigo-800 to-blue-900"
+                    animate={{
+                        background: [
+                            "linear-gradient(to bottom right, #1e3a8a, #3730a3, #1e3a8a)",
+                            "linear-gradient(to bottom right, #1e40af, #4338ca, #1e40af)",
+                            "linear-gradient(to bottom right, #1e3a8a, #3730a3, #1e3a8a)",
+                        ],
+                    }}
+                    transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
+                />
+
+                {/* Floating Shapes Animation */}
+                <div className="absolute inset-0 z-0 overflow-hidden opacity-30">
+                    <motion.div
+                        className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-blue-500 rounded-full mix-blend-screen blur-3xl opacity-20"
+                        animate={{
+                            x: [0, 100, 0],
+                            y: [0, 50, 0],
+                            scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
+                    />
+                    <motion.div
+                        className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-500 rounded-full mix-blend-screen blur-3xl opacity-20"
+                        animate={{
+                            x: [0, -100, 0],
+                            y: [0, -50, 0],
+                            scale: [1, 1.3, 1],
+                        }}
+                        transition={{
+                            duration: 25,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
+                    />
+                    <motion.div
+                        className="absolute top-[20%] right-[20%] w-64 h-64 bg-indigo-500 rounded-full mix-blend-screen blur-3xl opacity-20"
+                        animate={{
+                            x: [0, -50, 0],
+                            y: [0, 100, 0],
+                            scale: [1, 1.5, 1],
+                        }}
+                        transition={{
+                            duration: 15,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
+                    />
+                </div>
+
                 <div className="container mx-auto px-4 text-center relative z-10">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold mb-4"
+                        transition={{ duration: 0.8 }}
+                        className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-md"
                     >
                         CreditKlick Insights
                     </motion.h1>
-                    <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow"
+                    >
                         Expert financial advice, latest news, and guides to help you make smarter money decisions.
-                    </p>
+                    </motion.p>
                 </div>
             </div>
 

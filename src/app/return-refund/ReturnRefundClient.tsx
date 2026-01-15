@@ -10,10 +10,9 @@ export default function ReturnRefundClient() {
                 <div
                     className="absolute inset-0 bg-fixed bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')"
+                        backgroundImage: "url('/assets/images/refund-hero.png')"
                     }}
                 ></div>
-                <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-3xl md:text-6xl text-blue-900 font-semibold tracking-widest uppercase text-center px-4">
                         RETURN & REFUND POLICY
