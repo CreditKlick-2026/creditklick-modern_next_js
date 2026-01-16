@@ -34,8 +34,25 @@ export default function AdminLogin() {
         }
 
         setLoading(true)
+
+        // Retry logic for Render cold start
+        const tryLogin = async (attempt = 1): Promise<any> => {
+            try {
+                const response = await authAPI.adminLogin(formData.email, formData.password)
+                return response
+            } catch (error: any) {
+                // If timeout and first attempt, show message and retry
+                if (error.code === 'ECONNABORTED' && attempt === 1) {
+                    toast.loading('Backend waking up... Retrying...', { id: 'retry' })
+                    return tryLogin(2)
+                }
+                throw error
+            }
+        }
+
         try {
-            const response = await authAPI.adminLogin(formData.email, formData.password)
+            const response = await tryLogin()
+            toast.dismiss('retry')
             const data = response.data
 
             if (data.success) {
@@ -46,8 +63,13 @@ export default function AdminLogin() {
                 router.push('/admin/posts')
             }
         } catch (error: any) {
+            toast.dismiss('retry')
             console.error('Login error:', error)
-            toast.error(error.response?.data?.message || 'Invalid credentials')
+            if (error.code === 'ECONNABORTED') {
+                toast.error('Server is taking too long. Please wait a moment and try again.')
+            } else {
+                toast.error(error.response?.data?.message || 'Invalid credentials')
+            }
         } finally {
             setLoading(false)
         }
