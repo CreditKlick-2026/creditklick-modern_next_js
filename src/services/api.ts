@@ -60,6 +60,15 @@ api.interceptors.response.use(
             }
         }
 
+        // Handle 503 - Service Unavailable (Backend Starting)
+        if (error.response?.status === 503 && error.response?.data?.retryAfter) {
+            const retryDelay = error.response.data.retryAfter * 1000; // Convert to ms
+            console.log(`Backend 503: Retrying request in ${retryDelay}ms...`)
+
+            await new Promise(resolve => setTimeout(resolve, retryDelay));
+            return api(originalRequest);
+        }
+
         return Promise.reject(error)
     }
 )
