@@ -118,10 +118,12 @@ export const postsAPI = {
     getCategories: () => api.get('/posts/categories'),
     getRelated: (slug: string, limit?: number) => api.get(`/posts/${slug}/related`, { params: { limit } }),
     create: (data: FormData) => api.post('/posts', data, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 120000 // 2 minutes for large image uploads
     }),
     update: (id: string, data: FormData) => api.put(`/posts/${id}`, data, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 120000 // 2 minutes for large image uploads
     }),
     delete: (id: string) => api.delete(`/posts/${id}`),
 }
