@@ -122,6 +122,7 @@ export default function PostsManagement() {
     const [showEditor, setShowEditor] = useState(false)
     const [editingPost, setEditingPost] = useState<PostData | null>(null)
     const [submitting, setSubmitting] = useState(false)
+    const [imageProcessing, setImageProcessing] = useState(false)
     const [activeTab, setActiveTab] = useState('content') // content, seo, links, cta, settings
 
     const defaultCtaBanner: CtaBannerData = {
@@ -385,34 +386,9 @@ export default function PostsManagement() {
             data.append('subDescription', formData.subDescription)
             if (formData.slug) data.append('slug', formData.slug)
 
-            // Compress image before upload to avoid server timeout
+            // Image is already compressed during selection, just append it
             if (formData.featuredImage && typeof formData.featuredImage !== 'string') {
-                const imageFile = formData.featuredImage as File
-                const originalSize = imageFile.size / 1024 / 1024 // MB
-
-                if (originalSize > 1) {
-                    toast.loading('Compressing image...', { id: 'compress' })
-                    try {
-                        const options = {
-                            maxSizeMB: 1, // Max 1MB
-                            maxWidthOrHeight: 1920,
-                            useWebWorker: true,
-                        }
-                        const compressedFile = await imageCompression(imageFile, options)
-                        const compressedSize = compressedFile.size / 1024 / 1024
-                        console.log(`Image compressed: ${originalSize.toFixed(2)}MB → ${compressedSize.toFixed(2)}MB`)
-                        toast.dismiss('compress')
-                        toast.success(`Image compressed: ${originalSize.toFixed(1)}MB → ${compressedSize.toFixed(1)}MB`)
-                        data.append('featuredImage', compressedFile, imageFile.name)
-                    } catch (compressError) {
-                        console.error('Compression failed:', compressError)
-                        toast.dismiss('compress')
-                        // Fall back to original file
-                        data.append('featuredImage', imageFile)
-                    }
-                } else {
-                    data.append('featuredImage', imageFile)
-                }
+                data.append('featuredImage', formData.featuredImage as File)
             }
 
             let response
@@ -704,11 +680,11 @@ export default function PostsManagement() {
                                     </select>
                                     <button
                                         onClick={handleSubmit}
-                                        disabled={submitting}
-                                        className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                                        disabled={submitting || imageProcessing}
+                                        className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                                        Save Information
+                                        {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : imageProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                                        {imageProcessing ? 'Processing Image...' : 'Save Information'}
                                     </button>
                                     <button
                                         onClick={() => setShowEditor(false)}
@@ -852,6 +828,12 @@ export default function PostsManagement() {
                                                                 </a>
                                                             </div>
                                                         </div>
+                                                    ) : imageProcessing ? (
+                                                        <div className="flex flex-col items-center py-8">
+                                                            <Loader2 className="w-10 h-10 text-blue-600 animate-spin mb-3" />
+                                                            <p className="text-sm font-medium text-gray-700">Compressing image...</p>
+                                                            <p className="text-xs text-gray-500 mt-1">Please wait</p>
+                                                        </div>
                                                     ) : (
                                                         <div className="flex flex-col items-center py-2">
                                                             <ImageIcon className="w-8 h-8 text-gray-300 mb-2" />
@@ -862,14 +844,46 @@ export default function PostsManagement() {
                                                                         type="file"
                                                                         className="sr-only"
                                                                         accept="image/*"
-                                                                        onChange={(e) => {
+                                                                        onChange={async (e) => {
                                                                             const file = e.target.files?.[0]
                                                                             if (file) {
-                                                                                setFormData({
-                                                                                    ...formData,
-                                                                                    featuredImage: file,
-                                                                                    featuredImageUrl: URL.createObjectURL(file)
-                                                                                })
+                                                                                const originalSize = file.size / 1024 / 1024 // MB
+
+                                                                                // If file is large, compress it first
+                                                                                if (originalSize > 1) {
+                                                                                    setImageProcessing(true)
+                                                                                    try {
+                                                                                        const options = {
+                                                                                            maxSizeMB: 1,
+                                                                                            maxWidthOrHeight: 1920,
+                                                                                            useWebWorker: true,
+                                                                                        }
+                                                                                        const compressedFile = await imageCompression(file, options)
+                                                                                        const compressedSize = compressedFile.size / 1024 / 1024
+                                                                                        toast.success(`Image compressed: ${originalSize.toFixed(1)}MB → ${compressedSize.toFixed(1)}MB`)
+                                                                                        setFormData({
+                                                                                            ...formData,
+                                                                                            featuredImage: compressedFile,
+                                                                                            featuredImageUrl: URL.createObjectURL(compressedFile)
+                                                                                        })
+                                                                                    } catch (err) {
+                                                                                        console.error('Compression error:', err)
+                                                                                        // Fall back to original
+                                                                                        setFormData({
+                                                                                            ...formData,
+                                                                                            featuredImage: file,
+                                                                                            featuredImageUrl: URL.createObjectURL(file)
+                                                                                        })
+                                                                                    } finally {
+                                                                                        setImageProcessing(false)
+                                                                                    }
+                                                                                } else {
+                                                                                    setFormData({
+                                                                                        ...formData,
+                                                                                        featuredImage: file,
+                                                                                        featuredImageUrl: URL.createObjectURL(file)
+                                                                                    })
+                                                                                }
                                                                             }
                                                                         }}
                                                                     />
