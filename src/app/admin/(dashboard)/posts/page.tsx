@@ -27,6 +27,7 @@ import toast from 'react-hot-toast'
 import CategoriesList from './_components/CategoriesList'
 import axios from 'axios'
 import imageCompression from 'browser-image-compression'
+import { uploadToCloudinary } from '@/utils/cloudinary'
 
 const ReactQuill = dynamic(() => import('react-quill-new'), {
     ssr: false,
@@ -386,9 +387,9 @@ export default function PostsManagement() {
             data.append('subDescription', formData.subDescription)
             if (formData.slug) data.append('slug', formData.slug)
 
-            // Image is already compressed during selection, just append it
-            if (formData.featuredImage && typeof formData.featuredImage !== 'string') {
-                data.append('featuredImage', formData.featuredImage as File)
+            // Image was already uploaded to Cloudinary directly, send the URL
+            if (formData.featuredImage && typeof formData.featuredImage === 'string') {
+                data.append('featuredImageUrl', formData.featuredImage)
             }
 
             let response
@@ -847,42 +848,31 @@ export default function PostsManagement() {
                                                                         onChange={async (e) => {
                                                                             const file = e.target.files?.[0]
                                                                             if (file) {
-                                                                                const originalSize = file.size / 1024 / 1024 // MB
+                                                                                setImageProcessing(true)
+                                                                                try {
+                                                                                    let fileToUpload = file
+                                                                                    const originalSize = file.size / 1024 / 1024
 
-                                                                                // If file is large, compress it first
-                                                                                if (originalSize > 1) {
-                                                                                    setImageProcessing(true)
-                                                                                    try {
-                                                                                        const options = {
-                                                                                            maxSizeMB: 1,
-                                                                                            maxWidthOrHeight: 1920,
-                                                                                            useWebWorker: true,
-                                                                                        }
-                                                                                        const compressedFile = await imageCompression(file, options)
-                                                                                        const compressedSize = compressedFile.size / 1024 / 1024
-                                                                                        toast.success(`Image compressed: ${originalSize.toFixed(1)}MB → ${compressedSize.toFixed(1)}MB`)
-                                                                                        setFormData({
-                                                                                            ...formData,
-                                                                                            featuredImage: compressedFile,
-                                                                                            featuredImageUrl: URL.createObjectURL(compressedFile)
-                                                                                        })
-                                                                                    } catch (err) {
-                                                                                        console.error('Compression error:', err)
-                                                                                        // Fall back to original
-                                                                                        setFormData({
-                                                                                            ...formData,
-                                                                                            featuredImage: file,
-                                                                                            featuredImageUrl: URL.createObjectURL(file)
-                                                                                        })
-                                                                                    } finally {
-                                                                                        setImageProcessing(false)
+                                                                                    if (originalSize > 1) {
+                                                                                        toast.loading('Compressing image...', { id: 'upload' })
+                                                                                        const options = { maxSizeMB: 1, maxWidthOrHeight: 1920, useWebWorker: true }
+                                                                                        fileToUpload = await imageCompression(file, options)
+                                                                                        const compressedSize = fileToUpload.size / 1024 / 1024
+                                                                                        toast.loading(`Uploading... (${originalSize.toFixed(1)}MB → ${compressedSize.toFixed(1)}MB)`, { id: 'upload' })
+                                                                                    } else {
+                                                                                        toast.loading('Uploading image...', { id: 'upload' })
                                                                                     }
-                                                                                } else {
-                                                                                    setFormData({
-                                                                                        ...formData,
-                                                                                        featuredImage: file,
-                                                                                        featuredImageUrl: URL.createObjectURL(file)
-                                                                                    })
+
+                                                                                    const { url } = await uploadToCloudinary(fileToUpload)
+                                                                                    toast.dismiss('upload')
+                                                                                    toast.success('Image uploaded!')
+                                                                                    setFormData({ ...formData, featuredImage: url, featuredImageUrl: url })
+                                                                                } catch (err) {
+                                                                                    console.error('Upload error:', err)
+                                                                                    toast.dismiss('upload')
+                                                                                    toast.error('Upload failed. Try again.')
+                                                                                } finally {
+                                                                                    setImageProcessing(false)
                                                                                 }
                                                                             }
                                                                         }}
