@@ -95,6 +95,7 @@ export function Header() {
     const [profileDropdown, setProfileDropdown] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [blogCategories, setBlogCategories] = useState<{ label: string, href: string }[]>([])
+    const [latestPosts, setLatestPosts] = useState<Post[]>([]) // Latest 6 posts for dropdown
     const [searchQuery, setSearchQuery] = useState('')
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [searchResults, setSearchResults] = useState<Post[]>([])
@@ -152,7 +153,21 @@ export function Header() {
                 console.error("Failed to fetch blog categories", error)
             }
         }
+
+        // Fetch latest 6 posts for dropdown
+        const fetchLatestPosts = async () => {
+            try {
+                const response = await postsAPI.getAll({ limit: 6, status: 'published' })
+                if (response.data.success && response.data.data?.posts) {
+                    setLatestPosts(response.data.data.posts)
+                }
+            } catch (error) {
+                console.error("Failed to fetch latest posts", error)
+            }
+        }
+
         fetchCategories()
+        fetchLatestPosts()
 
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
@@ -299,6 +314,23 @@ export function Header() {
 
     return (
         <>
+            {/* Preload all dropdown icons - hidden but loads images on page load */}
+            <div className="hidden" aria-hidden="true">
+                {navItems.map(item => (
+                    <div key={item.label}>
+                        {item.icon && <Image src={item.icon} alt="" width={1} height={1} priority />}
+                        {item.children?.map(child => (
+                            child.icon && <Image key={child.href} src={child.icon} alt="" width={1} height={1} priority />
+                        ))}
+                    </div>
+                ))}
+                {/* Blog icons */}
+                <Image src="/assets/icons/3d/blog.png" alt="" width={1} height={1} priority />
+                {Object.values(blogCategoryIcons).map((icon, i) => (
+                    <Image key={i} src={icon} alt="" width={1} height={1} priority />
+                ))}
+            </div>
+
             {/* Desktop Header */}
             <header className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden lg:block', isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white shadow-lg')}>
                 <div className="container-custom">
@@ -342,24 +374,72 @@ export function Header() {
                                     </Link>
                                     <AnimatePresence>
                                         {openDropdown === 'Blogs' && (
-                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-3 w-[450px] bg-white rounded-2xl shadow-xl border-2 border-black">
+                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-3 lg:w-[260px] xl:w-[300px] 2xl:w-[340px] bg-white rounded-2xl shadow-xl border-2 border-black p-3">
                                                 <div className="absolute -top-[9px] left-8 w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45"></div>
-                                                <ul className="py-1 px-1 grid grid-flow-col grid-rows-3 gap-2 max-h-[60vh] overflow-y-auto relative bg-white rounded-xl">
-                                                    <li>
-                                                        <Link href="/blog" className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all">
-                                                            <Image src="/assets/icons/3d/blog.png" alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />
-                                                            <span>All Posts</span>
-                                                        </Link>
-                                                    </li>
-                                                    {blogCategories.slice(0, 5).map((cat, i) => (
-                                                        <li key={i}>
-                                                            <Link href={cat.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all capitalize">
-                                                                {blogCategoryIcons[cat.label] && <Image src={blogCategoryIcons[cat.label]} alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />}
-                                                                <span>{cat.label}</span>
+
+                                                {/* Header with Categories */}
+                                                <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
+                                                    <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Latest Posts</h4>
+                                                    <div className="flex gap-2">
+                                                        {blogCategories.slice(0, 4).map((cat, i) => (
+                                                            <Link
+                                                                key={i}
+                                                                href={cat.href}
+                                                                className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors font-medium"
+                                                            >
+                                                                {cat.label}
                                                             </Link>
-                                                        </li>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                {/* Latest Posts Grid - 3 posts per column */}
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    {latestPosts.slice(0, 6).map((post) => (
+                                                        <Link
+                                                            key={post._id}
+                                                            href={`/blog/${post.slug}`}
+                                                            className="flex items-start gap-3 p-2 rounded-lg hover:bg-blue-50 transition-all group"
+                                                        >
+                                                            <div className="w-16 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                                                                {post.featuredImage?.url ? (
+                                                                    <Image
+                                                                        src={post.featuredImage.url}
+                                                                        alt={post.title}
+                                                                        width={64}
+                                                                        height={48}
+                                                                        className="w-full h-full object-cover"
+                                                                    />
+                                                                ) : (
+                                                                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                                                                        <Image src="/assets/icons/3d/blog.png" alt="" width={24} height={24} className="w-6 h-6 opacity-50" />
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                            <div className="flex-1 min-w-0">
+                                                                <h5 className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                                                                    {post.title}
+                                                                </h5>
+                                                                {post.category && (
+                                                                    <span className="text-[10px] text-blue-500 font-medium uppercase mt-1 block">
+                                                                        {categoryLabels[post.category] || post.category}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </Link>
                                                     ))}
-                                                </ul>
+                                                </div>
+
+                                                {/* View All Button */}
+                                                <div className="mt-3 pt-2 border-t border-gray-100">
+                                                    <Link
+                                                        href="/blog"
+                                                        className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors"
+                                                    >
+                                                        View All Blogs
+                                                        <ChevronDown className="w-4 h-4 -rotate-90" />
+                                                    </Link>
+                                                </div>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

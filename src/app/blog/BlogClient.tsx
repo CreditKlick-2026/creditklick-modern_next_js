@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
@@ -32,21 +32,41 @@ interface Category {
     count: number
 }
 
-export default function BlogClient() {
+interface BlogClientProps {
+    initialPosts?: Post[]
+    initialCategories?: Category[]
+    initialTotalPages?: number
+    initialCategory?: string
+    initialSearch?: string
+    initialPage?: number
+}
+
+export default function BlogClient({
+    initialPosts = [],
+    initialCategories = [],
+    initialTotalPages = 1,
+    initialCategory = "All",
+    initialSearch = "",
+    initialPage = 1
+}: BlogClientProps) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const categoryParam = searchParams.get('category')
     const searchParam = searchParams.get('search')
 
-    const [posts, setPosts] = useState<Post[]>([])
-    const [categories, setCategories] = useState<Category[]>([])
-    const [loading, setLoading] = useState(true)
-    const [selectedCategory, setSelectedCategory] = useState("All")
+    // Use SSR data as initial values - NO loading on first render!
+    const [posts, setPosts] = useState<Post[]>(initialPosts)
+    const [categories, setCategories] = useState<Category[]>(initialCategories)
+    const [loading, setLoading] = useState(false) // Start with false since we have SSR data
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory)
 
     // Pagination State
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
+    const [page, setPage] = useState(initialPage)
+    const [totalPages, setTotalPages] = useState(initialTotalPages)
     const LIMIT = 20
+
+    // Track if this is the first mount (skip fetch if SSR data exists)
+    const isFirstMount = useRef(true)
 
     // Sync URL param with state
     useEffect(() => {
@@ -59,6 +79,13 @@ export default function BlogClient() {
     }, [categoryParam, searchParam])
 
     useEffect(() => {
+        // Skip API fetch on first mount if we have SSR data
+        if (isFirstMount.current && initialPosts.length > 0) {
+            isFirstMount.current = false
+            return
+        }
+        isFirstMount.current = false
+
         async function loadData() {
             setLoading(true)
             try {
