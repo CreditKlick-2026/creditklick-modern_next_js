@@ -46,7 +46,16 @@ const nextConfig: NextConfig = {
   // WWW to Non-WWW Redirect (handled via redirects)
   async redirects() {
     return [
-      // Redirects have been removed to prevent loops with hosting provider configuration
+      {
+        source: '/creditcards',
+        destination: '/credit-cards',
+        permanent: true,
+      },
+      {
+        source: '/creditklick',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
 };
