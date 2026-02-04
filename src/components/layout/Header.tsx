@@ -366,6 +366,7 @@ export function Header() {
                                         </AnimatePresence>
                                     </li>
                                 ))}
+
                                 {/* Blog Menu */}
                                 <li className="relative px-4" onMouseEnter={() => setOpenDropdown('Blogs')} onMouseLeave={() => setOpenDropdown(null)}>
                                     <Link href="/blog" className="flex items-center py-2 font-semibold uppercase tracking-wider text-sm hover:text-blue-600 transition-colors">
