@@ -374,18 +374,18 @@ export function Header() {
                                     </Link>
                                     <AnimatePresence>
                                         {openDropdown === 'Blogs' && (
-                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-3 lg:w-[260px] xl:w-[300px] 2xl:w-[340px] bg-white rounded-2xl shadow-xl border-2 border-black p-3">
-                                                <div className="absolute -top-[9px] left-8 w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45"></div>
+                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full -left-20 mt-3 w-[520px] bg-white rounded-2xl shadow-xl border-2 border-black p-4">
+                                                <div className="absolute -top-[9px] left-28 w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45"></div>
 
                                                 {/* Header with Categories */}
-                                                <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
-                                                    <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Latest Posts</h4>
-                                                    <div className="flex gap-2">
+                                                <div className="flex flex-wrap items-center gap-2 mb-4 pb-3 border-b border-gray-100">
+                                                    <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mr-auto">Latest Posts</h4>
+                                                    <div className="flex flex-wrap gap-2">
                                                         {blogCategories.slice(0, 4).map((cat, i) => (
                                                             <Link
                                                                 key={i}
                                                                 href={cat.href}
-                                                                className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors font-medium"
+                                                                className="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors font-medium whitespace-nowrap"
                                                             >
                                                                 {cat.label}
                                                             </Link>
@@ -393,35 +393,35 @@ export function Header() {
                                                     </div>
                                                 </div>
 
-                                                {/* Latest Posts Grid - 3 posts per column */}
-                                                <div className="grid grid-cols-2 gap-3">
+                                                {/* Latest Posts Grid - 2 columns with proper spacing */}
+                                                <div className="grid grid-cols-2 gap-4">
                                                     {latestPosts.slice(0, 6).map((post) => (
                                                         <Link
                                                             key={post._id}
                                                             href={`/blog/${post.slug}`}
-                                                            className="flex items-start gap-3 p-2 rounded-lg hover:bg-blue-50 transition-all group"
+                                                            className="flex items-start gap-3 p-2 rounded-xl hover:bg-blue-50 transition-all group"
                                                         >
-                                                            <div className="w-16 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                                                            <div className="w-20 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                                                                 {post.featuredImage?.url ? (
                                                                     <Image
                                                                         src={post.featuredImage.url}
                                                                         alt={post.title}
-                                                                        width={64}
-                                                                        height={48}
+                                                                        width={80}
+                                                                        height={56}
                                                                         className="w-full h-full object-cover"
                                                                     />
                                                                 ) : (
                                                                     <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                                                                        <Image src="/assets/icons/3d/blog.png" alt="" width={24} height={24} className="w-6 h-6 opacity-50" />
+                                                                        <Image src="/assets/icons/3d/blog.png" alt="" width={28} height={28} className="w-7 h-7 opacity-50" />
                                                                     </div>
                                                                 )}
                                                             </div>
                                                             <div className="flex-1 min-w-0">
-                                                                <h5 className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                                                                <h5 className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
                                                                     {post.title}
                                                                 </h5>
                                                                 {post.category && (
-                                                                    <span className="text-[10px] text-blue-500 font-medium uppercase mt-1 block">
+                                                                    <span className="text-[11px] text-blue-500 font-medium uppercase mt-1.5 block">
                                                                         {categoryLabels[post.category] || post.category}
                                                                     </span>
                                                                 )}
@@ -431,10 +431,10 @@ export function Header() {
                                                 </div>
 
                                                 {/* View All Button */}
-                                                <div className="mt-3 pt-2 border-t border-gray-100">
+                                                <div className="mt-4 pt-3 border-t border-gray-100">
                                                     <Link
                                                         href="/blog"
-                                                        className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors"
+                                                        className="flex items-center justify-center gap-2 w-full py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors"
                                                     >
                                                         View All Blogs
                                                         <ChevronDown className="w-4 h-4 -rotate-90" />
