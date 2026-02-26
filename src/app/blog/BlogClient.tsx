@@ -128,7 +128,6 @@ export default function BlogClient({
     }
 
 
-
     const getImageUrl = (post: Post) => {
         if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
         if (typeof post.featuredImage === 'string' && post.featuredImage) return post.featuredImage
