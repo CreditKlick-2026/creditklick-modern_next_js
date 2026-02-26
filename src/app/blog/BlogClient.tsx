@@ -129,7 +129,8 @@ export default function BlogClient({
 
     const getImageUrl = (post: Post) => {
         if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
-        if (typeof post.featuredImage === 'string') return post.featuredImage
+        if (typeof post.featuredImage === 'string' && post.featuredImage) return post.featuredImage
+        if ((post as any).ctaBanner?.customIconUrl) return (post as any).ctaBanner.customIconUrl
         return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=max&q=80&w=1000"
     }
 
