@@ -36,9 +36,23 @@ const ACCOUNT_TYPES: any = {
 const dateformat = (dateStr: any) => {
     if (!dateStr) return "N/A";
     const str = String(dateStr).trim();
-    if (!str) return "N/A";
+    if (!str || str === '0' || str === 'null' || str === 'undefined') return "N/A";
+    // YYYYMMDD format (Experian standard)
     if (/^\d{8}$/.test(str)) {
         return `${str.substring(6, 8)}-${str.substring(4, 6)}-${str.substring(0, 4)}`;
+    }
+    // DDMMYYYY format
+    if (/^\d{2}\d{2}\d{4}$/.test(str) && parseInt(str.substring(0, 2)) <= 31) {
+        return `${str.substring(0, 2)}-${str.substring(2, 4)}-${str.substring(4, 8)}`;
+    }
+    // ISO format (2024-01-15T...)
+    if (str.includes('T') || /^\d{4}-\d{2}-\d{2}/.test(str)) {
+        try {
+            const d = new Date(str);
+            if (!isNaN(d.getTime())) {
+                return `${String(d.getDate()).padStart(2, '0')}-${String(d.getMonth() + 1).padStart(2, '0')}-${d.getFullYear()}`;
+            }
+        } catch (e) { /* fall through */ }
     }
     return str;
 };
@@ -114,19 +128,67 @@ function parseExperianReport(rawData: any) {
         personalInfo: {}
     };
 
+    // Handle flat mock data format (from DEV_MODE backend)
+    if (!data.children && (data.SCORE || data.score || data.personalInfo)) {
+        report.score = parseInt(data.SCORE || data.score || 0, 10);
+        report.name = data.personalInfo?.name || 'User';
+        report.reportDate = data.reportDate || new Date().toLocaleDateString();
+        report.personalInfo = {
+            dob: data.personalInfo?.dob,
+            gender: data.personalInfo?.gender,
+            pan: data.personalInfo?.pan,
+            mobile: data.personalInfo?.phone || data.personalInfo?.mobile,
+            email: data.personalInfo?.email,
+        };
+        if (data.summary) {
+            report.summary = {
+                activeCount: data.summary.activeAccounts || 0,
+                closedCount: data.summary.closedAccounts || 0,
+                defaultCount: 0,
+                totalOutstanding: data.summary.totalOutstanding || 0
+            };
+        }
+        if (data.accounts) {
+            report.accounts = data.accounts.map((acc: any) => ({
+                title: acc.bank || acc.institution || 'Unknown',
+                outstanding: String(acc.currentBalance || 0),
+                accountOpenDate: acc.dateOpened || acc.openDate,
+                Total_Loan_Amount: String(acc.creditLimit || acc.sanctionedAmount || 0),
+                Account_Status: acc.status === 'Active' ? '11' : acc.status === 'Closed' ? '13' : 'DEFAULTVALUE',
+                Last_Pay_date: acc.lastPayDate,
+                Account_Type: acc.accountType === 'Credit Card' ? '10' : acc.accountType === 'Personal Loan' ? '5' : '0',
+                accNumber: acc.accountNumber || '',
+                paymentRating: acc.paymentHistory || '',
+                dateReported: acc.dateReported,
+                paymentHistoryProfile: '0',
+                history: []
+            }));
+        }
+        if (data.enquiries) {
+            report.enquiries = data.enquiries.map((enq: any) => ({
+                Subscriber_Name: enq.institution || enq.memberName || 'Unknown',
+                Enquiry_Reason: enq.type || enq.purpose || 'Unknown',
+                Amount_Financed: String(enq.amount || 0),
+                Date_of_Enquiry: enq.date || enq.enquiryDate
+            }));
+        }
+        return report;
+    }
+
     if (data.children) {
         const scoreVal = findValueInXMLJSON(data, 'SCORE') || findValueInXMLJSON(data, 'Score') || findValueInXMLJSON(data, 'BureauScore');
         if (scoreVal) report.score = parseInt(scoreVal, 10);
 
-        report.name = findValueInXMLJSON(data, 'ConsumerName1') || findValueInXMLJSON(data, 'Name') || findValueInXMLJSON(data, 'First_Name') || 'User';
+        report.name = findValueInXMLJSON(data, 'ConsumerName1') || findValueInXMLJSON(data, 'Name') || findValueInXMLJSON(data, 'First_Name') || findValueInXMLJSON(data, 'FullName') || 'User';
         report.personalInfo = {
-            dob: findValueInXMLJSON(data, 'Date_Of_Birth_Applicant') || findValueInXMLJSON(data, 'Date_of_Birth'),
-            pan: findValueInXMLJSON(data, 'IncomeTaxPan') || findValueInXMLJSON(data, 'Income_TAX_PAN') || findValueInXMLJSON(data, 'Income_Tax_PAN'),
-            passport: findValueInXMLJSON(data, 'Passport_number') || findValueInXMLJSON(data, 'Passport_Number'),
-            voterId: findValueInXMLJSON(data, 'Voter_s_Identity_Card') || findValueInXMLJSON(data, 'Voter_ID_Number'),
-            driverLicense: findValueInXMLJSON(data, 'Driver_License_Number'),
-            mobile: findValueInXMLJSON(data, 'MobilePhoneNumber') || findValueInXMLJSON(data, 'Mobile_Telephone_Number') || findValueInXMLJSON(data, 'Telephone_Number'),
-            email: findValueInXMLJSON(data, 'EMailId') || findValueInXMLJSON(data, 'Email_ID')
+            dob: findValueInXMLJSON(data, 'Date_Of_Birth_Applicant') || findValueInXMLJSON(data, 'Date_of_Birth') || findValueInXMLJSON(data, 'DateOfBirth') || findValueInXMLJSON(data, 'DOB') || findValueInXMLJSON(data, 'BirthDate'),
+            gender: findValueInXMLJSON(data, 'Gender_Code') || findValueInXMLJSON(data, 'Gender') || findValueInXMLJSON(data, 'GenderCode'),
+            pan: findValueInXMLJSON(data, 'IncomeTaxPan') || findValueInXMLJSON(data, 'Income_TAX_PAN') || findValueInXMLJSON(data, 'Income_Tax_PAN') || findValueInXMLJSON(data, 'PAN') || findValueInXMLJSON(data, 'Pan_Number') || findValueInXMLJSON(data, 'IncomeTaxIdNumber'),
+            passport: findValueInXMLJSON(data, 'Passport_number') || findValueInXMLJSON(data, 'Passport_Number') || findValueInXMLJSON(data, 'PassportNumber'),
+            voterId: findValueInXMLJSON(data, 'Voter_s_Identity_Card') || findValueInXMLJSON(data, 'Voter_ID_Number') || findValueInXMLJSON(data, 'VoterIdNumber'),
+            driverLicense: findValueInXMLJSON(data, 'Driver_License_Number') || findValueInXMLJSON(data, 'DrivingLicenseNumber'),
+            mobile: findValueInXMLJSON(data, 'MobilePhoneNumber') || findValueInXMLJSON(data, 'Mobile_Telephone_Number') || findValueInXMLJSON(data, 'Telephone_Number') || findValueInXMLJSON(data, 'TelephoneNumber'),
+            email: findValueInXMLJSON(data, 'EMailId') || findValueInXMLJSON(data, 'Email_ID') || findValueInXMLJSON(data, 'EmailAddress')
         };
 
         const addressNodes = [
@@ -708,6 +770,15 @@ export default function ReportAnalysisClient() {
     );
 
     const { score, name, reportDate, accounts, enquiries, enquirySummary, summary, personalInfo } = userData;
+    const formatGender = (code: string) => {
+        if (!code) return undefined;
+        const c = String(code).trim();
+        if (c === '1' || c.toLowerCase() === 'male' || c.toLowerCase() === 'm') return 'Male';
+        if (c === '2' || c.toLowerCase() === 'female' || c.toLowerCase() === 'f') return 'Female';
+        if (c === '3' || c.toLowerCase() === 'other' || c.toLowerCase() === 'transgender') return 'Other';
+        return c;
+    };
+
     const profileDetails = {
         Name: name,
         Score: score,
@@ -716,6 +787,7 @@ export default function ReportAnalysisClient() {
         Email: personalInfo.email,
         PAN: personalInfo.pan,
         DOB: dateformat(personalInfo.dob),
+        Gender: formatGender(personalInfo.gender),
         Passport: personalInfo.passport,
         VoterID: personalInfo.voterId,
         DriverLicense: personalInfo.driverLicense,
