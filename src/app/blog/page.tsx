@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // SSR - data is fetched at request time
 export const dynamic = 'force-dynamic'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://creditklick-2026-backend-next-gen.onrender.com/api/v1'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
 
 interface Post {
     _id: string

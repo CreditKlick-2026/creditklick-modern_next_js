@@ -32,7 +32,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
 
     const saveConsentToBackend = async (accepted: boolean) => {
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
             await fetch(`${API_URL}/cookies/consent`, {
                 method: 'POST',
                 headers: {
