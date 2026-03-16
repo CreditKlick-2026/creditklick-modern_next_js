@@ -58,6 +58,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // Proxy to backend to fix CORS
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: 'https://betaversion-creditklickapp.onrender.com/api/v1/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
