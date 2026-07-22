@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 
 // Asset path
-const Logo = '/assets/Images/creditklic_next_gen.png'
+const Logo = '/assets/creditklic_next_gen.png'
 
 interface SidebarItem {
     icon: LucideIcon;

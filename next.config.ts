@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   // Trailing Slash Consistency - ensures all URLs end without trailing slash
   trailingSlash: false,
 
+  // Tree-shake heavy libraries - only imports actually used will be bundled
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      'date-fns',
+    ],
+  },
+
   // Image Optimization for faster page loads
   images: {
     remotePatterns: [
@@ -17,10 +26,12 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Compression for faster loads
+  // Compression & Security
   compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
 
-  // Power Packed Headers for SEO
+  // System-Engineer level HTTP Headers & Cache-Control Policies
   async headers() {
     return [
       {
@@ -35,8 +46,34 @@ const nextConfig: NextConfig = {
             value: 'nosniff'
           },
           {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          },
+        ],
+      },
+      {
+        source: '/assets/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

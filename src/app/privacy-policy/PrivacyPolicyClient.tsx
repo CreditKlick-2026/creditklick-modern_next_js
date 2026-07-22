@@ -10,7 +10,7 @@ export default function PrivacyPolicyClient() {
                 <div
                     className="absolute inset-0 bg-fixed bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('/assets/images/privacy-hero.png')"
+                        backgroundImage: "url('/assets/privacy-hero.png')"
                     }}
                 ></div>
                 <div className="absolute inset-0 flex items-center justify-center">

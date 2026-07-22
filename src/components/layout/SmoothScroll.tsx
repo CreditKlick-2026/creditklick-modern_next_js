@@ -12,7 +12,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
 
     useEffect(() => {
         // Initialize Lenis for smooth scrolling
-        lenisRef.current = new Lenis({
+        const lenis = new Lenis({
             duration: 1.2, // Scroll animation duration
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing function
             orientation: 'vertical',
@@ -22,20 +22,51 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
             touchMultiplier: 2,
             infinite: false,
         })
+        lenisRef.current = lenis
 
-        // Animation frame loop
+        let rafId: number | null = null
+        let idleTimer: NodeJS.Timeout | null = null
+
         function raf(time: number) {
-            lenisRef.current?.raf(time)
-            requestAnimationFrame(raf)
+            lenis.raf(time)
+            rafId = requestAnimationFrame(raf)
         }
 
-        requestAnimationFrame(raf)
+        const onScrollActivity = () => {
+            if (!rafId) {
+                rafId = requestAnimationFrame(raf)
+            }
+            if (idleTimer) clearTimeout(idleTimer)
+            idleTimer = setTimeout(() => {
+                if (rafId && !lenis.isScrolling) {
+                    cancelAnimationFrame(rafId)
+                    rafId = null
+                }
+            }, 1500)
+        }
 
-        // Cleanup on unmount
+        // Trigger RAF loop on user interaction
+        window.addEventListener('wheel', onScrollActivity, { passive: true })
+        window.addEventListener('touchstart', onScrollActivity, { passive: true })
+        window.addEventListener('touchmove', onScrollActivity, { passive: true })
+        window.addEventListener('keydown', onScrollActivity, { passive: true })
+        window.addEventListener('scroll', onScrollActivity, { passive: true })
+
+        // Initial tick
+        onScrollActivity()
+
         return () => {
-            lenisRef.current?.destroy()
+            if (rafId) cancelAnimationFrame(rafId)
+            if (idleTimer) clearTimeout(idleTimer)
+            window.removeEventListener('wheel', onScrollActivity)
+            window.removeEventListener('touchstart', onScrollActivity)
+            window.removeEventListener('touchmove', onScrollActivity)
+            window.removeEventListener('keydown', onScrollActivity)
+            window.removeEventListener('scroll', onScrollActivity)
+            lenis.destroy()
         }
     }, [])
 
     return <>{children}</>
 }
+

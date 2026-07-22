@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Apply for Business Loan Online - Quick Approval | CreditKlick',
         description: 'Get the funding your business needs to grow. Instant approval and competitive rates from top lenders.',
-        images: ['/assets/Images/businessloan.png'],
+        images: ['/assets/businessloan.png'],
     },
     alternates: {
         canonical: '/loan/business-loan',

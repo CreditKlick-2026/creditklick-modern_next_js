@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 const isClient = typeof window !== 'undefined';
 const API_BASE_URL = isClient ? '/api/v1' : (process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1')
 
-// Create axios instance
+// Create axios instance for main CreditKlick backend
 const api = axios.create({
     baseURL: API_BASE_URL,
     timeout: 30000,
@@ -13,7 +13,10 @@ const api = axios.create({
     },
 })
 
-// Request interceptor - add auth token
+// Blog API uses same backend as main API (same server, same /api/v1 base)
+// No separate blogApi needed - reusing main api instance
+
+// Request interceptor - add auth token for main api
 api.interceptors.request.use(
     (config) => {
         const token = Cookies.get('accessToken') || Cookies.get('token')
@@ -112,7 +115,7 @@ export const creditReportAPI = {
     },
 }
 
-// Posts API
+// Posts API (Blog posts served by main backend - /api/v1/posts)
 export const postsAPI = {
     getAll: (params?: Record<string, unknown>) => api.get('/posts', { params }),
     getBySlug: (slug: string) => api.get(`/posts/${slug}`),
@@ -153,12 +156,12 @@ export const usersAPI = {
     delete: (id: string) => api.delete(`/users/${id}`),
 }
 
-// Upload API
+// Upload API (cloudinary uploads via main backend)
 export const uploadAPI = {
-    uploadImage: (formData: FormData) => api.post('/upload/image', formData, {
+    uploadImage: (formData: FormData) => api.post('/posts/upload/image', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
     }),
-    deleteImage: (publicId: string) => api.post('/upload/delete', { publicId })
+    deleteImage: (publicId: string) => api.post('/posts/upload/delete', { publicId })
 }
 
 // Subscribers API
@@ -212,6 +215,12 @@ export const contactsAPI = {
 
     // Admin - delete contact
     delete: (id: string) => api.delete(`/contacts/${id}`)
+}
+
+// User API & Consent Management
+export const userAPI = {
+    revokeConsent: (data: { phone?: string; email?: string; reason?: string }) =>
+        api.post('/user/revoke-consent', data),
 }
 
 export default api

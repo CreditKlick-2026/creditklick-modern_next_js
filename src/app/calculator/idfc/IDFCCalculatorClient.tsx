@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 
 // Asset path
-const milleniaImg = '/assets/Images/idfcimg/idfcmillenia.png';
+const milleniaImg = '/assets/idfcimg/idfcmillenia.png';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },

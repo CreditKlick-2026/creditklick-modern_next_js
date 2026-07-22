@@ -1,16 +1,18 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, User, LogOut, MessageCircle, Loader2, Search } from 'lucide-react'
+import { Menu, X, ChevronDown, User, Search, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import toast from 'react-hot-toast'
-import { verificationAPI, postsAPI } from '@/services/api'
+import { postsAPI } from '@/services/api'
 import Cookies from 'js-cookie'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+const LoginModal = dynamic(() => import('./LoginModal').then(mod => mod.LoginModal), { ssr: false })
 
 const navItems = [
     {
@@ -95,23 +97,51 @@ export function Header() {
     const [profileDropdown, setProfileDropdown] = useState(false)
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [blogCategories, setBlogCategories] = useState<{ label: string, href: string }[]>([])
-    const [latestPosts, setLatestPosts] = useState<Post[]>([]) // Latest 6 posts for dropdown
+    const [latestPosts, setLatestPosts] = useState<Post[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [searchResults, setSearchResults] = useState<Post[]>([])
     const [isSearching, setIsSearching] = useState(false)
     const [mobileExpandedItem, setMobileExpandedItem] = useState<string | null>(null)
     const searchRef = useRef<HTMLDivElement>(null)
+    const hasFetchedBlogRef = useRef(false)
 
     const pathname = usePathname()
     const router = useRouter()
 
-    // Login Flow States
-    const [mobileNumber, setMobileNumber] = useState('')
-    const [mobileError, setMobileError] = useState('')
-    const [otpSent, setOtpSent] = useState(false)
-    const [otp, setOtp] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    const [isBlogLoading, setIsBlogLoading] = useState(false)
+
+    // Fetch blog categories and latest posts for dropdown (cached in ref to avoid duplicate network calls)
+    const fetchBlogDataIfNeeded = useCallback(async () => {
+        if (hasFetchedBlogRef.current && latestPosts.length > 0) return
+        hasFetchedBlogRef.current = true
+        setIsBlogLoading(true)
+        try {
+            const [catRes, postsRes] = await Promise.all([
+                postsAPI.getCategories(),
+                postsAPI.getAll({ limit: 6, status: 'published' })
+            ])
+            if (catRes.data?.success && catRes.data?.data) {
+                setBlogCategories(catRes.data.data.map((cat: { category: string }) => ({
+                    label: categoryLabels[cat.category] || cat.category,
+                    href: `/blog?category=${encodeURIComponent(cat.category)}`
+                })))
+            }
+            if (postsRes.data?.success && postsRes.data?.data?.posts) {
+                setLatestPosts(postsRes.data.data.posts)
+            }
+        } catch (error) {
+            console.error("Failed to fetch blog dropdown data", error)
+            hasFetchedBlogRef.current = false // Allow retry on failure
+        } finally {
+            setIsBlogLoading(false)
+        }
+    }, [latestPosts.length])
+
+    // Fetch blog dropdown data immediately on mount so dropdown is always pre-populated
+    useEffect(() => {
+        fetchBlogDataIfNeeded()
+    }, [fetchBlogDataIfNeeded])
 
     // Debounced Search Effect
     useEffect(() => {
@@ -138,37 +168,7 @@ export function Header() {
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10)
-        window.addEventListener('scroll', handleScroll)
-
-        const fetchCategories = async () => {
-            try {
-                const response = await postsAPI.getCategories()
-                if (response.data.success && response.data.data) {
-                    setBlogCategories(response.data.data.map((cat: { category: string }) => ({
-                        label: categoryLabels[cat.category] || cat.category,
-                        href: `/blog?category=${encodeURIComponent(cat.category)}`
-                    })))
-                }
-            } catch (error) {
-                console.error("Failed to fetch blog categories", error)
-            }
-        }
-
-        // Fetch latest 6 posts for dropdown
-        const fetchLatestPosts = async () => {
-            try {
-                const response = await postsAPI.getAll({ limit: 6, status: 'published' })
-                if (response.data.success && response.data.data?.posts) {
-                    setLatestPosts(response.data.data.posts)
-                }
-            } catch (error) {
-                console.error("Failed to fetch latest posts", error)
-            }
-        }
-
-        fetchCategories()
-        fetchLatestPosts()
-
+        window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
@@ -180,20 +180,6 @@ export function Header() {
         setIsMobileMenuOpen(false)
         setOpenDropdown(null)
     }, [pathname])
-
-    useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setShowLoginModal(false)
-        }
-        if (showLoginModal) {
-            document.addEventListener('keydown', handleEscape)
-            document.body.style.overflow = 'hidden'
-        }
-        return () => {
-            document.removeEventListener('keydown', handleEscape)
-            document.body.style.overflow = 'unset'
-        }
-    }, [showLoginModal])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -240,110 +226,23 @@ export function Header() {
 
     const handleLoginClick = () => {
         setShowLoginModal(true)
-        setMobileNumber('')
-        setMobileError('')
-        setOtpSent(false)
-        setOtp('')
-    }
-
-    const handleSendOTP = async () => {
-        if (!mobileNumber || mobileNumber.length !== 10) {
-            setMobileError('Please enter a valid 10-digit mobile number')
-            return
-        }
-        setMobileError('')
-        setIsLoading(true)
-
-        try {
-            const response = await verificationAPI.init({ mobile: mobileNumber, isLogin: true })
-            const data = response.data
-
-            if (data.requireSignup) {
-                toast.error("User not found. Please Sign Up.")
-            } else if (data.success) {
-                setOtpSent(true)
-                toast.success("OTP Sent Successfully")
-            } else {
-                setMobileError(data.error || "Failed to send OTP")
-            }
-        } catch (error: unknown) {
-            console.error('Login Init Error:', error)
-            const err = error as { response?: { data?: { error?: string } } }
-            setMobileError(err.response?.data?.error || "Something went wrong")
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const handleVerifyOTP = async () => {
-        if (!otp || otp.length !== 6) {
-            setMobileError('Please enter valid 6-digit OTP')
-            return
-        }
-        setIsLoading(true)
-        try {
-            const response = await verificationAPI.submit({ mobile: mobileNumber, otp: otp, flow: 'MTALKZ' })
-            const data = response.data
-
-            if (data.success) {
-                Cookies.set('user', JSON.stringify(data.user), { expires: 7 })
-                if (data.token) Cookies.set('accessToken', data.token, { expires: 7 })
-                if (data.report) Cookies.set('cibil', JSON.stringify(data.report), { expires: 7 })
-
-                toast.success('Login Successful!')
-                setIsLoggedIn(true)
-                setShowLoginModal(false)
-                router.push('/report-analysis')
-            } else {
-                setMobileError(data.error || "Invalid OTP")
-            }
-        } catch (error: unknown) {
-            console.error('OTP Verify Error:', error)
-            const err = error as { response?: { data?: { error?: string } } }
-            setMobileError(err.response?.data?.error || "Verification failed")
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/\D/g, '').slice(0, 10)
-        setMobileNumber(value)
-        if (value.length === 10) setMobileError('')
     }
 
     return (
         <>
-            {/* Preload all dropdown icons - hidden but loads images on page load */}
-            <div className="hidden" aria-hidden="true">
-                {navItems.map(item => (
-                    <div key={item.label}>
-                        {item.icon && <Image src={item.icon} alt="" width={1} height={1} priority />}
-                        {item.children?.map(child => (
-                            child.icon && <Image key={child.href} src={child.icon} alt="" width={1} height={1} priority />
-                        ))}
-                    </div>
-                ))}
-                {/* Blog icons */}
-                <Image src="/assets/icons/3d/blog.png" alt="" width={1} height={1} priority />
-                {Object.values(blogCategoryIcons).map((icon, i) => (
-                    <Image key={i} src={icon} alt="" width={1} height={1} priority />
-                ))}
-            </div>
-
             {/* Desktop Header */}
             <header className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden lg:block', isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white shadow-lg')}>
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-20 py-2">
                         <Link href="/" className="flex items-center">
-                            <Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={96} height={40} className="max-w-24 h-auto" priority />
+                            <Image src="/assets/creditklic_next_gen_transparent.png" alt="CreditKlick" width={96} height={40} className="max-w-24 h-auto" priority />
                         </Link>
 
                         <div className="flex items-center">
                             <ul className="flex items-center ">
                                 {navItems.map((item) => (
                                     <li key={item.label} className="relative px-4" onMouseEnter={() => item.children && setOpenDropdown(item.label)} onMouseLeave={() => setOpenDropdown(null)}>
-                                        <Link href={item.href} className={`flex items-center py-2 font-semibold uppercase tracking-wider text-sm transition-colors ${item.label === 'Credit Refine' ? 'text-blue-600' : 'hover:text-blue-600'}`}>
+                                        <Link href={item.href} prefetch={true} className={`flex items-center py-2 font-semibold uppercase tracking-wider text-sm transition-colors ${item.label === 'Credit Refine' ? 'text-blue-600' : 'hover:text-blue-600'}`}>
                                             {item.label}
                                             {item.children && <ChevronDown className="ml-1 h-4 w-4" />}
                                         </Link>
@@ -354,7 +253,7 @@ export function Header() {
                                                     <ul className={`py-1 px-1 relative bg-white rounded-xl ${item.label === 'Calculators' ? 'grid grid-flow-col grid-rows-3 gap-2' : 'space-y-1'}`}>
                                                         {item.children.map((child) => (
                                                             <li key={child.href}>
-                                                                <Link href={child.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all">
+                                                                <Link href={child.href} prefetch={true} className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all">
                                                                     {child.icon && <Image src={child.icon} alt="" width={32} height={32} className="w-8 h-8 object-contain mix-blend-multiply" />}
                                                                     <span>{child.label}</span>
                                                                 </Link>
@@ -368,9 +267,9 @@ export function Header() {
                                 ))}
 
 
-                                {/* Blog Menu */}
-                                <li className="relative px-4" onMouseEnter={() => setOpenDropdown('Blogs')} onMouseLeave={() => setOpenDropdown(null)}>
-                                    <Link href="/blog" className="flex items-center py-2 font-semibold uppercase tracking-wider text-sm hover:text-blue-600 transition-colors">
+                                {/* Blog Menu - Lazy fetches data on hover */}
+                                <li className="relative px-4" onMouseEnter={() => { setOpenDropdown('Blogs'); fetchBlogDataIfNeeded(); }} onMouseLeave={() => setOpenDropdown(null)}>
+                                    <Link href="/blog" prefetch={true} className="flex items-center py-2 font-semibold uppercase tracking-wider text-sm hover:text-blue-600 transition-colors">
                                         Read Blog
                                         <ChevronDown className="ml-1 h-4 w-4" />
                                     </Link>
@@ -395,41 +294,55 @@ export function Header() {
                                                     </div>
                                                 </div>
 
-                                                {/* Latest Posts Grid - 2 columns with proper spacing */}
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    {latestPosts.slice(0, 6).map((post) => (
-                                                        <Link
-                                                            key={post._id}
-                                                            href={`/blog/${post.slug}`}
-                                                            className="flex items-start gap-3 p-2 rounded-xl hover:bg-blue-50 transition-all group"
-                                                        >
-                                                            <div className="w-20 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                                                                {post.featuredImage?.url ? (
-                                                                    <Image
-                                                                        src={post.featuredImage.url}
-                                                                        alt={post.title}
-                                                                        width={80}
-                                                                        height={56}
-                                                                        className="w-full h-full object-cover"
-                                                                    />
-                                                                ) : (
-                                                                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                                                                        <Image src="/assets/icons/3d/blog.png" alt="" width={28} height={28} className="w-7 h-7 opacity-50" />
-                                                                    </div>
-                                                                )}
+                                                {/* Latest Posts Grid */}
+                                                <div className="grid grid-cols-2 gap-4 min-h-[160px]">
+                                                    {latestPosts.length > 0 ? (
+                                                        latestPosts.slice(0, 6).map((post) => (
+                                                            <Link
+                                                                key={post._id}
+                                                                href={`/blog/${post.slug}`}
+                                                                onMouseEnter={() => router.prefetch(`/blog/${post.slug}`)}
+                                                                prefetch={true}
+                                                                className="flex items-start gap-3 p-2 rounded-xl hover:bg-blue-50 transition-all group"
+                                                            >
+                                                                <div className="w-20 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                                                                    {post.featuredImage?.url ? (
+                                                                        <Image
+                                                                            src={post.featuredImage.url}
+                                                                            alt={post.title}
+                                                                            width={80}
+                                                                            height={56}
+                                                                            className="w-full h-full object-cover"
+                                                                        />
+                                                                    ) : (
+                                                                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                                                                            <Image src="/assets/icons/3d/blog.png" alt="" width={28} height={28} className="w-7 h-7 opacity-50" />
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <h5 className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                                                                        {post.title}
+                                                                    </h5>
+                                                                    {post.category && (
+                                                                        <span className="text-[11px] text-blue-500 font-medium uppercase mt-1.5 block">
+                                                                            {categoryLabels[post.category] || post.category}
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                            </Link>
+                                                        ))
+                                                    ) : (
+                                                        [...Array(6)].map((_, i) => (
+                                                            <div key={i} className="flex items-start gap-3 p-2 rounded-xl bg-gray-50/80 animate-pulse border border-gray-100/50">
+                                                                <div className="w-20 h-14 bg-gray-200 rounded-lg flex-shrink-0"></div>
+                                                                <div className="flex-1 space-y-2 py-1">
+                                                                    <div className="h-3.5 bg-gray-200 rounded w-full"></div>
+                                                                    <div className="h-2.5 bg-gray-100 rounded w-2/3"></div>
+                                                                </div>
                                                             </div>
-                                                            <div className="flex-1 min-w-0">
-                                                                <h5 className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
-                                                                    {post.title}
-                                                                </h5>
-                                                                {post.category && (
-                                                                    <span className="text-[11px] text-blue-500 font-medium uppercase mt-1.5 block">
-                                                                        {categoryLabels[post.category] || post.category}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </Link>
-                                                    ))}
+                                                        ))
+                                                    )}
                                                 </div>
 
                                                 {/* View All Button */}
@@ -513,7 +426,7 @@ export function Header() {
             {/* Mobile Header */}
             <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white shadow-lg">
                 <div className="flex items-center justify-between px-4 h-16">
-                    <Link href="/"><Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={80} height={32} className="max-w-[80px] h-auto mt-1" priority /></Link>
+                    <Link href="/"><Image src="/assets/creditklic_next_gen_transparent.png" alt="CreditKlick" width={80} height={32} className="max-w-[80px] h-auto mt-1" priority /></Link>
                     <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-3">
                         {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
@@ -526,7 +439,6 @@ export function Header() {
                                 <form onSubmit={handleSearch} className="mb-6 relative">
                                     <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search blogs..." className="w-full pl-10 pr-10 py-3 text-base border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 bg-gray-50 shadow-sm" />
                                     <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                                    {isSearching && <Loader2 className="absolute right-3 top-3.5 h-5 w-5 animate-spin text-blue-500" />}
 
                                     {/* Mobile Search Results Dropdown */}
                                     {searchQuery.length >= 2 && searchResults.length > 0 && (
@@ -596,7 +508,7 @@ export function Header() {
 
                                 {/* Blog for Mobile */}
                                 <div>
-                                    <button onClick={() => setMobileExpandedItem(mobileExpandedItem === 'Blog' ? null : 'Blog')} className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-semibold hover:bg-gray-50">
+                                    <button onClick={() => { setMobileExpandedItem(mobileExpandedItem === 'Blog' ? null : 'Blog'); fetchBlogDataIfNeeded(); }} className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-semibold hover:bg-gray-50">
                                         Read Blog
                                         <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpandedItem === 'Blog' ? 'rotate-180' : ''}`} />
                                     </button>
@@ -632,51 +544,9 @@ export function Header() {
                 </AnimatePresence>
             </header>
 
-            {/* Login Modal */}
-            <AnimatePresence>
-                {showLoginModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4" onClick={(e) => e.target === e.currentTarget && setShowLoginModal(false)}>
-                        <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="bg-white rounded-lg shadow-2xl max-w-4xl w-full overflow-hidden">
-                            <div className="flex flex-col md:flex-row">
-                                <div className="md:w-1/2 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-8 hidden md:flex">
-                                    <Image src="/assets/Images/creditlogin.png" alt="Login" width={300} height={300} className="object-contain w-full max-w-xs" />
-                                </div>
-                                <div className="md:w-1/2 p-6 sm:p-12 relative w-full">
-                                    <button onClick={() => setShowLoginModal(false)} className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"><X className="h-5 w-5 text-gray-500" /></button>
-                                    <div className="w-full">
-                                        {!otpSent ? (
-                                            <>
-                                                <h2 className="text-2xl font-bold mb-6 text-center">Login to CreditKlick</h2>
-                                                <div className="mb-4">
-                                                    <label className="block mb-2 text-sm font-medium text-gray-700">Mobile Number</label>
-                                                    <input type="tel" value={mobileNumber} onChange={handleMobileChange} placeholder="Enter 10 digit Mobile Number" className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600" maxLength={10} />
-                                                    {mobileError && <p className="mt-2 text-sm text-red-500">{mobileError}</p>}
-                                                </div>
-                                                <p className="text-sm text-center mb-4">New user? <Link href="/credit-score" onClick={() => setShowLoginModal(false)} className="text-blue-600 hover:underline">Sign Up</Link></p>
-                                                <Button onClick={handleSendOTP} disabled={isLoading} className="w-full">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Send OTP</Button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <h2 className="text-2xl font-bold mb-6 text-center">Verify OTP</h2>
-                                                <div className="mb-4">
-                                                    <label className="block mb-2 text-sm font-medium text-gray-700">Enter OTP</label>
-                                                    <input type="text" value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder="Enter 6 digit OTP" className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 tracking-widest text-center text-lg" maxLength={6} />
-                                                    {mobileError && <p className="mt-2 text-sm text-red-500">{mobileError}</p>}
-                                                </div>
-                                                <Button onClick={handleVerifyOTP} disabled={isLoading} className="w-full bg-green-600 hover:bg-green-700">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Verify OTP</Button>
-                                                <button onClick={() => { setOtpSent(false); setOtp(''); }} className="w-full text-sm text-gray-500 hover:text-blue-600 underline mt-4">Change Mobile Number</button>
-                                            </>
-                                        )}
-                                        <div className="mt-6 text-center">
-                                            <p className="text-sm text-gray-500">Need help? <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"><MessageCircle className="h-4 w-4 mr-1" />WhatsApp</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Dynamic Login Modal */}
+            <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} setIsLoggedIn={setIsLoggedIn} />
         </>
     )
 }
+

@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import BlogPostClient from './BlogPostClient'
 
 interface Post {
@@ -34,17 +35,19 @@ interface Post {
     }
     tags?: string[]
     faqs?: { question: string; answer: string }[]
-    ctaBanner?: any // Using any for simplicity as structure is defined in BlogPostClient
+    ctaBanner?: any
 }
 
-export const dynamic = 'force-dynamic'
+// Enable Incremental Static Regeneration (ISR) for fast CDN serving
+export const revalidate = 3600 // Revalidate once per hour
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
 
-async function getPost(slug: string): Promise<Post | null> {
+// Memoize getPost using React.cache so generateMetadata & BlogPostPage share the exact same fetch execution
+const getPost = cache(async (slug: string): Promise<Post | null> => {
     try {
         const res = await fetch(`${API_BASE_URL}/posts/${slug}`, {
-            cache: 'no-store' // Disable cache for immediate updates
+            next: { revalidate: 3600 }
         })
         if (!res.ok) return null
         const data = await res.json()
@@ -53,25 +56,23 @@ async function getPost(slug: string): Promise<Post | null> {
         console.error('Failed to fetch post:', error)
         return null
     }
-}
+})
 
-async function getRelatedPosts(category: string, currentSlug: string): Promise<Post[]> {
+const getRelatedPosts = cache(async (category: string, currentSlug: string): Promise<Post[]> => {
     try {
-        // Fetch related blogs based on category (limit 20 for sidebar)
         const res = await fetch(`${API_BASE_URL}/posts?limit=20&status=published&category=${encodeURIComponent(category)}`, {
-            cache: 'no-store'
+            next: { revalidate: 3600 }
         })
         if (!res.ok) return []
         const data = await res.json()
         if (data.success) {
-            // Return all posts except current one
             return data.data.posts.filter((p: Post) => p.slug !== currentSlug)
         }
         return []
     } catch (error) {
         return []
     }
-}
+})
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params
@@ -81,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const metaTitle = post.seo?.metaTitle || post.title
     const description = post.seo?.metaDescription || post.excerpt || post.title
     const keywords = post.seo?.keywords?.join(', ') || post.seo?.metaKeywords?.join(', ') || post.tags?.join(', ')
-    const imageUrl = post.seo?.ogImage?.url || (typeof post.featuredImage === 'string' ? post.featuredImage : post.featuredImage?.url) || 'https://creditklick.com/assets/Images/creditklic_next_gen.png'
+    const imageUrl = post.seo?.ogImage?.url || (typeof post.featuredImage === 'string' ? post.featuredImage : post.featuredImage?.url) || 'https://creditklick.com/assets/creditklic_next_gen.png'
 
     return {
         title: metaTitle,
@@ -167,3 +168,4 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </>
     )
 }
+

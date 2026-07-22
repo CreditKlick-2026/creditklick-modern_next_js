@@ -19,7 +19,7 @@ const staggerContainer = {
 const cardTypes = [
     {
         name: 'SBI SIMPLY SAVE',
-        image: '/assets/Images/sbiimg/save.png',
+        image: '/assets/sbiimg/save.png',
         features: [
             'Enjoy 10X reward points on dining, grocery & movie spends',
             '2,000 bonus reward points on spends of Rs.2000 in first 60 days',
@@ -30,7 +30,7 @@ const cardTypes = [
     },
     {
         name: 'SBI SIMPLY CLICK',
-        image: '/assets/Images/sbiimg/click.png',
+        image: '/assets/sbiimg/click.png',
         features: [
             'Earn 10X rewards on online spends with exclusive partners',
             'Earn 5X rewards on all other online spends',
@@ -41,7 +41,7 @@ const cardTypes = [
     },
     {
         name: 'SBI PULSE',
-        image: '/assets/Images/sbiimg/pulse.png',
+        image: '/assets/sbiimg/pulse.png',
         features: [
             'Enjoy 1 year complimentary FITPASS PRO Membership',
             'Enjoy 10 Reward Points per Rs. 100 spent on Pharmacy, Dining and Movies',
@@ -52,7 +52,7 @@ const cardTypes = [
     },
     {
         name: 'SBI PRIME',
-        image: '/assets/Images/sbiimg/prime.png',
+        image: '/assets/sbiimg/prime.png',
         features: [
             'Welcome gift worth Rs. 3,000',
             'Get 10 Reward Points per Rs.100 spent on Dining, Groceries and Movies',
@@ -63,7 +63,7 @@ const cardTypes = [
     },
     {
         name: 'SBI ELITE',
-        image: '/assets/Images/sbiimg/elite.png',
+        image: '/assets/sbiimg/elite.png',
         features: [
             'Welcome e-Gift Voucher worth Rs. 5,000',
             'Enjoy 2 complimentary Domestic Airport Lounge visits every quarter',
@@ -95,7 +95,7 @@ export default function SBIBankClient() {
                                 transition={{ delay: 0.2 }}
                                 className="flex justify-center p-2 md:p-5"
                             >
-                                <img src="/assets/Images/cards/sbim.png" alt="SBI Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
+                                <img src="/assets/cards/sbim.png" alt="SBI Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, x: 50 }}

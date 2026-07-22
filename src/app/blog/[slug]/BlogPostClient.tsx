@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { toast } from 'react-hot-toast'
+import { getBlogImageUrl } from '@/utils/cloudinary'
 import {
     ArrowLeft, Calendar, Clock, User, Tag, Share2, Facebook, Twitter, Linkedin,
     Phone, Shield, CheckCircle, TrendingUp, CreditCard, Landmark, FileText,
@@ -145,10 +146,11 @@ const CTAIcon = ({ customIconUrl }: { type?: string; customIconUrl?: string }) =
     if (customIconUrl) {
         return (
             <div className="w-28 h-28 flex items-center justify-center overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src={customIconUrl}
                     alt="Offer"
+                    width={112}
+                    height={112}
                     className="w-full h-full object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
                 />
             </div>
@@ -432,10 +434,13 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
         setShareUrl(window.location.href)
     }, [])
 
-    const getImageUrl = (post: Post) => {
-        if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
-        if (typeof post.featuredImage === 'string') return post.featuredImage
-        return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=1000"
+    const getImageUrl = (post: Post, context: 'featured' | 'related' = 'featured') => {
+        const raw = (() => {
+            if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
+            if (typeof post.featuredImage === 'string') return post.featuredImage
+            return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=1200"
+        })()
+        return getBlogImageUrl(raw, context)
     }
 
     const getAuthorName = (postData: Post) => {
@@ -525,12 +530,16 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
 
                         {/* Article Content */}
                         <article className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-8">
-                            {/* Featured Image */}
-                            <div className="relative w-full h-auto mb-4 md:mb-6 rounded-lg md:rounded-xl overflow-hidden bg-gray-50 flex justify-center items-center">
-                                <img
+                            {/* Featured Image - LCP optimized, natural aspect ratio */}
+                            <div className="w-full mb-4 md:mb-6 rounded-lg md:rounded-xl overflow-hidden bg-gray-50 flex justify-center items-center">
+                                <Image
                                     src={getImageUrl(post)}
                                     alt={post.title}
-                                    className="w-full h-auto max-h-[600px] object-contain"
+                                    width={1200}
+                                    height={675}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 800px"
+                                    className="w-full h-auto object-contain max-h-[600px]"
+                                    priority
                                 />
                             </div>
 
@@ -634,10 +643,14 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                                 <Link key={relatedPost._id} href={`/blog/${relatedPost.slug}`} className="group">
                                     <div className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-md md:shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
                                         <div className="h-24 sm:h-32 md:h-40 overflow-hidden flex-shrink-0">
-                                            <img
-                                                src={getImageUrl(relatedPost)}
+                                            <Image
+                                                src={getImageUrl(relatedPost, 'related')}
                                                 alt={relatedPost.title}
+                                                width={400}
+                                                height={225}
+                                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                loading="lazy"
                                             />
                                         </div>
                                         <div className="p-2 sm:p-3 md:p-4 flex-1 flex flex-col">

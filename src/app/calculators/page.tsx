@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Free Financial Calculators Online | CreditKlick',
         description: 'Plan your finances with precision. Calculate EMIs and credit card benefits instantly.',
-        images: ['/assets/Images/calci/EMIcalc.png'],
+        images: ['/assets/calci/EMIcalc.png'],
     }
 }
 

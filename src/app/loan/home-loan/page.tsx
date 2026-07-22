@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Instant Home Loan Approval Online | CreditKlick',
         description: 'Get up to 90% funding for your dream home with quick digital processing and long repayment tenures.',
-        images: ['/assets/Images/authloan.png'],
+        images: ['/assets/authloan.png'],
     },
     alternates: {
         canonical: '/loan/home-loan',

@@ -19,42 +19,42 @@ const calculators = [
     {
         id: 1,
         title: 'EMI Calculators',
-        image: '/assets/Images/calci/EMIcalc.png',
+        image: '/assets/calci/EMIcalc.png',
         link: '/emi',
         description: 'Calculate your monthly EMI for any loan'
     },
     {
         id: 2,
         title: 'AU Value Calculator',
-        image: '/assets/Images/calci/AUcalc.png',
+        image: '/assets/calci/AUcalc.png',
         link: '/calculator/au',
         description: 'AU Bank credit card value calculator'
     },
     {
         id: 3,
         title: 'IDFC First Value Calculator',
-        image: '/assets/Images/calci/IBcalc.png',
+        image: '/assets/calci/IBcalc.png',
         link: '/calculator/idfc',
         description: 'IDFC First credit card value calculator'
     },
     {
         id: 4,
         title: 'SBI Simply Save Value Calculator',
-        image: '/assets/Images/calci/SScalc.png',
+        image: '/assets/calci/SScalc.png',
         link: '/calculator/sbi-save',
         description: 'SBI Simply Save credit card calculator'
     },
     {
         id: 5,
         title: 'SBI Simply Click Value Calculator',
-        image: '/assets/Images/calci/SCLcalc.png',
+        image: '/assets/calci/SCLcalc.png',
         link: '/calculator/sbi-click',
         description: 'SBI Simply Click credit card calculator'
     },
     {
         id: 6,
         title: 'YES Bank Value Calculator',
-        image: '/assets/Images/calci/YBcalc.png',
+        image: '/assets/calci/YBcalc.png',
         link: '/calculator/yes',
         description: 'Yes Bank credit card value calculator'
     }

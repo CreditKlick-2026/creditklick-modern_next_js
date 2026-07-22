@@ -14,16 +14,16 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Compare & Apply for Best Credit Cards Online | CreditKlick',
         description: 'Choose from a wide range of credit cards tailored to your lifestyle. Instant digital application for AU, IDFC, SBI, and more.',
-        images: ['/assets/Images/cards/aum.png'],
+        images: ['/assets/cards/aum.png'],
     }
 }
 
 // Static data
 const creditCards = [
-    { name: 'AU Bank Credit Cards', image: '/assets/Images/cards/aum.png', href: '/credit-card/au-bank' },
-    { name: 'IDFC First Credit Cards', image: '/assets/Images/cards/idfcm.png', href: '/credit-card/idfc-bank' },
-    { name: 'SBI Credit Cards', image: '/assets/Images/cards/sbim.png', href: '/credit-card/sbi-bank' },
-    { name: 'Yes Bank Credit Cards', image: '/assets/Images/cards/yesm.png', href: '/credit-card/yes-bank' }
+    { name: 'AU Bank Credit Cards', image: '/assets/cards/aum.png', href: '/credit-card/au-bank' },
+    { name: 'IDFC First Credit Cards', image: '/assets/cards/idfcm.png', href: '/credit-card/idfc-bank' },
+    { name: 'SBI Credit Cards', image: '/assets/cards/sbim.png', href: '/credit-card/sbi-bank' },
+    { name: 'Yes Bank Credit Cards', image: '/assets/cards/yesm.png', href: '/credit-card/yes-bank' }
 ]
 
 const creditTable = [

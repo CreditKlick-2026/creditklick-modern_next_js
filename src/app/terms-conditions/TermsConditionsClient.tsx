@@ -10,7 +10,7 @@ export default function TermsConditionsClient() {
                 <div
                     className="absolute inset-0 bg-fixed bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('/assets/images/terms-hero.png')"
+                        backgroundImage: "url('/assets/terms-hero.png')"
                     }}
                 ></div>
                 <div className="absolute inset-0 flex items-center justify-center">

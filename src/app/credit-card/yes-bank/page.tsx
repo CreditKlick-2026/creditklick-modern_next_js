@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'YES Bank Credit Cards - Never Expiring Rewards',
         description: 'Apply for YES Bank credit cards with exclusive annual bonuses and lounge access.',
-        images: ['/assets/Images/cards/yesm.png'],
+        images: ['/assets/cards/yesm.png'],
     },
     alternates: {
         canonical: '/credit-card/yes-bank',

@@ -30,6 +30,15 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
         }
     }, [])
 
+    useEffect(() => {
+        const handleOpenConsent = () => {
+            Cookies.remove(COOKIE_CONSENT_KEY)
+            setIsVisible(true)
+        }
+        window.addEventListener('open_cookie_consent', handleOpenConsent)
+        return () => window.removeEventListener('open_cookie_consent', handleOpenConsent)
+    }, [])
+
     const saveConsentToBackend = async (accepted: boolean) => {
         try {
             const isClient = typeof window !== 'undefined';

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'SBI Credit Cards - Trusted Banking Benefits | CreditKlick',
         description: 'Apply for India\'s most popular credit cards from SBI with exclusive offers.',
-        images: ['/assets/Images/cards/sbim.png'],
+        images: ['/assets/cards/sbim.png'],
     },
     alternates: {
         canonical: '/credit-card/sbi-bank',

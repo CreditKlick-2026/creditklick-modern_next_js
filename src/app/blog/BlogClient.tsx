@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { ArrowRight, FileText, Calendar, Clock } from "lucide-react"
 import { postsAPI } from "@/services/api"
+import { getBlogImageUrl } from "@/utils/cloudinary"
 
 interface Post {
     _id: string
@@ -129,10 +131,13 @@ export default function BlogClient({
 
 
     const getImageUrl = (post: Post) => {
-        if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
-        if (typeof post.featuredImage === 'string' && post.featuredImage) return post.featuredImage
-        if ((post as any).ctaBanner?.customIconUrl) return (post as any).ctaBanner.customIconUrl
-        return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=max&q=80&w=1000"
+        const raw = (() => {
+            if (post.featuredImage && typeof post.featuredImage === 'object' && post.featuredImage.url) return post.featuredImage.url
+            if (typeof post.featuredImage === 'string' && post.featuredImage) return post.featuredImage
+            if ((post as any).ctaBanner?.customIconUrl) return (post as any).ctaBanner.customIconUrl
+            return "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=max&q=80&w=600"
+        })()
+        return getBlogImageUrl(raw, 'thumbnail')
     }
 
     const getAuthorName = (author: Post['author']) => {
@@ -319,11 +324,16 @@ export default function BlogClient({
                                     className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                                 >
                                     <Link href={`/blog/${post.slug}`}>
-                                        <div className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-                                            <img
+                                        <div className="w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                                            <Image
                                                 src={getImageUrl(post)}
                                                 alt={post.title}
+                                                width={600}
+                                                height={338}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                                                loading={index < 3 ? 'eager' : 'lazy'}
+                                                priority={index === 0}
                                             />
                                             <div className="absolute top-4 left-4">
                                                 <span className="bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-medium">

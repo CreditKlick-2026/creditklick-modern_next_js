@@ -17,7 +17,7 @@ const staggerContainer = {
 const cardTypes = [
     {
         name: 'ALTURA',
-        image: '/assets/Images/auimg/alt.png',
+        image: '/assets/auimg/alt.png',
         features: [
             'Save Big. Upto 7% Cashback as an introductory offer',
             'Attractive Monthly Milestone Benefits',
@@ -28,7 +28,7 @@ const cardTypes = [
     },
     {
         name: 'ALTURA PLUS',
-        image: '/assets/Images/auimg/plus.png',
+        image: '/assets/auimg/plus.png',
         features: [
             'Double the Delight. Earn both Cashback & Reward Points.',
             'Attractive Welcome Benefit & Monthly Milestone Benefits',
@@ -39,7 +39,7 @@ const cardTypes = [
     },
     {
         name: 'LIT CREDIT CARD',
-        image: '/assets/Images/auimg/lit.png',
+        image: '/assets/auimg/lit.png',
         features: [
             'Get 5% cashback on grocery and travel spends',
             'Get additional 2%-5% cashback on all spends',
@@ -50,7 +50,7 @@ const cardTypes = [
     },
     {
         name: 'ZENITH AU CREDIT CARD',
-        image: '/assets/Images/auimg/zenth.png',
+        image: '/assets/auimg/zenth.png',
         features: [
             '10,000 Bonus Reward Points on completing retail spends* worth INR 1 Lakh',
             'Complimentary Epicure Membership on minimum of INR 8 lakh retail spends in a card anniversary year.',
@@ -61,7 +61,7 @@ const cardTypes = [
     },
     {
         name: 'VETTA AU CREDIT CARD',
-        image: '/assets/Images/auimg/vetta.png',
+        image: '/assets/auimg/vetta.png',
         features: [
             'Vouchers worth INR 2000 on minimum INR 30,000 retail spends done within 60 days of card setup.',
             'Earn up to 1,500 Bonus Reward Points in every calendar quarter with INR 1 lakh retail spends*.',
@@ -94,7 +94,7 @@ export default function AUBankClient() {
                                 transition={{ delay: 0.2 }}
                                 className="flex justify-center p-2 md:p-5 order-1 md:order-1"
                             >
-                                <img src="/assets/Images/cards/aum.png" alt="AU Bank Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
+                                <img src="/assets/cards/aum.png" alt="AU Bank Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, x: 50 }}

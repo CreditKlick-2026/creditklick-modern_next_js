@@ -3,37 +3,43 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, ArrowRight, Star } from 'lucide-react'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'react-chartjs-2'
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
+// Dynamic imports for heavy libraries - chart.js is ~200KB, only needed for EMI calculator
+const DoughnutChart = dynamic(
+  () => import('react-chartjs-2').then(async (mod) => {
+    const { Chart, ArcElement, Tooltip, Legend } = await import('chart.js')
+    Chart.register(ArcElement, Tooltip, Legend)
+    return mod.Doughnut
+  }),
+  { ssr: false }
+)
 
-
-ChartJS.register(ArcElement, Tooltip, Legend)
-
-// Animation components
 import ScoreAnimation from '@/components/animations/ScoreAnimation'
-import CardAnimation from '@/components/animations/CardAnimation'
-import LoanAnimation from '@/components/animations/LoanAnimation'
-import AppSlider from '@/components/animations/AppSlider'
 
-// Import images
-import ccico from '@/assets/heroimages/ccgifw.webp'
-import ploico from '@/assets/heroimages/persloan2.webp'
-import bloico from '@/assets/heroimages/busiloan2.webp'
-import calico from '@/assets/heroimages/calc2.webp'
-import credscore from '@/assets/heroimages/credscore2.webp'
-import refineico from '@/assets/heroimages/refine2.webp'
-import discoverImg from '@/assets/heroimages/discover.4c95c246e689d0ca4a91-_1__1.webp'
-import expertImg from '@/assets/heroimages/expert2.webp'
-import ani from '@/assets/heroimages/ani.webp'
-import ein from '@/assets/heroimages/ein.webp'
-import fox from '@/assets/heroimages/fox.webp'
-import ksnt from '@/assets/heroimages/ksnt.webp'
-import lokmattimes from '@/assets/heroimages/lokmat.webp'
-import theprint from '@/assets/heroimages/theprint.webp'
-import Logo from '@/assets/img/newlogo.webp'
-import GoldLoanSection from '@/components/home/GoldLoanSection'
+// Dynamic imports for hidden slide animation components to reduce initial bundle size
+const CardAnimation = dynamic(() => import('@/components/animations/CardAnimation'), { ssr: false })
+const LoanAnimation = dynamic(() => import('@/components/animations/LoanAnimation'), { ssr: false })
+const AppSlider = dynamic(() => import('@/components/animations/AppSlider'), { ssr: false })
+
+// Direct image URLs to avoid JS bundle bloat from static imports
+const ccico = '/assets/heroimages/ccgifw.webp'
+const ploico = '/assets/heroimages/persloan2.webp'
+const bloico = '/assets/heroimages/busiloan2.webp'
+const calico = '/assets/heroimages/calc2.webp'
+const credscore = '/assets/heroimages/credscore2.webp'
+const refineico = '/assets/heroimages/refine2.webp'
+const discoverImg = '/assets/heroimages/discover.4c95c246e689d0ca4a91-_1__1.webp'
+const expertImg = '/assets/heroimages/expert2.webp'
+const ani = '/assets/heroimages/ani.webp'
+const ein = '/assets/heroimages/ein.webp'
+const fox = '/assets/heroimages/fox.webp'
+const ksnt = '/assets/heroimages/ksnt.webp'
+const lokmattimes = '/assets/heroimages/lokmat.webp'
+const theprint = '/assets/heroimages/theprint.webp'
+const Logo = '/assets/img/newlogo.webp'
+
 const sliderData = [
     {
         id: 1,
@@ -90,12 +96,14 @@ function Slidernew() {
     const length = sliderData.length
     const minSwipeDistance = 50
 
-    const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1)
-    const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1)
+    const nextSlide = () => setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1))
+    const prevSlide = () => setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1))
 
     const startSlider = () => {
         if (sliderIntervalRef.current) clearInterval(sliderIntervalRef.current)
-        sliderIntervalRef.current = setInterval(nextSlide, 3000)
+        sliderIntervalRef.current = setInterval(() => {
+            setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1))
+        }, 3000)
     }
 
     const stopSlider = () => {
@@ -105,7 +113,7 @@ function Slidernew() {
     useEffect(() => {
         startSlider()
         return () => stopSlider()
-    }, [current])
+    }, [length])
 
     const onTouchStart = (e: React.TouchEvent) => {
         setTouchEnd(null)
@@ -146,7 +154,7 @@ function Slidernew() {
             <div className="carousel-wrapper px-1 mx-auto flex-1 relative h-full">
                 {sliderData.map((slide, index) => (
                     <div
-                        key={index}
+                        key={slide.id}
                         className={`transition-all duration-500 ${index === current ? 'block opacity-100' : 'hidden opacity-0'}`}
                     >
                         {index === current && (
@@ -197,10 +205,21 @@ function Product() {
 
     const scrollRef = useRef<HTMLDivElement>(null)
     const [isPaused, setIsPaused] = useState(false)
+    const [isInView, setIsInView] = useState(false)
+
+    useEffect(() => {
+        const container = scrollRef.current
+        if (!container) return
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsInView(entry.isIntersecting)
+        }, { threshold: 0.05 })
+        observer.observe(container)
+        return () => observer.disconnect()
+    }, [])
 
     useEffect(() => {
         const scrollContainer = scrollRef.current
-        if (!scrollContainer) return
+        if (!scrollContainer || !isInView) return
 
         let animationFrameId: number
 
@@ -217,7 +236,7 @@ function Product() {
         animationFrameId = requestAnimationFrame(scroll)
 
         return () => cancelAnimationFrame(animationFrameId)
-    }, [isPaused])
+    }, [isPaused, isInView])
 
     return (
         <div className="my-4 w-full overflow-hidden py-4 bg-white">
@@ -234,7 +253,7 @@ function Product() {
                     {[...productData, ...productData, ...productData, ...productData].map((item, i) => (
                         <div key={i} className="flex-shrink-0 w-32 sm:w-40 md:w-44">
                             <div className="w-full h-full bg-gray-50 py-4 px-3 rounded-xl border border-gray-200 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer flex flex-col items-center justify-center group">
-                                <Link href={item.link} className="flex flex-col items-center justify-center w-full">
+                                <Link href={item.link} prefetch={true} className="flex flex-col items-center justify-center w-full">
                                     <div className="w-10 h-10 sm:w-14 sm:h-14 relative mb-2">
                                         <Image
                                             src={item.img}
@@ -276,6 +295,7 @@ function Cibilstr() {
                     <div className="md:flex-none flex w-full md:justify-start justify-center font-medium">
                         <Link
                             href="/credit-score"
+                            prefetch={true}
                             className="bg-blue-600 md:w-auto w-full text-center text-white hover:bg-indigo-700 py-3 px-8 rounded-md border border-transparent shadow-lg transition-all"
                         >
                             Check Now
@@ -283,7 +303,7 @@ function Cibilstr() {
                     </div>
                 </div>
                 <div className="w-full flex justify-center mt-8 md:mt-0">
-                    <Image src={discoverImg} className="m-auto object-contain max-h-[400px]" alt="Discover Credit Health" />
+                    <Image src={discoverImg} width={400} height={400} className="m-auto object-contain max-h-[400px]" alt="Discover Credit Health" />
                 </div>
             </div>
         </div>
@@ -327,7 +347,7 @@ function CalcHero() {
     }, [loanAmount, interestRate, tenure])
 
     const chartData = {
-        labels: ['Monthly EMI', 'Principal'],
+        labels: ['Total Interest', 'Principal'],
         datasets: [
             {
                 data: [calculations.totalInterest, loanAmount],
@@ -340,7 +360,6 @@ function CalcHero() {
 
     return (
         <div className="flex flex-col justify-center md:w-4/6 w-5/6 mx-auto my-10 shadow-lg p-2 rounded-xl">
-            {/* Loan type selection buttons */}
             <div className="w-full">
                 <div className="mt-2 px-4 md:flex">
                     <button
@@ -388,10 +407,8 @@ function CalcHero() {
                 </div>
             </div>
 
-            {/* Calculator content */}
             <div className="md:flex">
                 <div className="p-4 md:w-1/2">
-                    {/* Title section */}
                     <div className="p-4 bg-gradient-to-r from-gray-50 to-blue-100">
                         <p className="font-semibold md:text-lg text-xs">
                             EMI calculator for
@@ -401,9 +418,7 @@ function CalcHero() {
                         </h1>
                     </div>
 
-                    {/* Slider section */}
                     <div className="w-5/6 mx-auto font-semibold text-xs md:text-sm py-4">
-                        {/* Loan Amount */}
                         <div>
                             <span className="flex justify-between py-3">
                                 <p>Loan Amount(₹)</p>
@@ -420,7 +435,6 @@ function CalcHero() {
                             />
                         </div>
 
-                        {/* Interest Rate */}
                         <div>
                             <span className="flex justify-between py-3">
                                 <p>Interest Rate %</p>
@@ -437,7 +451,6 @@ function CalcHero() {
                             />
                         </div>
 
-                        {/* Tenure */}
                         <div>
                             <span className="flex justify-between py-3">
                                 <p>Tenure (Months)</p>
@@ -454,49 +467,39 @@ function CalcHero() {
                             />
                         </div>
 
-                        {/* Results section */}
-                        <div className="flex flex-col text-center py-2 lg:w-64 md:w-44 mx-auto">
-                            <div className="p-2 md:text-sm text-xs flex justify-between">
-                                <p className="text-gray-500">Monthly EMI</p>
-                                <span className="text-blue-800">
-                                    ₹ {calculations.emi.toLocaleString('en-IN')}
-                                </span>
-                            </div>
-                            <div className="p-2 md:text-sm text-xs flex justify-between">
-                                <p className="text-gray-500">Total Interest</p>
-                                <span className="text-blue-800">
-                                    ₹ {calculations.totalInterest.toLocaleString('en-IN')}
-                                </span>
-                            </div>
-                            <div className="p-2 md:text-sm text-xs flex justify-between">
-                                <p className="text-gray-500">Total Amount</p>
-                                <span className="text-blue-800">
-                                    ₹ {calculations.totalAmount.toLocaleString('en-IN')}
-                                </span>
-                            </div>
+                        <div className="font-semibold text-xs md:text-sm pt-4 border-t mt-4">
+                            <span className="flex justify-between py-2">
+                                <p>Monthly EMI</p>
+                                <p className="text-blue-600 font-bold">₹{calculations.emi.toLocaleString('en-IN')}</p>
+                            </span>
+                            <span className="flex justify-between py-2">
+                                <p>Total Interest Payable</p>
+                                <p>₹{calculations.totalInterest.toLocaleString('en-IN')}</p>
+                            </span>
+                            <span className="flex justify-between py-2">
+                                <p>Total Amount Payable</p>
+                                <p>₹{calculations.totalAmount.toLocaleString('en-IN')}</p>
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Chart section */}
-                <div className="md:w-2/4 w-2/4 flex m-auto justify-center drop-shadow-2xl pb-4">
-                    <Doughnut data={chartData} />
+                <div className="md:w-1/2 p-4 flex flex-col items-center justify-center">
+                    <div className="w-64 h-64">
+                        <DoughnutChart data={chartData} />
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
 
-
-
-
-
 function Refinestr() {
     return (
-        <div className="bg-white mb-24 flex-shrink">
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="p-4 overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0 pb-16 lg:pb-0">
-                    <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left space-y-8">
+        <div className="my-10 bg-[#152a4e] container mx-auto rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-[#152a4e] py-10 px-6 sm:px-12 lg:px-16">
+                <div className="mx-auto flex flex-col lg:flex-row items-center justify-between">
+                    <div className="lg:w-1/2 text-center lg:text-left">
                         <h2 className="md:text-4xl text-2xl font-semibold tracking-tight text-white">
                             How does our Credit Refine Work?
                         </h2>
@@ -504,7 +507,7 @@ function Refinestr() {
                             We analyse your credit report to understand the impact of
                             negative accounts on your credit score.
                         </h2>
-                        <p className="md:text-4xl text-2xl text-white">
+                        <p className="md:text-4xl text-2xl text-white mt-8">
                             Talk to our Expert
                         </p>
                         <div className="my-10 flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-6 space-y-4 md:space-y-0 lg:justify-start">
@@ -522,15 +525,14 @@ function Refinestr() {
                             </Link>
                         </div>
                     </div>
-                    {/* Image container - centered with proper sizing */}
-                    <div className="flex items-center justify-center mt-8 lg:mt-0 lg:w-1/2">
-                        <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-lg aspect-square">
+                    <div className="flex items-center justify-center mt-8 lg:mt-0 lg:w-1/3">
+                        <div className="relative w-full max-w-[300px] aspect-square">
                             <Image
                                 src={expertImg}
                                 alt="Credit Expert"
                                 className="object-contain rounded-xl bg-white/5"
                                 fill
-                                sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 500px"
+                                sizes="(max-width: 640px) 280px, 400px"
                             />
                         </div>
                     </div>
@@ -565,7 +567,7 @@ function Media() {
                         className="p-2 flex items-center justify-center hover:scale-105 transition-transform"
                     >
                         <div className="w-full bg-white border border-gray-100 shadow-md p-4 rounded-lg flex items-center justify-center h-24 relative">
-                            <Image src={item.img} alt="Media coverage" className="object-contain max-h-full" />
+                            <Image src={item.img} width={120} height={40} alt="Media coverage" className="object-contain max-h-full" />
                         </div>
                     </a>
                 ))}
@@ -604,21 +606,21 @@ function Contactstr() {
 
 function Carousel() {
     const partnerImages = [
-        { id: 1, url: '/assets/Images/AUSFB.webp' },
-        { id: 2, url: '/assets/Images/BAJAJ.webp' },
-        { id: 3, url: '/assets/Images/CITIB.webp' },
-        { id: 4, url: '/assets/Images/CLIX.webp' },
-        { id: 5, url: '/assets/Images/hinduja.webp' },
-        { id: 6, url: '/assets/Images/IDFC.webp' },
-        { id: 7, url: '/assets/Images/IIFL.webp' },
-        { id: 8, url: '/assets/Images/KOTAKB.webp' },
-        { id: 9, url: '/assets/Images/paytm.webp' },
-        { id: 10, url: '/assets/Images/RBLB.webp' },
-        { id: 11, url: '/assets/Images/SBI.webp' },
-        { id: 12, url: '/assets/Images/tata.webp' },
-        { id: 13, url: '/assets/Images/YESB.webp' },
-        { id: 14, url: '/assets/Images/ZEST.webp' },
-        { id: 15, url: '/assets/Images/CASHE.webp' }
+        { id: 1, url: '/assets/AUSFB.webp' },
+        { id: 2, url: '/assets/BAJAJ.webp' },
+        { id: 3, url: '/assets/CITIB.webp' },
+        { id: 4, url: '/assets/CLIX.webp' },
+        { id: 5, url: '/assets/hinduja.webp' },
+        { id: 6, url: '/assets/IDFC.webp' },
+        { id: 7, url: '/assets/IIFL.webp' },
+        { id: 8, url: '/assets/KOTAKB.webp' },
+        { id: 9, url: '/assets/paytm.webp' },
+        { id: 10, url: '/assets/RBLB.webp' },
+        { id: 11, url: '/assets/SBI.webp' },
+        { id: 12, url: '/assets/tata.webp' },
+        { id: 13, url: '/assets/YESB.webp' },
+        { id: 14, url: '/assets/ZEST.webp' },
+        { id: 15, url: '/assets/CASHE.webp' }
     ]
 
     return (
@@ -626,7 +628,6 @@ function Carousel() {
             <div className="md:text-5xl mb-4 text-4xl font-semibold text-start text-gray-900">
                 Our Partners
             </div>
-
             <div className="SliderX mx-2 overflow-hidden">
                 <div className="sliderP">
                     <div className="slide-trackP flex">
@@ -667,8 +668,21 @@ function Testimonials() {
         { id: 8, name: "Kavita Das", role: "Doctor", content: "Trustworthy and transparent. No hidden charges for checking reports.", rating: 5, bg: "bg-white border-blue-100" },
     ];
 
+    const sectionRef = useRef<HTMLDivElement>(null)
+    const [isInView, setIsInView] = useState(false)
+
+    useEffect(() => {
+        const el = sectionRef.current
+        if (!el) return
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsInView(entry.isIntersecting)
+        }, { threshold: 0.05 })
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [])
+
     return (
-        <section className="py-16 bg-white overflow-hidden">
+        <section ref={sectionRef} className="py-16 bg-white overflow-hidden">
             <div className="container mx-auto px-4 mb-10 text-center">
                 <h2 className="text-3xl md:text-5xl font-semibold text-blue-900 mb-4">What Our Users Say</h2>
                 <p className="text-gray-600 text-lg max-w-2xl mx-auto">Join thousands of satisfied customers who have improved their financial health with CreditKlick.</p>
@@ -677,7 +691,7 @@ function Testimonials() {
             <div className="relative w-full mb-8 flex overflow-hidden">
                 <motion.div
                     className="flex gap-6 whitespace-nowrap"
-                    animate={{ x: ["0%", "-50%"] }}
+                    animate={isInView ? { x: ["0%", "-50%"] } : { x: "0%" }}
                     transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
                     style={{ minWidth: "100%" }}
                 >
@@ -706,7 +720,7 @@ function Testimonials() {
             <div className="relative w-full flex overflow-hidden">
                 <motion.div
                     className="flex gap-6 whitespace-nowrap"
-                    animate={{ x: ["-50%", "0%"] }}
+                    animate={isInView ? { x: ["-50%", "0%"] } : { x: "0%" }}
                     transition={{ repeat: Infinity, ease: "linear", duration: 45 }}
                     style={{ minWidth: "100%" }}
                 >
@@ -737,7 +751,7 @@ function Testimonials() {
 
 function AppDownloadSection() {
     const appFeatures = [
-        { title: "One-Tap Credit Score", desc: "Check your score instantly with a single tap.", icon: <Image src={Logo} alt="CK" className="w-12 h-12 object-contain bg-white rounded-full p-1" /> },
+        { title: "One-Tap Credit Score", desc: "Check your score instantly with a single tap.", icon: <Image src={Logo} alt="CK" width={48} height={48} className="w-12 h-12 object-contain bg-white rounded-full p-1" /> },
         { title: "Personalized Loan Offers", desc: "Get offers tailored just for you.", icon: "🎁" },
         { title: "Secure & Private", desc: "Your data is encrypted and safe with us.", icon: "🔒" },
     ];

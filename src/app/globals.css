@@ -39,16 +39,13 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-family-sans);
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   border-color: hsl(var(--border));
-}
-
-html {
-  /* Using Lenis for smooth scrolling instead of native scroll-behavior */
 }
 
 html.lenis,
@@ -68,17 +65,34 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Performance & Pointer Event Scroll Isolation */
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
 
-/* Performance optimizations */
+/* Performance & GPU Hardware Compositing Optimizations */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
 img,
 video {
+  content-visibility: auto;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.card,
+.card-premium {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.sliderP,
+.slide-trackP {
+  contain: layout paint style;
   content-visibility: auto;
 }
 
@@ -288,13 +302,15 @@ video {
   width: 100%;
 }
 
-/* Skeleton */
+/* Skeleton - GPU Composited */
 .skeleton {
   background-color: #e5e7eb;
   border-radius: 0.25rem;
   position: relative;
   overflow: hidden;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 .skeleton::after {
@@ -304,6 +320,7 @@ video {
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   animation: shimmer 2s infinite;
+  will-change: transform;
 }
 
 @keyframes pulse {
@@ -402,7 +419,8 @@ video {
   animation: scroll 40s linear infinite;
   display: flex;
   width: calc(250px * 30);
-  /* Adjust width based on items */
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 100px;
 }
 
 .sliderP:hover .slide-trackP {
@@ -420,14 +438,17 @@ video {
   }
 }
 
-/* Carousel Animations */
+/* Carousel Animations - GPU Accelerated */
 .carousel-wrapper {
   transition: transform 0.5s ease;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .slide-enter {
   opacity: 0;
   transform: translateX(-100%);
+  will-change: transform, opacity;
 }
 
 .slide-enter-active {
@@ -437,6 +458,7 @@ video {
 
 .slide-exit {
   transform: translateX(0%);
+  will-change: transform, opacity;
 }
 
 .slide-exit-active {
@@ -497,11 +519,12 @@ video {
    Comprehensive styles for rich text content
    =========================================== */
 
-/* Base prose container */
+/* Base prose container - isolated rendering layer */
 .prose {
   font-size: 1rem;
   line-height: 1.75;
   color: #374151;
+  contain: content;
 }
 
 @media (min-width: 768px) {
@@ -729,6 +752,7 @@ video {
 
 .prose tbody tr:hover {
   background-color: #f9fafb;
+  will-change: background-color;
 }
 
 .prose tbody tr:nth-child(even) {

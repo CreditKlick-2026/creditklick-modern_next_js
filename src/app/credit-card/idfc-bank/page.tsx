@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'IDFC FIRST Bank Credit Cards - Lifetime Free Benefits',
         description: 'Apply for IDFC credit cards with zero joining fee and never-expiring rewards.',
-        images: ['/assets/Images/cards/idfcm.png'],
+        images: ['/assets/cards/idfcm.png'],
     },
     alternates: {
         canonical: '/credit-card/idfc-bank',

@@ -26,7 +26,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
         description,
         keywords = [],
         path,
-        image = '/assets/Images/creditklic_next_gen.png',
+        image = '/assets/creditklic_next_gen.png',
         noIndex = false,
         type = 'website',
         publishedTime,
@@ -94,7 +94,7 @@ export function getOrganizationSchema() {
         '@type': 'Organization',
         name: 'CreditKlick',
         url: SITE_URL,
-        logo: `${SITE_URL}/assets/Images/creditklic_next_gen.png`,
+        logo: `${SITE_URL}/assets/creditklic_next_gen.png`,
         sameAs: [
             'https://www.facebook.com/creditklick',
             'https://twitter.com/creditklick',
@@ -221,8 +221,103 @@ export function getArticleSchema(config: {
             name: 'CreditKlick',
             logo: {
                 '@type': 'ImageObject',
-                url: `${SITE_URL}/assets/Images/creditklic_next_gen.png`,
+                url: `${SITE_URL}/assets/creditklic_next_gen.png`,
             },
         },
     }
 }
+
+/**
+ * GEO & AIO: Generative Engine & AI Optimization Knowledge Graph Schema
+ * Provides deep entity metadata for ChatGPT, Gemini, Perplexity, and AI Search Engines
+ */
+export function getAIOKnowledgeGraphSchema() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FinancialService',
+        '@id': `${SITE_URL}/#financialservice`,
+        name: 'CreditKlick',
+        legalName: 'CreditKlick Financial Technologies',
+        url: SITE_URL,
+        logo: `${SITE_URL}/assets/creditklic_next_gen.png`,
+        image: `${SITE_URL}/assets/creditklic_next_gen.png`,
+        description: 'CreditKlick is India\'s trusted AI-enabled financial marketplace providing free credit score checks, credit report analysis, personal loan comparison, business loans, home loans, and credit card applications.',
+        currenciesAccepted: 'INR',
+        paymentAccepted: 'Free Service',
+        areaServed: {
+            '@type': 'Country',
+            name: 'India',
+        },
+        knowsAbout: [
+            'Credit Score Check',
+            'Experian Credit Report',
+            'CIBIL Score Analysis',
+            'Personal Loan',
+            'Home Loan',
+            'Business Loan',
+            'Credit Cards Comparison',
+            'EMI Calculator',
+            'Credit Refine and Credit Repair',
+        ],
+        hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Financial Services & Products',
+            itemListElement: [
+                {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'Service',
+                        name: 'Free Credit Score Check & Report Analysis',
+                        description: 'Instant online Experian & credit health check with personalized credit improvement recommendations.'
+                    }
+                },
+                {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'FinancialProduct',
+                        name: 'Personal Loans',
+                        description: 'Compare & apply for personal loans from top Indian banks at competitive interest rates starting from 10.5% p.a.'
+                    }
+                },
+                {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'FinancialProduct',
+                        name: 'Credit Refine',
+                        description: 'Professional credit report analysis to fix errors, dispute inaccuracies, and improve credit score.'
+                    }
+                }
+            ]
+        }
+    }
+}
+
+/**
+ * AEO: Answer Engine Optimization FAQ Schema
+ * Structured Q&A tailored for AI Overviews, Featured Snippets, and LLM Retrieval
+ */
+export function getAEOFAQSchema() {
+    return getFAQSchema([
+        {
+            question: "How can I check my credit score for free on CreditKlick?",
+            answer: "You can check your credit score for free on CreditKlick by entering your 10-digit mobile number, verifying with OTP, and receiving an instant, detailed Experian credit report without affecting your credit score."
+        },
+        {
+            question: "What is a good credit score in India?",
+            answer: "In India, a credit score of 750 or higher (out of 900) is considered excellent. It improves your chances of quick loan approvals, higher credit limits, and lower interest rates on personal loans, home loans, and credit cards."
+        },
+        {
+            question: "How does CreditKlick's Credit Refine service help improve my credit score?",
+            answer: "CreditKlick's Credit Refine service analyzes your credit report for negative accounts, errors, or delays, and guides you with a customized step-by-step credit improvement plan to boost your credit score."
+        },
+        {
+            question: "Does checking my credit score on CreditKlick hurt my score?",
+            answer: "No, checking your credit score on CreditKlick is classified as a soft inquiry and does NOT lower or affect your credit score in any way."
+        },
+        {
+            question: "How is EMI calculated for personal and home loans?",
+            answer: "Equated Monthly Installment (EMI) is calculated using the formula: EMI = [P x R x (1+R)^N]/[(1+R)^N-1], where P is Principal Loan Amount, R is Monthly Interest Rate, and N is Tenure in Months. You can use CreditKlick's free EMI calculator to get exact instant calculations."
+        }
+    ])
+}
+

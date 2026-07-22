@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 import Cookies from 'js-cookie'
 
 // Asset path
-const NextGenImg = '/assets/Images/creditklic_next_gen.png';
+const NextGenImg = '/assets/creditklic_next_gen.png';
 
 export default function AdminLogin() {
     const router = useRouter()

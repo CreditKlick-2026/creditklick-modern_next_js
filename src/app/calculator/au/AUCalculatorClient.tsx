@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 
 // Asset path
-const vettaImg = '/assets/Images/auimg/vetta.png';
+const vettaImg = '/assets/auimg/vetta.png';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },

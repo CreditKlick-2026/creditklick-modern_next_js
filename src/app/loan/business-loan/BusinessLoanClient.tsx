@@ -146,7 +146,7 @@ export default function BusinessLoanClient() {
                             </div>
                             <div className="md:shrink-0 p-5 flex items-center justify-center">
                                 <img
-                                    src="/assets/Images/businessloan.png"
+                                    src="/assets/businessloan.png"
                                     alt="Business Loan"
                                     className="object-contain rounded-xl max-w-xs"
                                 />

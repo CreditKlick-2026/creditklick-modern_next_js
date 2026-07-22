@@ -117,7 +117,7 @@ export default function PersonalLoanClient() {
                             </div>
                             <div className="md:shrink-0 p-5 flex items-center justify-center">
                                 <img
-                                    src="/assets/Images/pers.png"
+                                    src="/assets/pers.png"
                                     alt="Personal Loan"
                                     className="object-contain rounded-xl max-w-xs"
                                 />

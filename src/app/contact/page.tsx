@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Contact CreditKlick - We are here to help',
         description: 'Need help with your credit score or loans? Reach out to our experts today.',
-        images: ['/assets/Images/creditklic_next_gen.png'],
+        images: ['/assets/creditklic_next_gen.png'],
     }
 }
 

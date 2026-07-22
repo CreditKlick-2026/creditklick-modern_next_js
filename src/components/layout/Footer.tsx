@@ -7,6 +7,8 @@ import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Loader2, CheckCi
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { subscribersAPI } from '@/services/api'
+import Cookies from 'js-cookie'
+import { RevokeConsentModal } from './RevokeConsentModal'
 
 const socialLinks = [
     { icon: Facebook, href: 'https://www.facebook.com/creditklickfin/', color: 'text-blue-600' },
@@ -20,6 +22,7 @@ export function Footer() {
     const [email, setEmail] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
+    const [isRevokeModalOpen, setIsRevokeModalOpen] = useState(false)
 
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -44,6 +47,10 @@ export function Footer() {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    const handleRevokeConsent = () => {
+        setIsRevokeModalOpen(true)
     }
 
     return (
@@ -80,7 +87,7 @@ export function Footer() {
                     {/* Brand Section */}
                     <div className="col-span-2 md:col-span-4 lg:col-span-1">
                         <Link href="/" className="inline-block mb-4">
-                            <Image src="/assets/Images/creditklic_next_gen_transparent.png" alt="CreditKlick" width={128} height={50} style={{ width: 'auto', height: 'auto' }} className="max-w-32" />
+                            <Image src="/assets/creditklic_next_gen_transparent.png" alt="CreditKlick" width={128} height={50} style={{ width: 'auto', height: 'auto' }} className="max-w-32" />
                         </Link>
                         <p className="text-xs text-gray-300 uppercase tracking-widest mb-4">Headoffice - Plot 112 Udyog Vihar Phase-1 Gurgaon, Haryana, 122016</p>
                         <div className="flex items-center space-x-2 mb-4">
@@ -115,18 +122,21 @@ export function Footer() {
                             <li><a href="https://www.stefto.com/careers/" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Careers</a></li>
                             <li><Link href="/contact" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Contact us</Link></li>
                             <li><Link href="/blog" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Blogs</Link></li>
+                            <li><Link href="/register-complaint" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Register Complaint</Link></li>
                         </ul>
                     </div>
 
                     {/* Legal */}
                     <div className="text-left">
-                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Legal</h4>
+                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Legal & Governance</h4>
                         <ul className="space-y-2">
                             <li><Link href="/privacy-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Privacy Policy</Link></li>
                             <li><Link href="/terms-conditions" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Terms and Conditions</Link></li>
                             <li><Link href="/return-refund" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Return & Refund Policy</Link></li>
                             <li><Link href="/posh-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Posh Policy</Link></li>
                             <li><Link href="/cookies-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Cookies Policy</Link></li>
+                            <li><Link href="/revoke-consent" prefetch={true} className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Revoke Consent</Link></li>
+                            <li><Link href="/grievance-redressal" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Grievance Redressal</Link></li>
                         </ul>
                     </div>
 
@@ -162,6 +172,11 @@ export function Footer() {
                     </div>
                 </div>
             </div>
+
+            <RevokeConsentModal
+                isOpen={isRevokeModalOpen}
+                onClose={() => setIsRevokeModalOpen(false)}
+            />
         </footer>
     )
 }

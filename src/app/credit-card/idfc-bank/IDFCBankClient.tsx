@@ -19,7 +19,7 @@ const staggerContainer = {
 const cardTypes = [
     {
         name: 'IDFC FIRST CLASSIC CARD',
-        image: '/assets/Images/idfcimg/idfcclassic.png',
+        image: '/assets/idfcimg/idfcclassic.png',
         features: [
             '10x Reward Points on incremental spends above ₹20,000 per month and spends done on your birthday',
             'Welcome voucher worth ₹500 on spending ₹15,000 or more within 90 days of card generation',
@@ -30,7 +30,7 @@ const cardTypes = [
     },
     {
         name: 'IDFC FIRST SELECT CARD',
-        image: '/assets/Images/idfcimg/idfcselect.png',
+        image: '/assets/idfcimg/idfcselect.png',
         features: [
             'Unlimited Reward points that never expires',
             '5% cashback (upto ₹1,000) on the transaction value of first EMI done within 90 days of card generation',
@@ -42,7 +42,7 @@ const cardTypes = [
     },
     {
         name: 'IDFC FIRST WEALTH CARD',
-        image: '/assets/Images/idfcimg/idfcwealth.png',
+        image: '/assets/idfcimg/idfcwealth.png',
         features: [
             '10x Reward points on incremental spends above ₹30,000 per month and spends done on your birthday',
             'Get access to International and Domestic Airport lounges and spas',
@@ -53,7 +53,7 @@ const cardTypes = [
     },
     {
         name: 'IDFC FIRST MILLENNIA CARD',
-        image: '/assets/Images/idfcimg/idfcmillenia.png',
+        image: '/assets/idfcimg/idfcmillenia.png',
         features: [
             '6X & 3X Reward Points on online & offline purchases respectively for spends up to ₹20,000 per month',
             '5% cashback (up to ₹1000) on the transaction value of first EMI done within 90 days of card generation',
@@ -86,7 +86,7 @@ export default function IDFCBankClient() {
                                 transition={{ delay: 0.2 }}
                                 className="flex justify-center p-2 md:p-5"
                             >
-                                <img src="/assets/Images/cards/idfcm.png" alt="IDFC FIRST Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
+                                <img src="/assets/cards/idfcm.png" alt="IDFC FIRST Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, x: 50 }}

@@ -36,7 +36,7 @@ import { Button } from '@/components/ui/Button'
 import { IconApply, IconValuation, IconApproval, IconDisbursal } from './_components/GoldProcessIcons'
 
 // Import images
-const GoldLoanHero = '/assets/Images/goldloan/gold_loan_hero.png'
+const GoldLoanHero = '/assets/goldloan/gold_loan_hero.png'
 
 // --- Components ---
 

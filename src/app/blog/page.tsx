@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     }
 }
 
-// SSR - data is fetched at request time
-export const dynamic = 'force-dynamic'
+// ISR - revalidate every 60 seconds for fast CDN caching
+export const revalidate = 60
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
 

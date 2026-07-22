@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Gold Loan - Safe. Instant. Digital. | CreditKlick',
         description: 'Get funds instantly against your gold with highest LTV and safe bank locker storage.',
-        images: ['/assets/Images/goldloan/gold_loan_hero.png'],
+        images: ['/assets/goldloan/gold_loan_hero.png'],
     },
     alternates: {
         canonical: '/loan/gold-loan',

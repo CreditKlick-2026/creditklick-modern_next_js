@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast'
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "CreditKlick",
     images: [
       {
-        url: "/assets/Images/creditklic_next_gen.png",
+        url: "/assets/creditklic_next_gen.png",
         width: 1200,
         height: 630,
         alt: "CreditKlick - India's trusted credit score platform",
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CreditKlick - Your Financial Partner",
     description: "Check your credit score and get best financial products",
-    images: ["/assets/Images/creditklic_next_gen.png"],
+    images: ["/assets/creditklic_next_gen.png"],
     creator: "@creditklick",
     site: "@creditklick",
   },
@@ -112,10 +113,14 @@ export default function RootLayout({
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://betaversion-creditklickapp.onrender.com" />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
 
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://betaversion-creditklickapp.onrender.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
 
         {/* Structured Data - Organization Schema */}
         <script
@@ -144,8 +149,10 @@ export default function RootLayout({
           <AnalyticsTracker />
         </Suspense>
 
-        {/* Google Tag Manager */}
-        <script
+        {/* Google Tag Manager - Non-blocking script loading */}
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

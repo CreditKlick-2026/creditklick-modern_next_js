@@ -5,20 +5,21 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { BiSolidTachometer } from "react-icons/bi";
-import { FaUser, FaTags } from "react-icons/fa";
-import { FaUserLarge } from "react-icons/fa6";
-import { MdNewReleases } from "react-icons/md";
-import { BsCheckLg } from "react-icons/bs";
-import { RiCloseLine } from "react-icons/ri";
-import { Loader2, AlertCircle, Info, Bookmark, CreditCard, Users, ArrowLeft, HelpCircle, MessageSquare } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import {
+    Gauge, User, Tag, Zap, CheckCircle2, X,
+    Loader2, AlertCircle, Info, Bookmark, CreditCard, Users, ArrowLeft, HelpCircle, MessageSquare
+} from 'lucide-react'
 import { creditReportAPI } from '@/services/api'
 import experianImg from '@/assets/Images/experian.png'
 import Cookies from 'js-cookie'
 
-import PDFDownloadButton from '@/components/ReportAnalysis/PDFDownloadButton';
+// Dynamic import - @react-pdf/renderer is ~350KB, loads only when needed
+const PDFDownloadButton = dynamic(
+  () => import('@/components/ReportAnalysis/PDFDownloadButton'),
+  { ssr: false, loading: () => <button className="px-4 py-2 bg-blue-100 text-blue-400 rounded-lg text-sm cursor-wait">Preparing PDF...</button> }
+)
 
-// --- Constants & Helpers ---
 
 const STATUS_CODES = {
     ACTIVE: ["11", "71", "78", "80", "82", "83", "84", "DEFAULTVALUE", "21", "22", "23", "24", "25"],
@@ -337,8 +338,8 @@ const AccountHistory = ({ item }: { item: any }) => {
                                 let icon = <span className="text-gray-200">.</span>;
                                 if (record) {
                                     icon = record.value === "0" || record.value === "000"
-                                        ? <BsCheckLg className="text-green-600 mx-auto" />
-                                        : <RiCloseLine className="text-red-600 mx-auto font-bold text-base" />;
+                                        ? <CheckCircle2 className="w-4 h-4 text-green-600 mx-auto" />
+                                        : <X className="w-4 h-4 text-red-600 mx-auto font-bold" />;
                                 }
                                 return <td key={mon} className="p-1">{icon}</td>;
                             })}
@@ -493,7 +494,7 @@ const TotalAccounts = ({ accounts, summary }: { accounts: any[], summary: any })
 const Profile = ({ userDetails }: { userDetails: any }) => (
     <div className="my-4 shadow-lg bg-white rounded-lg min-h-[500px]">
         <div className="flex items-center gap-4 p-6 text-lg tracking-widest font-semibold text-blue-900 border-b">
-            <FaUser /> PERSONAL DETAILS
+            <User className="w-5 h-5" /> PERSONAL DETAILS
         </div>
         <div className="grid md:grid-cols-2 grid-cols-1 p-6 gap-6">
             {Object.entries(userDetails).map(([key, value]) => {
@@ -811,14 +812,14 @@ export default function ReportAnalysisClient() {
                                 onClick={() => setActiveComponent(item)}
                                 className={`flex flex-col lg:flex-row items-center p-4 hover:bg-gray-50 w-full transition border-l-4 ${activeComponent === item ? 'border-blue-900 bg-blue-50' : 'border-transparent'}`}
                             >
-                                {item === 'Credit Report' && <BiSolidTachometer className="text-2xl lg:text-3xl text-green-700 mb-2 lg:mb-0 lg:mr-3" />}
-                                {item === 'My Profile' && <FaUserLarge className="text-xl lg:text-2xl text-blue-500 mb-2 lg:mb-0 lg:mr-3" />}
-                                {item === 'Your Offers' && <FaTags className="text-2xl lg:text-3xl text-red-700 animate-bounce mb-2 lg:mb-0 lg:mr-3" />}
+                                {item === 'Credit Report' && <Gauge className="text-2xl lg:text-3xl text-green-700 mb-2 lg:mb-0 lg:mr-3" />}
+                                {item === 'My Profile' && <User className="text-xl lg:text-2xl text-blue-500 mb-2 lg:mb-0 lg:mr-3" />}
+                                {item === 'Your Offers' && <Tag className="text-2xl lg:text-3xl text-red-700 animate-bounce mb-2 lg:mb-0 lg:mr-3" />}
                                 <span className="uppercase text-[10px] lg:text-sm font-semibold text-gray-700">{item}</span>
                             </button>
                         ))}
                         <Link href="/refine" className="flex flex-col lg:flex-row items-center p-4 hover:bg-gray-50 w-full no-underline border-l-4 border-transparent">
-                            <MdNewReleases className="text-2xl lg:text-3xl text-blue-800 mb-2 lg:mb-0 lg:mr-3" />
+                            <Zap className="text-2xl lg:text-3xl text-blue-800 mb-2 lg:mb-0 lg:mr-3" />
                             <span className="uppercase text-[10px] lg:text-sm font-semibold text-gray-700">Refine</span>
                         </Link>
                     </div>

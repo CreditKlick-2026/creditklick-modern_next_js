@@ -17,9 +17,9 @@ const staggerContainer = {
 }
 
 const loanTypes = [
-    { name: 'Personal Loan', image: '/assets/Images/Loans/PL1.png', href: '/loan/personal-loan', color: 'from-blue-500 to-blue-600' },
-    { name: 'Home Loan', image: '/assets/Images/Loans/HL1.png', href: '/loan/home-loan', color: 'from-green-500 to-green-600' },
-    { name: 'Business Loan', image: '/assets/Images/Loans/BL2.png', href: '/loan/business-loan', color: 'from-purple-500 to-purple-600' }
+    { name: 'Personal Loan', image: '/assets/Loans/PL1.png', href: '/loan/personal-loan', color: 'from-blue-500 to-blue-600' },
+    { name: 'Home Loan', image: '/assets/Loans/HL1.png', href: '/loan/home-loan', color: 'from-green-500 to-green-600' },
+    { name: 'Business Loan', image: '/assets/Loans/BL2.png', href: '/loan/business-loan', color: 'from-purple-500 to-purple-600' }
 ]
 
 const loanDetails = [

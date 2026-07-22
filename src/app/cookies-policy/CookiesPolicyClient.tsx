@@ -11,7 +11,7 @@ export default function CookiesPolicyClient() {
                 <div
                     className="absolute inset-0 bg-fixed bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('/assets/images/cookies-hero.png')"
+                        backgroundImage: "url('/assets/cookies-hero.png')"
                     }}
                 ></div>
                 <div className="absolute inset-0 flex items-center justify-center">

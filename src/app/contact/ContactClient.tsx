@@ -91,7 +91,7 @@ export function ContactClient() {
         <div className="bg-white min-h-screen">
             {/* Hero Section - Simulated Parallax Look */}
             <div className="relative h-[250px] md:h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center">
-                <div className="absolute inset-0 bg-[url('/assets/Images/contact-BG.jpg')] bg-cover bg-center opacity-40"></div>
+                <div className="absolute inset-0 bg-[url('/assets/contact-BG.jpg')] bg-cover bg-center opacity-40"></div>
                 <div className="relative z-10 text-center">
                     <h2 className="text-4xl font-bold tracking-tight text-teal-800 sm:text-6xl uppercase">
                         Contact Us
@@ -177,7 +177,7 @@ export function ContactClient() {
                         {IsSuccess ? (
                             <div className="flex flex-col justify-center items-center text-center">
                                 <Image
-                                    src="/assets/Images/success.gif"
+                                    src="/assets/success.gif"
                                     width={400}
                                     height={400}
                                     className="max-w-[300px] h-auto mb-6"

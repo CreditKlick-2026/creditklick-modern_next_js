@@ -19,7 +19,7 @@ const staggerContainer = {
 const cardTypes = [
     {
         name: 'YES REWARDS PLUS CREDIT CARD',
-        image: '/assets/Images/cards/prosp.png',
+        image: '/assets/cards/prosp.png',
         features: [
             "4 Reward Points for every INR 200 on all categories",
             '2 Reward Points for every INR 200 on Select categories',
@@ -30,7 +30,7 @@ const cardTypes = [
     },
     {
         name: 'YES PROSPERITY EDGE CREDIT CARD',
-        image: '/assets/Images/cards/edge.png',
+        image: '/assets/cards/edge.png',
         features: [
             'Annual Bonus of 15,000 Reward Points on spends of ₹6,00,000',
             "4 Reward Points for every INR 200 on all categories",
@@ -41,7 +41,7 @@ const cardTypes = [
     },
     {
         name: 'YES BANK PREMIA CARD',
-        image: '/assets/Images/cards/premia.png',
+        image: '/assets/cards/premia.png',
         features: [
             'Accelerated Reward points of 12 RP on travel and dining',
             '1% fuel surcharge waiver at all fuel stations',
@@ -73,7 +73,7 @@ export default function YESBankClient() {
                                 transition={{ delay: 0.2 }}
                                 className="flex justify-center p-2 md:p-5"
                             >
-                                <img src="/assets/Images/cards/yesm.png" alt="YES Bank Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
+                                <img src="/assets/cards/yesm.png" alt="YES Bank Cards" className="rounded-xl w-48 md:max-w-xs object-cover" />
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, x: 50 }}

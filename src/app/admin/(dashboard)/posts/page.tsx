@@ -289,10 +289,9 @@ export default function PostsManagement() {
                 const formDataPayload = new FormData()
                 formDataPayload.append('image', file)
 
-                const loadingToast = toast.loading('Uploading image...')
+                const loadingToast = toast.loading('Uploading image to Cloudinary...')
                 try {
-                    const response = await uploadAPI.uploadImage(formDataPayload)
-                    const url = response.data.data.url
+                    const { url } = await uploadToCloudinary(file)
 
                     const quill = quillRef.current?.getEditor()
                     if (quill) {
@@ -300,10 +299,10 @@ export default function PostsManagement() {
                         quill.insertEmbed(range.index, 'image', url)
                     }
                     toast.dismiss(loadingToast)
-                    toast.success('Image uploaded')
+                    toast.success('Image uploaded to Cloudinary!')
                 } catch (error) {
                     toast.dismiss(loadingToast)
-                    toast.error('Image upload failed')
+                    toast.error('Cloudinary upload failed')
                     console.error(error)
                 }
             }

@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    FaChartLine, FaChartPie, FaSearch, FaMousePointer,
-    FaMobileAlt, FaDesktop, FaClock, FaGlobe, FaCookieBite, FaExclamationTriangle,
-    FaUsers, FaArrowUp, FaArrowDown, FaChartBar,
-    FaChrome, FaFirefox, FaSafari, FaEdge, FaExternalLinkAlt, FaSync,
-    FaEye, FaUserPlus, FaRedo, FaSignInAlt, FaFileAlt, FaCalendarAlt,
-    FaPercentage, FaTachometerAlt, FaLayerGroup
-} from 'react-icons/fa';
+    TrendingUp, PieChart, Search, Pointer,
+    Smartphone, Monitor, Clock, Globe, Cookie, AlertTriangle,
+    Users, ArrowUp, ArrowDown, BarChart3,
+    Compass, ExternalLink, RefreshCw,
+    Eye, UserPlus, RotateCw, LogIn, FileText, Calendar,
+    Percent, Gauge, Layers
+} from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import api from '@/services/api';
 
@@ -61,7 +61,7 @@ const StatCard = ({ title, value, icon: Icon, color, subValue, subLabel, trend }
                     <span className="text-2xl font-bold text-gray-800">{value}</span>
                     {trend !== undefined && (
                         <span className={`text-xs flex items-center gap-0.5 ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                            {trend >= 0 ? <FaArrowUp size={10} /> : <FaArrowDown size={10} />}
+                            {trend >= 0 ? <ArrowUp size={10} /> : <ArrowDown size={10} />}
                             {Math.abs(trend)}%
                         </span>
                     )}
@@ -90,7 +90,7 @@ const HourlyChart = ({ data }: { data: { hour: number; views: number; visitors: 
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 overflow-hidden">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <FaClock className="text-green-600" /> Hourly Traffic (24h)
+                    <Clock className="text-green-600" /> Hourly Traffic (24h)
                 </h3>
                 <div className="flex items-center gap-4 text-xs">
                     <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-500 rounded" /> Views</span>
@@ -193,7 +193,7 @@ const DailyChart = ({ data }: { data: { date: string; views: number; visitors: n
             <div className="flex items-center justify-between mb-2">
                 <div>
                     <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        <FaChartLine className="text-blue-500" /> Daily Traffic Trend
+                        <TrendingUp className="text-blue-500" /> Daily Traffic Trend
                     </h3>
                 </div>
                 <div className="text-right">
@@ -470,7 +470,7 @@ const RealtimeCard = ({ count, pages }: { count: number; pages: { page: string; 
                 <span className="w-2.5 h-2.5 bg-white rounded-full animate-pulse" />
                 Live Right Now
             </h3>
-            <FaUsers size={22} />
+            <Users size={22} />
         </div>
         <div className="text-4xl font-bold mb-1">{count}</div>
         <p className="text-green-100 text-sm mb-4">Active users (last 5 min)</p>
@@ -491,11 +491,11 @@ const RealtimeCard = ({ count, pages }: { count: number; pages: { page: string; 
 // Browser Icon
 const BrowserIcon = ({ browser }: { browser: string }) => {
     const name = browser?.toLowerCase() || '';
-    if (name.includes('chrome')) return <FaChrome className="text-yellow-500" />;
-    if (name.includes('firefox')) return <FaFirefox className="text-orange-500" />;
-    if (name.includes('safari')) return <FaSafari className="text-blue-500" />;
-    if (name.includes('edge')) return <FaEdge className="text-blue-600" />;
-    return <FaGlobe className="text-gray-500" />;
+    if (name.includes('chrome')) return <Globe className="text-yellow-500" />;
+    if (name.includes('firefox')) return <Globe className="text-orange-500" />;
+    if (name.includes('safari')) return <Compass className="text-blue-500" />;
+    if (name.includes('edge')) return <Globe className="text-blue-600" />;
+    return <Globe className="text-gray-500" />;
 };
 
 // Comparison Card (Dynamic based on range)
@@ -523,7 +523,7 @@ const WeeklyComparison = ({ data, range }: { data: { thisWeek: number; lastWeek:
     return (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <FaCalendarAlt className="text-indigo-600" /> {title}
+                <Calendar className="text-indigo-600" /> {title}
             </h3>
             <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
@@ -536,7 +536,7 @@ const WeeklyComparison = ({ data, range }: { data: { thisWeek: number; lastWeek:
                 </div>
             </div>
             <div className={`mt-4 flex items-center justify-center gap-2 p-3 rounded-lg ${isPositive ? 'bg-green-50' : 'bg-red-50'}`}>
-                {isPositive ? <FaArrowUp className="text-green-600" /> : <FaArrowDown className="text-red-600" />}
+                {isPositive ? <ArrowUp className="text-green-600" /> : <ArrowDown className="text-red-600" />}
                 <span className={`text-lg font-bold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
                     {isPositive ? '+' : ''}{data.change}%
                 </span>
@@ -614,7 +614,7 @@ export default function AnalyticsDashboard() {
                 </div>
                 <div className="flex items-center gap-3">
                     <button onClick={fetchAllStats} className="p-2.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors" title="Refresh">
-                        <FaSync className={`text-gray-600 ${loading ? 'animate-spin' : ''}`} />
+                        <RefreshCw className={`text-gray-600 ${loading ? 'animate-spin' : ''}`} />
                     </button>
                     <div className="flex bg-white rounded-lg p-1 shadow-sm border border-gray-200">
                         {['24h', '7d', '30d', 'all'].map((range) => (
@@ -630,10 +630,10 @@ export default function AnalyticsDashboard() {
             {/* Tab Navigation */}
             <div className="flex gap-2 border-b border-gray-200 pb-2 overflow-x-auto">
                 {[
-                    { id: 'overview', label: 'Overview', icon: FaLayerGroup },
-                    { id: 'traffic', label: 'Traffic Analysis', icon: FaChartLine },
-                    { id: 'users', label: 'User Behavior', icon: FaUsers },
-                    { id: 'content', label: 'Content & SEO', icon: FaFileAlt }
+                    { id: 'overview', label: 'Overview', icon: Layers },
+                    { id: 'traffic', label: 'Traffic Analysis', icon: TrendingUp },
+                    { id: 'users', label: 'User Behavior', icon: Users },
+                    { id: 'content', label: 'Content & SEO', icon: FileText }
                 ].map(tab => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id as any)}
                         className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>
@@ -648,14 +648,14 @@ export default function AnalyticsDashboard() {
                     <motion.div key="overview" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
                         {/* Key Metrics */}
                         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-                            <StatCard title="Total Page Views" value={(stats?.summary?.totalViews || 0).toLocaleString()} icon={FaEye} color="bg-blue-500"
+                            <StatCard title="Total Page Views" value={(stats?.summary?.totalViews || 0).toLocaleString()} icon={Eye} color="bg-blue-500"
                                 trend={extendedStats?.weeklyComparison?.change ? Number(extendedStats.weeklyComparison.change) : undefined} />
-                            <StatCard title="Unique Visitors" value={(stats?.summary?.uniqueVisitors || 0).toLocaleString()} icon={FaGlobe} color="bg-purple-500" />
-                            <StatCard title="New Visitors" value={(extendedStats?.visitorTypes?.new || 0).toLocaleString()} icon={FaUserPlus} color="bg-green-500"
+                            <StatCard title="Unique Visitors" value={(stats?.summary?.uniqueVisitors || 0).toLocaleString()} icon={Globe} color="bg-purple-500" />
+                            <StatCard title="New Visitors" value={(extendedStats?.visitorTypes?.new || 0).toLocaleString()} icon={UserPlus} color="bg-green-500"
                                 subValue={extendedStats?.visitorTypes?.returning || 0} subLabel="Returning" />
-                            <StatCard title="Bounce Rate" value={`${extendedStats?.bounceRate || 0}%`} icon={FaPercentage} color="bg-red-500" />
-                            <StatCard title="Avg Session" value={`${extendedStats?.avgSessionMinutes || 0} min`} icon={FaClock} color="bg-teal-500" />
-                            <StatCard title="Total Searches" value={totalSearches.toLocaleString()} icon={FaSearch} color="bg-orange-500" />
+                            <StatCard title="Bounce Rate" value={`${extendedStats?.bounceRate || 0}%`} icon={Percent} color="bg-red-500" />
+                            <StatCard title="Avg Session" value={`${extendedStats?.avgSessionMinutes || 0} min`} icon={Clock} color="bg-teal-500" />
+                            <StatCard title="Total Searches" value={totalSearches.toLocaleString()} icon={Search} color="bg-orange-500" />
                         </div>
 
                         {/* Main Charts */}
@@ -668,11 +668,11 @@ export default function AnalyticsDashboard() {
 
                         {/* Secondary Stats */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                            <DonutChart title="Visitor Types" icon={FaUsers} data={[
+                            <DonutChart title="Visitor Types" icon={Users} data={[
                                 { label: 'New Visitors', value: extendedStats?.visitorTypes?.new || 0, color: '#3b82f6' },
                                 { label: 'Returning', value: extendedStats?.visitorTypes?.returning || 0, color: '#10b981' },
                             ]} />
-                            <DonutChart title="Cookie Consent" icon={FaCookieBite} data={[
+                            <DonutChart title="Cookie Consent" icon={Cookie} data={[
                                 { label: 'Accepted', value: cookieAccepted, color: '#10b981' },
                                 { label: 'Rejected', value: cookieRejected, color: '#ef4444' },
                                 { label: 'Pending', value: stats?.cookieConsentStats?.pending || 0, color: '#f59e0b' },
@@ -688,9 +688,9 @@ export default function AnalyticsDashboard() {
                         {extendedStats?.hourlyTraffic && <HourlyChart data={extendedStats.hourlyTraffic} />}
 
                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                            <HorizontalBarChart title="Peak Traffic Hours" icon={FaClock} color="purple"
+                            <HorizontalBarChart title="Peak Traffic Hours" icon={Clock} color="purple"
                                 data={(extendedStats?.peakHours || []).map((p: any) => ({ label: `${String(p.hour).padStart(2, '0')}:00 - ${String(p.hour + 1).padStart(2, '0')}:00`, value: p.count }))} />
-                            <HorizontalBarChart title="Top Referral Sources" icon={FaExternalLinkAlt} color="green"
+                            <HorizontalBarChart title="Top Referral Sources" icon={ExternalLink} color="green"
                                 data={(extendedStats?.topReferrers || []).map((r: any) => ({ label: r.source || 'Direct Traffic', value: r.count }))} />
                         </div>
 
@@ -698,7 +698,7 @@ export default function AnalyticsDashboard() {
                             {/* Device Stats */}
                             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                 <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                    <FaDesktop className="text-gray-600" /> Device Distribution
+                                    <Monitor className="text-gray-600" /> Device Distribution
                                 </h3>
                                 <div className="space-y-4">
                                     {stats?.deviceStats?.map((d: any, i: number) => {
@@ -707,7 +707,7 @@ export default function AnalyticsDashboard() {
                                         return (
                                             <div key={i} className="flex items-center gap-4">
                                                 <div className={`p-3 rounded-lg ${d._id === 'mobile' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600'}`}>
-                                                    {d._id === 'mobile' ? <FaMobileAlt size={20} /> : <FaDesktop size={20} />}
+                                                    {d._id === 'mobile' ? <Smartphone size={20} /> : <Monitor size={20} />}
                                                 </div>
                                                 <div className="flex-1">
                                                     <div className="flex justify-between mb-1">
@@ -728,7 +728,7 @@ export default function AnalyticsDashboard() {
                             {/* Browser Stats */}
                             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                 <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                    <FaChrome className="text-yellow-500" /> Browser Usage
+                                    <Globe className="text-yellow-500" /> Browser Usage
                                 </h3>
                                 <div className="space-y-4">
                                     {extendedStats?.browserStats?.map((b: any, i: number) => {
@@ -761,19 +761,19 @@ export default function AnalyticsDashboard() {
                     <motion.div key="users" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
                         {/* User Insights Cards */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <StatCard title="New Visitors" value={(extendedStats?.visitorTypes?.new || 0).toLocaleString()} icon={FaUserPlus} color="bg-blue-500" />
-                            <StatCard title="Returning Visitors" value={(extendedStats?.visitorTypes?.returning || 0).toLocaleString()} icon={FaRedo} color="bg-green-500" />
+                            <StatCard title="New Visitors" value={(extendedStats?.visitorTypes?.new || 0).toLocaleString()} icon={UserPlus} color="bg-blue-500" />
+                            <StatCard title="Returning Visitors" value={(extendedStats?.visitorTypes?.returning || 0).toLocaleString()} icon={RotateCw} color="bg-green-500" />
                             <StatCard title="Avg Pages/Session" value={
                                 ((stats?.summary?.totalViews || 0) / Math.max(stats?.summary?.uniqueVisitors || 1, 1)).toFixed(1)
-                            } icon={FaFileAlt} color="bg-purple-500" />
-                            <StatCard title="Consent Rate" value={`${consentRate}%`} icon={FaCookieBite} color="bg-teal-500" />
+                            } icon={FileText} color="bg-purple-500" />
+                            <StatCard title="Consent Rate" value={`${consentRate}%`} icon={Cookie} color="bg-teal-500" />
                         </div>
 
                         {/* Recent Events Table */}
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div className="p-6 border-b border-gray-100 flex justify-between items-center">
                                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                    <FaClock className="text-blue-600" /> Recent User Activity
+                                    <Clock className="text-blue-600" /> Recent User Activity
                                 </h3>
                                 <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Live Feed</span>
                             </div>
@@ -847,7 +847,7 @@ export default function AnalyticsDashboard() {
                             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="p-6 border-b border-gray-100 flex justify-between items-center">
                                     <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                        <FaSearch className="text-orange-500" /> Top Search Queries
+                                        <Search className="text-orange-500" /> Top Search Queries
                                     </h3>
                                     <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">User Intent</span>
                                 </div>
@@ -893,7 +893,7 @@ export default function AnalyticsDashboard() {
                             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="p-6 border-b border-gray-100 flex justify-between items-center">
                                     <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                        <FaChartBar className="text-green-600" /> Top Performing Pages
+                                        <BarChart3 className="text-green-600" /> Top Performing Pages
                                     </h3>
                                     <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">SEO</span>
                                 </div>
@@ -914,13 +914,13 @@ export default function AnalyticsDashboard() {
                                                         <td className="px-6 py-3 truncate max-w-[200px]">
                                                             <a href={page.path} target="_blank" rel="noopener noreferrer"
                                                                 className={`hover:underline flex items-center gap-1 ${routeValid ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                                {page.path} <FaExternalLinkAlt size={10} />
+                                                                {page.path} <ExternalLink size={10} />
                                                             </a>
                                                         </td>
                                                         <td className="px-6 py-3 text-center">
                                                             {routeValid
                                                                 ? <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs">✓ OK</span>
-                                                                : <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs flex items-center gap-1 justify-center"><FaExclamationTriangle size={10} /> 404</span>
+                                                                : <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs flex items-center gap-1 justify-center"><AlertTriangle size={10} /> 404</span>
                                                             }
                                                         </td>
                                                         <td className="px-6 py-3 text-right font-bold text-gray-700">{page.totalViews}</td>
@@ -946,7 +946,7 @@ export default function AnalyticsDashboard() {
                                                 <div className="flex items-center justify-between">
                                                     {routeValid
                                                         ? <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs">✓ OK</span>
-                                                        : <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs flex items-center gap-1"><FaExclamationTriangle size={10} /> 404</span>
+                                                        : <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs flex items-center gap-1"><AlertTriangle size={10} /> 404</span>
                                                     }
                                                 </div>
                                             </div>
@@ -960,7 +960,7 @@ export default function AnalyticsDashboard() {
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <div className="p-6 border-b border-gray-100 flex justify-between items-center">
                                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                    <FaExclamationTriangle className="text-amber-500" /> SEO Opportunities (Low Traffic Pages)
+                                    <AlertTriangle className="text-amber-500" /> SEO Opportunities (Low Traffic Pages)
                                 </h3>
                                 <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">Needs Attention</span>
                             </div>

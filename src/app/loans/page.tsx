@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Best Loan Offers in India - Apply Online at CreditKlick',
         description: 'Get instant approvals on loans with competitive interest rates. Compare top banking partners in one place.',
-        images: ['/assets/Images/Loans/PL1.png'],
+        images: ['/assets/Loans/PL1.png'],
     }
 }
 

@@ -10,7 +10,7 @@ export default function ReturnRefundClient() {
                 <div
                     className="absolute inset-0 bg-fixed bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('/assets/images/refund-hero.png')"
+                        backgroundImage: "url('/assets/refund-hero.png')"
                     }}
                 ></div>
                 <div className="absolute inset-0 flex items-center justify-center">

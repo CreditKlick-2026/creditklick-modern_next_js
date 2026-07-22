@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import HomeClient from './HomeClient'
+import { getAIOKnowledgeGraphSchema, getAEOFAQSchema } from '@/lib/seo'
 
 // Static generation for maximum performance
 export const dynamic = 'force-static'
@@ -20,5 +21,27 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
-  return <HomeClient />
+  const knowledgeGraphSchema = getAIOKnowledgeGraphSchema()
+  const faqSchema = getAEOFAQSchema()
+
+  return (
+    <>
+      {/* GEO & AIO: Generative Engine & Knowledge Graph Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(knowledgeGraphSchema),
+        }}
+      />
+      {/* AEO: Answer Engine Optimization FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+      <HomeClient />
+    </>
+  )
 }
+

@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { User, Mail, Phone, MapPin, Calendar, CreditCard, LogOut, Edit, Loader2 } from 'lucide-react'
+import { User, Mail, Phone, MapPin, Calendar, CreditCard, LogOut, Edit, Loader2, ShieldAlert } from 'lucide-react'
 import Cookies from 'js-cookie'
 import { Button, Card, Input } from '@/components/ui'
 import toast from 'react-hot-toast'
+import { RevokeConsentModal } from '@/components/layout/RevokeConsentModal'
 
 interface UserData {
     name?: string
@@ -28,6 +29,7 @@ export default function ProfileClient() {
     const [loading, setLoading] = useState(true)
     const [editing, setEditing] = useState(false)
     const [editData, setEditData] = useState<UserData>({})
+    const [isRevokeModalOpen, setIsRevokeModalOpen] = useState(false)
 
     useEffect(() => {
         const userData = Cookies.get('user')
@@ -196,7 +198,7 @@ export default function ProfileClient() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="grid md:grid-cols-2 gap-4"
+                    className="grid md:grid-cols-3 gap-4"
                 >
                     <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => router.push('/report-analysis')}>
                         <div className="flex items-center gap-4">
@@ -212,8 +214,8 @@ export default function ProfileClient() {
 
                     <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={handleLogout}>
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                                <LogOut className="w-6 h-6 text-red-600" />
+                            <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                                <LogOut className="w-6 h-6 text-gray-600" />
                             </div>
                             <div>
                                 <h3 className="font-bold text-gray-900">Logout</h3>
@@ -221,7 +223,24 @@ export default function ProfileClient() {
                             </div>
                         </div>
                     </Card>
+
+                    <Card className="cursor-pointer hover:shadow-lg border-red-200 bg-red-50/50 transition-shadow" onClick={() => setIsRevokeModalOpen(true)}>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                <ShieldAlert className="w-6 h-6 text-red-600" />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-red-900">Revoke Consent</h3>
+                                <p className="text-sm text-red-600">Permanently delete my data</p>
+                            </div>
+                        </div>
+                    </Card>
                 </motion.div>
+
+                <RevokeConsentModal
+                    isOpen={isRevokeModalOpen}
+                    onClose={() => setIsRevokeModalOpen(false)}
+                />
             </div>
         </div>
     )

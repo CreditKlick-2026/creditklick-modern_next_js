@@ -119,7 +119,7 @@ export default function HomeLoanClient() {
                             </div>
                             <div className="md:shrink-0 p-5 flex items-center justify-center">
                                 <img
-                                    src="/assets/Images/authloan.png"
+                                    src="/assets/authloan.png"
                                     alt="Home Loan"
                                     className="object-contain rounded-xl max-w-xs"
                                 />

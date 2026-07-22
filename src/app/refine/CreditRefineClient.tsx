@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BsCheckLg } from "react-icons/bs";
+import { CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie';
 import { paymentAPI } from "@/services/api";
@@ -134,8 +134,8 @@ export default function CreditRefineClient() {
                     <div className="space-y-4">
                         {features.map((item, index) => (
                             <div key={index} className="flex items-start text-lg font-light text-gray-700">
-                                <span className="text-pink-500 mr-3 mt-1 flex-shrink-0 text-xl">
-                                    <BsCheckLg />
+                                <span className="mr-3 mt-1 flex-shrink-0">
+                                    <CheckCircle2 className="w-5 h-5 text-pink-500" />
                                 </span>
                                 <span>{item.text}</span>
                             </div>

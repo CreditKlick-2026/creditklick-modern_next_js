@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Apply for Personal Loan Online at Best Rates | CreditKlick',
         description: 'Instant digital processing and quick disbursement on personal loans through our top banking partners.',
-        images: ['/assets/Images/pers.png'],
+        images: ['/assets/pers.png'],
     },
     alternates: {
         canonical: '/loan/personal-loan',

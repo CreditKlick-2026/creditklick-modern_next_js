@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 
 // Asset path
-const saveImg = '/assets/Images/sbiimg/save.png';
+const saveImg = '/assets/sbiimg/save.png';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },

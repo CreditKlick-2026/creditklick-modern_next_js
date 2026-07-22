@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'AU Bank Credit Cards - Rewarding Benefits & Easy Application',
         description: 'Compare and apply for the best AU Bank credit cards tailored to your lifestyle.',
-        images: ['/assets/Images/cards/aum.png'],
+        images: ['/assets/cards/aum.png'],
     },
     alternates: {
         canonical: '/credit-card/au-bank',
