@@ -26,7 +26,7 @@ function FormDesign() {
             </div>
             <div>
                 <h1 className="lg:text-5xl text-3xl text-blue-900 font-thin">
-                    Get Your FREE <br /> Experian Credit Report{" "}
+                    Get Your FREE <br /> CRIF Credit Report{" "}
                 </h1>
                 <p className="text-sm font-thin text-blue-900">
                     When you ask a bank for a loan or credit card, they want to know
@@ -50,9 +50,9 @@ function FormDesign() {
                 </span>
             </div>
 
-            <span className="flex text-xs gap-x-1 mt-10 items-center">
+            <span className="flex text-xs gap-x-1 mt-10 items-center text-gray-500 font-medium">
                 {" "}
-                powered by <Image src={experian} alt="Experian" className="w-16 h-auto object-contain" />
+                powered by <span className="font-bold text-blue-800">CRIF High Mark</span>
             </span>
         </div>
     )
@@ -201,7 +201,7 @@ export default function CreditScoreClient() {
     const router = useRouter()
 
     const [isLoading, setIsLoading] = useState(false)
-    const [agreed, setAgreed] = useState(true)
+    const [agreed, setAgreed] = useState(false)
     const [formData, setFormData] = useState({ name: '', email: '', dob: '', pin: '', pan: '', mobile: '' })
     const [gender, setGender] = useState('')
     const [status, setStatus] = useState('')
@@ -440,7 +440,7 @@ export default function CreditScoreClient() {
                             {/* Terms and Submit - full width */}
                             <div className="col-span-2 px-1">
                                 <Switch checked={agreed} onChange={setAgreed}>
-                                    <span className="text-xs">By selecting this, you agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms</Link>.</span>
+                                    <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms &amp; Conditions</Link>.</span>
                                 </Switch>
                                 <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
                             </div>

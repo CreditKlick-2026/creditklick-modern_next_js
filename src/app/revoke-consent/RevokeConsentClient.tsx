@@ -361,7 +361,7 @@ export default function RevokeConsentClient() {
                                         <div className="flex items-start gap-2">
                                             <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
                                             <p className="text-[10px] sm:text-xs text-amber-900 leading-normal font-medium">
-                                                Warning: This action permanently erases your credit records and Experian reports.
+                                                Warning: This action permanently erases your credit records, CRIF High Mark .
                                             </p>
                                         </div>
 
@@ -481,7 +481,7 @@ export default function RevokeConsentClient() {
                                     <div className="space-y-1">
                                         <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Consent Revocation Complete</h2>
                                         <p className="text-[11px] sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
-                                            Your request has been executed. All credit scores, Experian report histories, and account cookies associated with mobile number <strong className="text-gray-900">+91 {phone}</strong> have been erased.
+                                            Your request has been executed. All credit scores, CRIF High Mark & Experian report histories, and account cookies associated with mobile number <strong className="text-gray-900">+91 {phone}</strong> have been erased.
                                         </p>
                                     </div>
                                     <div className="pt-2 sm:pt-4">

@@ -242,7 +242,7 @@ export function Header() {
                             <ul className="flex items-center ">
                                 {navItems.map((item) => (
                                     <li key={item.label} className="relative px-4" onMouseEnter={() => item.children && setOpenDropdown(item.label)} onMouseLeave={() => setOpenDropdown(null)}>
-                                        <Link href={item.href} prefetch={true} className={`flex items-center py-2 font-semibold uppercase tracking-wider text-sm transition-colors ${item.label === 'Credit Refine' ? 'text-blue-600' : 'hover:text-blue-600'}`}>
+                                        <Link href={item.href} className={`flex items-center py-2 font-semibold uppercase tracking-wider text-sm transition-colors ${item.label === 'Credit Refine' ? 'text-blue-600' : 'hover:text-blue-600'}`}>
                                             {item.label}
                                             {item.children && <ChevronDown className="ml-1 h-4 w-4" />}
                                         </Link>

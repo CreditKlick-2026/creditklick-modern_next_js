@@ -74,21 +74,32 @@ export default function PrivacyPolicyClient() {
                     </p>
 
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
+                        Credit Bureau Data Handling & Encryption
+                    </h3>
+                    <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
+                        To fetch and display your credit score and credit report, CreditKlick acts as your authorized representative in partnership with licensed credit bureaus in India, including <strong>CRIF High Mark</strong> and <strong>Experian</strong>. All raw credit report responses received from credit bureaus are strictly encrypted at rest using industry-standard <strong>AES-256-GCM encryption</strong>.
+                    </p>
+
+                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
+                        Data Retention & 6-Month Auto Deletion
+                    </h3>
+                    <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
+                        In accordance with CRIF Infosec Audit compliance standards and the Digital Personal Data Protection (DPDP) Act 2023, CreditKlick enforces a strict <strong>6-month (180-day) data retention limit</strong>. All raw credit bureau reports are automatically purged from our databases after 180 days from the consent authorization date via an automated backend scheduler.
+                    </p>
+
+                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
                         Data Security
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         We implement appropriate technical and organizational security measures to protect your personal
-                        information. However, no method of transmission over the Internet is 100% secure, and we cannot
-                        guarantee absolute security.
+                        information, including SSL/TLS 1.3 encryption in transit, AES-256 encryption at rest, restricted network access controls, and routine CERT-In VAPT security assessments.
                     </p>
 
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Your Rights
+                        Your Rights & Consent Revocation
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
-                        You have the right to access, correct, or delete your personal information. You may also opt out
-                        of receiving promotional communications from us. To exercise these rights, please contact us at
-                        support@creditklick.com.
+                        You have the right to access, correct, or delete your personal information. Under the DPDP Act 2023, you have the full right to revoke your consent at any time. Revoking consent will permanently purge your credit report records and personal profile from our systems within 24 hours. As mandated by CRIF Infosec audit policy, consent transaction logs are retained for a minimum of 2 years for audit verification while all underlying credit information is purged. You can exercise this right directly on our <a href="/revoke-consent" className="text-blue-600 underline font-semibold">Revoke Consent Page</a> or by contacting us at <a href="mailto:support@creditklick.com" className="text-blue-600 hover:underline">support@creditklick.com</a>.
                     </p>
 
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
