@@ -211,7 +211,7 @@ export default function RevokeConsentClient() {
                             <ul className="space-y-1.5 text-[11px] sm:text-sm text-gray-600">
                                 <li className="flex items-start gap-1.5">
                                     <CheckCircle2 className="w-3 h-3 text-green-500 shrink-0 mt-0.5" />
-                                    <span><strong>Credit Score Records</strong> & Experian Reports</span>
+                                    <span><strong>Credit Score Records</strong></span>
                                 </li>
                                 <li className="flex items-start gap-1.5">
                                     <CheckCircle2 className="w-3 h-3 text-green-500 shrink-0 mt-0.5" />
