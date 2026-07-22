@@ -303,7 +303,7 @@ export default function GrievanceRedressalClient() {
                                             className="w-4 h-4 mt-0.5 rounded text-[#2b7fff] focus:ring-[#2b7fff]"
                                         />
                                         <span className="text-xs font-semibold text-gray-800 leading-snug">
-                                            I am escalating an existing unresolved Level 1 Ticket to Level 2 (Principal Nodal Officer - Govid)
+                                            I am escalating an existing unresolved Level 1 Ticket to Level 2
                                         </span>
                                     </label>
 
@@ -390,7 +390,7 @@ export default function GrievanceRedressalClient() {
                 <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
                     <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-3">
                         <Building2 className="w-5 h-5 text-[#2b7fff]" />
-                        <h3 className="text-sm sm:text-base font-bold text-gray-900">Designated Grievance & Nodal Officer Details</h3>
+                        <h3 className="text-sm sm:text-base font-bold text-gray-900">Designated Grievance</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
