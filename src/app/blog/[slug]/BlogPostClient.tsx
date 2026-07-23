@@ -124,7 +124,7 @@ const defaultCtaBanner: CtaBanner = {
     formTitle: "Let's Get Started",
     formPlaceholder: 'Mobile Number',
     buttonText: 'Check Free Credit Score',
-    consentText: 'I hereby appoint CreditKlick as my authorized representative to receive my credit information from Cibil / Equifax / Experian / CRIF Highmark (bureau).',
+    consentText: 'I hereby appoint CreditKlick as my authorized representative to receive my credit information from  CRIF Highmark (bureau).',
     redirectUrl: '/credit-score',
     sidebarTitle: 'CIBIL & CIBIL-related Info',
     sidebarLinks: [

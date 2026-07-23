@@ -9,8 +9,7 @@ import toast from 'react-hot-toast'
 import { verificationAPI } from '@/services/api'
 import Cookies from 'js-cookie'
 
-// Images
-import experian from '@/assets/Images/experian.png'
+
 import scoremeter from '@/assets/Images/Cibil/scoremeter.png'
 import badge from '@/assets/Images/Cibil/badge.png'
 import calendar from '@/assets/Images/Cibil/calendar.png'
@@ -306,7 +305,7 @@ export default function CreditScoreClient() {
 
             if (!data.success) throw new Error(data.error || 'Verification failed')
 
-            toast.success('OTP Sent Successfully via ' + (data.flow === 'MTALKZ' ? 'SMS' : 'Experian'))
+            toast.success('OTP Sent Successfully via ' + (data.flow === 'MTALKZ' ? 'SMS' : ''))
 
             const nextState = {
                 phone: formData.mobile,
@@ -339,10 +338,7 @@ export default function CreditScoreClient() {
             {/* Main form container - reduced margins on mobile */}
             <div className="h-full mx-auto my-4 md:my-10 px-2 md:px-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 w-full justify-around rounded bg-white">
-                    {/* Experian badge - mobile only */}
-                    <span className="text-xs gap-x-1 items-center justify-end pr-4 md:hidden flex py-2">
-                        powered by <Image src={experian} alt="Experian" className="w-16 h-auto object-contain" />
-                    </span>
+
 
                     {/* Left design - desktop only */}
                     <div className="w-2/3 md:block hidden mx-auto">

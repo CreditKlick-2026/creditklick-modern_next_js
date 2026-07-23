@@ -6,12 +6,12 @@ export const dynamic = 'force-static'
 export const revalidate = 3600 // Revalidate every hour
 
 export const metadata: Metadata = {
-    title: 'Check Free Credit Score Online | Experian Credit Report - CreditKlick',
-    description: 'Get your free credit score and detailed credit report online from Experian. Monitor your credit health, get personalized loan offers, and insights to improve your score at CreditKlick.',
-    keywords: ['free credit score check', 'check cibil score free', 'experian credit report india', 'online credit score', 'improve credit score', 'credit monitoring service'],
+    title: 'Check Free Credit Score Online |CIRF Credit Report - CreditKlick',
+    description: 'Get your free credit score and detailed credit report online from Crif . Monitor your credit health, get personalized loan offers, and insights to improve your score at CreditKlick.',
+    keywords: ['free credit score check', 'check cibil score free', 'crif credit report india', 'online credit score', 'improve credit score', 'credit monitoring service'],
     openGraph: {
         title: 'Check Your Credit Score Online for Free | CreditKlick',
-        description: 'Instant access to your Experian credit report. Join 200K+ users who trust CreditKlick for their financial health monitoring.',
+        description: 'Instant access to your crif credit report. Join 200K+ users who trust CreditKlick for their financial health monitoring.',
         images: ['/assets/Cibil/scoremeter.png'],
     },
     alternates: {
@@ -25,7 +25,7 @@ export default function CreditScorePage() {
     const faqSchema = getFAQSchema([
         {
             question: "How can I check my credit score for free on CreditKlick?",
-            answer: "You can check your free Experian credit score on CreditKlick by entering your mobile number and basic personal details. It takes less than 2 minutes and has zero impact on your credit score."
+            answer: "You can check your free crif credit score on CreditKlick by entering your mobile number and basic personal details. It takes less than 2 minutes and has zero impact on your credit score."
         },
         {
             question: "Does checking my credit score on CreditKlick lower my score?",
@@ -34,8 +34,8 @@ export default function CreditScorePage() {
     ]);
 
     const productSchema = getFinancialProductSchema({
-        name: "Free Experian Credit Score Check",
-        description: "Get instant free credit score and detailed credit report analysis from Experian with zero credit impact.",
+        name: "Free Crif Credit Score Check",
+        description: "Get instant free credit score and detailed credit report analysis from Crif with zero credit impact.",
         provider: "CreditKlick India",
         category: "Credit Card"
     });

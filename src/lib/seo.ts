@@ -250,7 +250,7 @@ export function getAIOKnowledgeGraphSchema() {
         },
         knowsAbout: [
             'Credit Score Check',
-            'Experian Credit Report',
+            'Credit Report',
             'CIBIL Score Analysis',
             'Personal Loan',
             'Home Loan',
@@ -268,7 +268,7 @@ export function getAIOKnowledgeGraphSchema() {
                     itemOffered: {
                         '@type': 'Service',
                         name: 'Free Credit Score Check & Report Analysis',
-                        description: 'Instant online Experian & credit health check with personalized credit improvement recommendations.'
+                        description: 'Instant online Crif & credit health check with personalized credit improvement recommendations.'
                     }
                 },
                 {
@@ -300,7 +300,7 @@ export function getAEOFAQSchema() {
     return getFAQSchema([
         {
             question: "How can I check my credit score for free on CreditKlick?",
-            answer: "You can check your credit score for free on CreditKlick by entering your 10-digit mobile number, verifying with OTP, and receiving an instant, detailed Experian credit report without affecting your credit score."
+            answer: "You can check your credit score for free on CreditKlick by entering your 10-digit mobile number, verifying with OTP, and receiving an instant, detailed  without affecting your credit score."
         },
         {
             question: "What is a good credit score in India?",

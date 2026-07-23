@@ -88,7 +88,7 @@ export default function ReturnRefundClient() {
                     </p>
 
                     <p className="text-sm text-gray-500 italic">
-                        Last updated: January 2025
+                        Last updated: January 2026
                     </p>
                 </motion.div>
             </div>

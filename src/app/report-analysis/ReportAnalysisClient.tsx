@@ -11,13 +11,12 @@ import {
     Loader2, AlertCircle, Info, Bookmark, CreditCard, Users, ArrowLeft, HelpCircle, MessageSquare
 } from 'lucide-react'
 import { creditReportAPI } from '@/services/api'
-import experianImg from '@/assets/Images/experian.png'
 import Cookies from 'js-cookie'
 
 // Dynamic import - @react-pdf/renderer is ~350KB, loads only when needed
 const PDFDownloadButton = dynamic(
-  () => import('@/components/ReportAnalysis/PDFDownloadButton'),
-  { ssr: false, loading: () => <button className="px-4 py-2 bg-blue-100 text-blue-400 rounded-lg text-sm cursor-wait">Preparing PDF...</button> }
+    () => import('@/components/ReportAnalysis/PDFDownloadButton'),
+    { ssr: false, loading: () => <button className="px-4 py-2 bg-blue-100 text-blue-400 rounded-lg text-sm cursor-wait">Preparing PDF...</button> }
 )
 
 
@@ -38,7 +37,7 @@ const dateformat = (dateStr: any) => {
     if (!dateStr) return "N/A";
     const str = String(dateStr).trim();
     if (!str || str === '0' || str === 'null' || str === 'undefined') return "N/A";
-    // YYYYMMDD format (Experian standard)
+    // YYYYMMDD format (Crif standard)
     if (/^\d{8}$/.test(str)) {
         return `${str.substring(6, 8)}-${str.substring(4, 6)}-${str.substring(0, 4)}`;
     }
@@ -832,7 +831,7 @@ export default function ReportAnalysisClient() {
                             {/* Score Card */}
                             <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
                                 <div className="flex justify-between p-4 border-b items-center">
-                                    <Image src={experianImg} alt="experian" className="h-8 md:h-10 object-contain w-auto" />
+
                                     <div className="flex items-center gap-4">
                                         <PDFDownloadButton
                                             cibilName={name}
@@ -846,7 +845,7 @@ export default function ReportAnalysisClient() {
                                 </div>
                                 <div className="p-6 text-center bg-blue-50">
                                     <div className="text-xl md:text-2xl text-blue-900 font-semibold mb-2">
-                                        {name}, Your Experian Credit Score is <span className={bandColor}>{score}</span>
+                                        {name}, Your Crif Credit Score is <span className={bandColor}>{score}</span>
                                     </div>
                                     <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-6">
                                         <Speedometer score={score} />

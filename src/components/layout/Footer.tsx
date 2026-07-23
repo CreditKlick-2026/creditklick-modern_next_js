@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { subscribersAPI } from '@/services/api'
 import Cookies from 'js-cookie'
-import { RevokeConsentModal } from './RevokeConsentModal'
+
 
 const socialLinks = [
     { icon: Facebook, href: 'https://www.facebook.com/creditklickfin/', color: 'text-blue-600' },
@@ -22,7 +22,7 @@ export function Footer() {
     const [email, setEmail] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
-    const [isRevokeModalOpen, setIsRevokeModalOpen] = useState(false)
+
 
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -49,9 +49,7 @@ export function Footer() {
         }
     }
 
-    const handleRevokeConsent = () => {
-        setIsRevokeModalOpen(true)
-    }
+
 
     return (
         <footer className="bg-gray-700 text-white">
@@ -135,7 +133,7 @@ export function Footer() {
                             <li><Link href="/return-refund" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Return & Refund Policy</Link></li>
                             <li><Link href="/posh-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Posh Policy</Link></li>
                             <li><Link href="/cookies-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Cookies Policy</Link></li>
-                            <li><Link href="/revoke-consent" prefetch={true} className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Revoke Consent</Link></li>
+
                             <li><Link href="/grievance-redressal" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Grievance Redressal</Link></li>
                         </ul>
                     </div>
@@ -173,10 +171,7 @@ export function Footer() {
                 </div>
             </div>
 
-            <RevokeConsentModal
-                isOpen={isRevokeModalOpen}
-                onClose={() => setIsRevokeModalOpen(false)}
-            />
+
         </footer>
     )
 }

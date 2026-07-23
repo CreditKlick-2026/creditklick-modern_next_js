@@ -8,12 +8,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 // Dynamic imports for heavy libraries - chart.js is ~200KB, only needed for EMI calculator
 const DoughnutChart = dynamic(
-  () => import('react-chartjs-2').then(async (mod) => {
-    const { Chart, ArcElement, Tooltip, Legend } = await import('chart.js')
-    Chart.register(ArcElement, Tooltip, Legend)
-    return mod.Doughnut
-  }),
-  { ssr: false }
+    () => import('react-chartjs-2').then(async (mod) => {
+        const { Chart, ArcElement, Tooltip, Legend } = await import('chart.js')
+        Chart.register(ArcElement, Tooltip, Legend)
+        return mod.Doughnut
+    }),
+    { ssr: false }
 )
 
 import ScoreAnimation from '@/components/animations/ScoreAnimation'
@@ -44,7 +44,7 @@ const sliderData = [
     {
         id: 1,
         text1: 'Get Your Latest & FREE',
-        text2: 'Experian Credit Report',
+        text2: 'Credit Report',
         text3: "The smart choice when it comes to finding credit that's just right for you",
         url: '/credit-score',
         btntext: 'CHECK FREE CREDIT SCORE',

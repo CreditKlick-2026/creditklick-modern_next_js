@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '/return-refund', priority: 0.3 },
         { path: '/posh-policy', priority: 0.3 },
         { path: '/cookies-policy', priority: 0.3 },
-        { path: '/revoke-consent', priority: 0.3 },
+
         { path: '/refine', priority: 0.8 },
         { path: '/loan/personal-loan', priority: 0.9 },
         { path: '/loan/home-loan', priority: 0.9 },
