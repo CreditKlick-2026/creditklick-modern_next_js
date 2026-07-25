@@ -1,10 +1,11 @@
 "use client"
+// CreditKlick - Credit Score Client Component
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Star, StarHalf, Loader2 } from 'lucide-react'
+import { Star, StarHalf, Loader2, CheckCircle2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { verificationAPI } from '@/services/api'
 import Cookies from 'js-cookie'
@@ -205,6 +206,7 @@ export default function CreditScoreClient() {
     const [gender, setGender] = useState('')
     const [status, setStatus] = useState('')
     const [formErrors, setFormErrors] = useState<any>({})
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
     useEffect(() => {
         const cibil = Cookies.get('cibil')
@@ -305,20 +307,10 @@ export default function CreditScoreClient() {
 
             if (!data.success) throw new Error(data.error || 'Verification failed')
 
-            toast.success('OTP Sent Successfully via ' + (data.flow === 'MTALKZ' ? 'SMS' : ''))
-
-            const nextState = {
-                phone: formData.mobile,
-                flow: data.flow,
-                stageOneId: data.stageOneId,
-                stageTwoId: data.stageTwoId,
-                message: data.message,
-                userDetails: { ...formData, profession: status, gender },
-                isExistingUser: data.exists
-            }
-            sessionStorage.setItem('otpVerificationState', JSON.stringify(nextState))
-
-            router.push('/verify-otp')
+            setIsSubmitted(true)
+            toast.success('Form Submitted Successfully! Our team is processing your CRIF report.', {
+                duration: 5000
+            })
 
         } catch (error: any) {
             console.error('Submission Error:', error)
@@ -347,114 +339,168 @@ export default function CreditScoreClient() {
 
                     {/* Form section */}
                     <div className="md:w-3/3 mx-auto px-2 md:px-4 w-full">
-                        <div className="grid grid-cols-2 m-auto gap-2 md:gap-4 py-2 md:py-4">
-                            {/* Full Name */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                        {!isSubmitted ? (
+                            <div className="grid grid-cols-2 m-auto gap-2 md:gap-4 py-2 md:py-4">
+                                {/* Full Name */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.name}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.name}</div>
-                            </div>
 
-                            {/* Email */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                {/* Email */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.email}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.email}</div>
-                            </div>
 
-                            {/* Date of Birth */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">D.O.B</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                {/* Date of Birth */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">D.O.B</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.dob}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.dob}</div>
-                            </div>
 
-                            {/* Pincode */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                {/* Pincode */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.pin}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.pin}</div>
-                            </div>
 
-                            {/* PAN */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="AAAAA1214J" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6 uppercase" required />
+                                {/* PAN */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="AAAAA1214J" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6 uppercase" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.pan}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.pan}</div>
-                            </div>
 
-                            {/* Mobile Number */}
-                            <div className="p-1 md:p-2 h-auto">
-                                <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Mobile</label>
-                                <div className="mt-1 md:mt-2.5">
-                                    <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                {/* Mobile Number */}
+                                <div className="p-1 md:p-2 h-auto">
+                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Mobile</label>
+                                    <div className="mt-1 md:mt-2.5">
+                                        <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.mobile}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.mobile}</div>
-                            </div>
 
-                            {/* Gender - inline on mobile */}
-                            <div className="p-1 md:p-2">
-                                <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">GENDER</label>
-                                <div className="flex gap-3 mt-1 flex-wrap">
-                                    <label className="text-xs md:text-sm flex items-center gap-1">
-                                        <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} className="w-3 h-3" /> Male
-                                    </label>
-                                    <label className="text-xs md:text-sm flex items-center gap-1">
-                                        <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} className="w-3 h-3" /> Female
-                                    </label>
-                                    <label className="text-xs md:text-sm flex items-center gap-1">
-                                        <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} className="w-3 h-3" /> Others
-                                    </label>
+                                {/* Gender - inline on mobile */}
+                                <div className="p-1 md:p-2">
+                                    <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">GENDER</label>
+                                    <div className="flex gap-3 mt-1 flex-wrap">
+                                        <label className="text-xs md:text-sm flex items-center gap-1">
+                                            <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} className="w-3 h-3" /> Male
+                                        </label>
+                                        <label className="text-xs md:text-sm flex items-center gap-1">
+                                            <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} className="w-3 h-3" /> Female
+                                        </label>
+                                        <label className="text-xs md:text-sm flex items-center gap-1">
+                                            <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} className="w-3 h-3" /> Others
+                                        </label>
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.selectedError}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.selectedError}</div>
-                            </div>
 
-                            {/* Employment Status - inline on mobile */}
-                            <div className="p-1 md:p-2">
-                                <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">STATUS</label>
-                                <div className="flex gap-3 mt-1 flex-wrap">
-                                    <label className="text-xs md:text-sm flex items-center gap-1">
-                                        <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} className="w-3 h-3" /> Salaried
-                                    </label>
-                                    <label className="text-xs md:text-sm flex items-center gap-1">
-                                        <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} className="w-3 h-3" /> Self-Employed
-                                    </label>
+                                {/* Employment Status - inline on mobile */}
+                                <div className="p-1 md:p-2">
+                                    <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">STATUS</label>
+                                    <div className="flex gap-3 mt-1 flex-wrap">
+                                        <label className="text-xs md:text-sm flex items-center gap-1">
+                                            <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} className="w-3 h-3" /> Salaried
+                                        </label>
+                                        <label className="text-xs md:text-sm flex items-center gap-1">
+                                            <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} className="w-3 h-3" /> Self-Employed
+                                        </label>
+                                    </div>
+                                    <div className="text-xs text-red-500">{formErrors.status}</div>
                                 </div>
-                                <div className="text-xs text-red-500">{formErrors.status}</div>
-                            </div>
 
-                            {/* Terms and Submit - full width */}
-                            <div className="col-span-2 px-1">
-                                <Switch checked={agreed} onChange={setAgreed}>
-                                    <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms &amp; Conditions</Link>.</span>
-                                </Switch>
-                                <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
-                            </div>
+                                {/* Terms and Submit - full width */}
+                                <div className="col-span-2 px-1">
+                                    <Switch checked={agreed} onChange={setAgreed}>
+                                        <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms &amp; Conditions</Link>.</span>
+                                    </Switch>
+                                    <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
+                                </div>
 
-                            <div className="col-span-2 mt-2 mx-auto flex flex-col text-center px-4">
-                                <button
-                                    type="submit"
-                                    disabled={isLoading}
-                                    className="block w-full rounded-md bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
-                                    onClick={handleSubmit}
-                                >
-                                    {isLoading ? <span className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Processing...</span> : 'Check Credit Score Now'}
-                                </button>
-                                <p className="text-[10px] text-center mt-1 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
-                                <p className="text-[10px] text-center text-green-400">Receive updates via Whatsapp</p>
+                                <div className="col-span-2 mt-2 mx-auto flex flex-col text-center px-4">
+                                    <button
+                                        type="submit"
+                                        disabled={isLoading}
+                                        className="block w-full rounded-md bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
+                                        onClick={handleSubmit}
+                                    >
+                                        {isLoading ? <span className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Processing...</span> : 'Check Credit Score Now'}
+                                    </button>
+                                    <p className="text-[10px] text-center mt-1 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
+                                    <p className="text-[10px] text-center text-green-400">Receive updates via Whatsapp</p>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className="max-w-md mx-auto my-4 p-5 md:p-6 bg-white border border-blue-100 rounded-xl shadow-md text-left animate-fadeIn">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 shrink-0">
+                                        <CheckCircle2 className="w-6 h-6 text-blue-700" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-base md:text-lg font-bold text-blue-900 leading-snug">
+                                            Form Submitted Successfully! 🎉
+                                        </h3>
+                                        <p className="text-xs text-gray-600 mt-0.5">
+                                            Thank you{formData.name ? `, ${formData.name}` : ''}! Your CRIF report is being processed.
+                                        </p>
+                                    </div>
+                                </div>
 
+                                <div className="bg-blue-50/70 border border-blue-100 rounded-lg p-3.5 my-4 space-y-2 text-xs">
+                                    {formData.mobile && (
+                                        <div className="flex items-center justify-between border-b border-blue-100/80 pb-2">
+                                            <span className="text-gray-600 font-medium">Mobile:</span>
+                                            <span className="font-semibold text-gray-900">+91 {formData.mobile}</span>
+                                        </div>
+                                    )}
+                                    {formData.email && (
+                                        <div className="flex items-center justify-between border-b border-blue-100/80 pb-2">
+                                            <span className="text-gray-600 font-medium">Email:</span>
+                                            <span className="font-semibold text-gray-900">{formData.email}</span>
+                                        </div>
+                                    )}
+                                    <div className="flex items-center justify-between pt-0.5">
+                                        <span className="text-gray-600 font-medium">Status:</span>
+                                        <span className="font-semibold text-blue-800 bg-blue-100 px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
+                                            Under Processing
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4">
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsSubmitted(false)
+                                            setFormData({ name: '', email: '', dob: '', pin: '', pan: '', mobile: '' })
+                                            setGender('')
+                                            setStatus('')
+                                            setAgreed(false)
+                                        }}
+                                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-xs shadow-sm transition-all text-center"
+                                    >
+                                        Check Another Credit Score
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
