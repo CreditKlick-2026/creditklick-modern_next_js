@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
 import Cookies from 'js-cookie'
 
-const COOKIE_CONSENT_KEY = 'cookie_consent'
+const COOKIE_CONSENT_KEY = 'cookie_consent_v2'
 const COOKIE_CONSENT_EXPIRY = 365 // days
 
 interface CookieConsentProps {
@@ -22,10 +22,9 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
         // Check if user has already given consent
         const consent = Cookies.get(COOKIE_CONSENT_KEY)
         if (!consent) {
-            // Small delay before showing banner
             const timer = setTimeout(() => {
                 setIsVisible(true)
-            }, 1500)
+            }, 600)
             return () => clearTimeout(timer)
         }
     }, [])
@@ -81,63 +80,65 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
-                    transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                    className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50"
+                    initial={{ y: 50, opacity: 0, scale: 0.96 }}
+                    animate={{ y: 0, opacity: 1, scale: 1 }}
+                    exit={{ y: 50, opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    className="fixed bottom-6 left-4 md:left-6 right-4 md:right-auto md:max-w-[390px] z-[9990]"
                 >
-                    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                        <div className="p-4">
-                            <div className="flex items-start gap-3">
-                                {/* Icon */}
-                                <div className="flex-shrink-0 mt-0.5">
-                                    <Cookie className="w-5 h-5 text-blue-600" />
+                    <div className="cookie-glass-card p-5">
+                        <div className="flex items-start gap-3.5">
+                            {/* Clean Cookie Icon Badge */}
+                            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-center">
+                                <Cookie className="w-5 h-5 text-amber-600" />
+                            </div>
+
+                            {/* Content Body */}
+                            <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between gap-2 mb-1">
+                                    <h4 className="text-sm font-semibold text-gray-900">
+                                        We value your privacy
+                                    </h4>
+                                    <button
+                                        onClick={handleDecline}
+                                        className="p-1 -mr-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                                        aria-label="Dismiss cookie notice"
+                                    >
+                                        <X className="w-4 h-4" />
+                                    </button>
                                 </div>
 
-                                {/* Content */}
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-sm text-gray-600 leading-relaxed">
-                                        We use cookies to enhance your experience.{' '}
-                                        <Link
-                                            href="/cookies-policy"
-                                            className="text-blue-600 hover:underline font-medium"
-                                        >
-                                            Learn more
-                                        </Link>
-                                    </p>
+                                <p className="text-xs text-gray-600 leading-relaxed">
+                                    We use cookies to personalize your experience and enhance site features.{' '}
+                                    <Link
+                                        href="/cookies-policy"
+                                        className="text-blue-600 hover:text-blue-700 font-semibold underline underline-offset-2"
+                                    >
+                                        Learn more
+                                    </Link>
+                                </p>
 
-                                    {/* Buttons */}
-                                    <div className="flex items-center gap-2 mt-3">
-                                        <button
-                                            onClick={handleDecline}
-                                            disabled={isLoading}
-                                            className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 font-medium rounded-md border border-gray-200 hover:bg-gray-50 transition-colors disabled:opacity-50"
-                                        >
-                                            Decline
-                                        </button>
-                                        <button
-                                            onClick={handleAccept}
-                                            disabled={isLoading}
-                                            className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors disabled:opacity-50 flex items-center gap-1.5"
-                                        >
-                                            {isLoading ? (
-                                                <span className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full" />
-                                            ) : (
-                                                'Accept'
-                                            )}
-                                        </button>
-                                    </div>
+                                {/* Action Buttons */}
+                                <div className="flex items-center gap-2.5 mt-3.5">
+                                    <button
+                                        onClick={handleDecline}
+                                        disabled={isLoading}
+                                        className="flex-1 py-2 px-3 text-xs cookie-btn-secondary disabled:opacity-50"
+                                    >
+                                        Decline
+                                    </button>
+                                    <button
+                                        onClick={handleAccept}
+                                        disabled={isLoading}
+                                        className="flex-1 py-2 px-4 text-xs cookie-btn-primary disabled:opacity-50 flex items-center justify-center gap-1.5"
+                                    >
+                                        {isLoading ? (
+                                            <span className="animate-spin w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full" />
+                                        ) : (
+                                            'Accept All'
+                                        )}
+                                    </button>
                                 </div>
-
-                                {/* Close button */}
-                                <button
-                                    onClick={handleDecline}
-                                    className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 transition-colors"
-                                    aria-label="Close"
-                                >
-                                    <X className="w-4 h-4" />
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -18,10 +18,11 @@ const DoughnutChart = dynamic(
 
 import ScoreAnimation from '@/components/animations/ScoreAnimation'
 
-// Dynamic imports for hidden slide animation components to reduce initial bundle size
+// Dynamic imports for animation and interactive components
 const CardAnimation = dynamic(() => import('@/components/animations/CardAnimation'), { ssr: false })
 const LoanAnimation = dynamic(() => import('@/components/animations/LoanAnimation'), { ssr: false })
 const AppSlider = dynamic(() => import('@/components/animations/AppSlider'), { ssr: false })
+const HappyCustomersSection = dynamic(() => import('@/components/home/HappyCustomersSection'), { ssr: false })
 
 // Direct image URLs to avoid JS bundle bloat from static imports
 const ccico = '/assets/heroimages/ccgifw.webp'
@@ -93,17 +94,30 @@ function Slidernew() {
     const [touchStart, setTouchStart] = useState<number | null>(null)
     const [touchEnd, setTouchEnd] = useState<number | null>(null)
     const sliderIntervalRef = useRef<NodeJS.Timeout | null>(null)
+    const sliderContainerRef = useRef<HTMLDivElement>(null)
+    const [isInView, setIsInView] = useState(true)
     const length = sliderData.length
     const minSwipeDistance = 50
 
     const nextSlide = () => setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1))
     const prevSlide = () => setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1))
 
+    useEffect(() => {
+        const el = sliderContainerRef.current
+        if (!el) return
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsInView(entry.isIntersecting)
+        }, { threshold: 0.1 })
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [])
+
     const startSlider = () => {
         if (sliderIntervalRef.current) clearInterval(sliderIntervalRef.current)
+        if (!isInView) return
         sliderIntervalRef.current = setInterval(() => {
             setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1))
-        }, 3000)
+        }, 3500)
     }
 
     const stopSlider = () => {
@@ -111,9 +125,13 @@ function Slidernew() {
     }
 
     useEffect(() => {
-        startSlider()
+        if (isInView) {
+            startSlider()
+        } else {
+            stopSlider()
+        }
         return () => stopSlider()
-    }, [length])
+    }, [isInView, length])
 
     const onTouchStart = (e: React.TouchEvent) => {
         setTouchEnd(null)
@@ -141,7 +159,9 @@ function Slidernew() {
     }
 
     return (
-        <div className="flex items-center justify-between mx-auto container overflow-hidden md:h-96 sm:my-20 my-1 touch-pan-y"
+        <div 
+            ref={sliderContainerRef}
+            className="flex items-center justify-between mx-auto container overflow-hidden md:h-96 sm:my-20 my-1 touch-pan-y"
             onMouseEnter={stopSlider}
             onMouseLeave={startSlider}
             onTouchStart={onTouchStart}
@@ -203,56 +223,28 @@ function Product() {
         { link: '/calculators', img: calico, text: 'CALCULATORS' }
     ];
 
-    const scrollRef = useRef<HTMLDivElement>(null)
-    const [isPaused, setIsPaused] = useState(false)
-    const [isInView, setIsInView] = useState(false)
-
-    useEffect(() => {
-        const container = scrollRef.current
-        if (!container) return
-        const observer = new IntersectionObserver(([entry]) => {
-            setIsInView(entry.isIntersecting)
-        }, { threshold: 0.05 })
-        observer.observe(container)
-        return () => observer.disconnect()
-    }, [])
-
-    useEffect(() => {
-        const scrollContainer = scrollRef.current
-        if (!scrollContainer || !isInView) return
-
-        let animationFrameId: number
-
-        const scroll = () => {
-            if (!isPaused && scrollContainer) {
-                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-                    scrollContainer.scrollLeft = 0;
-                } else {
-                    scrollContainer.scrollLeft += 1;
-                }
-            }
-            animationFrameId = requestAnimationFrame(scroll)
-        }
-        animationFrameId = requestAnimationFrame(scroll)
-
-        return () => cancelAnimationFrame(animationFrameId)
-    }, [isPaused, isInView])
-
     return (
         <div className="my-4 w-full overflow-hidden py-4 bg-white">
-            <div className="relative w-full">
-                <div
-                    ref={scrollRef}
-                    className="flex gap-4 sm:gap-6 px-4 py-2 overflow-x-auto no-scrollbar"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                    onTouchStart={() => setIsPaused(true)}
-                    onTouchEnd={() => setIsPaused(false)}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                >
+            <style jsx>{`
+                @keyframes product-marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .product-track {
+                    display: flex;
+                    width: max-content;
+                    animation: product-marquee 28s linear infinite;
+                    will-change: transform;
+                }
+                .product-track:hover {
+                    animation-play-state: paused;
+                }
+            `}</style>
+            <div className="relative w-full overflow-hidden">
+                <div className="product-track flex gap-4 sm:gap-6 px-4 py-2">
                     {[...productData, ...productData, ...productData, ...productData].map((item, i) => (
                         <div key={i} className="flex-shrink-0 w-32 sm:w-40 md:w-44">
-                            <div className="w-full h-full bg-gray-50 py-4 px-3 rounded-xl border border-gray-200 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer flex flex-col items-center justify-center group">
+                            <div className="w-full h-full bg-gray-50 py-4 px-3 rounded-xl border border-gray-200 shadow-md hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer flex flex-col items-center justify-center group">
                                 <Link href={item.link} prefetch={true} className="flex flex-col items-center justify-center w-full">
                                     <div className="w-10 h-10 sm:w-14 sm:h-14 relative mb-2">
                                         <Image
@@ -496,43 +488,43 @@ function CalcHero() {
 
 function Refinestr() {
     return (
-        <div className="my-10 bg-[#152a4e] container mx-auto rounded-xl overflow-hidden shadow-lg">
-            <div className="bg-[#152a4e] py-10 px-6 sm:px-12 lg:px-16">
-                <div className="mx-auto flex flex-col lg:flex-row items-center justify-between">
-                    <div className="lg:w-1/2 text-center lg:text-left">
-                        <h2 className="md:text-4xl text-2xl font-semibold tracking-tight text-white">
+        <div className="my-10 max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="bg-[#152a4e] rounded-3xl py-8 px-6 sm:px-10 lg:px-12 shadow-xl overflow-hidden">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div className="lg:w-3/5 text-center lg:text-left">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-white">
                             How does our Credit Refine Work?
                         </h2>
-                        <h2 className="mt-6 text-lg leading-8 text-gray-300">
+                        <p className="mt-4 text-base leading-relaxed text-gray-300">
                             We analyse your credit report to understand the impact of
                             negative accounts on your credit score.
-                        </h2>
-                        <p className="md:text-4xl text-2xl text-white mt-8">
+                        </p>
+                        <p className="text-2xl sm:text-3xl font-semibold text-white mt-6">
                             Talk to our Expert
                         </p>
-                        <div className="my-10 flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-6 space-y-4 md:space-y-0 lg:justify-start">
+                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                             <Link
                                 href="/refine"
-                                className="rounded-md bg-white px-3.5 py-2.5 text-md font-base text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 transition-all text-center"
                             >
                                 Connect Me To Credit Consultant
                             </Link>
                             <Link
                                 href="/credit-score"
-                                className="text-md font-semibold leading-6 text-white hover:text-blue-200"
+                                className="text-sm font-semibold leading-6 text-white hover:text-blue-200 transition-colors py-2 text-center"
                             >
                                 Check Free Credit Score <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center mt-8 lg:mt-0 lg:w-1/3">
-                        <div className="relative w-full max-w-[300px] aspect-square">
+                    <div className="flex items-center justify-center lg:w-2/5 flex-shrink-0">
+                        <div className="relative w-56 sm:w-64 aspect-square">
                             <Image
                                 src={expertImg}
                                 alt="Credit Expert"
-                                className="object-contain rounded-xl bg-white/5"
+                                className="object-contain"
                                 fill
-                                sizes="(max-width: 640px) 280px, 400px"
+                                sizes="(max-width: 640px) 220px, 260px"
                             />
                         </div>
                     </div>
@@ -624,29 +616,37 @@ function Carousel() {
     ]
 
     return (
-        <div className="container mx-auto">
-            <div className="md:text-5xl mb-4 text-4xl font-semibold text-start text-gray-900">
+        <div className="container mx-auto my-12">
+            <div className="md:text-5xl mb-6 text-4xl font-semibold text-start text-gray-900">
                 Our Partners
             </div>
             <div className="SliderX mx-2 overflow-hidden">
                 <div className="sliderP">
-                    <div className="slide-trackP flex">
-                        <div className="flex items-center">
+                    <div className="slide-trackP flex items-center">
+                        <div className="flex items-center gap-8 md:gap-16">
                             {partnerImages.map((image) => (
-                                <img
-                                    key={image.id}
-                                    src={image.url}
-                                    alt="partners"
-                                    className="my-2 md:px-20 px-6 max-h-12 w-auto"
-                                />
+                                <div key={image.id} className="relative h-10 w-28 md:w-36 flex-shrink-0">
+                                    <Image
+                                        src={image.url}
+                                        alt="partner logo"
+                                        fill
+                                        sizes="(max-width: 768px) 112px, 144px"
+                                        className="object-contain"
+                                        loading="lazy"
+                                    />
+                                </div>
                             ))}
                             {partnerImages.map((image) => (
-                                <img
-                                    key={`dup-${image.id}`}
-                                    src={image.url}
-                                    alt="partners"
-                                    className="my-2 md:px-20 px-6 max-h-12 w-auto"
-                                />
+                                <div key={`dup-${image.id}`} className="relative h-10 w-28 md:w-36 flex-shrink-0">
+                                    <Image
+                                        src={image.url}
+                                        alt="partner logo"
+                                        fill
+                                        sizes="(max-width: 768px) 112px, 144px"
+                                        className="object-contain"
+                                        loading="lazy"
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -916,8 +916,8 @@ export default function HomeClient() {
             {/* Commented for future use - "What Our Users Say" section */}
             {/* <Testimonials /> */}
             <Carousel />
+            <HappyCustomersSection />
             <Contactstr />
-
         </div>
     )
 }

@@ -1,32 +1,19 @@
 "use client"
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Loader2, CheckCircle } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { ArrowRight, Twitter, Linkedin, Instagram, Facebook, Youtube, Loader2, CheckCircle } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { subscribersAPI } from '@/services/api'
-import Cookies from 'js-cookie'
-
-
-const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/creditklickfin/', color: 'text-blue-600' },
-    { icon: Twitter, href: 'https://twitter.com/creditklickfin', color: 'text-blue-400' },
-    { icon: Youtube, href: 'https://www.youtube.com/@creditklickfin', color: 'text-red-600' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/creditklickfin', color: 'text-blue-500' },
-    { icon: Instagram, href: 'https://www.instagram.com/creditklickfin/', color: 'text-pink-500' },
-]
 
 export function Footer() {
     const [email, setEmail] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
 
-
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault()
-
         if (!email || !email.includes('@')) {
             toast.error('Please enter a valid email address')
             return
@@ -38,7 +25,7 @@ export function Footer() {
             if (response.data.success) {
                 setIsSubscribed(true)
                 setEmail('')
-                toast.success(response.data.message || 'Successfully subscribed!')
+                toast.success(response.data.message || 'Successfully subscribed to newsletter!')
             }
         } catch (error: unknown) {
             const err = error as { response?: { data?: { message?: string } } }
@@ -49,129 +36,147 @@ export function Footer() {
         }
     }
 
-
+    const footerLinks = [
+        {
+            title: "Resources",
+            links: [
+                { name: "Credit Score", href: "/credit-score" },
+                { name: "Credit Card", href: "/credit-cards" },
+                { name: "Credit Refine", href: "/refine", isHighlight: true },
+                { name: "Personal Loan", href: "/loan/personal-loan" },
+                { name: "Business Loan", href: "/loan/business-loan" },
+                { name: "Home Loan", href: "/loan/home-loan" },
+            ]
+        },
+        {
+            title: "Company",
+            links: [
+                { name: "About us", href: "/about" },
+                { name: "Careers", href: "https://www.stefto.com/careers/" },
+                { name: "Contact us", href: "/contact" },
+                { name: "Blogs", href: "/blog" },
+                { name: "Register Complaint", href: "/register-complaint" },
+            ]
+        },
+        {
+            title: "Quick Links",
+            links: [
+                { name: "EMI Calculator", href: "/emi" },
+                { name: "AU VALUE Calculator", href: "/calculator/au" },
+                { name: "IDFC FIRST VALUE Calculator", href: "/calculator/idfc" },
+                { name: "SBI SCLICK VALUE Calculator", href: "/calculator/sbi-click" },
+                { name: "YES BANK VALUE Calculator", href: "/calculator/yes" },
+            ]
+        },
+        {
+            title: "Legal & Governance",
+            links: [
+                { name: "Privacy Policy", href: "/privacy-policy" },
+                { name: "Terms and Conditions", href: "/terms-conditions" },
+                { name: "Return & Refund Policy", href: "/return-refund" },
+                { name: "Posh Policy", href: "/posh-policy" },
+                { name: "Cookies Policy", href: "/cookies-policy" },
+                { name: "Grievance Redressal", href: "/grievance-redressal" },
+            ]
+        }
+    ]
 
     return (
-        <footer className="bg-gray-700 text-white">
-            {/* Newsletter Section */}
-            <div className="bg-gray-800 py-10">
-                <div className="container-custom">
-                    <div className="max-w-2xl mx-auto text-center">
-                        <h3 className="text-2xl font-bold mb-2">Stay Financially Ahead</h3>
-                        <p className="text-gray-400 mb-6">Join 10,000+ subscribers for credit tips, loan offers & financial news.</p>
-
-                        {isSubscribed ? (
-                            <div className="flex items-center justify-center gap-2 text-green-400">
-                                <CheckCircle className="w-5 h-5" />
-                                <span>Thanks for subscribing!</span>
-                            </div>
-                        ) : (
-                            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                                <div className="relative flex-1">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors" disabled={isLoading} />
-                                </div>
-                                <button type="submit" disabled={isLoading} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
-                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Subscribe'}
-                                </button>
-                            </form>
-                        )}
-                    </div>
-                </div>
+        <footer className="relative bg-[#364153] pt-[80px] md:pt-[130px] pb-8 sm:pb-10 font-sans selection:bg-white selection:text-[#364153] z-0 overflow-hidden text-white">
+            {/* 1. Wave Mask Divider */}
+            <div className="absolute -top-[3px] left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+                <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative block w-full h-[70px] md:h-[120px]" preserveAspectRatio="none">
+                    <path d="M-10,-6 L1450,-6 L1450,0 C1280,0 1220,80 1060,80 C900,80 840,30 680,30 C520,30 460,100 320,100 C180,100 120,0 0,0 L-10,0 Z" className="fill-white" />
+                </svg>
             </div>
 
-            <div className="container-custom py-12">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                    {/* Brand Section */}
-                    <div className="col-span-2 md:col-span-4 lg:col-span-1">
-                        <Link href="/" className="inline-block mb-4">
-                            <Image src="/assets/creditklic_next_gen_transparent.png" alt="CreditKlick" width={128} height={50} style={{ width: 'auto', height: 'auto' }} className="max-w-32" />
+            {/* 3. Footer Content */}
+            <div className="max-w-[1200px] mx-auto px-6 relative z-30">
+                <div className="flex flex-col xl:flex-row justify-between gap-10 sm:gap-14 xl:gap-10 pt-2 sm:pt-4">
+                    {/* Left Column (Brand & Socials matching screenshot) */}
+                    <div className="xl:w-[32%] flex flex-col gap-4">
+                        <Link href="/" className="inline-block mb-1">
+                            <Image
+                                src="/assets/creditklic_next_gen_transparent.png"
+                                alt="CreditKlick"
+                                width={160}
+                                height={65}
+                                className="w-32 sm:w-36 h-auto object-contain"
+                                priority
+                            />
                         </Link>
-                        <p className="text-xs text-gray-300 uppercase tracking-widest mb-4">Headoffice - Plot 112 Udyog Vihar Phase-1 Gurgaon, Haryana, 122016</p>
-                        <div className="flex items-center space-x-2 mb-4">
-                            {socialLinks.map((social, index) => (
-                                <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded flex items-center justify-center hover:opacity-80 transition-opacity">
-                                    <social.icon className={`h-4 w-4 ${social.color}`} />
-                                </a>
-                            ))}
+                        
+                        <p className="text-xs text-blue-200 uppercase tracking-widest font-semibold leading-relaxed max-w-xs">
+                            HEADOFFICE - PLOT 112 UDYOG VIHAR PHASE-1 GURGAON, HARYANA, 122016
+                        </p>
+
+                        {/* White Square Social Badges */}
+                        <div className="flex items-center gap-2.5 my-2">
+                            <a href="https://www.facebook.com/creditklickfin/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                                <Facebook className="w-5 h-5 text-blue-600 fill-current" />
+                            </a>
+                            <a href="https://twitter.com/creditklickfin" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                                <Twitter className="w-5 h-5 text-blue-400 fill-current" />
+                            </a>
+                            <a href="https://www.youtube.com/@creditklickfin" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                                <Youtube className="w-5 h-5 text-red-600 fill-current" />
+                            </a>
+                            <a href="https://www.linkedin.com/company/creditklickfin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                                <Linkedin className="w-5 h-5 text-blue-500 fill-current" />
+                            </a>
+                            <a href="https://www.instagram.com/creditklickfin/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 bg-white rounded-lg flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                                <Instagram className="w-5 h-5 text-pink-500" />
+                            </a>
                         </div>
-                        <p className="text-xs text-gray-500">© 2022-2026 Incredible Management Services PVT. LTD.</p>
+
+                        <p className="text-xs text-gray-400 font-normal">
+                            © 2022-{new Date().getFullYear()} Incredible Management Services PVT. LTD.
+                        </p>
                     </div>
 
+                    {/* Right Columns (4 Column Grid with Styled Typography) */}
+                    <div className="xl:w-[68%] grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+                        {footerLinks.map((section, idx) => (
+                            <div key={idx} className="text-left">
+                                <h4 className="font-semibold text-lg mb-4 text-blue-400">
+                                    {section.title}
+                                </h4>
+                                <ul className="space-y-2 sm:space-y-2.5">
+                                    {section.links.map((link, i) => (
+                                        <li key={i}>
+                                            <Link 
+                                                href={link.href} 
+                                                className={`text-sm ${link.isHighlight ? 'text-blue-300 font-medium' : 'text-gray-300'} hover:text-white hover:pl-1 transition-all block`}
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                    {/* Resources */}
-                    <div className="text-left">
-                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Resources</h4>
-                        <ul className="space-y-2">
-                            <li><Link href="/credit-score" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Credit Score</Link></li>
-                            <li><Link href="/credit-cards" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Credit Card</Link></li>
-                            <li><Link href="/refine" className="text-sm text-blue-300 hover:text-white hover:pl-1 transition-all font-medium">Credit Refine</Link></li>
-                            <li><Link href="/loan/personal-loan" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Personal Loan</Link></li>
-                            <li><Link href="/loan/business-loan" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Business Loan</Link></li>
-                            <li><Link href="/loan/home-loan" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Home Loan</Link></li>
-                        </ul>
+                {/* Bottom Bar with Divider */}
+                <div className="mt-8 sm:mt-12 pt-4 sm:pt-5 flex flex-col md:flex-row justify-between items-center gap-4 relative">
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+
+                    <div className="text-xs text-white/70 font-medium">
+                        CreditKlick is India&apos;s leading credit score comparison and financial services portal.
                     </div>
 
-                    {/* Company */}
-                    <div className="text-left">
-                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Company</h4>
-                        <ul className="space-y-2">
-                            <li><Link href="/about" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">About us</Link></li>
-                            <li><a href="https://www.stefto.com/careers/" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Careers</a></li>
-                            <li><Link href="/contact" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Contact us</Link></li>
-                            <li><Link href="/blog" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Blogs</Link></li>
-                            <li><Link href="/register-complaint" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Register Complaint</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Legal */}
-                    <div className="text-left">
-                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Legal & Governance</h4>
-                        <ul className="space-y-2">
-                            <li><Link href="/privacy-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Privacy Policy</Link></li>
-                            <li><Link href="/terms-conditions" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Terms and Conditions</Link></li>
-                            <li><Link href="/return-refund" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Return & Refund Policy</Link></li>
-                            <li><Link href="/posh-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Posh Policy</Link></li>
-                            <li><Link href="/cookies-policy" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Cookies Policy</Link></li>
-
-                            <li><Link href="/grievance-redressal" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">Grievance Redressal</Link></li>
-                        </ul>
-                    </div>
-
-                    <div className="text-left">
-                        <h4 className="font-semibold text-lg mb-4 text-blue-400">Quick Links</h4>
-                        <ul className="space-y-2">
-                            <li><Link href="/emi" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">EMI Calculator</Link></li>
-                            <li><Link href="/calculator/au" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">AU VALUE Calculator</Link></li>
-                            <li><Link href="/calculator/idfc" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">IDFC FIRST VALUE Calculator</Link></li>
-                            <li><Link href="/calculator/sbi-click" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">SBI SCLICK VALUE Calculator</Link></li>
-                            <li><Link href="/calculator/yes" className="text-sm text-gray-300 hover:text-white hover:pl-1 transition-all">YES BANK VALUE Calculator</Link></li>
-                        </ul>
+                    <div className="flex gap-4 sm:gap-6 flex-wrap text-xs text-white/70">
+                        <Link href="/terms-conditions" className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">Terms of Use</Link>
+                        <Link href="/privacy-policy" className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">Privacy Policy</Link>
+                        <Link href="/grievance-redressal" className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">Grievance Redressal</Link>
+                        <Link href="/cookies-policy" className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">Cookies Policy</Link>
+                        <button type="button" onClick={() => window.dispatchEvent(new Event('open_cookie_consent'))} className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">Cookie Settings</button>
+                        <Link href="/posh-policy" className="hover:text-white hover:underline underline-offset-[3px] decoration-white/30 transition-colors">POSH Policy</Link>
                     </div>
                 </div>
             </div>
-
-            {/* Disclaimer */}
-            <div className="bg-gray-800 py-3 overflow-hidden border-t border-gray-700">
-                <div className="container-custom">
-                    <div className="text-red-400 text-sm overflow-hidden whitespace-nowrap">
-                        <motion.div
-                            animate={{ x: "-50%" }}
-                            transition={{ repeat: Infinity, duration: 80, ease: "linear" }}
-                            className="flex whitespace-nowrap"
-                        >
-                            <span className="px-4 flex-shrink-0">
-                                CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
-                            </span>
-                            <span className="px-4 flex-shrink-0">
-                                CreditKlick does not sell any loans on our own and does not charge any fee from any customers/viewers. We advise customers/viewers to choose from best offers from Banks and its advertisers. We do not guarantee any loans as loan sanction is as per Banks and NBFCs. We suggest all users to never pay any upfront amount for any loan disbursal. Report any fraud at support@creditklick.com
-                            </span>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
-
-
         </footer>
     )
 }
+export default Footer

@@ -109,40 +109,52 @@ export function LoginModal({ showLoginModal, setShowLoginModal, setIsLoggedIn }:
 
     return (
         <AnimatePresence>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4" onClick={(e) => e.target === e.currentTarget && setShowLoginModal(false)}>
-                <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="bg-white rounded-lg shadow-2xl max-w-4xl w-full overflow-hidden">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4" onClick={(e) => e.target === e.currentTarget && setShowLoginModal(false)}>
+                <motion.div initial={{ opacity: 0, scale: 0.92, y: 15 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 15 }} className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden border border-gray-100">
                     <div className="flex flex-col md:flex-row">
-                        <div className="md:w-1/2 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-8 hidden md:flex">
-                            <Image src="/assets/creditlogin.png" alt="Login" width={300} height={300} className="object-contain w-full max-w-xs" />
+                        <div className="md:w-1/2 bg-gradient-to-br from-blue-50/80 via-indigo-50/40 to-blue-100/60 flex flex-col items-center justify-center p-8 hidden md:flex border-r border-blue-100/50">
+                            <div className="relative w-full max-w-xs aspect-square flex items-center justify-center">
+                                <Image 
+                                    src="/assets/credit_login_3d.png" 
+                                    alt="CreditKlick Secure Login" 
+                                    width={380} 
+                                    height={380} 
+                                    className="object-contain w-full h-full drop-shadow-xl hover:scale-105 transition-transform duration-500" 
+                                    priority 
+                                />
+                            </div>
+                            <p className="text-xs font-medium text-slate-500 mt-2 text-center">
+                                🔒 256-Bit Bank Grade Secure & Encrypted Login
+                            </p>
                         </div>
-                        <div className="md:w-1/2 p-6 sm:p-12 relative w-full">
+                        <div className="md:w-1/2 p-6 sm:p-10 relative w-full flex flex-col justify-center">
                             <button onClick={() => setShowLoginModal(false)} className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"><X className="h-5 w-5 text-gray-500" /></button>
                             <div className="w-full">
                                 {!otpSent ? (
                                     <>
-                                        <h2 className="text-2xl font-bold mb-6 text-center">Login to CreditKlick</h2>
+                                        <h2 className="text-2xl font-bold mb-6 text-center text-slate-900">Login to CreditKlick</h2>
                                         <div className="mb-4">
                                             <label className="block mb-2 text-sm font-medium text-gray-700">Mobile Number</label>
-                                            <input type="tel" value={mobileNumber} onChange={handleMobileChange} placeholder="Enter 10 digit Mobile Number" className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600" maxLength={10} />
+                                            <input type="tel" value={mobileNumber} onChange={handleMobileChange} placeholder="Enter 10 digit Mobile Number" className="w-full px-4 py-2.5 text-sm border rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" maxLength={10} />
                                             {mobileError && <p className="mt-2 text-sm text-red-500">{mobileError}</p>}
                                         </div>
-                                        <p className="text-sm text-center mb-4">New user? <Link href="/credit-score" onClick={() => setShowLoginModal(false)} className="text-blue-600 hover:underline">Sign Up</Link></p>
-                                        <Button onClick={handleSendOTP} disabled={isLoading} className="w-full">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Send OTP</Button>
+                                        <p className="text-sm text-center mb-5 text-slate-600">New user? <Link href="/credit-score" onClick={() => setShowLoginModal(false)} className="text-blue-600 font-semibold hover:underline">Sign Up</Link></p>
+                                        <Button onClick={handleSendOTP} disabled={isLoading} className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 font-semibold shadow-md">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Send OTP</Button>
                                     </>
                                 ) : (
                                     <>
-                                        <h2 className="text-2xl font-bold mb-6 text-center">Verify OTP</h2>
+                                        <h2 className="text-2xl font-bold mb-6 text-center text-slate-900">Verify OTP</h2>
                                         <div className="mb-4">
                                             <label className="block mb-2 text-sm font-medium text-gray-700">Enter OTP</label>
-                                            <input type="text" value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder="Enter 6 digit OTP" className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600 tracking-widest text-center text-lg" maxLength={6} />
+                                            <input type="text" value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder="Enter 6 digit OTP" className="w-full px-4 py-2.5 text-sm border rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 tracking-widest text-center text-lg font-semibold" maxLength={6} />
                                             {mobileError && <p className="mt-2 text-sm text-red-500">{mobileError}</p>}
                                         </div>
-                                        <Button onClick={handleVerifyOTP} disabled={isLoading} className="w-full bg-green-600 hover:bg-green-700">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Verify OTP</Button>
+                                        <Button onClick={handleVerifyOTP} disabled={isLoading} className="w-full py-2.5 rounded-lg bg-green-600 hover:bg-green-700 font-semibold shadow-md">{isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}Verify OTP</Button>
                                         <button onClick={() => { setOtpSent(false); setOtp(''); }} className="w-full text-sm text-gray-500 hover:text-blue-600 underline mt-4">Change Mobile Number</button>
                                     </>
                                 )}
                                 <div className="mt-6 text-center">
-                                    <p className="text-sm text-gray-500">Need help? <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"><MessageCircle className="h-4 w-4 mr-1" />WhatsApp</a></p>
+                                    <p className="text-sm text-gray-500">Need help? <a href="https://wa.me/9318427221?text=Need%20help%20with%20CreditKlick%20login" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-green-600 hover:text-green-700 font-medium ml-1"><MessageCircle className="h-4 w-4 mr-1" />WhatsApp</a></p>
                                 </div>
                             </div>
                         </div>

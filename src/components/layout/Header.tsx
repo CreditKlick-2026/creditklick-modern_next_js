@@ -10,9 +10,7 @@ import { cn } from '@/lib/utils'
 import { postsAPI } from '@/services/api'
 import Cookies from 'js-cookie'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-
-const LoginModal = dynamic(() => import('./LoginModal').then(mod => mod.LoginModal), { ssr: false })
+import { LoginModal } from './LoginModal'
 
 const navItems = [
     {
@@ -138,10 +136,6 @@ export function Header() {
         }
     }, [latestPosts.length])
 
-    // Fetch blog dropdown data immediately on mount so dropdown is always pre-populated
-    useEffect(() => {
-        fetchBlogDataIfNeeded()
-    }, [fetchBlogDataIfNeeded])
 
     // Debounced Search Effect
     useEffect(() => {
