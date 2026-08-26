@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
+import { connectToDatabase } from '@/lib/db'
+import { Post } from '@/models/Post'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://creditklick.com'
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
 
     const routes = [
         { path: '', priority: 1.0 },
@@ -45,18 +46,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route.priority,
     }))
 
-    // Dynamic Blog Posts
-    let blogSitemap: any[] = []
+    // Dynamic Blog Posts direct from DB
+    let blogSitemap: MetadataRoute.Sitemap = []
     try {
-        const res = await fetch(`${API_BASE_URL}/posts?limit=100&status=published`, {
-            next: { revalidate: 3600 }
-        })
-        const data = await res.json()
-        if (data.success && data.data && data.data.posts) {
-            blogSitemap = data.data.posts.map((post: any) => ({
+        await connectToDatabase()
+        const posts = await Post.find({ status: 'published' }).select('slug createdAt updatedAt').lean()
+
+        if (posts && posts.length > 0) {
+            blogSitemap = posts.map((post) => ({
                 url: `${baseUrl}/blog/${post.slug}`,
                 lastModified: new Date(post.updatedAt || post.createdAt),
-                changeFrequency: 'daily' as any,
+                changeFrequency: 'daily' as const,
                 priority: 0.7,
             }))
         }

@@ -2,74 +2,45 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import BlogPostClient from './BlogPostClient'
+import { connectToDatabase } from '@/lib/db'
+import { Post } from '@/models/Post'
 
-interface Post {
-    _id: string
-    title: string
-    slug: string
-    content: string
-    category: string
-    authorName?: string
-    subDescription?: string
-    excerpt?: string
-    createdAt: string
-    updatedAt: string
-    readTime?: number
-    featuredImage?: { url: string } | string
-    author?: {
-        _id?: string
-        fullName?: string
-        name?: { first?: string; last?: string } | string
-        avatar?: { url: string }
-    }
-    seo?: {
-        metaTitle?: string
-        metaDescription?: string
-        metaKeywords?: string[]
-        focusKeyword?: string
-        keywords?: string[]
-        canonicalUrl?: string
-        ogImage?: { url: string; publicId?: string }
-        noIndex?: boolean
-        noFollow?: boolean
-    }
-    tags?: string[]
-    faqs?: { question: string; answer: string }[]
-    ctaBanner?: any
-}
-
-// Enable Incremental Static Regeneration (ISR) for fast CDN serving
+// Enable Incremental Static Regeneration (ISR)
 export const revalidate = 3600 // Revalidate once per hour
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1'
-
-// Memoize getPost using React.cache so generateMetadata & BlogPostPage share the exact same fetch execution
-const getPost = cache(async (slug: string): Promise<Post | null> => {
+// Memoize getPost using React.cache so generateMetadata & BlogPostPage share the exact same execution
+const getPost = cache(async (slug: string) => {
     try {
-        const res = await fetch(`${API_BASE_URL}/posts/${slug}`, {
-            next: { revalidate: 3600 }
-        })
-        if (!res.ok) return null
-        const data = await res.json()
-        return data.success ? data.data : null
+        await connectToDatabase()
+        const post = await Post.findOneAndUpdate(
+            { slug, status: 'published' },
+            { $inc: { views: 1 } },
+            { new: true }
+        ).lean()
+
+        if (!post) return null
+        return JSON.parse(JSON.stringify(post))
     } catch (error) {
-        console.error('Failed to fetch post:', error)
+        console.error('Failed to fetch post from DB:', error)
         return null
     }
 })
 
-const getRelatedPosts = cache(async (category: string, currentSlug: string): Promise<Post[]> => {
+const getRelatedPosts = cache(async (category: string, currentSlug: string) => {
     try {
-        const res = await fetch(`${API_BASE_URL}/posts?limit=20&status=published&category=${encodeURIComponent(category)}`, {
-            next: { revalidate: 3600 }
+        await connectToDatabase()
+        const related = await Post.find({
+            slug: { $ne: currentSlug },
+            status: 'published',
+            category: category,
         })
-        if (!res.ok) return []
-        const data = await res.json()
-        if (data.success) {
-            return data.data.posts.filter((p: Post) => p.slug !== currentSlug)
-        }
-        return []
+            .sort({ createdAt: -1 })
+            .limit(6)
+            .lean()
+
+        return JSON.parse(JSON.stringify(related))
     } catch (error) {
+        console.error('Failed to fetch related posts from DB:', error)
         return []
     }
 })
@@ -168,4 +139,3 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </>
     )
 }
-
