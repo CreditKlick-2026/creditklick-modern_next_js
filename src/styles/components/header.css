@@ -171,6 +171,8 @@
 
 /* ZET App Action Button (Apply Now / Check Score) */
 .zet-btn-cta {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -182,18 +184,119 @@
   font-size: 14px;
   padding: 8px 18px;
   border-radius: 9999px;
-  transition: all 0.2s ease;
-  box-shadow: none !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(21, 93, 252, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   text-decoration: none;
   letter-spacing: -0.01em;
   white-space: nowrap;
+  isolation: isolate;
 }
 
 .zet-btn-cta:hover {
   background-color: #104ac7;
   transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 18px rgba(21, 93, 252, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
   color: #ffffff;
+}
+
+/* Luminous Spark Shimmer Light Beam */
+.zet-btn-spark-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -130%;
+  width: 65%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.55) 48%,
+    rgba(255, 255, 255, 0.95) 52%,
+    rgba(255, 255, 255, 0.55) 56%,
+    rgba(255, 255, 255, 0.05) 80%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  animation: btnSparkSweep 2.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes btnSparkSweep {
+  0% {
+    left: -130%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  45% {
+    left: 160%;
+    opacity: 1;
+  }
+  46%, 100% {
+    left: 160%;
+    opacity: 0;
+  }
+}
+
+/* Glowing Sparkle Star on Top Edge */
+.zet-btn-spark-star {
+  position: absolute;
+  top: 3px;
+  right: 14px;
+  width: 4px;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.95), 0 0 10px 4px rgba(147, 197, 253, 0.7);
+  pointer-events: none;
+  animation: sparkStarGlint 2.8s infinite ease-in-out;
+  z-index: 2;
+}
+
+@keyframes sparkStarGlint {
+  0%, 35% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  42% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  58% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Icon Spark Glow Pulse */
+.zet-btn-cta .zet-icon-zap {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  animation: zapGlowPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes zapGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+  20%, 35% {
+    filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 8px rgba(147, 197, 253, 0.9));
+  }
+  45% {
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
 }
 
 /* ZET App Login Button - Blue Pill */

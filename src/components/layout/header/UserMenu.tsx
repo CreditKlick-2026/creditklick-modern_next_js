@@ -67,10 +67,12 @@ export function UserMenu({ isLoggedIn, onLogout }: UserMenuProps) {
         <div className="flex items-center">
             <Link
                 href="/credit-score"
-                className="zet-btn-cta"
+                className="zet-btn-cta group"
             >
-                <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 flex-shrink-0" />
-                <span className="whitespace-nowrap font-semibold">Check Score</span>
+                <Zap className="w-3.5 h-3.5 text-white flex-shrink-0 zet-icon-zap" />
+                <span className="whitespace-nowrap font-semibold relative z-10">Check Score</span>
+                <span className="zet-btn-spark-shimmer" aria-hidden="true" />
+                <span className="zet-btn-spark-star" aria-hidden="true" />
             </Link>
         </div>
     )
