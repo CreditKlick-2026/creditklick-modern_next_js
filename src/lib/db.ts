@@ -1,4 +1,11 @@
 import mongoose from 'mongoose'
+import dns from 'dns'
+
+try {
+    dns.setServers(['8.8.8.8', '1.1.1.1'])
+} catch {
+    // Ignore in environments where setServers is restricted
+}
 
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://creditklick_app:6WypM1v30l7ITfo0@cluster0.lyksmnj.mongodb.net/creditklick?retryWrites=true&w=majority&appName=Cluster0'
 

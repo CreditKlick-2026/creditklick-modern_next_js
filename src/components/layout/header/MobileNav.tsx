@@ -1,12 +1,14 @@
 "use client"
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Search, Zap } from 'lucide-react'
+import { Menu, X, ChevronDown, Search, Zap, FileText } from 'lucide-react'
 
 import { Button, GlobalButton } from '@/components/ui'
 import { NavItem, Post } from '@/types'
+import { defaultBlogCategoryGroups } from './header.data'
 
 interface MobileNavProps {
     isMobileMenuOpen: boolean
@@ -45,6 +47,8 @@ export function MobileNav({
     handleLoginClick,
     handleLogout
 }: MobileNavProps) {
+    const [expandedBlogCategory, setExpandedBlogCategory] = useState<string | null>('cibil')
+
     return (
         <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white shadow-lg">
             <div className="flex items-center justify-between px-4 h-16">
@@ -171,15 +175,142 @@ export function MobileNav({
                                 </div>
                             ))}
 
-                            {/* Mobile Blog Link */}
+                            {/* Mobile Blog Accordion */}
                             <div>
-                                <Link
-                                    href="/blog"
-                                    className="block px-4 py-3 rounded-lg font-semibold hover:bg-gray-50"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setMobileExpandedItem(mobileExpandedItem === 'Blog' ? null : 'Blog')
+                                        fetchBlogDataIfNeeded()
+                                    }}
+                                    className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
                                 >
-                                    Blog
-                                </Link>
+                                    <span>Blog</span>
+                                    <ChevronDown
+                                        className={`w-4 h-4 transition-transform ${
+                                            mobileExpandedItem === 'Blog' ? 'rotate-180 text-blue-600' : ''
+                                        }`}
+                                    />
+                                </button>
+
+                                {mobileExpandedItem === 'Blog' && (
+                                    <div className="ml-2 pl-3 py-2 space-y-3 border-l-2 border-blue-100">
+                                        {/* Quick Category Capsule Pills (Image 2 style) */}
+                                        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none no-scrollbar -mx-1 px-1">
+                                            {defaultBlogCategoryGroups.map((group) => {
+                                                const isSelected = expandedBlogCategory === group.key
+                                                return (
+                                                    <button
+                                                        key={group.key}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setExpandedBlogCategory(expandedBlogCategory === group.key ? null : group.key)
+                                                        }}
+                                                        className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-2xs active:scale-95 ${
+                                                            isSelected
+                                                                ? 'bg-blue-600 text-white shadow-sm shadow-blue-200 border border-blue-600'
+                                                                : 'bg-white border border-gray-200 text-gray-700 hover:border-blue-400'
+                                                        }`}
+                                                    >
+                                                        <span>{group.label}</span>
+                                                        <span className={`text-[11px] font-medium ${isSelected ? 'text-blue-100' : 'text-gray-400'}`}>
+                                                            ({group.count})
+                                                        </span>
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
+
+                                        {/* Categories as Headers, each displaying its Blog Heading Names */}
+                                        <div className="space-y-2">
+                                            {defaultBlogCategoryGroups.map((group) => {
+                                                const isHeaderOpen = expandedBlogCategory === group.key || expandedBlogCategory === 'ALL'
+                                                return (
+                                                    <div
+                                                        key={group.key}
+                                                        className="rounded-xl border border-gray-100 bg-white overflow-hidden shadow-2xs transition-all"
+                                                    >
+                                                        {/* Category Header */}
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setExpandedBlogCategory(expandedBlogCategory === group.key ? null : group.key)
+                                                            }}
+                                                            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-gray-50/70 hover:bg-blue-50/40 transition-colors text-left"
+                                                        >
+                                                            <div className="flex items-center gap-2 min-w-0">
+                                                                {group.icon && (
+                                                                    <Image
+                                                                        src={group.icon}
+                                                                        alt=""
+                                                                        width={20}
+                                                                        height={20}
+                                                                        className="w-5 h-5 object-contain mix-blend-multiply flex-shrink-0"
+                                                                    />
+                                                                )}
+                                                                <span className="text-xs font-bold text-gray-800 truncate">
+                                                                    {group.label}
+                                                                </span>
+                                                                <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-full border border-blue-100 flex-shrink-0">
+                                                                    {group.count}
+                                                                </span>
+                                                            </div>
+                                                            <ChevronDown
+                                                                className={`w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0 ${
+                                                                    isHeaderOpen ? 'rotate-180 text-blue-600' : ''
+                                                                }`}
+                                                            />
+                                                        </button>
+
+                                                        {/* Blog Heading Names list inside this Category Header */}
+                                                        {isHeaderOpen && (
+                                                            <div className="px-3.5 py-2.5 bg-white border-t border-gray-100 space-y-2">
+                                                                <ul className="space-y-1.5 pl-2 border-l-2 border-blue-200">
+                                                                    {group.posts.map((post) => (
+                                                                        <li key={post.slug}>
+                                                                            <Link
+                                                                                href={`/blog/${post.slug}`}
+                                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                                                className="group flex items-start gap-2 py-1 text-xs text-gray-700 hover:text-blue-600 transition-colors leading-snug font-medium"
+                                                                            >
+                                                                                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 flex-shrink-0 group-hover:bg-blue-600 group-hover:scale-125 transition-all" />
+                                                                                <span className="line-clamp-2 group-hover:underline">
+                                                                                    {post.title}
+                                                                                </span>
+                                                                            </Link>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+
+                                                                <div className="pt-1 flex items-center justify-between border-t border-gray-50 text-[11px]">
+                                                                    <Link
+                                                                        href={group.href}
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="font-semibold text-blue-600 hover:text-blue-700 hover:underline inline-flex items-center gap-1"
+                                                                    >
+                                                                        <span>View all in {group.label}</span>
+                                                                        <span>→</span>
+                                                                    </Link>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+
+                                        {/* Bottom Direct Link to All Blogs */}
+                                        <div className="pt-1">
+                                            <Link
+                                                href="/blog"
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                className="block text-center py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold text-xs rounded-lg transition-colors"
+                                            >
+                                                Explore Full Blog Portal →
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Auth Actions in Mobile */}
