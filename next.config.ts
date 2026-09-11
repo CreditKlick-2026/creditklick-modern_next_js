@@ -96,14 +96,16 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Proxy to backend to fix CORS
+  // Proxy to backend fallback if local route does not exist
   async rewrites() {
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: 'https://betaversion-creditklickapp.onrender.com/api/v1/:path*',
-      },
-    ];
+    return {
+      fallback: [
+        {
+          source: '/api/v1/:path*',
+          destination: 'https://betaversion-creditklickapp.onrender.com/api/v1/:path*',
+        },
+      ],
+    };
   },
 };
 

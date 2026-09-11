@@ -32,7 +32,7 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
             <Link href={`${baseBlogPath}/${post.slug || post._id}`} className={styles.featuredCard}>
                 <div className={styles.featuredImageWrapper}>
                     <Image
-                        src={post.featuredImageUrl || post.coverImage || post.image || '/assets/creditklic_next_gen_transparent.png'}
+                        src={post.featuredImageUrl || post.featuredImage?.url || post.coverImage || post.image || '/images/blog/credit-score-guide.svg'}
                         alt={post.title}
                         fill
                         priority

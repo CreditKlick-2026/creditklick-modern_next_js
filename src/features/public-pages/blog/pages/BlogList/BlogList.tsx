@@ -67,7 +67,14 @@ export default function BlogList() {
     const isApiAvailable = Array.isArray(apiPosts) && apiPosts.length > 0;
 
     const rawPosts = useMemo(() => {
-        if (isApiAvailable) { const slugs = new Set(sampleBlogPosts.map((p) => p.slug)); return [...sampleBlogPosts, ...apiPosts.filter((p: any) => !slugs.has(p.slug))]; }
+        if (isApiAvailable) {
+            return apiPosts.map((p: any) => ({
+                ...p,
+                featuredImageUrl: p.featuredImage?.url || p.featuredImageUrl || p.coverImage || '/images/blog/credit-score-guide.svg',
+                authorName: p.authorName || 'CreditKlick Editorial',
+                readingTime: p.readingTime || (p.readTime ? `${p.readTime} min read` : '6 min read'),
+            }));
+        }
         return sampleBlogPosts;
     }, [isApiAvailable, apiPosts]);
 

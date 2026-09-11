@@ -7,7 +7,7 @@ class BlogService {
   async getPosts(params: Record<string, any> = {}) {
     try {
       const query = new URLSearchParams(params).toString();
-      const res = await fetch(`/api/posts${query ? `?${query}` : ''}`);
+      const res = await fetch(`/api/v1/posts${query ? `?${query}` : ''}`);
       if (res.ok) {
         const data = await res.json();
         if (data?.data?.posts?.length) return data;
@@ -34,7 +34,7 @@ class BlogService {
    */
   async getPostBySlug(slug: string) {
     try {
-      const res = await fetch(`/api/posts/${slug}`);
+      const res = await fetch(`/api/v1/posts/${slug}`);
       if (res.ok) {
         const data = await res.json();
         if (data?.data) return data;

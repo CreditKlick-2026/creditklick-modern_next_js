@@ -20,7 +20,7 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post, index, baseBlogPath }: BlogPostCardProps) {
     const slug = post.slug || post.id || post._id;
     const targetUrl = `${baseBlogPath}/${slug}`;
-    const imageUrl = post.featuredImageUrl || post.coverImage || post.image || post.featuredImage?.url || '/assets/creditklic_next_gen_transparent.png';
+    const imageUrl = post.featuredImageUrl || post.featuredImage?.url || post.coverImage || post.image || '/images/blog/credit-score-guide.svg';
     const author = post.authorName || (typeof post.author === 'object' ? post.author?.name : post.author) || 'CreditKlick Editorial';
     const category = post.category || 'Credit Score';
     const isSpecialTitleGreen = false;
