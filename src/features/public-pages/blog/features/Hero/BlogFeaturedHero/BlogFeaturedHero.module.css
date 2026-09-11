@@ -1,0 +1,19 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   WAPINE — BLOGFEATUREDHERO CSS MODULE
+   Tokens ✓ | Responsive ✓ | Multi-Theme ✓ | 120 FPS Containment ✓
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.container {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-lg, 12px);
+    contain: content;
+}
+
+/* ── 🌙 Dark / Night Mode Support ── */
+:global(.dark) .container,
+:global([data-theme="dark"]) .container,
+:global([data-theme="night"]) .container {
+    background: #1e293b;
+    border-color: #334155;
+}

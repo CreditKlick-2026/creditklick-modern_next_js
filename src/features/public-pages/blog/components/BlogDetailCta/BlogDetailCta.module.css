@@ -1,0 +1,28 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   WAPINE — BLOGDETAILCTA CSS MODULE
+   Tokens ✓ | Responsive ✓ | Multi-Theme ✓ | 120 FPS Containment ✓
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.container {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-xl, 16px);
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.04));
+    transition: transform var(--transition-spring, 0.22s cubic-bezier(0.16, 1, 0.3, 1)),
+                box-shadow var(--transition-normal, 0.2s ease),
+                border-color var(--transition-fast, 0.12s ease);
+    contain: content;
+}
+
+.container:hover {
+    box-shadow: var(--shadow-md, 0 8px 24px rgba(0, 0, 0, 0.06));
+    border-color: var(--color-border-hover, #cbd5e1);
+}
+
+/* ── 🌙 Dark / Night Mode Support ── */
+:global(.dark) .container,
+:global([data-theme="dark"]) .container,
+:global([data-theme="night"]) .container {
+    background: #1e293b;
+    border-color: #334155;
+}
