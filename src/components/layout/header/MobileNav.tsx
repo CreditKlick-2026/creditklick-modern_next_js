@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -47,9 +47,20 @@ export function MobileNav({
     handleLoginClick,
     handleLogout
 }: MobileNavProps) {
+    // Lock body scroll when mobile full-screen drawer is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => {
+            document.body.style.overflow = ''
+        }
+    }, [isMobileMenuOpen])
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white shadow-lg">
-            <div className="flex items-center justify-between px-4 h-16">
+        <div className="lg:hidden">
+            <header className="ck-mobile-header-bar">
                 <Link href="/">
                     <Image
                         src="/assets/creditklic_next_gen_transparent.png"
@@ -62,22 +73,23 @@ export function MobileNav({
                 </Link>
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="p-3 cursor-pointer"
+                    className="p-3 cursor-pointer text-gray-700 hover:text-gray-900"
                     aria-label="Toggle Menu"
                 >
                     {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </button>
-            </div>
+            </header>
 
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="bg-white border-t"
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        className="ck-mobile-menu-drawer"
                     >
-                        <div className="py-4 px-4 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
+                        <div className="ck-mobile-menu-scroll space-y-2">
                             {/* Mobile Nav Items */}
                             {navItems.map((item) => (
                                 <div key={item.label}>
@@ -251,50 +263,51 @@ export function MobileNav({
                                 </div>
                             ))}
 
-                            {/* Auth Actions in Mobile */}
-                            <div className="pt-4 mt-4 border-t">
-                                {isLoggedIn ? (
-                                    <>
-                                        <Link href="/profile" onClick={() => setIsMobileMenuOpen(false)}>
-                                            <Button
-                                                variant="default"
-                                                className="w-full mb-2 bg-blue-600 hover:bg-blue-700 text-white"
-                                            >
-                                                Go to Profile
-                                            </Button>
-                                        </Link>
+                        </div>
+
+                        {/* Auth Actions in Mobile (pinned at bottom of full screen drawer) */}
+                        <div className="ck-mobile-menu-bottom">
+                            {isLoggedIn ? (
+                                <>
+                                    <Link href="/profile" onClick={() => setIsMobileMenuOpen(false)}>
                                         <Button
                                             variant="default"
-                                            className="w-full bg-red-600 hover:bg-red-700 text-white"
-                                            onClick={() => {
-                                                setIsMobileMenuOpen(false)
-                                                handleLogout()
-                                            }}
+                                            className="w-full mb-2 bg-blue-600 hover:bg-blue-700 text-white"
                                         >
-                                            Logout
+                                            Go to Profile
                                         </Button>
-                                    </>
-                                ) : (
-                                    <GlobalButton
-                                        href="/credit-score"
-                                        color="blue"
-                                        variant="shine"
-                                        size="lg"
-                                        fullWidth
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="gap-2 font-bold"
+                                    </Link>
+                                    <Button
+                                        variant="default"
+                                        className="w-full bg-red-600 hover:bg-red-700 text-white"
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false)
+                                            handleLogout()
+                                        }}
                                     >
-                                        <Zap className="w-4 h-4 text-yellow-300 fill-yellow-300 animate-pulse flex-shrink-0" />
-                                        <span>Check Free Credit Score</span>
-                                    </GlobalButton>
-                                )}
-
-
-                            </div>
+                                        Logout
+                                    </Button>
+                                </>
+                            ) : (
+                                <GlobalButton
+                                    href="/credit-score"
+                                    color="blue"
+                                    variant="shine"
+                                    size="lg"
+                                    fullWidth
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="gap-2 font-bold relative overflow-hidden shadow-md shadow-blue-500/20"
+                                >
+                                    <Zap className="w-4 h-4 text-white fill-white flex-shrink-0 relative z-10" />
+                                    <span className="relative z-10">Check Free Credit Score</span>
+                                    <span className="zet-btn-spark-shimmer" aria-hidden="true" />
+                                    <span className="zet-btn-spark-star" aria-hidden="true" />
+                                </GlobalButton>
+                            )}
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </div>
     )
 }
