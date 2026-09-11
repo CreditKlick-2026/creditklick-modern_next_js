@@ -78,40 +78,6 @@ export function MobileNav({
                         className="bg-white border-t"
                     >
                         <div className="py-4 px-4 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
-                            {/* Category Capsule Pills (Top Row) */}
-                            <div className="pb-3 mb-2 border-b border-gray-100">
-                                <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none no-scrollbar -mx-1 px-1">
-                                    {defaultBlogCategoryGroups.map((group, idx) => (
-                                        <Link
-                                            key={group.key}
-                                            href={group.href}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-2xs active:scale-95 flex-shrink-0 ${
-                                                idx === 0
-                                                    ? 'bg-blue-600 text-white border border-blue-600 shadow-sm shadow-blue-200'
-                                                    : 'bg-white border border-gray-200 text-gray-700 hover:border-blue-500 hover:text-blue-600'
-                                            }`}
-                                        >
-                                            {group.icon && (
-                                                <Image
-                                                    src={group.icon}
-                                                    alt=""
-                                                    width={16}
-                                                    height={16}
-                                                    className={`w-4 h-4 object-contain mix-blend-multiply flex-shrink-0 ${
-                                                        idx === 0 ? 'brightness-0 invert' : ''
-                                                    }`}
-                                                />
-                                            )}
-                                            <span>{group.label}</span>
-                                            <span className={`text-[11px] font-medium ${idx === 0 ? 'text-blue-100' : 'text-gray-400'}`}>
-                                                ({group.count})
-                                            </span>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-
                             {/* Mobile Nav Items */}
                             {navItems.map((item) => (
                                 <div key={item.label}>
@@ -217,6 +183,73 @@ export function MobileNav({
                                     Blog
                                 </Link>
                             </div>
+
+                            {/* Blog Categories as Headings (Vertical Expandable Items) */}
+                            {defaultBlogCategoryGroups.map((group) => (
+                                <div key={group.key}>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setMobileExpandedItem(
+                                                mobileExpandedItem === group.key ? null : group.key
+                                            )
+                                        }
+                                        className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
+                                    >
+                                        <div className="flex items-center gap-2.5">
+                                            {group.icon && (
+                                                <Image
+                                                    src={group.icon}
+                                                    alt=""
+                                                    width={22}
+                                                    height={22}
+                                                    className="w-5.5 h-5.5 object-contain mix-blend-multiply flex-shrink-0"
+                                                />
+                                            )}
+                                            <span>{group.label}</span>
+                                            <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                                                ({group.count})
+                                            </span>
+                                        </div>
+                                        <ChevronDown
+                                            className={`w-4 h-4 transition-transform text-gray-400 ${
+                                                mobileExpandedItem === group.key ? 'rotate-180 text-blue-600' : ''
+                                            }`}
+                                        />
+                                    </button>
+
+                                    {mobileExpandedItem === group.key && (
+                                        <div className="ml-4 border-l-2 border-blue-100 pl-4 py-2 space-y-1.5">
+                                            <ul className="space-y-1">
+                                                {group.posts.map((post) => (
+                                                    <li key={post.slug}>
+                                                        <Link
+                                                            href={`/blog/${post.slug}`}
+                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                            className="group flex items-start gap-2 py-1.5 text-xs text-gray-600 hover:text-blue-600 transition-colors font-medium leading-snug"
+                                                        >
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 flex-shrink-0 group-hover:bg-blue-600" />
+                                                            <span className="line-clamp-2 group-hover:underline">
+                                                                {post.title}
+                                                            </span>
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="pt-1.5">
+                                                <Link
+                                                    href={group.href}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="text-[11px] font-semibold text-blue-600 hover:underline inline-flex items-center gap-1"
+                                                >
+                                                    <span>View all in {group.label} ({group.count})</span>
+                                                    <span>→</span>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
 
                             {/* Auth Actions in Mobile */}
                             <div className="pt-4 mt-4 border-t">
