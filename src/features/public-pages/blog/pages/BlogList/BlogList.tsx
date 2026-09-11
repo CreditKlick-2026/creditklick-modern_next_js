@@ -87,7 +87,11 @@ export default function BlogList() {
     };
 
     const filteredPosts = useMemo(() => rawPosts.filter((p: any) => activeCategory === 'All' || p.category?.toLowerCase() === activeCategory.toLowerCase()), [rawPosts, activeCategory]);
-    const featuredPost = useMemo(() => filteredPosts.find((p: any) => p.slug === 'top-5-whatsapp-crm-for-small-business') || filteredPosts.find((p: any) => p.isFeatured) || filteredPosts[0] || null, [filteredPosts]);
+    const featuredPost = useMemo(() => 
+        filteredPosts.find((p: any) => p.isFeatured) || 
+        filteredPosts.find((p: any) => p.slug?.includes('credit') || p.slug?.includes('cibil')) || 
+        filteredPosts[0] || null, 
+    [filteredPosts]);
     const allOtherPosts = useMemo(() => !featuredPost ? filteredPosts : filteredPosts.filter((p: any) => (p.slug || p._id) !== (featuredPost.slug || featuredPost._id)), [filteredPosts, featuredPost]);
     const totalPages = useMemo(() => Math.max(1, Math.ceil(allOtherPosts.length / POSTS_PER_PAGE)), [allOtherPosts.length]);
     const paginatedPosts = useMemo(() => { const s = (currentPage - 1) * POSTS_PER_PAGE; return allOtherPosts.slice(s, s + POSTS_PER_PAGE); }, [allOtherPosts, currentPage]);
@@ -98,9 +102,9 @@ export default function BlogList() {
                 {/* Hero */}
                 <section className={styles.heroSection}>
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeOut' }}>
-                        <h1 className={styles.heroTitle}>Wapine - WhatsApp CRM<br className="hidden sm:inline" /> and WhatsApp Marketing Blog</h1>
-                        <p className={styles.heroSubtitle}>Wapine and WhatsApp Business API Best Practices and Tips</p>
-                        <div><Link href="/demo" className={styles.demoBtn}>Book a demo</Link></div>
+                        <h1 className={styles.heroTitle}>CreditKlick - Credit Score, Loans<br className="hidden sm:inline" /> & Financial Tips Blog</h1>
+                        <p className={styles.heroSubtitle}>Expert CIBIL Score Guides, Credit Card Reviews & Smart Financial Planning Insights</p>
+                        <div><Link href="/credit-score" className={styles.demoBtn}>Check Free Credit Score</Link></div>
                     </motion.div>
                     <div className={styles.searchContainer}>
                         <div className={styles.searchPill} onClick={() => setIsSearchModalOpen(true)} role="button" tabIndex={0}
@@ -131,7 +135,7 @@ export default function BlogList() {
                     ) : paginatedPosts.length === 0 ? (
                         <div className="text-center py-20 bg-slate-50 dark:bg-slate-900/40 rounded-2xl border border-slate-100 dark:border-slate-800">
                             <p className="text-slate-600 dark:text-slate-400 text-lg font-medium">No posts found.</p>
-                            <button onClick={() => setActiveCategory('All')} className="mt-4 px-4 py-2 bg-[#2e7d32] text-white rounded-md text-sm font-semibold hover:bg-[#256629]">Show All Posts</button>
+                            <button onClick={() => setActiveCategory('All')} className="mt-4 px-4 py-2 bg-[#155dfc] text-white rounded-md text-sm font-semibold hover:bg-[#1d4ed8]">Show All Posts</button>
                         </div>
                     ) : (
                         <div className={styles.postsGrid}>
@@ -143,7 +147,7 @@ export default function BlogList() {
                         <div className="flex justify-center items-center gap-2 mt-12 mb-8">
                             <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-2 rounded-md border border-slate-200 dark:border-slate-800 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed" aria-label="Previous Page"><ChevronLeft className="w-4 h-4" /></button>
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                <button key={page} onClick={() => setCurrentPage(page)} className={`w-9 h-9 rounded-md text-sm font-semibold transition-colors ${currentPage === page ? 'bg-[#2e7d32] text-white' : 'border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'}`}>{page}</button>
+                                <button key={page} onClick={() => setCurrentPage(page)} className={`w-9 h-9 rounded-md text-sm font-semibold transition-colors ${currentPage === page ? 'bg-[#155dfc] text-white' : 'border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'}`}>{page}</button>
                             ))}
                             <button onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="p-2 rounded-md border border-slate-200 dark:border-slate-800 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed" aria-label="Next Page"><ChevronRight className="w-4 h-4" /></button>
                         </div>
@@ -153,9 +157,9 @@ export default function BlogList() {
                 {/* Bottom CTA */}
                 <section className={styles.bottomCtaSection}>
                     <div className={styles.bottomCtaBanner}>
-                        <h2 className={styles.bottomCtaTitle}>Grow Your Business with WhatsApp Business API</h2>
-                        <p className={styles.bottomCtaSubtitle}>Attend a free demo</p>
-                        <div><Link href="/demo" className={styles.bottomCtaButton}>Book Demo Now</Link></div>
+                        <h2 className={styles.bottomCtaTitle}>Take Control of Your Financial Health with CreditKlick</h2>
+                        <p className={styles.bottomCtaSubtitle}>Check your free CIBIL score, unlock personalized loan offers, and build a stellar credit profile today.</p>
+                        <div><Link href="/credit-score" className={styles.bottomCtaButton}>Check Free Credit Score</Link></div>
                     </div>
                 </section>
 

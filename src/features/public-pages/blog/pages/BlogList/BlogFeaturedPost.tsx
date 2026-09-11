@@ -32,7 +32,7 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
             <Link href={`${baseBlogPath}/${post.slug || post._id}`} className={styles.featuredCard}>
                 <div className={styles.featuredImageWrapper}>
                     <Image
-                        src={post.featuredImageUrl || '/images/blog/whatsapp-crm-guide.svg'}
+                        src={post.featuredImageUrl || post.coverImage || post.image || '/assets/creditklic_next_gen_transparent.png'}
                         alt={post.title}
                         fill
                         priority
@@ -44,7 +44,7 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
                     <h2 className={styles.featuredTitle}>{post.title}</h2>
                     <div className={styles.metaRowAuthor}>
                         <User className="w-4 h-4 text-slate-400 flex-shrink-0" />
-                        <span>{post.authorName || 'Deepak Bhagchandani'}</span>
+                        <span>{post.authorName || 'CreditKlick Editorial'}</span>
                     </div>
                     <div className={styles.metaRowDetails}>
                         <span className="flex items-center gap-1.5">
@@ -59,7 +59,7 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
                         <span className={styles.metaBullet}>•</span>
                         <span className="flex items-center gap-1.5">
                             <Folder className="w-3.5 h-3.5 text-slate-400" />
-                            {post.category || 'WhatsApp Tools'}
+                            {post.category || 'Credit Score'}
                         </span>
                     </div>
                     {post.excerpt && (
@@ -67,7 +67,7 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
                             {post.excerpt}
                         </p>
                     )}
-                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#156d47] dark:text-[#34d399]">
+                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155dfc] dark:text-[#60a5fa]">
                         <span>Read full guide</span>
                         <ArrowRight className="w-4 h-4" />
                     </div>

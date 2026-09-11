@@ -20,10 +20,10 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post, index, baseBlogPath }: BlogPostCardProps) {
     const slug = post.slug || post.id || post._id;
     const targetUrl = `${baseBlogPath}/${slug}`;
-    const imageUrl = post.featuredImageUrl || post.coverImage || post.image || '/images/blog/whatsapp-blast-guide.svg';
-    const author = post.authorName || (typeof post.author === 'object' ? post.author?.name : post.author) || 'Deepak Bhagchandani';
-    const category = post.category || 'WhatsApp Marketing';
-    const isSpecialTitleGreen = category.toLowerCase().includes('marketing') || index === 2;
+    const imageUrl = post.featuredImageUrl || post.coverImage || post.image || post.featuredImage?.url || '/assets/creditklic_next_gen_transparent.png';
+    const author = post.authorName || (typeof post.author === 'object' ? post.author?.name : post.author) || 'CreditKlick Editorial';
+    const category = post.category || 'Credit Score';
+    const isSpecialTitleGreen = false;
 
     return (
         <motion.div

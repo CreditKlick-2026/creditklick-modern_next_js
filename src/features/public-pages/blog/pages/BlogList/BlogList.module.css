@@ -79,31 +79,31 @@
     color: #94a3b8;
 }
 
-/* ── Demo Button ── */
+/* ── Demo Button / CTA Button ── */
 .demoBtn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #2e7d32;
+    background: linear-gradient(135deg, #155dfc 0%, #0052ff 100%);
     color: #ffffff;
     font-weight: 600;
     font-size: 0.95rem;
     padding: 0.65rem 1.6rem;
     border-radius: 0.375rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(21, 93, 252, 0.25);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
     margin-top: 1.5rem;
 }
 
 .demoBtn:hover {
-    background-color: #256629;
+    background: linear-gradient(135deg, #1d4ed8 0%, #155dfc 100%);
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.25);
+    box-shadow: 0 4px 14px rgba(21, 93, 252, 0.35);
     color: #ffffff;
 }
 
-/* ── Search Bar Element (Screenshot 1) ── */
+/* ── Search Bar Element ── */
 .searchContainer {
     max-width: 76rem;
     margin: 2.5rem auto 0 auto;
@@ -114,8 +114,8 @@
     display: flex;
     align-items: center;
     width: 100%;
-    background-color: #ecf7f2;
-    border: 1px solid #c9ecda;
+    background-color: #f0f7ff;
+    border: 1px solid #dbeafe;
     border-radius: 0.6rem;
     padding: 0.75rem 1.5rem;
     gap: 0.75rem;
@@ -125,24 +125,24 @@
 }
 
 .searchPill:hover {
-    border-color: #9bd7ba;
-    background-color: #e4f4ec;
+    border-color: #93c5fd;
+    background-color: #e0f2fe;
 }
 
 :global(.dark) .searchPill {
-    background-color: rgba(6, 78, 59, 0.2);
-    border-color: rgba(16, 185, 129, 0.25);
+    background-color: rgba(30, 58, 138, 0.2);
+    border-color: rgba(59, 130, 246, 0.25);
 }
 
 :global(.dark) .searchPill:hover {
-    border-color: #10b981;
-    background-color: rgba(6, 78, 59, 0.3);
+    border-color: #3b82f6;
+    background-color: rgba(30, 58, 138, 0.3);
 }
 
 .searchIcon {
     width: 1.15rem;
     height: 1.15rem;
-    color: #4a916e;
+    color: #2563eb;
     flex-shrink: 0;
 }
 
@@ -151,26 +151,26 @@
     border: none;
     outline: none;
     font-size: 1rem;
-    color: #527967;
+    color: #1e3a8a;
     text-align: left;
 }
 
 :global(.dark) .searchInput {
-    color: #6ee7b7;
+    color: #93c5fd;
 }
 
 .kbdBadge {
     margin-left: auto;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #4a916e;
+    color: #2563eb;
     background: transparent;
     user-select: none;
     letter-spacing: 0.02em;
 }
 
 :global(.dark) .kbdBadge {
-    color: #6ee7b7;
+    color: #93c5fd;
 }
 
 /* ── Featured Card Spotlight (Screenshot 2) ── */
@@ -223,7 +223,7 @@
 }
 
 .featuredTitle {
-    color: #156d47;
+    color: #0f172a;
     font-size: 1.75rem;
     line-height: 1.25;
     font-weight: 800;
@@ -239,15 +239,15 @@
 }
 
 .featuredCard:hover .featuredTitle {
-    color: #0b4d2e;
+    color: #155dfc;
 }
 
 :global(.dark) .featuredTitle {
-    color: #34d399;
+    color: #ffffff;
 }
 
 :global(.dark) .featuredCard:hover .featuredTitle {
-    color: #6ee7b7;
+    color: #60a5fa;
 }
 
 .metaRowAuthor {
@@ -375,7 +375,7 @@
 }
 
 .postCard:hover .postTitle {
-    color: #156d47;
+    color: #155dfc;
 }
 
 :global(.dark) .postTitle {
@@ -383,20 +383,20 @@
 }
 
 :global(.dark) .postCard:hover .postTitle {
-    color: #34d399;
+    color: #60a5fa;
 }
 
-/* Green Highlighted Title Variation (like Screenshot 3 Card 3) */
+/* Highlighted Title Variation */
 .postTitleGreen {
-    color: #156d47;
+    color: #155dfc;
 }
 
 :global(.dark) .postTitleGreen {
-    color: #34d399;
+    color: #60a5fa;
 }
 
 .postCategory {
-    color: #156d47;
+    color: #2563eb;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -405,7 +405,7 @@
 }
 
 :global(.dark) .postCategory {
-    color: #34d399;
+    color: #60a5fa;
 }
 
 .postMeta {
@@ -663,11 +663,11 @@
 }
 
 .bottomCtaBanner {
-    background-color: #358b5e;
+    background: linear-gradient(135deg, #1e40af 0%, #155dfc 55%, #0284c7 100%);
     border-radius: 1rem;
     padding: 2.75rem 2rem;
     color: #ffffff;
-    box-shadow: 0 10px 25px -5px rgba(53, 139, 94, 0.25);
+    box-shadow: 0 10px 30px -5px rgba(21, 93, 252, 0.28);
 }
 
 @media (min-width: 640px) {
@@ -702,22 +702,22 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #0a0a0a;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #155dfc;
     font-size: 0.95rem;
     font-weight: 700;
     padding: 0.75rem 1.75rem;
     border-radius: 0.375rem;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .bottomCtaButton:hover {
-    background-color: #1f1f1f;
+    background-color: #f8fafc;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    color: #1d4ed8;
 }
 
 

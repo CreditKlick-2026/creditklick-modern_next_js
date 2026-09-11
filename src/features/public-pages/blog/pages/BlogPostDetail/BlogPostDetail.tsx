@@ -56,7 +56,7 @@ export default function BlogPostDetail() {
 
   useEffect(() => {
     if (post && typeof document !== 'undefined') {
-      document.title = post.seo?.metaTitle || post.title || "Wapine Blog";
+      document.title = post.seo?.metaTitle || post.title || "CreditKlick Blog";
       let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
       if (!metaDesc) {
         metaDesc = document.createElement('meta');
@@ -79,7 +79,7 @@ export default function BlogPostDetail() {
         "@type": "Article",
         "headline": post.title,
         "description": post.seo?.metaDescription || post.excerpt || "",
-        "author": { "@type": "Person", "name": post.authorName || "Wapine" },
+        "author": { "@type": "Person", "name": post.authorName || "CreditKlick Editorial" },
         "about": post.geo?.brandEntities ? post.geo.brandEntities.split(',') : [],
         "mainEntityOfPage": {
           "@type": "WebPage",
@@ -101,17 +101,17 @@ export default function BlogPostDetail() {
   if (!post && (isError || !isLoading)) return <BlogPostNotFound onReturn={() => setLocation(baseBlogPath)} />;
 
   const imageUrl = post.featuredImageUrl || post.coverImage || post.image;
-  const authorName = post.authorName || (typeof post.author === 'object' ? post.author?.name : post.author) || "Wapine";
+  const authorName = post.authorName || (typeof post.author === 'object' ? post.author?.name : post.author) || "CreditKlick Editorial";
   const postDate = post.createdAt || post.publishedAt || Date.now();
   const readTimeEstimate = post.readingTime || `${Math.ceil((post.content?.split(' ').length || 200) / 200)} min read`;
 
   return (
     <LandingLayout>
-      <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#0f6841]/20 pb-20 pt-28">
+      <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600/20 pb-20 pt-28">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#0f6841] text-xs font-bold uppercase tracking-wider mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0f6841]"></span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               {post.category || "General"}
             </span>
             <h1 className="text-3xl md:text-[2.75rem] font-extrabold tracking-tight text-slate-900 mb-8 leading-[1.15] max-w-4xl">
@@ -120,9 +120,9 @@ export default function BlogPostDetail() {
             <BlogPostHeaderCta ctaBanner={post.ctaBanner} />
             <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between text-[13px] font-medium text-slate-500 border-b border-slate-100 pb-4 gap-4">
               <div className="flex items-center gap-2">
-                <Link href="/" className="hover:text-[#0f6841] transition-colors">Home</Link>
+                <Link href="/" className="hover:text-[#155dfc] transition-colors">Home</Link>
                 <span>›</span>
-                <Link href={baseBlogPath} className="hover:text-[#0f6841] transition-colors">Blog</Link>
+                <Link href={baseBlogPath} className="hover:text-[#155dfc] transition-colors">Blog</Link>
                 <span>›</span>
                 <span className="text-slate-900 truncate max-w-[200px] sm:max-w-[400px]">{post.title}</span>
               </div>
@@ -139,17 +139,17 @@ export default function BlogPostDetail() {
               )}
               <div className="flex items-center gap-4 mb-8 text-[13px] text-slate-500 border-b border-slate-100 pb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[#0f6841] flex items-center justify-center text-white font-bold"><User className="w-4 h-4" /></div>
+                  <div className="w-8 h-8 rounded-full bg-[#155dfc] flex items-center justify-center text-white font-bold"><User className="w-4 h-4" /></div>
                   <span className="font-semibold text-slate-800">{authorName}</span>
                 </div>
                 <div className="w-1 h-1 rounded-full bg-slate-300"></div>
                 <div className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /><time dateTime={new Date(postDate).toISOString()}>{new Date(postDate).toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' })}</time></div>
                 <div className="w-1 h-1 rounded-full bg-slate-300"></div>
                 <span>{readTimeEstimate}</span>
-                <span className="hidden sm:inline-flex items-center ml-auto px-3 py-1 rounded-full bg-[#0f6841] text-white text-[11px] font-bold">{post.category || "General"}</span>
+                <span className="hidden sm:inline-flex items-center ml-auto px-3 py-1 rounded-full bg-[#155dfc] text-white text-[11px] font-bold">{post.category || "General"}</span>
               </div>
 
-              <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight prose-p:text-slate-700 prose-p:leading-relaxed prose-a:text-[#0f6841] hover:prose-a:text-[#0c5636] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-sm prose-img:border prose-img:border-slate-100 prose-blockquote:border-[#0f6841] prose-blockquote:bg-emerald-50/50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-slate-700 prose-strong:text-slate-900 prose-code:text-[#0f6841] prose-code:bg-emerald-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+              <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight prose-p:text-slate-700 prose-p:leading-relaxed prose-a:text-[#155dfc] hover:prose-a:text-[#1d4ed8] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-sm prose-img:border prose-img:border-slate-100 prose-blockquote:border-[#155dfc] prose-blockquote:bg-blue-50/50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-slate-700 prose-strong:text-slate-900 prose-code:text-[#155dfc] prose-code:bg-blue-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
 
@@ -175,10 +175,10 @@ export default function BlogPostDetail() {
           <BlogPostRelatedSection relatedPosts={relatedPosts} baseBlogPath={baseBlogPath} />
 
           <div className="mt-16 mb-4">
-            <div className="bg-[#358b5e] rounded-2xl p-8 sm:p-12 text-white shadow-xl">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">Grow Your Business with WhatsApp Business API</h2>
-              <p className="text-white/90 text-sm sm:text-base mb-6 font-normal">Attend a free demo</p>
-              <div><Link href="/demo" className="inline-flex items-center justify-center bg-[#0a0a0a] hover:bg-black text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-lg transition-all shadow-md">Book Demo Now</Link></div>
+            <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600 rounded-2xl p-8 sm:p-12 text-white shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">Take Control of Your Financial Health with CreditKlick</h2>
+              <p className="text-white/90 text-sm sm:text-base mb-6 font-normal">Check your free CIBIL score and unlock personalized loan & credit card offers today.</p>
+              <div><Link href="/credit-score" className="inline-flex items-center justify-center bg-white hover:bg-slate-50 text-[#155dfc] font-bold text-sm sm:text-base px-7 py-3.5 rounded-lg transition-all shadow-md">Check Free Credit Score</Link></div>
             </div>
           </div>
         </div>
