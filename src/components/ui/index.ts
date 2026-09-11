@@ -1,5 +1,6 @@
 // Core components
 export { Button } from './Button'
+export { GlobalButton } from './GlobalButton'
 export { Input } from './Input'
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './Card'
 export { Skeleton, SkeletonCard, SkeletonText } from './Skeleton'

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 const Button = forwardRef<
     HTMLButtonElement,
     React.ButtonHTMLAttributes<HTMLButtonElement> & {
-        variant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link' | 'gradient'
+        variant?: 'default' | 'brand' | 'primary' | 'blue' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link' | 'gradient'
         size?: 'default' | 'sm' | 'lg' | 'xl' | 'icon'
     }
 >(({
@@ -19,6 +19,9 @@ const Button = forwardRef<
 }, ref) => {
     const variants = {
         default: 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl',
+        brand: 'bg-[#1c398e] text-white hover:bg-[#152c70] shadow-md hover:shadow-lg shadow-[#1c398e]/20 active:bg-[#0f1f50]',
+        primary: 'bg-[#1c398e] text-white hover:bg-[#152c70] shadow-md hover:shadow-lg shadow-[#1c398e]/20 active:bg-[#0f1f50]',
+        blue: 'bg-[#155dfc] text-white hover:bg-[#104ac7] shadow-md hover:shadow-lg shadow-[#155dfc]/25 active:bg-[#0b389e]',
         secondary: 'bg-white text-blue-700 border-2 border-blue-600 hover:bg-blue-50',
         destructive: 'bg-red-600 text-white hover:bg-red-700',
         outline: 'border border-gray-300 bg-white hover:bg-gray-50 text-gray-700',

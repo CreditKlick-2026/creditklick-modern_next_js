@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="50%" stop-color="#0a122c" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <radialGradient id="glow-cyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="glow-blue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="glow-purple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="glow-amber" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Gauge Arc Gradient -->
+    <linearGradient id="gauge-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="25%" stop-color="#f59e0b" />
+      <stop offset="55%" stop-color="#3b82f6" />
+      <stop offset="80%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Card Gradients -->
+    <linearGradient id="card-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <linearGradient id="card-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0.4)" />
+      <stop offset="50%" stop-color="rgba(59, 130, 246, 0.5)" />
+      <stop offset="100%" stop-color="rgba(16, 185, 129, 0.4)" />
+    </linearGradient>
+
+    <linearGradient id="gold-chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <linearGradient id="chart-area-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Glassmorphism Filter -->
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="shadow-elevated" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="100%" height="100%" fill="url(#bg-grad)" />
+
+  <!-- Perspective Floor Grid (Adventure Grid) -->
+  <g opacity="0.15" stroke="#38bdf8" stroke-width="1">
+    <line x1="0" y1="500" x2="1200" y2="500" />
+    <line x1="0" y1="560" x2="1200" y2="560" />
+    <line x1="0" y1="630" x2="1200" y2="630" />
+    <line x1="0" y1="710" x2="1200" y2="710" />
+    <line x1="0" y1="800" x2="1200" y2="800" />
+
+    <!-- Vanishing Lines from horizon center (600, 420) -->
+    <line x1="600" y1="420" x2="-200" y2="800" />
+    <line x1="600" y1="420" x2="0" y2="800" />
+    <line x1="600" y1="420" x2="200" y2="800" />
+    <line x1="600" y1="420" x2="400" y2="800" />
+    <line x1="600" y1="420" x2="600" y2="800" />
+    <line x1="600" y1="420" x2="800" y2="800" />
+    <line x1="600" y1="420" x2="1000" y2="800" />
+    <line x1="600" y1="420" x2="1200" y2="800" />
+    <line x1="600" y1="420" x2="1400" y2="800" />
+  </g>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="600" cy="380" r="320" fill="url(#glow-blue)" />
+  <circle cx="300" cy="280" r="260" fill="url(#glow-cyan)" />
+  <circle cx="920" cy="420" r="280" fill="url(#glow-purple)" />
+  <circle cx="600" cy="260" r="180" fill="url(#glow-amber)" />
+
+  <!-- ==============================================
+       MAIN VISUAL COMPOSITION: SMART CREDIT ADVENTURE
+       ============================================== -->
+
+  <!-- Top Adventure Banner Badge -->
+  <g transform="translate(600, 75)">
+    <rect x="-180" y="-18" width="360" height="36" rx="18" fill="rgba(15, 23, 42, 0.8)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" />
+    <circle cx="-150" cy="0" r="5" fill="#10b981" filter="url(#soft-glow)" />
+    <text x="-135" y="5" fill="#38bdf8" font-family="'General Sans', sans-serif" font-size="11" font-weight="700" letter-spacing="3">INDIA&apos;S SMARTEST CREDIT ECOSYSTEM</text>
+  </g>
+
+  <!-- SECTION 1: Upward Trajectory Mountain Wave (Left/Center background) -->
+  <g opacity="0.6">
+    <path d="M 120 620 Q 300 580 480 460 T 840 320 T 1100 210 L 1100 680 L 120 680 Z" fill="url(#chart-area-grad)" />
+    <path d="M 120 620 Q 300 580 480 460 T 840 320 T 1100 210" fill="none" stroke="#10b981" stroke-width="3.5" filter="url(#soft-glow)" />
+    <!-- Wave Nodes -->
+    <circle cx="480" cy="460" r="6" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+    <circle cx="840" cy="320" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+    <circle cx="1100" cy="210" r="8" fill="#10b981" stroke="#ffffff" stroke-width="2.5" filter="url(#soft-glow)" />
+  </g>
+
+  <!-- SECTION 2: Central Futuristic Credit Score Speedometer Gauge -->
+  <g transform="translate(600, 390)" filter="url(#shadow-elevated)">
+    <!-- Outer Glass Pod Disc -->
+    <circle cx="0" cy="0" r="175" fill="rgba(15, 23, 42, 0.85)" stroke="url(#card-border)" stroke-width="2" />
+    <circle cx="0" cy="0" r="160" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" stroke-dasharray="4 4" />
+
+    <!-- Gauge Outer Arc Track -->
+    <path d="M -125 50 A 135 135 0 1 1 125 50" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="16" stroke-linecap="round" />
+    <!-- Gauge Active Value Arc (80% filled to 785) -->
+    <path d="M -125 50 A 135 135 0 1 1 85 -105" fill="none" stroke="url(#gauge-grad)" stroke-width="16" stroke-linecap="round" filter="url(#soft-glow)" />
+
+    <!-- Tick Markers -->
+    <g stroke="rgba(255, 255, 255, 0.3)" stroke-width="2">
+      <line x1="-120" y1="20" x2="-105" y2="20" />
+      <line x1="-95" y1="-70" x2="-83" y2="-60" />
+      <line x1="0" y1="-120" x2="0" y2="-105" />
+      <line x1="95" y1="-70" x2="83" y2="-60" />
+      <line x1="120" y1="20" x2="105" y2="20" />
+    </g>
+
+    <!-- Score Labels on Arc -->
+    <text x="-120" y="75" fill="#94a3b8" font-family="'General Sans', sans-serif" font-size="11" font-weight="600">300</text>
+    <text x="105" y="75" fill="#10b981" font-family="'General Sans', sans-serif" font-size="11" font-weight="700">900</text>
+
+    <!-- Digital Dial Core Hub -->
+    <circle cx="0" cy="0" r="85" fill="#090d1a" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" />
+
+    <!-- Bureau Synchronized Indicator -->
+    <g transform="translate(0, -52)">
+      <rect x="-42" y="-10" width="84" height="20" rx="10" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1" />
+      <text x="0" y="4" fill="#34d399" font-family="'General Sans', sans-serif" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="1">CRIF • EXPERIAN</text>
+    </g>
+
+    <!-- Main Score Number -->
+    <text x="0" y="10" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="46" font-weight="800" text-anchor="middle" letter-spacing="-1">785</text>
+    <text x="0" y="32" fill="#10b981" font-family="'General Sans', sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="3">EXCELLENT</text>
+
+    <!-- Gauge Pointer Indicator Needle -->
+    <g transform="rotate(52)">
+      <polygon points="0,-130 -5,-30 0,-15 5,-30" fill="#38bdf8" filter="url(#soft-glow)" />
+      <circle cx="0" cy="0" r="14" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+      <circle cx="0" cy="0" r="5" fill="#ffffff" />
+    </g>
+
+    <!-- Dynamic Status Pulse Ring -->
+    <circle cx="0" cy="115" r="4" fill="#10b981" filter="url(#soft-glow)" />
+    <text x="12" y="119" fill="#94a3b8" font-family="'General Sans', sans-serif" font-size="11" font-weight="500">Real-Time Score Analytics</text>
+  </g>
+
+  <!-- SECTION 3: Floating Holographic Smart Credit Card (Right Side) -->
+  <g transform="translate(860, 260) rotate(12)" filter="url(#shadow-elevated)">
+    <!-- Card Body -->
+    <rect x="-140" y="-85" width="280" height="170" rx="16" fill="url(#card-metal)" stroke="url(#card-border)" stroke-width="1.5" />
+
+    <!-- Card Shimmer Lines -->
+    <path d="M -140 -20 Q -40 20 60 -40 T 140 -10" fill="none" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+    <path d="M -140 30 Q -60 70 40 10 T 140 40" fill="none" stroke="rgba(56, 189, 248, 0.18)" stroke-width="2" />
+
+    <!-- EMV Chip -->
+    <rect x="-110" y="-55" width="34" height="26" rx="4" fill="url(#gold-chip)" stroke="#78350f" stroke-width="0.8" />
+    <line x1="-110" y1="-42" x2="-76" y2="-42" stroke="#78350f" stroke-width="0.8" />
+    <line x1="-93" y1="-55" x2="-93" y2="-29" stroke="#78350f" stroke-width="0.8" />
+
+    <!-- Contactless Wireless Waves -->
+    <g transform="translate(-60, -42)" stroke="rgba(255, 255, 255, 0.6)" stroke-width="1.5" fill="none">
+      <path d="M 0 -8 A 10 10 0 0 1 0 8" />
+      <path d="M 5 -12 A 15 15 0 0 1 5 12" />
+      <path d="M 10 -16 A 20 20 0 0 1 10 16" />
+    </g>
+
+    <!-- Rupee Currency Symbol Emblem -->
+    <text x="105" y="-38" fill="#38bdf8" font-family="'General Sans', sans-serif" font-size="28" font-weight="700" text-anchor="middle">₹</text>
+
+    <!-- Card Number Digits -->
+    <text x="-110" y="15" fill="#f8fafc" font-family="'Courier New', monospace" font-size="14" font-weight="700" letter-spacing="3">5412 •••• •••• 9081</text>
+
+    <!-- Cardholder & Limit -->
+    <text x="-110" y="45" fill="#94a3b8" font-family="'General Sans', sans-serif" font-size="9" font-weight="500">CREDIT LIMIT</text>
+    <text x="-110" y="60" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="13" font-weight="700">₹ 5,00,000</text>
+
+    <text x="75" y="45" fill="#94a3b8" font-family="'General Sans', sans-serif" font-size="9" font-weight="500">TIER</text>
+    <text x="75" y="60" fill="#fbbf24" font-family="'General Sans', sans-serif" font-size="12" font-weight="700">PLATINUM</text>
+  </g>
+
+  <!-- SECTION 4: Fast Loan Approval Shield Pill (Left Side) -->
+  <g transform="translate(300, 290) rotate(-10)" filter="url(#shadow-elevated)">
+    <rect x="-130" y="-80" width="260" height="160" rx="18" fill="rgba(15, 23, 42, 0.88)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" />
+
+    <!-- Shield Icon -->
+    <g transform="translate(-75, -25)">
+      <polygon points="0,-24 22,-14 22,10 0,26 -22,10 -22,-14" fill="rgba(37, 99, 235, 0.2)" stroke="#3b82f6" stroke-width="2" filter="url(#soft-glow)" />
+      <path d="M -7 -1 L -2 5 L 8 -6" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <text x="-35" y="-30" fill="#38bdf8" font-family="'General Sans', sans-serif" font-size="10" font-weight="700" letter-spacing="1">INSTANT APPROVAL</text>
+    <text x="-35" y="-8" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="18" font-weight="800">₹ 25 Lakhs</text>
+
+    <!-- Progress Indicator Bar -->
+    <rect x="-105" y="18" width="210" height="6" rx="3" fill="rgba(255, 255, 255, 0.1)" />
+    <rect x="-105" y="18" width="185" height="6" rx="3" fill="url(#gauge-grad)" filter="url(#soft-glow)" />
+
+    <text x="-105" y="44" fill="#94a3b8" font-family="'General Sans', sans-serif" font-size="10" font-weight="500">Interest From 10.49% • Paperless</text>
+    <rect x="55" y="32" width="50" height="18" rx="9" fill="#10b981" />
+    <text x="80" y="44" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="9" font-weight="700" text-anchor="middle">ACTIVE</text>
+  </g>
+
+  <!-- SECTION 5: Floating Rupee Coins & Feature Pods (Surrounding Adventure elements) -->
+  
+  <!-- Floating Gold Rupee Coin Left -->
+  <g transform="translate(180, 500) rotate(-15)" filter="url(#soft-glow)">
+    <circle cx="0" cy="0" r="30" fill="url(#gold-chip)" stroke="#fef08a" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="23" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" stroke-dasharray="3 2" />
+    <text x="0" y="9" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="26" font-weight="800" text-anchor="middle">₹</text>
+  </g>
+
+  <!-- Floating Gold Rupee Coin Right -->
+  <g transform="translate(1040, 480) rotate(20)" filter="url(#soft-glow)">
+    <circle cx="0" cy="0" r="26" fill="url(#gold-chip)" stroke="#fef08a" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" stroke-dasharray="3 2" />
+    <text x="0" y="8" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="22" font-weight="800" text-anchor="middle">₹</text>
+  </g>
+
+  <!-- Feature Pill 1: 40+ Partner Banks -->
+  <g transform="translate(260, 660)" filter="url(#shadow-elevated)">
+    <rect x="-85" y="-20" width="170" height="40" rx="20" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" />
+    <circle cx="-60" cy="0" r="10" fill="rgba(59, 130, 246, 0.2)" />
+    <text x="-60" y="4" fill="#3b82f6" font-family="'General Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle">✓</text>
+    <text x="-40" y="4" fill="#e2e8f0" font-family="'General Sans', sans-serif" font-size="12" font-weight="600">40+ Partner Banks</text>
+  </g>
+
+  <!-- Feature Pill 2: 100% Free Report -->
+  <g transform="translate(600, 680)" filter="url(#shadow-elevated)">
+    <rect x="-95" y="-22" width="190" height="44" rx="22" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.5" filter="url(#soft-glow)" />
+    <circle cx="-68" cy="0" r="12" fill="#10b981" />
+    <text x="-68" y="4" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="13" font-weight="800" text-anchor="middle">★</text>
+    <text x="-46" y="5" fill="#ffffff" font-family="'General Sans', sans-serif" font-size="13" font-weight="700">100% Free For Life</text>
+  </g>
+
+  <!-- Feature Pill 3: Credit Refine Expert Support -->
+  <g transform="translate(940, 660)" filter="url(#shadow-elevated)">
+    <rect x="-95" y="-20" width="190" height="40" rx="20" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" />
+    <circle cx="-70" cy="0" r="10" fill="rgba(245, 158, 11, 0.2)" />
+    <text x="-70" y="4" fill="#f59e0b" font-family="'General Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle">⚡</text>
+    <text x="-50" y="4" fill="#e2e8f0" font-family="'General Sans', sans-serif" font-size="12" font-weight="600">Credit Score Repair</text>
+  </g>
+
+  <!-- Decorative Constellation Data Connections -->
+  <g stroke="rgba(56, 189, 248, 0.25)" stroke-width="1" stroke-dasharray="3 3">
+    <line x1="430" y1="290" x2="480" y2="350" />
+    <line x1="720" y1="350" x2="770" y2="280" />
+    <line x1="600" y1="520" x2="600" y2="650" />
+  </g>
+</svg>

@@ -1,8 +1,11 @@
+
+
+// App Shell Container - Updated v2
 "use client"
 
 import { usePathname } from 'next/navigation'
-import { Header } from './Header'
-import { Footer } from './Footer'
+import { Header } from './header'
+import { Footer } from './footer'
 import { FloatingActions } from './FloatingActions'
 import { TawkToChat } from './TawkToChat'
 import { ScrollProgress } from './ScrollProgress'
@@ -19,13 +22,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
     return (
         <SmoothScroll>
-            <div className="min-h-screen flex flex-col">
+            <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden relative">
                 <ScrollProgress />
                 <Header />
-                <main className="flex-1 pt-16 lg:pt-20">
+                <main className="flex-1 pt-16 lg:pt-24 w-full max-w-full overflow-x-hidden">
                     {children}
                 </main>
                 <Footer />
+
                 <FloatingActions />
                 <TawkToChat />
             </div>

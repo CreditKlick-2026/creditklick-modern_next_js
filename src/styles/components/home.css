@@ -1,0 +1,43 @@
+/* ===========================================
+   HOME COMPONENT STYLES & MARQUEE TRACKS
+   =========================================== */
+
+.product-track {
+  display: flex;
+  width: max-content;
+  animation: product-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.product-track:hover {
+  animation-play-state: paused;
+}
+
+.SliderX {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: clip;
+  position: relative;
+}
+
+.sliderP {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: clip;
+  position: relative;
+}
+
+
+.slide-trackP {
+  display: flex;
+  width: max-content;
+  animation: scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.slide-trackP:hover {
+  animation-play-state: paused;
+}

@@ -1,7 +1,9 @@
-import { Metadata } from 'next'
-import IDFCBankClient from './IDFCBankClient'
+import { redirect } from 'next/navigation'
+// import { Metadata } from 'next'
+// import IDFCBankClient from './IDFCBankClient'
 
-// Static generation for performance
+// Route commented out as requested: http://localhost:3000/credit-card/idfc-bank
+/*
 export const dynamic = 'force-static'
 export const revalidate = 86400 // Revalidate daily
 
@@ -18,7 +20,10 @@ export const metadata: Metadata = {
         canonical: '/credit-card/idfc-bank',
     }
 }
+*/
 
 export default function IDFCCardsPage() {
-    return <IDFCBankClient />
+    // Route commented out
+    redirect('/#pricing')
+    // return <IDFCBankClient />
 }

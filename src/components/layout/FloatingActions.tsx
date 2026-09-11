@@ -29,15 +29,16 @@ export function FloatingActions() {
     return (
         <>
             {/* WhatsApp Icon - Middle Right (Exact Legacy Position) */}
-            <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[9999]">
+            <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[9999] overflow-hidden">
                 <motion.a
                     href="https://wa.me/9318427221?text=I'm%20interested%20in%20your%20service"
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     className="bg-white border-2 border-green-600 border-r-0 rounded-l-full p-2 pl-3 shadow-xl hover:pl-5 transition-all group flex items-center gap-3"
                 >
+
                     <div className="text-green-600 group-hover:scale-110 transition-transform">
                         <svg
                             viewBox="0 0 24 24"

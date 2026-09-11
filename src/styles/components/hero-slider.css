@@ -1,0 +1,74 @@
+/* ==========================================================================
+   CREDITKLICK HERO SLIDER STYLESHEET
+   Clean modular transitions and CTA buttons for hero section
+   ========================================================================== */
+
+.ck-hero-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+@media (min-width: 640px) {
+  .ck-hero-slider-container {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .ck-hero-slider-container {
+    height: 24rem; /* h-96 */
+  }
+}
+
+.ck-hero-nav-arrow {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.ck-hero-nav-arrow:hover {
+  transform: scale(1.1);
+}
+
+.ck-hero-cta-btn {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #155dfc;
+  border: 1px solid #155dfc;
+  box-shadow: 0 4px 14px rgba(21, 93, 252, 0.35);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.ck-hero-cta-btn:hover {
+  background-color: #104ac7;
+  border-color: #104ac7;
+  box-shadow: 0 8px 22px rgba(21, 93, 252, 0.45);
+  transform: translateY(-2px);
+}
+
+.ck-hero-cta-btn:active {
+  background-color: #0b389e;
+  transform: translateY(0);
+}

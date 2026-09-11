@@ -1,0 +1,56 @@
+/* ==========================================================================
+   CREDITKLICK HOME EMI CALCULATOR STYLESHEET
+   ========================================================================== */
+
+.ck-emi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .ck-emi-card {
+    width: 66.666667%;
+  }
+}
+
+.ck-emi-tab-btn {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .ck-emi-tab-btn {
+    width: 33.333333%;
+  }
+}
+
+.ck-emi-tab-active {
+  background-color: #60a5fa;
+  color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+}
+
+.ck-emi-header-banner {
+  padding: 1rem;
+  background: linear-gradient(to right, #f9fafb, #dbeafe);
+  border-radius: 0.5rem;
+}

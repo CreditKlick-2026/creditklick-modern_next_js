@@ -1,7 +1,9 @@
-import { Metadata } from 'next'
-import SBIBankClient from './SBIBankClient'
+import { redirect } from 'next/navigation'
+// import { Metadata } from 'next'
+// import SBIBankClient from './SBIBankClient'
 
-// Static generation for performance
+// Route commented out as requested: http://localhost:3000/credit-card/sbi-bank
+/*
 export const dynamic = 'force-static'
 export const revalidate = 86400 // Revalidate daily
 
@@ -18,7 +20,10 @@ export const metadata: Metadata = {
         canonical: '/credit-card/sbi-bank',
     }
 }
+*/
 
 export default function SBICardsPage() {
-    return <SBIBankClient />
+    // Route commented out
+    redirect('/#pricing')
+    // return <SBIBankClient />
 }

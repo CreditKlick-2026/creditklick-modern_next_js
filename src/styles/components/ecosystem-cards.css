@@ -1,0 +1,136 @@
+/* ==========================================================================
+   CREDITKLICK ECOSYSTEM - 3D TITANIUM LUXURY CARD & CURATED CARDS
+   Pure CSS 3D perspective tilt, specular reflection, EMV chip & card perks
+   ========================================================================== */
+
+/* 3D Perspective Stage */
+.eco-3d-stage {
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .eco-3d-stage {
+    padding: 2.5rem 1rem;
+  }
+}
+
+/* The 3D Titanium Obsidian Card */
+.eco-titanium-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 200px;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #090d16 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0.2, 1);
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .eco-titanium-card {
+    max-width: 350px;
+    height: 220px;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+}
+
+/* Pure CSS Specular Light Beam */
+.eco-specular-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  transition: background 0.1s ease-out;
+  border-radius: inherit;
+}
+
+/* Realistic Brushed Gold EMV Chip */
+.eco-emv-chip {
+  width: 44px;
+  height: 32px;
+  border-radius: 0.375rem;
+  background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #ca8a04 100%);
+  border: 1px solid rgba(254, 240, 138, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.eco-emv-chip-grid {
+  width: 32px;
+  height: 20px;
+  border: 1px solid rgba(113, 63, 18, 0.4);
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  opacity: 0.75;
+}
+
+/* Embossed Card Number */
+.eco-card-number {
+  font-family: var(--font-mono, monospace);
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  color: #f8fafc;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .eco-card-number {
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Cardholder Label & Perks Badge */
+.eco-cardholder-name {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.eco-card-badge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fde047;
+  background-color: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+}
+
+/* Perks Highlight Stat Box */
+.eco-perk-stat-box {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+@media (min-width: 640px) {
+  .eco-perk-stat-box {
+    padding: 1.25rem;
+  }
+}

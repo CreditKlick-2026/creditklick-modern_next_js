@@ -1,0 +1,73 @@
+/* ==========================================================================
+   CREDITKLICK FOOTER COMPONENT STYLESHEET
+   Clean modular styling for wave mask, social badges, and responsive columns
+   ========================================================================== */
+
+.ck-footer-wrapper {
+  position: relative;
+  background-color: #364153;
+  padding-top: 80px;
+  padding-bottom: 2rem;
+  color: #ffffff;
+  overflow: hidden;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .ck-footer-wrapper {
+    padding-top: 130px;
+    padding-bottom: 2.5rem;
+  }
+}
+
+.ck-footer-wave-mask {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.ck-footer-wave-svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 70px;
+}
+
+@media (min-width: 768px) {
+  .ck-footer-wave-svg {
+    height: 120px;
+  }
+}
+
+.ck-footer-social-badge {
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease-in-out;
+}
+
+.ck-footer-social-badge:hover {
+  transform: scale(1.1);
+}
+
+.ck-footer-nav-link {
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.ck-footer-nav-link:hover {
+  color: #ffffff;
+  padding-left: 0.25rem;
+}

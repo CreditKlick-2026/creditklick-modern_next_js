@@ -1,0 +1,17 @@
+/* ==========================================================================
+   CREDITKLICK ECOSYSTEM - MASTER COMPONENT STYLESHEET
+   Modular architecture broken into specialized domain files:
+   - ecosystem-laser.css: Conic laser border, glow blobs & shimmer animations
+   - ecosystem-layout.css: Section wrapper, responsive header, scrollable tabs & CTAs
+   - ecosystem-simulator.css: Credit score arc gauge, slider, unlocked perks & security
+   - ecosystem-loans.css: Loan calculator slider, tenure buttons, EMI card & bank odds
+   - ecosystem-cards.css: 3D titanium luxury card, perspective tilt, EMV chip & perks
+   - ecosystem-refine.css: Azul dispute audit steps, before/after score & trajectory graph
+   ========================================================================== */
+
+@import "./ecosystem-laser.css";
+@import "./ecosystem-layout.css";
+@import "./ecosystem-simulator.css";
+@import "./ecosystem-loans.css";
+@import "./ecosystem-cards.css";
+@import "./ecosystem-refine.css";

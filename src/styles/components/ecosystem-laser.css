@@ -1,0 +1,220 @@
+/* ==========================================================================
+   CREDITKLICK ECOSYSTEM - LASER BORDER & AMBIENT ANIMATIONS
+   Pure CSS high-tech rotating conic laser, glow particles & shimmer effects
+   ========================================================================== */
+
+/* Keyframe: Conic Laser Rotation */
+@keyframes ecoLaserRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes laserRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Keyframe: Ambient Pulse Glow */
+@keyframes ecoPulseGlow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
+}
+
+/* Keyframe: Floating Micro-Animation */
+@keyframes ecoFloatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Keyframe: Holographic Shimmer */
+@keyframes ecoShimmerBeam {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes shimmerBeam {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+/* --- Conic Rotating Laser Container --- */
+.eco-laser-container,
+.laser-container {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: translateZ(0);
+  max-width: 100%;
+  padding: 1.5px;
+  background: transparent;
+  box-shadow: 0 20px 50px -10px rgba(80, 162, 255, 0.15),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease;
+}
+
+@media (min-width: 640px) {
+  .eco-laser-container,
+  .laser-container {
+    border-radius: 1.75rem;
+    padding: 2px;
+    box-shadow: 0 25px 60px -15px rgba(80, 162, 255, 0.2),
+                0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* The rotating laser beam */
+.eco-laser-beam,
+.laser-beam {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  aspect-ratio: 1 / 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 70deg,
+    #50a2ff 120deg,
+    #155dfc 180deg,
+    #38bdf8 210deg,
+    transparent 260deg,
+    transparent 360deg
+  );
+  animation: ecoLaserRotate 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* The inner card content placed above the laser beam */
+.eco-laser-content,
+.laser-content {
+  position: relative;
+  border-radius: calc(1.25rem - 1.5px);
+  background: #ffffff;
+  z-index: 2;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .eco-laser-content,
+  .laser-content {
+    border-radius: calc(1.75rem - 2px);
+  }
+}
+
+/* Ambient glow blobs */
+.eco-glow-blob,
+.pulse-glow-bg {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: ecoPulseGlow 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .eco-glow-blob,
+  .pulse-glow-bg {
+    filter: blur(120px);
+  }
+}
+
+/* Floating element */
+.floating-element {
+  animation: ecoFloatSlow 4s ease-in-out infinite;
+}
+
+/* Subtle Shimmer Overlay */
+.eco-shimmer-wrapper,
+.shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.eco-shimmer-wrapper::after,
+.shimmer-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  animation: ecoShimmerBeam 5s infinite ease-in-out;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .eco-laser-beam,
+  .laser-beam {
+    animation: none;
+    inset: 0;
+    background: linear-gradient(135deg, #50a2ff, #155dfc);
+    opacity: 0.7;
+  }
+  .eco-glow-blob,
+  .pulse-glow-bg,
+  .eco-shimmer-wrapper::after,
+  .shimmer-overlay::after {
+    animation: none;
+  }
+}

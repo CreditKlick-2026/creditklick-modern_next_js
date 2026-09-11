@@ -1,8 +1,10 @@
+// Root Layout - CreditKlick
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+
 import { Toaster } from 'react-hot-toast'
 import { Shell } from "@/components/layout/Shell";
 import { ScrollTop } from "@/components/layout/ScrollTop";
@@ -13,7 +15,7 @@ import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: 'swap', // Font display swap for better performance
 });
 

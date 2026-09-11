@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 375" width="600" height="375">
+  <defs>
+    <linearGradient id="benefitsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5fbf7"/>
+      <stop offset="100%" stop-color="#eaf5ee"/>
+    </linearGradient>
+    <linearGradient id="waGreen4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#25D366"/>
+      <stop offset="100%" stop-color="#128C7E"/>
+    </linearGradient>
+    <filter id="benShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="375" rx="16" fill="url(#benefitsBg)"/>
+
+  <!-- Background decorative elements -->
+  <circle cx="500" cy="90" r="100" fill="#25d366" fill-opacity="0.06"/>
+  <circle cx="70" cy="300" r="110" fill="#10b981" fill-opacity="0.05"/>
+
+  <!-- Top powered by text -->
+  <text x="240" y="45" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#64748b">POWERED BY WAPINE</text>
+
+  <!-- Left: Titles & Bullet points -->
+  <g transform="translate(50, 85)">
+    <text x="0" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" fill="#1e293b">Benefits of</text>
+    <text x="0" y="68" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" fill="#156d47">Using WhatsApp</text>
+    <text x="0" y="104" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" fill="#1e293b">for Business</text>
+
+    <!-- Stat callout -->
+    <g transform="translate(0, 135)">
+      <rect width="170" height="50" rx="12" fill="#ffffff" stroke="#e2e8f0" filter="url(#benShadow)"/>
+      <text x="14" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800" fill="#16a34a">98% Open Rate</text>
+      <text x="14" y="40" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#64748b">vs 20% in Email</text>
+    </g>
+  </g>
+
+  <!-- Right: Hand holding phone + WhatsApp Business + Growth Chart -->
+  <g transform="translate(360, 45)">
+    <!-- Smartphone Frame -->
+    <g transform="translate(40, 20)" filter="url(#benShadow)">
+      <!-- Phone Outer -->
+      <rect width="115" height="230" rx="20" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+      <!-- Notch -->
+      <rect x="36" y="6" width="42" height="10" rx="5" fill="#1e293b"/>
+      <!-- Screen -->
+      <rect x="6" y="20" width="103" height="190" rx="14" fill="#ffffff"/>
+
+      <!-- WhatsApp Business Logo on Screen -->
+      <g transform="translate(22, 60)">
+        <circle cx="30" cy="30" r="28" fill="url(#waGreen4)"/>
+        <!-- Chat Bubble notch -->
+        <polygon points="12,48 10,60 22,54" fill="#128c7e"/>
+        <!-- 'B' letter for Business -->
+        <text x="30" y="41" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="30" font-weight="900" fill="#ffffff" text-anchor="middle">B</text>
+      </g>
+
+      <text x="58" y="150" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#156d47" text-anchor="middle">WhatsApp</text>
+      <text x="58" y="165" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">Business API</text>
+    </g>
+
+    <!-- Upward Trend Chart Card (Floating on bottom left of phone) -->
+    <g transform="translate(-40, 180)" filter="url(#benShadow)">
+      <rect width="125" height="90" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+      
+      <!-- Growth Bars -->
+      <rect x="18" y="55" width="14" height="20" rx="3" fill="#86efac"/>
+      <rect x="38" y="42" width="14" height="33" rx="3" fill="#4ade80"/>
+      <rect x="58" y="30" width="14" height="45" rx="3" fill="#22c55e"/>
+      <rect x="78" y="15" width="14" height="60" rx="3" fill="#15803d"/>
+
+      <!-- Arrow -->
+      <path d="M 22 45 L 85 15 L 80 15 L 85 15 L 85 20" fill="none" stroke="#eab308" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- Star -->
+      <polygon points="105,18 107,24 113,24 108,28 110,34 105,30 100,34 102,28 97,24 103,24" fill="#fbbf24"/>
+    </g>
+
+    <!-- Floating WhatsApp notification icon -->
+    <g transform="translate(145, 140)" filter="url(#benShadow)">
+      <circle cx="16" cy="16" r="14" fill="url(#waGreen4)"/>
+      <path d="M 20 18 C 19.5 19 18.5 19.5 17.5 19.5 C 15 19.5 13 17.5 13 15 C 13 14 13.5 13 14.5 12.5 L 15.5 14.5 C 15.2 15 15.5 15.5 16 16 C 16.5 16.5 17 16.8 17.5 16.5 Z" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

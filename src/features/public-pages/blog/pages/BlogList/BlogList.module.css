@@ -1,0 +1,723 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   WAPINE / WHATSPIFY BLOG LIST CSS MODULE
+   Exact Wapine / Modern WhatsApp CRM Blog Layout Matching Screenshots
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    color: #0f172a;
+    font-family: inherit;
+    contain: content;
+}
+
+:global(.dark) .container {
+    background: #0b0f19;
+    color: #f8fafc;
+}
+
+/* ── Hero Section ── */
+.heroSection {
+    padding-top: 8.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .heroSection {
+        padding-top: 10rem;
+    }
+}
+
+.heroTitle {
+    font-size: 2.5rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 640px) {
+    .heroTitle {
+        font-size: 3.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .heroTitle {
+        font-size: 4.25rem;
+    }
+}
+
+:global(.dark) .heroTitle {
+    color: #ffffff;
+}
+
+.heroSubtitle {
+    margin-top: 1.25rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #475569;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 640px) {
+    .heroSubtitle {
+        font-size: 1.3rem;
+    }
+}
+
+:global(.dark) .heroSubtitle {
+    color: #94a3b8;
+}
+
+/* ── Demo Button ── */
+.demoBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e7d32;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.6rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    margin-top: 1.5rem;
+}
+
+.demoBtn:hover {
+    background-color: #256629;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.25);
+    color: #ffffff;
+}
+
+/* ── Search Bar Element (Screenshot 1) ── */
+.searchContainer {
+    max-width: 76rem;
+    margin: 2.5rem auto 0 auto;
+    padding: 0 1.5rem;
+}
+
+.searchPill {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #ecf7f2;
+    border: 1px solid #c9ecda;
+    border-radius: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    gap: 0.75rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.searchPill:hover {
+    border-color: #9bd7ba;
+    background-color: #e4f4ec;
+}
+
+:global(.dark) .searchPill {
+    background-color: rgba(6, 78, 59, 0.2);
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+:global(.dark) .searchPill:hover {
+    border-color: #10b981;
+    background-color: rgba(6, 78, 59, 0.3);
+}
+
+.searchIcon {
+    width: 1.15rem;
+    height: 1.15rem;
+    color: #4a916e;
+    flex-shrink: 0;
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #527967;
+    text-align: left;
+}
+
+:global(.dark) .searchInput {
+    color: #6ee7b7;
+}
+
+.kbdBadge {
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4a916e;
+    background: transparent;
+    user-select: none;
+    letter-spacing: 0.02em;
+}
+
+:global(.dark) .kbdBadge {
+    color: #6ee7b7;
+}
+
+/* ── Featured Card Spotlight (Screenshot 2) ── */
+.featuredSection {
+    max-width: 76rem;
+    margin: 3.5rem auto 5rem auto;
+    padding: 0 1.5rem;
+}
+
+.featuredCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    border-radius: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (min-width: 768px) {
+    .featuredCard {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 3rem;
+    }
+}
+
+.featuredImageWrapper {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background-color: #f8fafc;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.featuredImage {
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.featuredCard:hover .featuredImage {
+    transform: scale(1.03);
+}
+
+.featuredContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featuredTitle {
+    color: #156d47;
+    font-size: 1.75rem;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+@media (min-width: 640px) {
+    .featuredTitle {
+        font-size: 2.15rem;
+    }
+}
+
+.featuredCard:hover .featuredTitle {
+    color: #0b4d2e;
+}
+
+:global(.dark) .featuredTitle {
+    color: #34d399;
+}
+
+:global(.dark) .featuredCard:hover .featuredTitle {
+    color: #6ee7b7;
+}
+
+.metaRowAuthor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+}
+
+:global(.dark) .metaRowAuthor {
+    color: #94a3b8;
+}
+
+.metaRowDetails {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+:global(.dark) .metaRowDetails {
+    color: #94a3b8;
+}
+
+.metaBullet {
+    color: #94a3b8;
+}
+
+/* ── "All Posts" Section & Grid (Screenshot 3) ── */
+.postsSection {
+    max-width: 76rem;
+    margin: 2rem auto 5rem auto;
+    padding: 0 1.5rem;
+}
+
+.allPostsHeading {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+    .allPostsHeading {
+        font-size: 2.25rem;
+    }
+}
+
+:global(.dark) .allPostsHeading {
+    color: #ffffff;
+}
+
+.postsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 640px) {
+    .postsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .postsGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.25rem;
+    }
+}
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 1rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.postCard:hover {
+    transform: translateY(-3px);
+}
+
+.postImageWrapper {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #f1f5f9;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.postImage {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    object-fit: cover;
+}
+
+.postCard:hover .postImage {
+    transform: scale(1.04);
+}
+
+.postContent {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.postTitle {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.015em;
+    transition: color 0.2s ease-in-out;
+}
+
+.postCard:hover .postTitle {
+    color: #156d47;
+}
+
+:global(.dark) .postTitle {
+    color: #f8fafc;
+}
+
+:global(.dark) .postCard:hover .postTitle {
+    color: #34d399;
+}
+
+/* Green Highlighted Title Variation (like Screenshot 3 Card 3) */
+.postTitleGreen {
+    color: #156d47;
+}
+
+:global(.dark) .postTitleGreen {
+    color: #34d399;
+}
+
+.postCategory {
+    color: #156d47;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+}
+
+:global(.dark) .postCategory {
+    color: #34d399;
+}
+
+.postMeta {
+    font-size: 0.82rem;
+    color: #64748b;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+:global(.dark) .postMeta {
+    color: #94a3b8;
+}
+
+/* ── Search Modal / Command Palette (Matches Screenshot 2) ── */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 13vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    animation: modalFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modalDialog {
+    width: 100%;
+    max-width: 35rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    padding: 0.85rem 0.85rem 0 0.85rem;
+    animation: modalScaleUp 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+:global(.dark) .modalDialog {
+    background-color: #0f172a;
+    border-color: #1e293b;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+}
+
+.modalSearchHeader {
+    padding: 0;
+}
+
+.modalSearchBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.625rem;
+    padding: 0.65rem 0.85rem;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.modalSearchBox:focus-within {
+    border-color: #cbd5e1;
+    box-shadow: 0 0 0 3px rgba(226, 232, 240, 0.6);
+}
+
+:global(.dark) .modalSearchBox {
+    background-color: #0b1120;
+    border-color: #334155;
+}
+
+:global(.dark) .modalSearchBox:focus-within {
+    border-color: #475569;
+    box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.3);
+}
+
+.modalSearchInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: #0f172a;
+}
+
+:global(.dark) .modalSearchInput {
+    color: #f8fafc;
+}
+
+.modalEscKey {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.4rem;
+    user-select: none;
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+:global(.dark) .modalEscKey {
+    color: #94a3b8;
+    border-color: #334155;
+    background-color: #1e293b;
+}
+
+.modalBody {
+    min-height: 8rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modalEmptyState {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+:global(.dark) .modalEmptyState {
+    color: #94a3b8;
+}
+
+.modalResultsList {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    gap: 0.25rem;
+}
+
+.modalResultItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.85rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.15s ease;
+}
+
+.modalResultItem:hover,
+.modalResultItemActive {
+    background-color: #f8fafc;
+}
+
+:global(.dark) .modalResultItem:hover,
+:global(.dark) .modalResultItemActive {
+    background-color: #1e293b;
+}
+
+.modalResultTitle {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.35;
+}
+
+:global(.dark) .modalResultTitle {
+    color: #f8fafc;
+}
+
+.modalResultCategory {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #0284c7;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+}
+
+:global(.dark) .modalResultCategory {
+    color: #38bdf8;
+}
+
+.modalFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 0.75rem 1rem;
+    margin: 0 -0.85rem;
+    background-color: #fafbfc;
+    border-top: 1px solid #f1f5f9;
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+:global(.dark) .modalFooter {
+    background-color: #0b1120;
+    border-top-color: #1e293b;
+    color: #94a3b8;
+}
+
+.footerKeyGroup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.footerKey {
+    font-size: 0.68rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.35rem;
+    background-color: #ffffff;
+}
+
+:global(.dark) .footerKey {
+    color: #cbd5e1;
+    border-color: #334155;
+    background-color: #1e293b;
+}
+
+/* ── Bottom CTA Banner (Grow Your Business with WhatsApp Business API) ── */
+.bottomCtaSection {
+    max-width: 76rem;
+    margin: 0 auto 5rem auto;
+    padding: 0 1.5rem;
+}
+
+.bottomCtaBanner {
+    background-color: #358b5e;
+    border-radius: 1rem;
+    padding: 2.75rem 2rem;
+    color: #ffffff;
+    box-shadow: 0 10px 25px -5px rgba(53, 139, 94, 0.25);
+}
+
+@media (min-width: 640px) {
+    .bottomCtaBanner {
+        padding: 3.25rem 3.5rem;
+    }
+}
+
+.bottomCtaTitle {
+    font-size: 1.85rem;
+    line-height: 1.25;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .bottomCtaTitle {
+        font-size: 2.35rem;
+    }
+}
+
+.bottomCtaSubtitle {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 400;
+    margin-bottom: 1.75rem;
+}
+
+.bottomCtaButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.bottomCtaButton:hover {
+    background-color: #1f1f1f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+}
+
+

@@ -1,0 +1,282 @@
+/* ===========================================
+   ZET APP STYLE FLOATING PILL NAVBAR
+   Clean Solid White Header
+   =========================================== */
+
+.clean-header-outer,
+.ck-header-outer,
+.zet-header-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 16px 0 10px 0 !important;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.clean-header-outer::before,
+.ck-header-outer::before,
+.zet-header-outer::before {
+  display: none !important;
+  content: none !important;
+}
+
+.clean-header-outer.scrolled,
+.ck-header-outer.scrolled,
+.zet-header-outer.scrolled {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 10px 0 !important;
+}
+
+.zet-header-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zet-logo-img {
+  height: 42px;
+  width: auto;
+  max-height: 42px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.zet-logo-img:hover {
+  transform: scale(1.02);
+}
+
+/* Solid white floating pill navigation bar on the right */
+.zet-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  padding: 8px 14px;
+  gap: 5px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zet-nav-pill:hover {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+}
+
+.zet-nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.zet-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 16px;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: #374151;
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+.zet-nav-link:hover {
+  color: #155dfc;
+  background-color: #f1f5f9;
+  box-shadow: none;
+}
+
+.zet-nav-link.active {
+  color: #155dfc;
+  background-color: rgba(21, 93, 252, 0.08);
+  font-weight: 600;
+}
+
+/* Solid white dropdown card beneath pill */
+.zet-dropdown-card {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 20px 40px -8px rgba(0, 0, 0, 0.1),
+    0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  padding: 10px;
+  z-index: 60;
+}
+
+.zet-dropdown-card::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+}
+
+.zet-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.zet-dropdown-item:hover {
+  background-color: rgba(239, 246, 255, 0.85);
+  color: #155dfc;
+  transform: translateX(3px);
+}
+
+/* ZET App Action Button (Apply Now / Check Score) */
+.zet-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 6px;
+  background-color: #155dfc;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  box-shadow: none !important;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.zet-btn-cta:hover {
+  background-color: #104ac7;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  color: #ffffff;
+}
+
+/* ZET App Login Button - Blue Pill */
+.zet-btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #50a2ff 0%, #2b7fff 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(80, 162, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+}
+
+.zet-btn-login:hover {
+  background: linear-gradient(135deg, #2b7fff 0%, #1a6eee 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(80, 162, 255, 0.45);
+  color: #ffffff;
+}
+
+/* ===========================================
+   ZET APP STYLE ROLLING TEXT HOVER ANIMATION
+   Staggered vertical letter roll on hover
+   =========================================== */
+
+.zet-rolling-wrapper,
+.zet-rolling-text {
+  display: inline-flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  height: 1.3em !important;
+  line-height: 1.3em !important;
+  vertical-align: middle !important;
+  pointer-events: none !important;
+}
+
+.zet-rolling-track {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  height: 1.3em !important;
+  line-height: 1.3em !important;
+  transform: translateY(0%) !important;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform !important;
+}
+
+.zet-rolling-char {
+  display: block !important;
+  height: 1.3em !important;
+  line-height: 1.3em !important;
+  white-space: pre !important;
+  flex-shrink: 0 !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+.zet-char-default {
+  color: inherit !important;
+  transition: color 0.2s ease !important;
+}
+
+.zet-char-hover {
+  color: #155dfc !important;
+  font-weight: 600 !important;
+}
+
+/* When parent nav link is hovered, each track rolls up */
+.zet-nav-link:hover .zet-rolling-track,
+.zet-roll-hover-parent:hover .zet-rolling-track {
+  transform: translateY(-100%) !important;
+}
+
+/* When active, highlight default char */
+.zet-nav-link.active .zet-char-default {
+  color: #155dfc !important;
+  font-weight: 600 !important;
+}

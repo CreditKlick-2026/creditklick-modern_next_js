@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import HomeClient from './HomeClient'
 import { getAIOKnowledgeGraphSchema, getAEOFAQSchema } from '@/lib/seo'
 
-// Static generation for maximum performance
-export const dynamic = 'force-static'
+// Dynamic rendering
+export const dynamic = 'auto'
 export const revalidate = 3600 // Revalidate every hour
 
 export const metadata: Metadata = {

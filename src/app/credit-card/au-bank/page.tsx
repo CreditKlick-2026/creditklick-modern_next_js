@@ -1,7 +1,9 @@
-import { Metadata } from 'next'
-import AUBankClient from './AUBankClient'
+import { redirect } from 'next/navigation'
+// import { Metadata } from 'next'
+// import AUBankClient from './AUBankClient'
 
-// Static generation for performance
+// Route commented out as requested: http://localhost:3000/credit-card/au-bank
+/*
 export const dynamic = 'force-static'
 export const revalidate = 86400
 
@@ -18,7 +20,10 @@ export const metadata: Metadata = {
         canonical: '/credit-card/au-bank',
     }
 }
+*/
 
 export default function AUCardsPage() {
-    return <AUBankClient />
+    // Route commented out
+    redirect('/#pricing')
+    // return <AUBankClient />
 }
