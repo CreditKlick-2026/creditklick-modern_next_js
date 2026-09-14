@@ -21,7 +21,7 @@ export const AppPitch: React.FC = () => {
           Download The CreditKlick App
         </h2>
         <p className="ck-app-subtitle">
-          Your all-in-one financial super app. Check your free credit score, apply for instant pre-approved loans up to ₹25 Lakhs, and unlock 100+ best credit cards anywhere, anytime.
+          Your all-in-one financial super app. Check your free credit score.
         </p>
       </div>
 
@@ -58,8 +58,8 @@ export const AppPitch: React.FC = () => {
           </div>
         </a>
 
-        {/* Apple App Store */}
-        <a
+
+        {/* <a
           href={APP_PLAYSTORE_URL}
           target="_blank"
           rel="noopener noreferrer"
@@ -72,7 +72,7 @@ export const AppPitch: React.FC = () => {
             <span className="text-[0.62rem] uppercase tracking-wider text-slate-300">DOWNLOAD ON</span>
             <span className="text-[0.92rem] font-bold text-white">App Store</span>
           </div>
-        </a>
+        </a> */}
       </div>
 
       {/* Trust Highlights */}
