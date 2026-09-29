@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 import { Header } from './header'
 import { Footer } from './footer'
 import { FloatingActions } from './FloatingActions'
-import { TawkToChat } from './TawkToChat'
 import { ScrollProgress } from './ScrollProgress'
 import { SmoothScroll } from './SmoothScroll'
 
@@ -31,7 +30,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <Footer />
 
                 <FloatingActions />
-                <TawkToChat />
             </div>
         </SmoothScroll>
     )

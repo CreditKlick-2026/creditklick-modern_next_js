@@ -9,10 +9,16 @@ import {
   HomeEmiCalculator,
   PartnersCarousel,
   CustomerCentricBanner,
+  ServicesGrid,
+  BenefitsAccordion,
+  LetsTalkBanner,
+  AppFeatureCards,
+  StatsCounter,
+  SupportInitiative,
+  DataSafeSection,
 } from "@/components/home";
 
 import {
-  ZentryFeatures,
   ZetPlusRewards,
 } from "@/components/zentry";
 
@@ -48,46 +54,64 @@ export default function HomeClient() {
   return (
     <div className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
 
-      {/* 1. Hero interactive slider with gauge meter & credit animation (No gaming video needed!) */}
+
+      {/* 4. Hero interactive slider with gauge meter & credit animation */}
       <div className="pt-2 sm:pt-4 bg-white">
         <HeroSlider />
       </div>
 
-      {/* 2. Quick product marquee ribbon */}
+      {/* 5. Quick product marquee ribbon */}
       <ProductMarquee />
 
-      {/* 3. Zentry Scroll-Pinned "About" Section */}
+      {/* 8. Zentry Scroll-Pinned "About" Section */}
       <ZentryAbout />
 
-      {/* 4. Zentry 3D Tilt Bento Grid Features */}
-      <ZentryFeatures />
+      {/* 10. Benefits of CreditKlick - Accordion + illustration */}
+      <BenefitsAccordion />
 
-      {/* 5. ZET Plus Credit Card Rewards & Pricing Comparison Section */}
+      {/* 6. How CreditKlick Helps You - Service icon grid */}
+      <ServicesGrid />
+
+      {/* 11. ZET Plus Credit Card Rewards & Pricing Comparison Section */}
       <ZetPlusRewards />
 
-      {/* 6. Credit Health Promo Banner */}
+      {/* 12. "Let's Talk" CTA banner */}
+      <LetsTalkBanner />
+
+      {/* 13. In-app feature cards */}
+      <AppFeatureCards />
+
+      {/* 14. Animated milestone counters */}
+      <StatsCounter />
+
+      {/* 15. Credit Health Promo Banner */}
       <CreditHealthPromo />
 
-      {/* 7. Interactive EMI Loan Calculator */}
+      {/* 16. Interactive EMI Loan Calculator */}
       <div className="bg-white py-12">
         <HomeEmiCalculator />
       </div>
 
-      {/* 8. Media Coverage */}
-      <MediaCoverage />
+      {/* 17. Sounds of Silence support initiative */}
+      <SupportInitiative />
 
-      {/* 9. Partner Banks Infinite Carousel */}
+      {/* 18. Partner Banks Infinite Carousel */}
       <PartnersCarousel />
 
-
-      {/* 9. Customer Testimonials */}
+      {/* 19. Customer Testimonials */}
       <HappyCustomersSection />
 
-      {/* 10. Frequently Asked Questions (7pixs style) */}
+      {/* 20. Data security & accreditations */}
+      <DataSafeSection />
+
+      {/* 21. Frequently Asked Questions (7pixs style) */}
       <HomeFaqSection />
 
-      {/* 11. Customer Centric Contact Banner */}
+      {/* 22. Customer Centric Contact Banner */}
       <CustomerCentricBanner />
+
+      {/* 23. Press & Acclaim - Our Media Coverage */}
+      <MediaCoverage />
     </div>
   );
 }

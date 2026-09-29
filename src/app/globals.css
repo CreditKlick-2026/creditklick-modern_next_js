@@ -2,7 +2,6 @@
 @import "../styles/base.css";
 @import "../styles/utilities.css";
 @import "../styles/animations.css";
-@import "../styles/components/header.css";
 @import "../styles/components/home.css";
 @import "../styles/components/ecosystem.css";
 @import "../styles/components/testimonials.css";
@@ -12,5 +11,5 @@
 @import "../styles/components/footer.css";
 @import "../styles/components/hero-slider.css";
 @import "../styles/components/emi-calculator.css";
-@import "../styles/components/media-coverage.css";
 @import "../styles/components/buttons.css";
+@import "../styles/components/debt-relief.css";

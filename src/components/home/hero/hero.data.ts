@@ -18,15 +18,7 @@ export const DEFAULT_SLIDES: SlideItem[] = [
     btntext: "CHECK FREE CREDIT SCORE",
     animation: "score",
   },
-  {
-    id: 2,
-    text1: "THE WAIT IS OVER",
-    text2: "OUR FINANCE APP IS HERE",
-    text3: "Get all your credit histories in your hand, check your CRIF credit score and apply for various loans and cards.",
-    url: "https://play.google.com/store/apps/details?id=com.creditklick.creditklick",
-    btntext: "DOWNLOAD NOW",
-    animation: "app",
-  },
+
   {
     id: 3,
     text1: "Instant Credit Card Approval",

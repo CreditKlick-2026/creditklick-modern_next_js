@@ -15,4 +15,8 @@ export { CreditHealthPromo } from "./CreditHealthPromo";
 export { MediaCoverage } from "./MediaCoverage";
 export { PartnersCarousel } from "./PartnersCarousel";
 export { CustomerCentricBanner } from "./CustomerCentricBanner";
+export { DebtFreeHero } from "./DebtFreeHero";
 
+
+// SingleDebt-style debt-relief sections
+export * from "./debtrelief";

@@ -1,0 +1,380 @@
+/* ===========================================
+   DEBT FREE HERO SECTION — FULL WIDTH REDESIGN
+   Premium two-column fintech layout
+   =========================================== */
+
+/* ── Section Wrapper ── */
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 88vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Animated background mesh blobs ── */
+.heroSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 10% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 70% 80%, rgba(251, 191, 36, 0.10) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid lines overlay */
+.heroSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Inner container ── */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ── LEFT COLUMN ── */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #34d399;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  animation: dotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+  50% { opacity: 0.7; transform: scale(0.9); box-shadow: 0 0 0 4px rgba(52, 211, 153, 0); }
+}
+
+.heroTitle {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.heroTitleAccent {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* Stats row */
+.statsRow {
+  display: flex;
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statValue {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* CTA buttons */
+.ctaRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 12px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.35);
+  cursor: pointer;
+  border: none;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(251, 191, 36, 0.45);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-2px);
+}
+
+/* Trust badges */
+.trustRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
+.trustCheck {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px;
+  color: #34d399;
+}
+
+/* ── RIGHT COLUMN — Credit Card SVG ── */
+.rightCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cardFloat {
+  width: 100%;
+  max-width: 440px;
+  animation: cardHover 5s ease-in-out infinite alternate;
+  will-change: transform;
+  filter: drop-shadow(0 40px 60px rgba(0,0,0,0.4));
+}
+
+@keyframes cardHover {
+  0%   { transform: translateY(0px) rotate(-1deg); }
+  100% { transform: translateY(-16px) rotate(0.5deg); }
+}
+
+.cardSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Floating glow behind card */
+.cardGlow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.35), transparent 70%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Decorative floating orbs */
+.orb1 {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  opacity: 0.15;
+  top: 8%;
+  right: 5%;
+  animation: orbFloat 6s ease-in-out infinite alternate;
+}
+
+.orb2 {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  opacity: 0.18;
+  bottom: 12%;
+  left: 8%;
+  animation: orbFloat 8s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orbFloat {
+  0%   { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-20px) scale(1.15); }
+}
+
+/* Animated sparkle elements */
+.celebrateSparks {
+  animation: sparkFlicker 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes sparkFlicker {
+  0%   { opacity: 0.4; transform: scale(0.85); }
+  100% { opacity: 1;   transform: scale(1.1); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .container {
+    gap: 2.5rem;
+    padding: 60px 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: auto;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    padding: 60px 1.5rem;
+    gap: 3rem;
+    text-align: center;
+  }
+  .leftCol {
+    align-items: center;
+  }
+  .badge {
+    margin: 0 auto;
+  }
+  .heroSubtitle {
+    max-width: 100%;
+    text-align: center;
+  }
+  .statsRow {
+    justify-content: center;
+  }
+  .ctaRow {
+    justify-content: center;
+  }
+  .trustRow {
+    justify-content: center;
+  }
+  .cardFloat {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 48px 1.25rem;
+  }
+  .heroTitle {
+    font-size: 2.1rem;
+  }
+  .statsRow {
+    gap: 1.25rem;
+  }
+  .cardFloat {
+    max-width: 280px;
+  }
+  .btnPrimary,
+  .btnSecondary {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}

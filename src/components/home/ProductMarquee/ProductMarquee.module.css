@@ -1,54 +1,18 @@
-/* ===========================================
-   HOME COMPONENT STYLES & MARQUEE TRACKS
-   =========================================== */
+/* ==========================================================================
+   PRODUCT MARQUEE - CSS MODULE
+   Infinite seamless ticker ribbon with responsive cards
+   ========================================================================== */
 
-.product-track {
-  display: flex;
-  width: max-content;
-  animation: product-marquee 32s linear infinite;
-  will-change: transform;
-  align-items: center;
-  gap: 16px;
-  padding: 4px 16px;
+@keyframes productMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.product-track:hover {
-  animation-play-state: paused;
-}
-
-.SliderX {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  overflow-x: clip;
-  position: relative;
-}
-
-.sliderP {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  overflow-x: clip;
-  position: relative;
-}
-
-.slide-trackP {
-  display: flex;
-  width: max-content;
-  animation: scroll 35s linear infinite;
-  will-change: transform;
-}
-
-.slide-trackP:hover {
-  animation-play-state: paused;
-}
-
-/* ===========================================
-   PREMIUM PRODUCT MARQUEE STRIP (WHITE STRIP + #fad4d4 PILLS)
-   =========================================== */
-
-.ck-marquee-section {
+.marqueeSection {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -59,8 +23,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
-/* Soft ambient warmth accent */
-.ck-marquee-section::before {
+.marqueeSection::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -73,14 +36,13 @@
   z-index: 1;
 }
 
-.ck-marquee-inner {
+.marqueeInner {
   position: relative;
   width: 100%;
   z-index: 2;
 }
 
-/* Side fade gradient masks with pure white */
-.ck-marquee-mask-left {
+.maskLeft {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -91,7 +53,7 @@
   pointer-events: none;
 }
 
-.ck-marquee-mask-right {
+.maskRight {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -103,14 +65,27 @@
 }
 
 @media (max-width: 640px) {
-  .ck-marquee-mask-left,
-  .ck-marquee-mask-right {
+  .maskLeft,
+  .maskRight {
     width: 60px;
   }
 }
 
-/* #fad4d4 Rectangular Card Item */
-.ck-marquee-pill {
+.track {
+  display: flex;
+  width: max-content;
+  animation: productMarqueeScroll 32s linear infinite;
+  will-change: transform;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.pill {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -125,15 +100,14 @@
   box-shadow: 0 2px 8px rgba(225, 29, 72, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.ck-marquee-pill:hover {
+.pill:hover {
   background: #fce2e2;
   border-color: rgba(225, 29, 72, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 6px 18px -2px rgba(225, 29, 72, 0.2), 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Icon badge wrapper */
-.ck-marquee-icon-badge {
+.iconBadge {
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -148,20 +122,19 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
-.ck-marquee-pill:hover .ck-marquee-icon-badge {
+.pill:hover .iconBadge {
   transform: scale(1.12) rotate(3deg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
-/* Content inside pill */
-.ck-marquee-content {
+.content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
 }
 
-.ck-marquee-title {
+.title {
   font-size: 13.5px;
   font-weight: 700;
   color: #0f172a;
@@ -171,11 +144,11 @@
   transition: color 0.2s ease;
 }
 
-.ck-marquee-pill:hover .ck-marquee-title {
+.pill:hover .title {
   color: #090d16;
 }
 
-.ck-marquee-tag {
+.tag {
   font-size: 10.5px;
   font-weight: 600;
   color: #475569;
@@ -185,12 +158,11 @@
   transition: color 0.2s ease;
 }
 
-.ck-marquee-pill:hover .ck-marquee-tag {
+.pill:hover .tag {
   color: #1e293b;
 }
 
-/* Arrow indicator on hover */
-.ck-marquee-arrow {
+.arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,32 +173,8 @@
   transition: all 0.25s ease;
 }
 
-.ck-marquee-pill:hover .ck-marquee-arrow {
+.pill:hover .arrow {
   color: #0f172a;
   opacity: 1;
   transform: translateX(3px);
 }
-
-/* ===========================================
-   PARTNERS CAROUSEL STYLES
-   =========================================== */
-.ck-partners-section {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #070c18;
-  padding: 36px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.ck-partners-heading {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 24px;
-}
-

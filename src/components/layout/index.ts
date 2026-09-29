@@ -1,6 +1,5 @@
 export { Header } from "./header/index";
 export { Footer } from "./footer/index";
-export * from "./header/index";
 export * from "./footer/index";
 
 export { Shell } from "./Shell";
