@@ -7,23 +7,20 @@ import { ArrowRight } from "lucide-react";
 import { SlideItem } from "./hero.data";
 
 // Animations dynamically loaded
-import ScoreAnimation from "@/components/animations/ScoreAnimation";
+const DebtBanner = dynamic(() => import("@/components/DebtBanner"), { ssr: false });
 const CardAnimation = dynamic(() => import("@/components/animations/CardAnimation"), { ssr: false });
-const LoanAnimation = dynamic(() => import("@/components/animations/LoanAnimation"), { ssr: false });
 const AppSlider = dynamic(() => import("@/components/animations/AppSlider"), { ssr: false });
 
 function RenderAnimation({ type }: { type: string }) {
   switch (type) {
     case "score":
-      return <ScoreAnimation />;
+      return <DebtBanner />;
     case "app":
       return <AppSlider />;
     case "card":
       return <CardAnimation />;
-    case "loan":
-      return <LoanAnimation />;
     default:
-      return <ScoreAnimation />;
+      return <DebtBanner />;
   }
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import "./zet-rewards.css";
 import { RewardsMatrix } from "./RewardsMatrix";
 
 export const ZetPlusRewards: React.FC = () => {

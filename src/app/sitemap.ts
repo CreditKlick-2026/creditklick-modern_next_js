@@ -10,7 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '/about', priority: 0.8 },
         { path: '/contact', priority: 0.7 },
         { path: '/calculators', priority: 0.9 },
-        { path: '/loans', priority: 0.9 },
         { path: '/credit-cards', priority: 0.9 },
         { path: '/credit-score', priority: 1.0 },
         { path: '/blog', priority: 0.8 },
@@ -21,9 +20,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '/cookies-policy', priority: 0.3 },
 
         { path: '/refine', priority: 0.8 },
-        { path: '/loan/personal-loan', priority: 0.9 },
-        { path: '/loan/home-loan', priority: 0.9 },
-        { path: '/loan/business-loan', priority: 0.9 },
         { path: '/loan/gold-loan', priority: 0.9 },
         { path: '/credit-card/au-bank', priority: 0.8 },
         { path: '/credit-card/idfc-bank', priority: 0.8 },

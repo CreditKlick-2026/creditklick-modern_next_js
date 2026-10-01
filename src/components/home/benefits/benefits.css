@@ -1,0 +1,29 @@
+/* Benefits of CreditKlick Accordion Styles */
+
+.benefits-accordion-collapse {
+  display: grid;
+  transition: grid-template-rows 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefits-accordion-collapse.is-closed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.benefits-accordion-collapse.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.benefits-accordion-inner {
+  overflow: hidden;
+}
+
+/* Fallback utilities */
+.grid-rows-\[0fr\] {
+  grid-template-rows: 0fr;
+}
+
+.grid-rows-\[1fr\] {
+  grid-template-rows: 1fr;
+}

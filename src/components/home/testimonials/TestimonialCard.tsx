@@ -38,10 +38,11 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({ item }) => {
         {
           "--mouse-x": mousePos.x,
           "--mouse-y": mousePos.y,
+          borderRadius: "0px",
         } as React.CSSProperties
       }
     >
-      <div className="testimonial-spotlight-glow" />
+      <div className="testimonial-spotlight-glow" style={{ borderRadius: "0px" }} />
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div>

@@ -1,6 +1,6 @@
 export default function LoadingBlogPost() {
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+        <div className="min-h-screen bg-gray-50 pt-[104px] md:pt-[116px] pb-16">
             <div className="container mx-auto px-4 max-w-6xl">
                 {/* Skeleton Header */}
                 <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm mb-8 animate-pulse">

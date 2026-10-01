@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import "./buttons.css";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 

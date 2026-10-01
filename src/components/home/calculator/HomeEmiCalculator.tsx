@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import "./emi-calculator.css";
 import { LoanType } from "@/types";
 import { LOAN_CONFIGS } from "./calculator.data";
 import { EmiTabs } from "./EmiTabs";

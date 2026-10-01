@@ -75,7 +75,7 @@ export default function BlogList() {
                 readingTime: p.readingTime || (p.readTime ? `${p.readTime} min read` : '6 min read'),
             }));
         }
-        return sampleBlogPosts;
+        return [];
     }, [isApiAvailable, apiPosts]);
 
     const modalSearchResults = useMemo(() => {
@@ -96,7 +96,6 @@ export default function BlogList() {
     const filteredPosts = useMemo(() => rawPosts.filter((p: any) => activeCategory === 'All' || p.category?.toLowerCase() === activeCategory.toLowerCase()), [rawPosts, activeCategory]);
     const featuredPost = useMemo(() => 
         filteredPosts.find((p: any) => p.isFeatured) || 
-        filteredPosts.find((p: any) => p.slug?.includes('credit') || p.slug?.includes('cibil')) || 
         filteredPosts[0] || null, 
     [filteredPosts]);
     const allOtherPosts = useMemo(() => !featuredPost ? filteredPosts : filteredPosts.filter((p: any) => (p.slug || p._id) !== (featuredPost.slug || featuredPost._id)), [filteredPosts, featuredPost]);
@@ -132,8 +131,8 @@ export default function BlogList() {
                     {isLoading ? (
                         <div className={styles.postsGrid}>
                             {[...Array(6)].map((_, i) => (
-                                <div key={i} className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-4 animate-pulse">
-                                    <div className="aspect-[16/10] bg-slate-200 dark:bg-slate-800 rounded-xl mb-4" />
+                                <div key={i} className="bg-slate-50 dark:bg-slate-900 rounded-none p-4 animate-pulse">
+                                    <div className="aspect-[16/10] bg-slate-200 dark:bg-slate-800 rounded-none mb-4" />
                                     <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-3/4 mb-3" />
                                     <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-1/3 mb-2" />
                                 </div>
@@ -151,10 +150,10 @@ export default function BlogList() {
                     )}
 
                     {totalPages > 1 && (
-                        <div className="flex justify-center items-center gap-2 mt-12 mb-8">
+                        <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 mt-8 sm:mt-12 mb-8 px-2">
                             <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-2 rounded-md border border-slate-200 dark:border-slate-800 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed" aria-label="Previous Page"><ChevronLeft className="w-4 h-4" /></button>
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                <button key={page} onClick={() => setCurrentPage(page)} className={`w-9 h-9 rounded-md text-sm font-semibold transition-colors ${currentPage === page ? 'bg-[#155dfc] text-white' : 'border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'}`}>{page}</button>
+                                <button key={page} onClick={() => setCurrentPage(page)} className={`w-8 h-8 sm:w-9 sm:h-9 rounded-md text-xs sm:text-sm font-semibold transition-colors ${currentPage === page ? 'bg-[#155dfc] text-white' : 'border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'}`}>{page}</button>
                             ))}
                             <button onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="p-2 rounded-md border border-slate-200 dark:border-slate-800 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed" aria-label="Next Page"><ChevronRight className="w-4 h-4" /></button>
                         </div>

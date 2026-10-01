@@ -1,0 +1,106 @@
+/* ==========================================================================
+   DATA SAFE & SECURITY SECTION - MODULAR STYLESHEET
+   Row 1: Heading | Logo; Row 2: Text | CRIF Trust Box
+   ========================================================================== */
+
+.data-safe-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 36px 0 44px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.data-safe-container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Row 1: Heading (Left) + Logo (Right) */
+.data-safe-row-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef2f6;
+  margin-bottom: 24px;
+}
+
+.data-safe-heading-col {
+  flex: 1 1 auto;
+}
+
+.data-safe-logo-col {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Row 2: Text (Left) + CRIF / Trust Box (Right) */
+.data-safe-row-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.data-safe-text-col {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+.data-safe-crif-col {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+.data-safe-trust-box {
+  padding: 20px 22px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f8fafc 0%, rgba(239, 246, 255, 0.5) 50%, #f8fafc 100%);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.data-safe-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .data-safe-row-1 {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+  .data-safe-row-2 {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .data-safe-text-col,
+  .data-safe-crif-col {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .data-safe-row-1 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .data-safe-logo-col {
+    justify-content: flex-start;
+  }
+  .data-safe-trust-grid {
+    grid-template-columns: 1fr;
+  }
+}

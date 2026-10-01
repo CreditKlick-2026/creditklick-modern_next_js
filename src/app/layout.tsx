@@ -151,6 +151,21 @@ export default function RootLayout({
           <AnalyticsTracker />
         </Suspense>
 
+        {/* Suppress Tawk.to Chat Widget */}
+        <script
+          id="tawk-suppress-script"
+          dangerouslySetInnerHTML={{
+            __html: `window.Tawk_API=window.Tawk_API||{};window.Tawk_API.hideWidget=function(){};window.Tawk_API.onLoad=function(){if(window.Tawk_API&&typeof window.Tawk_API.hideWidget==='function'){window.Tawk_API.hideWidget();}};`,
+          }}
+        />
+
+        {/* Lottie — loaded locally to avoid Turbopack HMR module-factory bug */}
+        <Script
+          id="lottie-global"
+          src="/js/lottie.min.js"
+          strategy="beforeInteractive"
+        />
+
         {/* Google Tag Manager - Non-blocking script loading */}
         <Script
           id="gtm-script"

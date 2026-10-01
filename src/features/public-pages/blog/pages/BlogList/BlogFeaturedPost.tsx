@@ -19,6 +19,20 @@ const formatDate = (dateStr?: string) => {
     }
 };
 
+const cleanExcerpt = (text?: string) => {
+    if (!text) return '';
+    return text
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&amp;/gi, '&')
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'")
+        .replace(/&lt;/gi, '<')
+        .replace(/&gt;/gi, '>')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+};
+
 interface BlogFeaturedPostProps {
     post: any;
     baseBlogPath: string;
@@ -26,6 +40,8 @@ interface BlogFeaturedPostProps {
 
 export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) {
     if (!post) return null;
+
+    const excerptText = cleanExcerpt(post.excerpt || post.summary);
 
     return (
         <section className={styles.featuredSection}>
@@ -62,12 +78,12 @@ export function BlogFeaturedPost({ post, baseBlogPath }: BlogFeaturedPostProps) 
                             {post.category || 'Credit Score'}
                         </span>
                     </div>
-                    {post.excerpt && (
-                        <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
-                            {post.excerpt}
+                    {excerptText && (
+                        <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                            {excerptText}
                         </p>
                     )}
-                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155dfc] dark:text-[#60a5fa]">
+                    <div className="mt-4 sm:mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#155dfc] dark:text-[#60a5fa]">
                         <span>Read full guide</span>
                         <ArrowRight className="w-4 h-4" />
                     </div>

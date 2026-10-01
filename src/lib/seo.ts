@@ -94,7 +94,7 @@ export function getOrganizationSchema() {
         '@type': 'Organization',
         name: 'CreditKlick',
         url: SITE_URL,
-        logo: `${SITE_URL}/assets/creditklic_next_gen.png`,
+        logo: `${SITE_URL}/images/CK.png`,
         sameAs: [
             'https://www.facebook.com/creditklick',
             'https://twitter.com/creditklick',
@@ -221,7 +221,7 @@ export function getArticleSchema(config: {
             name: 'CreditKlick',
             logo: {
                 '@type': 'ImageObject',
-                url: `${SITE_URL}/assets/creditklic_next_gen.png`,
+                url: `${SITE_URL}/images/CK.png`,
             },
         },
     }
@@ -239,8 +239,8 @@ export function getAIOKnowledgeGraphSchema() {
         name: 'CreditKlick',
         legalName: 'CreditKlick Financial Technologies',
         url: SITE_URL,
-        logo: `${SITE_URL}/assets/creditklic_next_gen.png`,
-        image: `${SITE_URL}/assets/creditklic_next_gen.png`,
+        logo: `${SITE_URL}/images/CK.png`,
+        image: `${SITE_URL}/images/CK.png`,
         description: 'CreditKlick is India\'s trusted AI-enabled financial marketplace providing free credit score checks, credit report analysis, personal loan comparison, business loans, home loans, and credit card applications.',
         currenciesAccepted: 'INR',
         paymentAccepted: 'Free Service',

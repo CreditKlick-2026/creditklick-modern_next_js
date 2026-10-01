@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'CreditKlick - Your Financial Partner for Loans & Credit Score',
     description: 'Get your free credit score, compare top loan offers, and apply for the best credit cards in India. Fast, secure, and purely digital.',
-    images: ['/assets/img/newlogo.webp'],
+    images: ['/images/CK.png'],
   },
   alternates: {
     canonical: '/',

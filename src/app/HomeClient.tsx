@@ -1,30 +1,20 @@
 "use client";
+
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   HeroSlider,
   ProductMarquee,
-  CreditHealthPromo,
-  MediaCoverage,
-  HomeEmiCalculator,
-  PartnersCarousel,
-  CustomerCentricBanner,
-  ServicesGrid,
   BenefitsAccordion,
-  LetsTalkBanner,
-  AppFeatureCards,
-  StatsCounter,
-  SupportInitiative,
+  ServicesGrid,
+  CreditReportShowcase,
+  HomeEmiCalculator,
   DataSafeSection,
 } from "@/components/home";
 
-import {
-  ZetPlusRewards,
-} from "@/components/zentry";
-
-// Dynamic imports for client-only animated sections
-const ZentryAbout = dynamic(
-  () => import("@/components/zentry/about"),
+// Client-only dynamic imports for heavy animation & scroll-pinned sections
+const AppDownload = dynamic(
+  () => import("@/components/home/app-download"),
   { ssr: false }
 );
 
@@ -38,7 +28,13 @@ const HomeFaqSection = dynamic(
   { ssr: false }
 );
 
+const HeroBanner = dynamic(
+  () => import("@/components/home/HeroBanner"),
+  { ssr: false }
+);
+
 export default function HomeClient() {
+  // Smooth scroll handler for anchor links
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash) {
       const hash = window.location.hash.replace("#", "");
@@ -52,66 +48,40 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-white w-full max-w-full">
+      {/* 1. Full Hero Animated Banner (Desktop & Mobile) */}
+      <section id="hero">
+        <HeroBanner />
+      </section>
 
-
-      {/* 4. Hero interactive slider with gauge meter & credit animation */}
-      <div className="pt-2 sm:pt-4 bg-white">
-        <HeroSlider />
-      </div>
-
-      {/* 5. Quick product marquee ribbon */}
+      {/* 2. Quick product marquee ribbon */}
       <ProductMarquee />
 
-      {/* 8. Zentry Scroll-Pinned "About" Section */}
-      <ZentryAbout />
-
-      {/* 10. Benefits of CreditKlick - Accordion + illustration */}
+      {/* 3. Benefits of CreditKlick - Accordion + illustration */}
       <BenefitsAccordion />
 
-      {/* 6. How CreditKlick Helps You - Service icon grid */}
+      {/* 4. Download The CreditKlick App (Modular App Showcase Section) */}
+      <AppDownload />
+
+      {/* 5. How CreditKlick Helps You - Interactive circuit service grid */}
       <ServicesGrid />
 
-      {/* 11. ZET Plus Credit Card Rewards & Pricing Comparison Section */}
-      <ZetPlusRewards />
+      {/* 6. Features: "Everything you need to fix your score" + Sticky Showcase Cards */}
+      <CreditReportShowcase />
 
-      {/* 12. "Let's Talk" CTA banner */}
-      <LetsTalkBanner />
-
-      {/* 13. In-app feature cards */}
-      <AppFeatureCards />
-
-      {/* 14. Animated milestone counters */}
-      <StatsCounter />
-
-      {/* 15. Credit Health Promo Banner */}
-      <CreditHealthPromo />
-
-      {/* 16. Interactive EMI Loan Calculator */}
-      <div className="bg-white py-12">
+      {/* 8. Interactive EMI Loan Calculator */}
+      <section id="calculator" className="bg-white py-12">
         <HomeEmiCalculator />
-      </div>
+      </section>
 
-      {/* 17. Sounds of Silence support initiative */}
-      <SupportInitiative />
-
-      {/* 18. Partner Banks Infinite Carousel */}
-      <PartnersCarousel />
-
-      {/* 19. Customer Testimonials */}
+      {/* 9. Customer Testimonials */}
       <HappyCustomersSection />
 
-      {/* 20. Data security & accreditations */}
+      {/* 12. Enterprise Data Security, Accreditations & CRIF Audit */}
       <DataSafeSection />
 
-      {/* 21. Frequently Asked Questions (7pixs style) */}
+      {/* 13. Frequently Asked Questions */}
       <HomeFaqSection />
-
-      {/* 22. Customer Centric Contact Banner */}
-      <CustomerCentricBanner />
-
-      {/* 23. Press & Acclaim - Our Media Coverage */}
-      <MediaCoverage />
     </div>
   );
 }

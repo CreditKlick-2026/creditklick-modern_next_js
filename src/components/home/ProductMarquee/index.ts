@@ -1,2 +1,2 @@
-export { ProductMarquee } from "./ProductMarquee";
-export { ProductMarquee as default } from "./ProductMarquee";
+export { ProductMarquee, default } from "./ProductMarquee";
+export * from "./marquee.data";

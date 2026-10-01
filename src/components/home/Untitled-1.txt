@@ -1,0 +1,257 @@
+[AAbboouutt  UUss](http://localhost:3000/about)
+[PPrriiccee](http://localhost:3000/#pricing)
+[LLooaannss](http://localhost:3000/loans)
+[CCrreeddiitt  RReeffiinnee](http://localhost:3000/refine)
+[CCaallccuullaattoorrss](http://localhost:3000/calculators)
+[BBlloogg](http://localhost:3000/blog)
+[Check Score](http://localhost:3000/credit-score)
+
+# The smart choice when it comes to finding credit that's just right for you
+
+[CHECK FREE CREDIT SCORE](http://localhost:3000/credit-score)
+[Credit ScoreFree Report](http://localhost:3000/credit-score)
+[Credit CardsInstant Approval](http://localhost:3000/credit-cards)
+[Personal LoansFrom 10.49%](http://localhost:3000/loan/personal-loan)
+[Business LoanUp to ₹50 Lakhs](http://localhost:3000/loan/business-loan)
+[Credit RefineBoost Score](http://localhost:3000/refine)
+[CalculatorsEMI & Tools](http://localhost:3000/calculators)
+[Credit ScoreFree Report](http://localhost:3000/credit-score)
+[Credit CardsInstant Approval](http://localhost:3000/credit-cards)
+[Personal LoansFrom 10.49%](http://localhost:3000/loan/personal-loan)
+[Business LoanUp to ₹50 Lakhs](http://localhost:3000/loan/business-loan)
+[Credit RefineBoost Score](http://localhost:3000/refine)
+[CalculatorsEMI & Tools](http://localhost:3000/calculators)
+[Credit ScoreFree Report](http://localhost:3000/credit-score)
+[Credit CardsInstant Approval](http://localhost:3000/credit-cards)
+[Personal LoansFrom 10.49%](http://localhost:3000/loan/personal-loan)
+[Business LoanUp to ₹50 Lakhs](http://localhost:3000/loan/business-loan)
+[Credit RefineBoost Score](http://localhost:3000/refine)
+[CalculatorsEMI & Tools](http://localhost:3000/calculators)
+[Credit ScoreFree Report](http://localhost:3000/credit-score)
+[Credit CardsInstant Approval](http://localhost:3000/credit-cards)
+[Personal LoansFrom 10.49%](http://localhost:3000/loan/personal-loan)
+[Business LoanUp to ₹50 Lakhs](http://localhost:3000/loan/business-loan)
+[Credit RefineBoost Score](http://localhost:3000/refine)
+[CalculatorsEMI & Tools](http://localhost:3000/calculators)
+[Debt CounselingPersonalized advice to navigate challenges & make informed decisions.](http://localhost:3000/contact)
+Debt Counseling
+Personalized advice to navigate challenges & make informed decisions.
+[Debt ManagementCustomized plans consolidating EMIs into a single monthly payment.](http://localhost:3000/loans)
+Debt Management
+Customized plans consolidating EMIs into a single monthly payment.
+[Financial EmpowermentLiteracy programs to regain control & achieve lasting stability.](http://localhost:3000/blog)
+Financial Empowerment
+Literacy programs to regain control & achieve lasting stability.
+[Credit RefineAlgorithmic bureau dispute resolution to rebuild credit score.](http://localhost:3000/refine)
+Credit Refine
+Algorithmic bureau dispute resolution to rebuild credit score.
+[Legal Debt SolutionsProtecting rights & negotiating with creditors to eliminate stress.](http://localhost:3000/register-complaint)
+Legal Debt Solutions
+Protecting rights & negotiating with creditors to eliminate stress.
+[Customer App / PortalEasy 24/7 access to resources & live debt resolution tracking.](http://localhost:3000/login)
+Customer App / Portal
+Easy 24/7 access to resources & live debt resolution tracking.
+[Community ForumCommunity platform for sharing experiences & debt management insights.](http://localhost:3000/blog)
+Community Forum
+Community platform for sharing experiences & debt management insights.
+[Repayment CalculatorsInteractive financial tools to plan loan settlements & timelines.](http://localhost:3000/calculators)
+Repayment Calculators
+Interactive financial tools to plan loan settlements & timelines.
+[Debt Counseling1-on-1 SessionPersonalized advice to navigate challenges & make informed decisions.](http://localhost:3000/contact)
+Debt Counseling
+Personalized advice to navigate challenges & make informed decisions.
+[Debt ManagementLower InterestCustomized plans consolidating EMIs into a single monthly payment.](http://localhost:3000/loans)
+Debt Management
+Customized plans consolidating EMIs into a single monthly payment.
+[Financial EmpowermentFree ModulesLiteracy programs to regain control & achieve lasting stability.](http://localhost:3000/blog)
+Financial Empowerment
+Literacy programs to regain control & achieve lasting stability.
+[Credit RefineScore AuditAlgorithmic bureau dispute resolution to rebuild credit score.](http://localhost:3000/refine)
+Credit Refine
+Algorithmic bureau dispute resolution to rebuild credit score.
+[Legal Debt SolutionsAnti-HarassmentProtecting rights & negotiating with creditors to eliminate stress.](http://localhost:3000/register-complaint)
+Legal Debt Solutions
+Protecting rights & negotiating with creditors to eliminate stress.
+[Customer App / PortalReal-Time TrackingEasy 24/7 access to resources & live debt resolution tracking.](http://localhost:3000/login)
+Customer App / Portal
+
+# The smart choice when it comes to finding credit that's just right for you
+
+Easy 24/7 access to resources & live debt resolution tracking.
+[Community ForumPeer CommunityCommunity platform for sharing experiences & debt management insights.](http://localhost:3000/blog)
+Community Forum
+Community platform for sharing experiences & debt management insights.
+[Repayment CalculatorsEMI SimulatorInteractive financial tools to plan loan settlements & timelines.](http://localhost:3000/calculators)
+Repayment Calculators
+Interactive financial tools to plan loan settlements & timelines.
+
+## Benefits of CreditKlick
+Our experts negotiate with your creditors to reduce EMIs, consolidating multiple debts into a single, affordable monthly payment. Every creditor and account payment detail stays accessible 24/7 on our secure online platform.
+Regular affordable EMI payments and a steady decline in debt get updated on your credit files, leading to an improved credit score. Our counselling, education and anti-harassment tools help you reach future goals — a car or a home.
+Expert solutions to stop creditor harassment and help you become debt and stress free. Relentless recovery calls to you, your friends and family, or unexpected visits to your home or workplace — we step in immediately.
+Our team, trained by psychologists and mental health professionals in empathetic communication, listens with compassion and responds with understanding — so every conversation is handled with care and respect.
+
+## Upgrade Your CreditKlick RewardsWith CreditKlick Plus
+CreditKlick Plus users enjoy exclusive benefits on UPI transactions, voucher payments, and more.
+चला बोलूया
+
+## LET'S TALK
+One honest conversation is all it takes to start. Our advisors will walk you through your options — no judgement, no obligation.
+[Talk To An Advisor](http://localhost:3000/contact)
+
+### Easy Communication
+Connect directly with our expert advisors for personalized support.
+
+### Resource Hub
+Access valuable resources, tips, and educational materials.
+
+### Real Time Financial Insights
+Monitor your financial progress anytime, anywhere.
+
+### Community Forum
+Share experiences, gain knowledge, and learn from others on your journey to financial freedom.
+0
+Years of global experience
+0
+Cities across India
+0K+
+Accounts managed
+0%
+Satisfaction rate
+0.0/5
+Customer review rating
+
+## Check your Credit Score today
+
+Get a better understanding of your financial health with a free Credit Score check today. Discover where you stand and take control of your Credit with ease!
+[Check Now](http://localhost:3000/credit-score)
+
+### Personal Loan EMI Calculator
+Determine the cost of facilitating immediate liquidity.
+
+### Home Loan EMI Calculator
+Estimate the cost of realizing your ideal home.
+
+### Car Loan EMI Calculator
+Compute the cost of personalizing your car.
+EMI calculator for
+
+#### PERSONAL LOAN
+Loan Amount(₹)
+₹5,00,000
+Interest Rate %
+15%
+Tenure (Months)
+60
+Monthly EMI
+₹11,895
+Total Interest Payable
+₹2,13,700
+Total Amount Payable
+₹7,13,700
+
+## Sounds of Silence
+Sounds of Silence (SOS) is a CreditKlick initiative for people carrying the silent struggles of debt — the recovery calls, the sleepless nights, the fear of a missed EMI. It offers a stigma-free space to talk. With free, confidential financial and mental-health counselling, multilingual support and self-help resources, SOS helps replace silent suffering with care, and restores dignity. It is time to be heard.
+[Let's Talk](http://localhost:3000/contact)
+[Learn More](http://localhost:3000/about)
+Trusted by India's leading financial institutions
+
+## Your Data is in Safe Hands
+We've got it covered.
+Operating in a data-sensitive environment, we have developed and rigorously tested our technology and solutions to meet the highest industry standards. Our accreditations reflect an unwavering commitment to compliance and excellence.
+We hold information-security and quality-management certifications that govern how your data is stored, accessed and protected — at every step of your journey with CreditKlick.
+- ISO 27001
+- ISO 9001
+- RBI Compliant
+- PCI DSS
+
+## Being Customer-Centric, we focus on client's needs before offering a solution
+You're at the center of our story, not just a statistic. Join us on your journey to improve your credit score with our confidential and expert Credit Improvement Services.
+[Check Free Credit Score](http://localhost:3000/credit-score)
+
+## Press & AcclaimOur Media Coverage
+Leading national news agencies and international business networks spotlighting CreditKlick's digital credit innovation.
+[National WireIMS Introduces Credit Refine: A Revolutionary Product by CreditKlickCreditKlick pioneers an algorithmic credit-repair and dispute-management platform designed for millions of Indian borrowers.Press ReleaseRead Story](https://aninews.in/news/business/business/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick20230530190234/)
+
+### IMS Introduces Credit Refine: A Revolutionary Product by CreditKlick
+CreditKlick pioneers an algorithmic credit-repair and dispute-management platform designed for millions of Indian borrowers.
+[Leading DailyTransforming Financial Health with Automated Bureau AuditsSpotlighting CreditKlick's dedicated approach to improving creditworthiness and securing prime institutional loan terms.Business NewsRead Story](https://www.lokmattimes.com/business/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick/)
+
+### Transforming Financial Health with Automated Bureau Audits
+Spotlighting CreditKlick's dedicated approach to improving creditworthiness and securing prime institutional loan terms.
+[Digital MediaEmpowering Borrowers Across India to Take Control of CreditHow CreditKlick is disrupting credit reporting errors, unauthorized inquiries, and outdated bureau data in real-time.National FeatureRead Story](https://theprint.in/ani-press-releases/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick/1602841/)
+
+### Empowering Borrowers Across India to Take Control of Credit
+How CreditKlick is disrupting credit reporting errors, unauthorized inquiries, and outdated bureau data in real-time.
+[Global WireCreditKlick Launches to Revolutionize the Digital Credit IndustryIncredible Management Service Pvt Ltd introduces its next-generation subsidiary CreditKlick with bank-grade tech stack.InternationalRead Story](https://www.einpresswire.com/article/622077441/incredible-management-service-pvt-ltd-launches-new-subsidiary-creditklick-to-revolutionize-the-credit-industry)
+
+### CreditKlick Launches to Revolutionize the Digital Credit Industry
+Incredible Management Service Pvt Ltd introduces its next-generation subsidiary CreditKlick with bank-grade tech stack.
+[Television NetworkNext-Gen Fintech Innovations in Automated Credit SolutionsGlobal syndicated feature exploring consumer empowerment through algorithmic credit guidance and curated card matching.Broadcast FeatureRead Story](https://fox59.com/business/press-releases/ein-presswire/622077441/incredible-management-service-pvt-ltd-launches-new-subsidiary-creditklick-to-revolutionize-the-credit-industry/)
+
+### Next-Gen Fintech Innovations in Automated Credit Solutions
+Global syndicated feature exploring consumer empowerment through algorithmic credit guidance and curated card matching.
+[Broadcast AffiliateDisrupting Digital Lending & Financial Transparency in IndiaIndustry spotlight on CreditKlick's secure 256-bit infrastructure for seamless personal loans, credit cards, and credit health.Media SpotlightRead Story](https://www.ksnt.com/business/press-releases/ein-presswire/622077441/incredible-management-service-pvt-ltd-launches-new-subsidiary-creditklick-to-revolutionize-the-credit-industry/)
+
+### Disrupting Digital Lending & Financial Transparency in India
+
+Industry spotlight on CreditKlick's secure 256-bit infrastructure for seamless personal loans, credit cards, and credit health.
+HEADOFFICE - PLOT 112 UDYOG VIHAR PHASE-1 GURGAON, HARYANA, 122016
+© 2022-2026 Incredible Management Services PVT. LTD.
+
+#### Resources
+- [Credit Score](http://localhost:3000/credit-score)
+- [Credit Card](http://localhost:3000/credit-cards)
+- [Credit Refine](http://localhost:3000/refine)
+- [Personal Loan](http://localhost:3000/loan/personal-loan)
+- [Business Loan](http://localhost:3000/loan/business-loan)
+- [Home Loan](http://localhost:3000/loan/home-loan)
+[Credit Score](http://localhost:3000/credit-score)
+[Credit Card](http://localhost:3000/credit-cards)
+[Credit Refine](http://localhost:3000/refine)
+[Personal Loan](http://localhost:3000/loan/personal-loan)
+[Business Loan](http://localhost:3000/loan/business-loan)
+[Home Loan](http://localhost:3000/loan/home-loan)
+
+#### Company
+- [About us](http://localhost:3000/about)
+- [Careers](https://www.stefto.com/careers/)
+- [Contact us](http://localhost:3000/contact)
+- [Blogs](http://localhost:3000/blog)
+- [Register Complaint](http://localhost:3000/register-complaint)
+[About us](http://localhost:3000/about)
+[Careers](https://www.stefto.com/careers/)
+[Contact us](http://localhost:3000/contact)
+[Blogs](http://localhost:3000/blog)
+[Register Complaint](http://localhost:3000/register-complaint)
+
+#### Quick Links
+- [EMI Calculator](http://localhost:3000/emi)
+- [AU VALUE Calculator](http://localhost:3000/calculator/au)
+- [IDFC FIRST VALUE Calculator](http://localhost:3000/calculator/idfc)
+- [SBI SCLICK VALUE Calculator](http://localhost:3000/calculator/sbi-click)
+- [YES BANK VALUE Calculator](http://localhost:3000/calculator/yes)
+[EMI Calculator](http://localhost:3000/emi)
+[AU VALUE Calculator](http://localhost:3000/calculator/au)
+[IDFC FIRST VALUE Calculator](http://localhost:3000/calculator/idfc)
+[SBI SCLICK VALUE Calculator](http://localhost:3000/calculator/sbi-click)
+[YES BANK VALUE Calculator](http://localhost:3000/calculator/yes)
+
+#### Legal & Governance
+- [Privacy Policy](http://localhost:3000/privacy-policy)
+- [Terms and Conditions](http://localhost:3000/terms-conditions)
+- [Return & Refund Policy](http://localhost:3000/return-refund)
+- [Posh Policy](http://localhost:3000/posh-policy)
+- [Cookies Policy](http://localhost:3000/cookies-policy)
+- [Grievance Redressal](http://localhost:3000/grievance-redressal)
+[Privacy Policy](http://localhost:3000/privacy-policy)
+[Terms and Conditions](http://localhost:3000/terms-conditions)
+[Return & Refund Policy](http://localhost:3000/return-refund)
+[Posh Policy](http://localhost:3000/posh-policy)
+[Cookies Policy](http://localhost:3000/cookies-policy)
+[Grievance Redressal](http://localhost:3000/grievance-redressal)
+[Terms of Use](http://localhost:3000/terms-conditions)
+[Privacy Policy](http://localhost:3000/privacy-policy)
+[Grievance Redressal](http://localhost:3000/grievance-redressal)
+[Cookies Policy](http://localhost:3000/cookies-policy)
+[POSH Policy](http://localhost:3000/posh-policy)

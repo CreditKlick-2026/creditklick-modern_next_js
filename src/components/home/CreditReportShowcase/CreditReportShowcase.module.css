@@ -1,0 +1,443 @@
+/* ==========================================================================
+   CREDIT REPORT SHOWCASE MODULE STYLESHEET
+   6-Slide Custom Section Images with Sticky Stacking On Scroll
+   ========================================================================== */
+
+.section {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 3rem 1rem 6rem 1rem;
+  overflow: visible; /* Required so sticky cards don't get trapped */
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 4rem 1.5rem 8rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 5rem 2rem 10rem 2rem;
+  }
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* ── Section Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 58rem;
+  margin: 0 auto 2.5rem auto;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .header {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    margin-bottom: 4.5rem;
+  }
+}
+
+.sectionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(147, 197, 253, 0.6);
+  background-color: rgba(219, 234, 254, 0.7);
+  color: #1c398e;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.sectionTag svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #1c398e;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 3rem;
+    line-height: 1.15;
+  }
+}
+
+.titleHighlight {
+  display: block;
+  color: #2563eb;
+}
+
+.sectionIntro {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #6b7280;
+}
+
+@media (min-width: 768px) {
+  .sectionIntro {
+    font-size: 1.125rem;
+  }
+}
+
+/* ── Sticky Cards Stack Container (Must be block for reliable sticky in Chrome/Safari) ── */
+.cardsStack {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+/* ── Sticky Card Wrapper Base (Rounded corners 24px) ── */
+.cardWrapper {
+  position: sticky;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.04), 0 15px 40px -10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Inner wrapper */
+.cardInner {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+/* Stacking Offsets & Scroll Travel for 6 Cards (Staggered stack effect) */
+.cardIndex0 {
+  top: 4.5rem;
+  z-index: 10;
+  margin-bottom: 40vh;
+}
+
+.cardIndex1 {
+  top: 5rem;
+  z-index: 20;
+  margin-bottom: 40vh;
+  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.1), 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+.cardIndex2 {
+  top: 5.5rem;
+  z-index: 30;
+  margin-bottom: 40vh;
+  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.1), 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+.cardIndex3 {
+  top: 6rem;
+  z-index: 40;
+  margin-bottom: 40vh;
+  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.1), 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+.cardIndex4 {
+  top: 6.5rem;
+  z-index: 50;
+  margin-bottom: 40vh;
+  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.1), 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+.cardIndex5 {
+  top: 7rem;
+  z-index: 60;
+  margin-bottom: 0;
+  box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.1), 0 20px 45px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 1024px) {
+  .cardIndex0 {
+    top: 5.5rem;
+    margin-bottom: 45vh;
+  }
+  .cardIndex1 {
+    top: 6.25rem;
+    margin-bottom: 45vh;
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.12), 0 25px 50px rgba(0, 0, 0, 0.08);
+  }
+  .cardIndex2 {
+    top: 7rem;
+    margin-bottom: 45vh;
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.12), 0 25px 50px rgba(0, 0, 0, 0.08);
+  }
+  .cardIndex3 {
+    top: 7.75rem;
+    margin-bottom: 45vh;
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.12), 0 25px 50px rgba(0, 0, 0, 0.08);
+  }
+  .cardIndex4 {
+    top: 8.5rem;
+    margin-bottom: 45vh;
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.12), 0 25px 50px rgba(0, 0, 0, 0.08);
+  }
+  .cardIndex5 {
+    top: 9.25rem;
+    margin-bottom: 0;
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.12), 0 25px 50px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ── Responsive 2-Column Split ── */
+.layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 520px;
+  }
+}
+
+/* ── Left Column ── */
+.leftCol {
+  flex: 1 1 55%;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .leftCol {
+    padding: 3rem 3.5rem;
+    max-width: 600px;
+    gap: 1.5rem;
+  }
+}
+
+.headline {
+  font-size: 1.75rem;
+  line-height: 1.22;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+  margin: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .headline {
+    font-size: 2.15rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 2.45rem;
+    line-height: 1.18;
+  }
+}
+
+/* Badges */
+.confusedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-style: italic;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.badgeBlue {
+  background-color: #edf2fe;
+  border: 1px solid rgba(191, 219, 254, 0.85);
+  color: #1e3a8a;
+}
+
+.badgeOrange {
+  background-color: #fff7ed;
+  border: 1px solid rgba(254, 215, 170, 0.85);
+  color: #9a3412;
+}
+
+.badgeRed {
+  background-color: #fef2f2;
+  border: 1px solid rgba(254, 202, 202, 0.85);
+  color: #991b1b;
+}
+
+.badgeTeal {
+  background-color: #f0fdfa;
+  border: 1px solid rgba(153, 246, 228, 0.85);
+  color: #115e59;
+}
+
+.badgeIndigo {
+  background-color: #eef2ff;
+  border: 1px solid rgba(199, 210, 254, 0.85);
+  color: #3730a3;
+}
+
+.badgeGreen {
+  background-color: #ecfdf5;
+  border: 1px solid rgba(167, 243, 208, 0.85);
+  color: #065f46;
+}
+
+.emoji {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.25rem;
+  margin: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .checklist {
+    gap: 1.15rem;
+  }
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkText {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #334155;
+  font-weight: 450;
+}
+
+@media (min-width: 640px) {
+  .checkText {
+    font-size: 1rem;
+  }
+}
+
+/* ── Right Column: Custom Phone Image Container ── */
+.rightCol {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #f1f5fd;
+}
+
+@media (min-width: 1024px) {
+  .rightCol {
+    width: 440px;
+    height: 520px;
+    align-items: stretch;
+  }
+}
+
+.rightColBlue {
+  background-color: #f1f5fd;
+}
+
+.rightColOrange {
+  background-color: #fffbf5;
+}
+
+.rightColRed {
+  background-color: #fff8f8;
+}
+
+.rightColTeal {
+  background-color: #f6fdfc;
+}
+
+.rightColIndigo {
+  background-color: #f7f9ff;
+}
+
+.rightColGreen {
+  background-color: #f6fcf8;
+}
+
+/* ── Image Container (Full Image Display with Zero Cut-off) ── */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.fullPhoneImage {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 1023px) {
+  .fullPhoneImage {
+    max-width: 340px;
+    height: auto;
+    max-height: 480px;
+    margin: 0 auto;
+    padding: 1.25rem 0.75rem;
+  }
+}

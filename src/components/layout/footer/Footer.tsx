@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import "./footer.css";
 import { FooterWave } from "./FooterWave";
 import { FooterBrand } from "./FooterBrand";
 import { FooterNav } from "./FooterNav";
@@ -8,7 +9,7 @@ import { FooterBottom } from "./FooterBottom";
 
 export function Footer() {
   return (
-    <footer className="ck-footer-wrapper font-sans selection:bg-white selection:text-[#364153]">
+    <footer className="ck-footer-wrapper font-sans selection:bg-white selection:text-black">
       {/* 1. Wave Mask Divider */}
       <FooterWave />
 

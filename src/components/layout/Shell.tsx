@@ -21,10 +21,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
     return (
         <SmoothScroll>
-            <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden relative">
+            <div className="min-h-screen flex flex-col w-full max-w-full relative">
                 <ScrollProgress />
                 <Header />
-                <main className="flex-1 pt-16 lg:pt-24 w-full max-w-full overflow-x-hidden">
+                <main className="flex-1 pt-16 lg:pt-24 w-full max-w-full">
                     {children}
                 </main>
                 <Footer />

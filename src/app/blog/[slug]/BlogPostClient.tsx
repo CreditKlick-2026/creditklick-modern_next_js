@@ -456,10 +456,10 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-gray-50 min-h-screen blogPostPageWrapper">
             {/* Hero Heading Section */}
-            <div className="bg-gradient-to-b from-white to-gray-50 border-b border-gray-100">
-                <div className="container mx-auto px-4 md:py-2">
+            <div className="bg-gradient-to-b from-white to-gray-50 border-b border-gray-100 py-6 md:py-8">
+                <div className="container mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -467,39 +467,29 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                         className="max-w-4xl mx-auto"
                     >
                         {/* Category & Read Time Badge */}
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-center mb-3">
                             <Link
                                 href={`/blog?category=${post.category}`}
-                                className="inline-flex items-center  px-3 bg-blue-50 text-blue-600 rounded-full text-xs font-semibold hover:bg-blue-100 transition-colors"
+                                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-semibold hover:bg-blue-100 transition-colors"
                             >
                                 <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
                                 {post.category}
                             </Link>
-
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-2xl sm:text-xl md:text-2xl lg:text-[2.25rem] font-bold text-gray-900 leading-[1.2] tracking-tight text-center">
+                        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-[2.25rem] font-bold text-gray-900 leading-snug tracking-tight text-center">
                             {post.title}
                         </h1>
 
-
-
                         {/* SubDescription */}
                         {post.subDescription && (
-                            <p className="text-base sm:text-sm md:text-lg md:text-base text-gray-600 leading-relaxed font-light text-center max-w-3xl mx-auto mt-2">
+                            <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed font-light text-center max-w-3xl mx-auto mt-3">
                                 {post.subDescription}
                             </p>
                         )}
-
-
                     </motion.div>
                 </div>
-            </div>
-
-            {/* CTA Banner - First */}
-            <div className="container max-w-6xl mx-auto flex justify-center items-center px-4 pt-2">
-                {ctaBanner.enabled && <CTABannerSection ctaBanner={ctaBanner} />}
             </div>
 
             {/* Breadcrumb - Compact */}
@@ -529,9 +519,9 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                     <div className="lg:w-3/4">
 
                         {/* Article Content */}
-                        <article className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-8">
+                        <article className="bg-white rounded-none shadow-sm border border-gray-100 p-4 md:p-8">
                             {/* Featured Image - LCP optimized, natural aspect ratio */}
-                            <div className="w-full mb-4 md:mb-6 rounded-lg md:rounded-xl overflow-hidden bg-gray-50 flex justify-center items-center">
+                            <div className="w-full mb-4 md:mb-6 rounded-none overflow-hidden bg-gray-50 flex justify-center items-center">
                                 <Image
                                     src={getImageUrl(post)}
                                     alt={post.title}
@@ -641,8 +631,8 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
                         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
                             {relatedPosts.slice(0, 6).map((relatedPost) => (
                                 <Link key={relatedPost._id} href={`/blog/${relatedPost.slug}`} className="group">
-                                    <div className="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-md md:shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-                                        <div className="h-24 sm:h-32 md:h-40 overflow-hidden flex-shrink-0">
+                                    <div className="bg-white rounded-none overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                                        <div className="h-24 sm:h-32 md:h-40 overflow-hidden flex-shrink-0 rounded-none">
                                             <Image
                                                 src={getImageUrl(relatedPost, 'related')}
                                                 alt={relatedPost.title}
@@ -671,6 +661,14 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
             {/* {ctaBanner.stickyBarEnabled && <StickyBottomBar ctaBanner={ctaBanner} />} */}
 
             <style jsx global>{`
+                .blogPostPageWrapper {
+                    padding-top: 3.5rem;
+                }
+                @media (min-width: 768px) {
+                    .blogPostPageWrapper {
+                        padding-top: 1rem;
+                    }
+                }
                 .prose iframe, .ql-video {
                     width: 100%;
                     min-height: 350px;

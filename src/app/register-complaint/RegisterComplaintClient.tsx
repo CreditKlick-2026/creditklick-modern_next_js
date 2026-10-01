@@ -7,7 +7,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
 import { contactsAPI } from '@/services/api'
-import complaintImg from '@/assets/Images/register_complaint.png'
+
+const complaintImg = "/images/Images/register_complaint.png"
 
 const COMPLAINT_CATEGORIES = [
     'Credit Report Error / Discrepancy',
@@ -229,6 +230,8 @@ export default function RegisterComplaintClient() {
                         <Image
                             src={complaintImg}
                             alt="Register Complaint"
+                            width={500}
+                            height={500}
                             className="w-auto h-auto object-contain max-h-[150px] max-w-[220px] md:max-h-[900px] md:max-w-none mix-blend-multiply"
                             priority
                         />

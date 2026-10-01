@@ -60,6 +60,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
         source: '/assets/:path*',
         headers: [
           {
@@ -74,6 +83,15 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/animations/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
           },
         ],
       },
@@ -99,6 +117,16 @@ const nextConfig: NextConfig = {
   // Proxy to backend fallback if local route does not exist
   async rewrites() {
     return {
+      beforeFiles: [
+        {
+          source: '/assets/:path*',
+          destination: '/images/:path*',
+        },
+        {
+          source: '/img/:path*',
+          destination: '/images/:path*',
+        },
+      ],
       fallback: [
         {
           source: '/api/v1/:path*',

@@ -5,7 +5,7 @@ export interface SlideItem {
   text3: string;
   url: string;
   btntext: string;
-  animation: "score" | "app" | "card" | "loan" | string;
+  animation: "score" | "app" | "card" | string;
 }
 
 export const DEFAULT_SLIDES: SlideItem[] = [
@@ -27,14 +27,5 @@ export const DEFAULT_SLIDES: SlideItem[] = [
     url: "/credit-cards",
     btntext: "APPLY FOR CREDIT CARD",
     animation: "card",
-  },
-  {
-    id: 4,
-    text1: "Instant Loan Approval",
-    text2: "Enjoy Premium Benefits",
-    text3: "100% Contactless Application Process with instant approval from top banks",
-    url: "/loans",
-    btntext: "APPLY FOR LOAN",
-    animation: "loan",
   },
 ];

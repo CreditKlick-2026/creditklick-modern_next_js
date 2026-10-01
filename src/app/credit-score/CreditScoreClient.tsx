@@ -11,18 +11,18 @@ import { verificationAPI } from '@/services/api'
 import Cookies from 'js-cookie'
 
 
-import scoremeter from '@/assets/Images/Cibil/scoremeter.png'
-import badge from '@/assets/Images/Cibil/badge.png'
-import calendar from '@/assets/Images/Cibil/calendar.png'
-import graph from '@/assets/Images/Cibil/graph.png'
-import testimonial from '@/assets/Images/Cibil/testimonial.png'
-import joinck from '@/assets/Images/Refine/refineProgram2.png'
+const scoremeter = '/images/Cibil/scoremeter.png'
+const badge = '/images/Cibil/badge.png'
+const calendar = '/images/Cibil/calendar.png'
+const graph = '/images/Cibil/graph.png'
+const testimonial = '/images/Cibil/testimonial.png'
+const joinck = '/images/Refine/refineProgram2.png'
 
 function FormDesign() {
     return (
         <div className="pl-4">
             <div>
-                <Image src={scoremeter} alt="Score Meter" className="flex pl-10 object-contain w-auto h-auto" />
+                <Image src={scoremeter} alt="Score Meter" width={280} height={140} className="flex pl-10 object-contain w-auto h-auto" />
             </div>
             <div>
                 <h1 className="lg:text-5xl text-3xl text-blue-900 font-thin">
@@ -35,17 +35,17 @@ function FormDesign() {
             </div>
             <div className="flex gap-x-4 p-2 my-4">
                 <span className="w-16">
-                    <Image src={badge} alt="Offers" className="w-full h-auto object-contain" />
+                    <Image src={badge} alt="Offers" width={64} height={64} className="w-full h-auto object-contain" />
                     <p className="text-[8px] px-2 py-1">
                         Get best offers on Loan & Car
                     </p>
                 </span>
                 <span className="w-16">
-                    <Image src={graph} alt="Insights" className="w-full h-auto object-contain" />
+                    <Image src={graph} alt="Insights" width={64} height={64} className="w-full h-auto object-contain" />
                     <p className="text-[8px] px-2 py-1">Insights for better score</p>
                 </span>
                 <span className="w-16">
-                    <Image src={calendar} alt="Report" className="w-full h-auto object-contain" />
+                    <Image src={calendar} alt="Report" width={64} height={64} className="w-full h-auto object-contain" />
                     <p className="text-[8px] px-2 py-1">Free monthly credit report</p>
                 </span>
             </div>
@@ -114,7 +114,7 @@ function Testimonials() {
             </p>
             <div className="grid lg:grid-cols-3 grid-cols-1">
                 <div className="w-full p-4 m-auto">
-                    <Image src={testimonial} alt="Testimonial" className="lg:w-1/2 w-2/5 m-auto object-contain h-auto" />
+                    <Image src={testimonial} alt="Testimonial" width={300} height={200} className="lg:w-1/2 w-2/5 m-auto object-contain h-auto" />
                 </div>
                 <div className="w-3/4 p-4 bg-blue-50 mx-auto my-4 shadow-lg rounded-lg">
                     <div className="flex text-blue-500 my-2">

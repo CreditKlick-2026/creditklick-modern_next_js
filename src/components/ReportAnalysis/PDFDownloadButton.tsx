@@ -3,8 +3,9 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, Image as PDFImage } from '@react-pdf/renderer';
 import productType from "./productType";
-import experian from "@/assets/Images/experian.png";
 import { Loader2 } from 'lucide-react';
+
+const experian = { src: "/images/Images/experian.png" };
 
 const dateformat = (dateStr: any) => {
     if (!dateStr) return "N/A";

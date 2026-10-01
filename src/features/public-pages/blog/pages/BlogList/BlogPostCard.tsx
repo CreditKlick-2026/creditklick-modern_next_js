@@ -35,14 +35,14 @@ export function BlogPostCard({ post, index, baseBlogPath }: BlogPostCardProps) {
             <Link href={targetUrl} className={styles.postCard}>
                 <div className={styles.postImageWrapper}>
                     <Image src={imageUrl} alt={post.title} fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                         className={styles.postImage} />
                 </div>
                 <div className={styles.postContent}>
                     <h3 className={`${styles.postTitle} ${isSpecialTitleGreen ? styles.postTitleGreen : ''}`}>{post.title}</h3>
                     <div className={styles.postCategory}>{category}</div>
                     <div className={styles.postMeta}>
-                        <span>{author}</span>
+                        <span className="truncate max-w-[70px] sm:max-w-none">{author}</span>
                         <span className={styles.metaBullet}>•</span>
                         <span>{formatDate(post.createdAt)}</span>
                         <span className={styles.metaBullet}>•</span>

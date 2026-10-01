@@ -1,8 +1,2 @@
-import ZentryAbout from "./ZentryAbout";
-
-export default ZentryAbout;
-export { ZentryAbout };
-export { AppPitch } from "./AppPitch";
-export { PhoneMockup } from "./PhoneMockup";
-export { QrDownloadCard } from "./QrDownloadCard";
-export * from "./about.data";
+export { AppDownload as default, AppDownload as ZentryAbout } from "@/components/home/app-download";
+export * from "@/components/home/app-download";

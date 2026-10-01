@@ -8,11 +8,11 @@ export const FooterBrand: React.FC = () => {
     <div className="xl:w-[32%] flex flex-col gap-4">
       <Link href="/" className="inline-block mb-1">
         <Image
-          src="/assets/creditklic_next_gen_transparent.png"
+          src="/images/CK.png"
           alt="CreditKlick"
-          width={160}
-          height={65}
-          className="w-32 sm:w-36 h-auto object-contain"
+          width={130}
+          height={71}
+          className="w-28 sm:w-32 h-auto object-contain"
           priority
         />
       </Link>

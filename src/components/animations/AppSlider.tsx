@@ -1,11 +1,11 @@
 // @ts-nocheck
 import Image from 'next/image';
-import appsliderimg from "@/assets/Images/sliderappimg.png";
+const appsliderimg = "/images/Images/sliderappimg.png";
 
 const AppSlider = () => {
     return (
         <div>
-            <Image src={appsliderimg} alt="CreditKlick App" className="w-full h-auto object-contain" priority />
+            <Image src={appsliderimg} alt="CreditKlick App" width={600} height={400} className="w-full h-auto object-contain" priority />
         </div>
     );
 };

@@ -11,5 +11,5 @@ export {
 } from "./ecosystem";
 export { ZetPlusRewards, RewardsMatrix, PlanCards } from "./rewards";
 export * from "./ecosystem/ecosystem.data";
-export * from "./about/about.data";
+export * from "./about";
 export * from "./rewards/rewards.data";

@@ -1346,6 +1346,12 @@
   .overflow-x-hidden {
     overflow-x: hidden;
   }
+  .overflow-x-clip {
+    overflow-x: clip;
+  }
+  .overflow-clip {
+    overflow: clip;
+  }
   .overflow-y-auto {
     overflow-y: auto;
   }

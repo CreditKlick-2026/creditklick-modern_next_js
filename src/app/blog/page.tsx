@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/creditklic_next_gen_transparent.png",
+        url: "/images/CK.png",
         width: 1200,
         height: 630,
         alt: "CreditKlick Financial Blog",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Blogs - Financial Tips, Credit Cards & Loans | CreditKlick",
     description: "Read actionable guides, credit score tips, personal loan comparisons, and expert financial advice.",
-    images: ["/assets/creditklic_next_gen_transparent.png"],
+    images: ["/images/CK.png"],
   },
 };
 
@@ -47,7 +47,7 @@ const blogListJsonLd = {
         "name": "CreditKlick",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://creditklick.com/assets/creditklic_next_gen_transparent.png"
+          "url": "https://creditklick.com/images/CK.png"
         }
       }
     },

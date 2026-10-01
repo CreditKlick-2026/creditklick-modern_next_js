@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import "./hero-slider.css";
 import { SlideItem, DEFAULT_SLIDES } from "./hero.data";
 import { HeroSlide } from "./HeroSlide";
 import { SliderPrevArrow, SliderNextArrow } from "./SliderControls";

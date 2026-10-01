@@ -1,5 +1,3 @@
-import { sampleBlogPosts } from "@/lib/data/blogData";
-
 class BlogService {
   /**
    * Get all published posts (Public)
@@ -10,20 +8,20 @@ class BlogService {
       const res = await fetch(`/api/v1/posts${query ? `?${query}` : ''}`);
       if (res.ok) {
         const data = await res.json();
-        if (data?.data?.posts?.length) return data;
+        if (data?.data?.posts) return data;
       }
-    } catch {
-      // fallback to sample posts
+    } catch (err) {
+      console.error("Error fetching posts:", err);
     }
     return {
       success: true,
       data: {
-        posts: sampleBlogPosts,
+        posts: [],
         pagination: {
-          total: sampleBlogPosts.length,
+          total: 0,
           page: 1,
           limit: 50,
-          totalPages: 1
+          totalPages: 0
         }
       }
     };
@@ -39,13 +37,12 @@ class BlogService {
         const data = await res.json();
         if (data?.data) return data;
       }
-    } catch {
-      // fallback
+    } catch (err) {
+      console.error("Error fetching post by slug:", err);
     }
-    const found = sampleBlogPosts.find(p => p.slug === slug || p._id === slug);
     return {
-      success: true,
-      data: found || null
+      success: false,
+      data: null
     };
   }
 

@@ -1,27 +1,31 @@
 // @ts-nocheck
-import Lottie from "lottie-web";
 import { useEffect, useRef } from "react";
 import animationData from "./animationjson/Card.json";
+import { getLottie } from "@/lib/lottie-global";
 
 const CardAnimation = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        const container = containerRef.current;
+        let animation: any = null;
+        let cancelled = false;
 
-        if (container) {
-            const animation = Lottie.loadAnimation({
-                container,
+        getLottie().then((lottie) => {
+            if (cancelled || !lottie || !containerRef.current) return;
+
+            animation = lottie.loadAnimation({
+                container: containerRef.current,
                 animationData,
                 renderer: "svg",
                 loop: true,
                 autoplay: true,
             });
+        });
 
-            return () => {
-                animation.destroy();
-            };
-        }
+        return () => {
+            cancelled = true;
+            animation?.destroy();
+        };
     }, []);
 
     return <div ref={containerRef} />;

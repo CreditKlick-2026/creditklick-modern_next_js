@@ -18,9 +18,6 @@ export const FOOTER_SECTIONS: FooterSection[] = [
       { name: "Credit Score", href: "/credit-score" },
       { name: "Credit Card", href: "/credit-cards" },
       { name: "Credit Refine", href: "/refine", isHighlight: true },
-      { name: "Personal Loan", href: "/loan/personal-loan" },
-      { name: "Business Loan", href: "/loan/business-loan" },
-      { name: "Home Loan", href: "/loan/home-loan" },
     ],
   },
   {

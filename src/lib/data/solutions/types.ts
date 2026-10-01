@@ -1,15 +1,15 @@
-import icon3dShopping from "@/assets/icons/solutions/3d-shopping.png";
-import icon3dMegaphone from "@/assets/icons/solutions/3d-megaphone.png";
-import icon3dBell from "@/assets/icons/solutions/3d-bell.png";
-import icon3dShield from "@/assets/icons/solutions/3d-shield.png";
-import icon3dChart from "@/assets/icons/solutions/3d-chart.png";
-import icon3dHeart from "@/assets/icons/solutions/3d-heart.png";
-import icon3dTruck from "@/assets/icons/solutions/3d-truck.png";
-import icon3dBuilding from "@/assets/icons/solutions/3d-building.png";
-import icon3dEducation from "@/assets/icons/solutions/3d-education.png";
-import icon3dRocket from "@/assets/icons/contact/3d-rocket.png";
-import icon3dHeadset from "@/assets/icons/contact/3d-headset.png";
-import icon3dLocation from "@/assets/icons/contact/3d-location.png";
+const icon3dShopping = "/images/icons/3d-shopping.png";
+const icon3dMegaphone = "/images/icons/3d-megaphone.png";
+const icon3dBell = "/images/icons/3d-bell.png";
+const icon3dShield = "/images/icons/3d-shield.png";
+const icon3dChart = "/images/icons/3d-chart.png";
+const icon3dHeart = "/images/icons/3d-heart.png";
+const icon3dTruck = "/images/icons/3d-truck.png";
+const icon3dBuilding = "/images/icons/3d-building.png";
+const icon3dEducation = "/images/icons/3d-education.png";
+const icon3dRocket = "/images/icons/3d-rocket.png";
+const icon3dHeadset = "/images/icons/3d-headset.png";
+const icon3dLocation = "/images/icons/3d-location.png";
 
 export {
   icon3dShopping,

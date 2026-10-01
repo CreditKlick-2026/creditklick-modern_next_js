@@ -88,7 +88,7 @@ export default function NotFound() {
                         <span className="text-gray-300">•</span>
                         <Link href="/credit-cards" className="text-blue-600 hover:underline">Credit Cards</Link>
                         <span className="text-gray-300">•</span>
-                        <Link href="/loans" className="text-blue-600 hover:underline">Loans</Link>
+                        <Link href="/refine" className="text-blue-600 hover:underline">Credit Refine</Link>
                         <span className="text-gray-300">•</span>
                         <Link href="/contact" className="text-blue-600 hover:underline">Contact Us</Link>
                     </div>

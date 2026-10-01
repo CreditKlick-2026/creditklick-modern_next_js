@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import "./ecosystem.css";
 import { EcosystemTab } from "./ecosystem.data";
 import { EcosystemTabs } from "./EcosystemTabs";
 import { SimulatorTab } from "./SimulatorTab";

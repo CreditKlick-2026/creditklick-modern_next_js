@@ -4,104 +4,39 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductMarquee.module.css";
-
-const ccico = "/assets/heroimages/ccgifw.webp";
-const ploico = "/assets/heroimages/persloan2.webp";
-const bloico = "/assets/heroimages/busiloan2.webp";
-const calico = "/assets/heroimages/calc2.webp";
-const credscore = "/assets/heroimages/credscore2.webp";
-const refineico = "/assets/heroimages/refine2.webp";
-
-const productData = [
-  {
-    link: "/credit-score",
-    img: credscore,
-    title: "Credit Score",
-    tag: "Free Report",
-  },
-  {
-    link: "/credit-cards",
-    img: ccico,
-    title: "Credit Cards",
-    tag: "Instant Approval",
-  },
-  {
-    link: "/loan/personal-loan",
-    img: ploico,
-    title: "Personal Loans",
-    tag: "From 10.49%",
-  },
-  {
-    link: "/loan/business-loan",
-    img: bloico,
-    title: "Business Loan",
-    tag: "Up to ₹50 Lakhs",
-  },
-  {
-    link: "/refine",
-    img: refineico,
-    title: "Credit Refine",
-    tag: "Boost Score",
-  },
-  {
-    link: "/calculators",
-    img: calico,
-    title: "Calculators",
-    tag: "EMI & Tools",
-  },
-];
+import { PRODUCT_DATA } from "./marquee.data";
 
 // Duplicate 4 times for infinite seamless loop across all screen sizes
-const items = [...productData, ...productData, ...productData, ...productData];
+const items = [...PRODUCT_DATA, ...PRODUCT_DATA, ...PRODUCT_DATA, ...PRODUCT_DATA];
 
 export function ProductMarquee() {
   return (
     <div className={styles.marqueeSection}>
       <div className={styles.marqueeInner}>
-        {/* Soft edge gradient masks */}
-        <div className={styles.maskLeft} />
-        <div className={styles.maskRight} />
-
-        {/* Scrolling track */}
         <div className={styles.track}>
-          {items.map((item, i) => (
+          {items.map((item, index) => (
             <Link
-              key={i}
+              key={index}
               href={item.link}
-              prefetch={false}
-              className={styles.pill}
+              className={styles.productCard}
+              style={{
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.85))",
+                borderColor: "rgba(180, 210, 255, 0.4)",
+              }}
             >
-              <div className={styles.iconBadge}>
-                <div style={{ position: "relative", width: 22, height: 22 }}>
-                  <Image
-                    src={item.img}
-                    alt={item.title}
-                    fill
-                    sizes="22px"
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
+              <div className={styles.imgWrapper}>
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  width={34}
+                  height={34}
+                  className={styles.img}
+                />
               </div>
-
-              <div className={styles.content}>
+              <div className={styles.textContainer}>
                 <span className={styles.title}>{item.title}</span>
                 <span className={styles.tag}>{item.tag}</span>
               </div>
-
-              <svg
-                className={styles.arrow}
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
             </Link>
           ))}
         </div>

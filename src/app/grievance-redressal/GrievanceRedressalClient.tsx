@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
 import { contactsAPI } from '@/services/api'
-import supportImg from '@/assets/Images/grievance_support.png'
+const supportImg = "/images/Images/grievance_support.png";
 
 export default function GrievanceRedressalClient() {
     const [name, setName] = useState('')
@@ -286,6 +286,8 @@ export default function GrievanceRedressalClient() {
                         <Image
                             src={supportImg}
                             alt="Grievance Support"
+                            width={500}
+                            height={500}
                             className="w-auto h-auto object-contain max-h-[150px] max-w-[220px] md:max-h-[900px] md:max-w-none mix-blend-multiply"
                             priority
                         />
