@@ -17,6 +17,7 @@ export function ServicesGrid() {
         <div style={{ textAlign: "center", marginBottom: "1rem" }}>
           <span style={{
             display: "inline-flex",
+
             alignItems: "center",
             gap: "8px",
             fontSize: "11px",
