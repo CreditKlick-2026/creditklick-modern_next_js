@@ -110,41 +110,55 @@
   }
 }
 
-/* ── Sticky Cards Stack Container (Must be block for reliable sticky in Chrome/Safari) ── */
+/* ── Sticky Cards Stack Container ── */
 .cardsStack {
   position: relative;
-  display: flow-root; /* contains the last card's margin so the stack holds after card 6 settles */
+  display: flow-root;
   width: 100%;
   overflow: visible;
 }
 
-/* ── Sticky Card ── */
+/* ── Card Wrapper (Sticky Stacking on both Mobile & Desktop) ── */
 .cardWrapper {
   position: sticky;
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  border-radius: 28px;
+  border-radius: 20px;
   border: 1px solid #e5eaf3;
   background: #ffffff;
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.05), 0 4px 20px -4px rgba(15, 23, 42, 0.08);
 }
 
-/* Stacking offsets — each card sticks a little lower so the edges of the
-   cards underneath stay visible as a stack. */
-.cardIndex0 { top: 4.5rem; z-index: 10; margin-bottom: 40vh; }
-.cardIndex1 { top: 5rem;   z-index: 20; margin-bottom: 40vh; }
-.cardIndex2 { top: 5.5rem; z-index: 30; margin-bottom: 40vh; }
-.cardIndex3 { top: 6rem;   z-index: 40; margin-bottom: 40vh; }
-.cardIndex4 { top: 6.5rem; z-index: 50; margin-bottom: 40vh; }
-.cardIndex5 { top: 7rem;   z-index: 60; margin-bottom: 0; }
+/* Mobile Sticky Stacking (under fixed mobile navbar) */
+.cardIndex0 { top: 4.25rem; z-index: 10; margin-bottom: 35vh; }
+.cardIndex1 { top: 4.75rem; z-index: 20; margin-bottom: 35vh; }
+.cardIndex2 { top: 5.25rem; z-index: 30; margin-bottom: 35vh; }
+.cardIndex3 { top: 5.75rem; z-index: 40; margin-bottom: 35vh; }
+.cardIndex4 { top: 6.25rem; z-index: 50; margin-bottom: 35vh; }
+.cardIndex5 { top: 6.75rem; z-index: 60; margin-bottom: 35vh; }
 
+.stackSpacer {
+  display: block;
+  height: 45vh;
+}
+
+/* Desktop: Sticky Stacking */
 @media (min-width: 1024px) {
-  .cardIndex0 { top: 5.5rem;  margin-bottom: 45vh; }
-  .cardIndex1 { top: 6.25rem; margin-bottom: 45vh; }
-  .cardIndex2 { top: 7rem;    margin-bottom: 45vh; }
-  .cardIndex3 { top: 7.75rem; margin-bottom: 45vh; }
-  .cardIndex4 { top: 8.5rem;  margin-bottom: 45vh; }
-  .cardIndex5 { top: 9.25rem; margin-bottom: 0; }
+  .stackSpacer {
+    height: 60vh;
+  }
+
+  .cardWrapper {
+    border-radius: 28px;
+    box-shadow: none;
+  }
+  .cardIndex0 { top: 5.5rem;  z-index: 10; margin-bottom: 50vh; }
+  .cardIndex1 { top: 6.25rem; z-index: 20; margin-bottom: 50vh; }
+  .cardIndex2 { top: 7rem;    z-index: 30; margin-bottom: 50vh; }
+  .cardIndex3 { top: 7.75rem; z-index: 40; margin-bottom: 50vh; }
+  .cardIndex4 { top: 8.5rem;  z-index: 50; margin-bottom: 50vh; }
+  .cardIndex5 { top: 9.25rem; z-index: 60; margin-bottom: 50vh; }
 }
 
 /* ── 2-Column Split ── */
@@ -168,44 +182,63 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 0.75rem;
   min-width: 0;
-  padding: 1.75rem 1.5rem 2rem;
+  padding: 1.125rem 1rem 0.75rem;
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
-  .leftCol { padding: 2.5rem 2.5rem; }
+  .leftCol {
+    padding: 2rem 2rem;
+    gap: 1.125rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .leftCol { padding: 3rem 3.5rem; gap: 1.5rem; }
+  .leftCol {
+    padding: 3rem 3.5rem;
+    gap: 1.5rem;
+  }
 }
 
 /* Step meta row: 01 · CATEGORY ─── progress */
 .meta {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
 .stepNum {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: #155dfc;
-  padding: 0.25rem 0.55rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 8px;
   background: #eff4ff;
 }
 
+@media (min-width: 640px) {
+  .stepNum {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.55rem;
+  }
+}
+
 .category {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #64748b;
+}
+
+@media (min-width: 640px) {
+  .category {
+    font-size: 0.75rem;
+  }
 }
 
 .progress {
@@ -215,10 +248,16 @@
 }
 
 .progress span {
-  width: 18px;
+  width: 14px;
   height: 4px;
   border-radius: 999px;
   background: #e2e8f0;
+}
+
+@media (min-width: 640px) {
+  .progress span {
+    width: 18px;
+  }
 }
 
 .progress span.progressOn {
@@ -226,21 +265,21 @@
 }
 
 @media (max-width: 400px) {
-  .progress span { width: 12px; }
+  .progress span { width: 10px; }
 }
 
 .headline {
   margin: 0;
-  font-size: 1.625rem;
-  line-height: 1.2;
+  font-size: 1.1875rem;
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: #0b1b47;
   text-wrap: balance;
 }
 
 @media (min-width: 640px) {
-  .headline { font-size: 2rem; }
+  .headline { font-size: 1.75rem; }
 }
 
 @media (min-width: 1024px) {
@@ -251,15 +290,25 @@
 .highlight {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem 0.75rem 0.75rem;
-  border-radius: 14px;
+  gap: 0.55rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 12px;
   border: 1px solid #e3ebfd;
   background: linear-gradient(90deg, #f3f7ff 0%, #ffffff 100%);
   color: #1c398e;
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.35;
+}
+
+@media (min-width: 640px) {
+  .highlight {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 0.75rem 0.75rem;
+    border-radius: 14px;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
 }
 
 .highlightIcon {
@@ -267,15 +316,25 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
   background: #155dfc;
   color: #ffffff;
-  box-shadow: 0 6px 14px -4px rgba(21, 93, 252, 0.5);
+  box-shadow: 0 4px 10px -2px rgba(21, 93, 252, 0.4);
 }
 
-.highlightIcon svg { width: 18px; height: 18px; }
+.highlightIcon svg { width: 13px; height: 13px; }
+
+@media (min-width: 640px) {
+  .highlightIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px -4px rgba(21, 93, 252, 0.5);
+  }
+  .highlightIcon svg { width: 18px; height: 18px; }
+}
 
 /* Checklist */
 .checklist {
@@ -289,14 +348,24 @@
 .checkItem {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.85rem 0;
+  gap: 0.55rem;
+  padding: 0.35rem 0;
   border-top: 1px solid #f1f5f9;
 }
 
 .checkItem:first-child {
   border-top: 0;
-  padding-top: 0.25rem;
+  padding-top: 0.1rem;
+}
+
+@media (min-width: 640px) {
+  .checkItem {
+    gap: 0.75rem;
+    padding: 0.85rem 0;
+  }
+  .checkItem:first-child {
+    padding-top: 0.25rem;
+  }
 }
 
 .checkIcon {
@@ -304,25 +373,34 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  margin-top: 1px;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
   border-radius: 50%;
   background: #e8f0ff;
   color: #155dfc;
 }
 
-.checkIcon svg { width: 13px; height: 13px; }
+.checkIcon svg { width: 10px; height: 10px; }
+
+@media (min-width: 640px) {
+  .checkIcon {
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+  }
+  .checkIcon svg { width: 13px; height: 13px; }
+}
 
 .checkText {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: #475569;
 }
 
 @media (min-width: 640px) {
-  .checkText { font-size: 1rem; }
+  .checkText { font-size: 1rem; line-height: 1.55; }
 }
 
 /* ── Right Column: phone image on a soft brand backdrop ── */
@@ -366,8 +444,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 1.75rem 1.5rem;
+  padding: 0.75rem 1rem;
   box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .imageContainer { padding: 1.75rem 1.5rem; }
 }
 
 @media (min-width: 1024px) {
@@ -379,15 +461,28 @@
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 400px;
+  max-height: 180px;
   object-fit: contain;
-  border-radius: 22px;
+  border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
     0 2px 6px rgba(15, 23, 42, 0.06),
-    0 28px 50px -18px rgba(28, 57, 142, 0.35);
+    0 14px 26px -8px rgba(28, 57, 142, 0.25);
+}
+
+@media (min-width: 640px) {
+  .fullPhoneImage {
+    max-height: 320px;
+    border-radius: 20px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .fullPhoneImage { max-height: 450px; }
+  .fullPhoneImage {
+    max-height: 450px;
+    border-radius: 22px;
+    box-shadow:
+      0 2px 6px rgba(15, 23, 42, 0.06),
+      0 28px 50px -18px rgba(28, 57, 142, 0.35);
+  }
 }

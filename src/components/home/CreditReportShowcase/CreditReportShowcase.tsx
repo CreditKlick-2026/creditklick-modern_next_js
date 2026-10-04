@@ -39,6 +39,7 @@ export function CreditReportShowcase() {
               total={SLIDES.length}
             />
           ))}
+          <div className={styles.stackSpacer} aria-hidden="true" />
         </div>
       </div>
     </section>
