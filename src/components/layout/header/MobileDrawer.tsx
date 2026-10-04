@@ -45,7 +45,7 @@ export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
     };
   }, [isOpen]);
 
-  const isHome = pathname === "/";
+  const hasColoredHeader = pathname === "/" || pathname === "/pricing" || pathname === "/price" || pathname === "/refine";
 
   return (
     <div className="lg:hidden">
@@ -53,7 +53,7 @@ export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
       <header
         className={cn(
           styles.mobileHeaderBar,
-          isHome && !isScrolled && styles.mobileHeaderHome
+          hasColoredHeader && !isScrolled && styles.mobileHeaderHome
         )}
       >
         <Link href="/" className="flex items-center flex-shrink-0">

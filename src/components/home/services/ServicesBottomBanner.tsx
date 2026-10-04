@@ -5,7 +5,7 @@ export function ServicesBottomBanner() {
     <div
       className="dt-bottom-content"
       style={{
-        marginTop: "60px",
+        marginTop: "32px",
         maxWidth: "880px",
         marginInline: "auto",
         textAlign: "center",
@@ -25,7 +25,7 @@ export function ServicesBottomBanner() {
       </h2>
 
       {/* 3 Interactive Feature Badges */}
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+      <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
         <span className="dt-feature-badge">
           <svg
             width="14"

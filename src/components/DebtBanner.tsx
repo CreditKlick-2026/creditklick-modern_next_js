@@ -24,22 +24,30 @@ export default function DebtBanner({
     const container = containerRef.current;
     if (!container) return;
 
-    getLottie().then((lottie) => {
+    getLottie().then(async (lottie) => {
       if (cancelled || !lottie || !containerRef.current) return;
 
-      anim = lottie.loadAnimation({
-        container: containerRef.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        path: "/animations/SDDesktopBanner.json",
-      });
+      try {
+        const res = await fetch(`/animations/SDDesktopBanner_v3.json?v=4&t=${Date.now()}`, { cache: "no-store" });
+        const animData = await res.json();
+        if (cancelled || !containerRef.current) return;
+        containerRef.current.innerHTML = "";
+        anim = lottie.loadAnimation({
+          container: containerRef.current,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          animationData: animData,
+        });
 
-      const onLoaded = () => setIsLoaded(true);
-      anim.addEventListener("DOMLoaded", onLoaded);
-      anim.addEventListener("data_ready", onLoaded);
-      setTimeout(onLoaded, 1200);
-      animRef.current = anim;
+        const onLoaded = () => setIsLoaded(true);
+        anim.addEventListener("DOMLoaded", onLoaded);
+        anim.addEventListener("data_ready", onLoaded);
+        setTimeout(onLoaded, 1200);
+        animRef.current = anim;
+      } catch (e) {
+        console.error("Failed to load debt banner animation:", e);
+      }
     });
 
     return () => {

@@ -1,9 +1,9 @@
 /* ==========================================================================
-   PRODUCT MARQUEE - CSS MODULE
-   Infinite seamless ticker ribbon with responsive cards
+   PRODUCT MARQUEE - PREMIUM PILL TICKER
+   Clean, modern infinite ticker ribbon with pill-shaped cards & smooth masks
    ========================================================================== */
 
-@keyframes productMarqueeScroll {
+@keyframes marqueeScroll {
   0% {
     transform: translateX(0);
   }
@@ -17,117 +17,109 @@
   width: 100%;
   overflow: hidden;
   background: #ffffff;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 16px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.marqueeSection::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 120%;
-  background: radial-gradient(ellipse at center, rgba(250, 212, 212, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.875rem 0;
 }
 
 .marqueeInner {
   position: relative;
   width: 100%;
-  z-index: 2;
+  overflow: hidden;
 }
 
-.maskLeft {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 120px;
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 35%, transparent 100%);
-  z-index: 10;
-  pointer-events: none;
-}
-
+/* Gradient Fade Masks on edges */
+.maskLeft,
 .maskRight {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
   width: 120px;
-  background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 35%, transparent 100%);
   z-index: 10;
   pointer-events: none;
+}
+
+.maskLeft {
+  left: 0;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, transparent 100%);
+}
+
+.maskRight {
+  right: 0;
+  background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 40%, transparent 100%);
 }
 
 @media (max-width: 640px) {
   .maskLeft,
   .maskRight {
-    width: 60px;
+    width: 48px;
   }
 }
 
+/* Scrolling track */
 .track {
   display: flex;
   width: max-content;
-  animation: productMarqueeScroll 32s linear infinite;
-  will-change: transform;
   align-items: center;
-  gap: 16px;
-  padding: 4px 16px;
+  gap: 1.25rem;
+  animation: marqueeScroll 36s linear infinite;
+  will-change: transform;
 }
 
 .track:hover {
   animation-play-state: paused;
 }
 
-.pill {
+/* Individual Pill Card */
+.pillCard {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px 10px 12px;
-  border-radius: 8px;
-  background: #fad4d4;
-  border: 1px solid rgba(225, 29, 72, 0.12);
+  gap: 0.875rem;
+  padding: 0.5rem 1.125rem 0.5rem 0.625rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   text-decoration: none;
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pill:hover {
-  background: #fce2e2;
-  border-color: rgba(225, 29, 72, 0.3);
+.pillCard:hover {
+  background: #f8fafc;
+  border-color: #93c5fd;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px -2px rgba(225, 29, 72, 0.2), 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px -2px rgba(37, 99, 235, 0.12), 0 2px 4px rgba(15, 23, 42, 0.04);
 }
 
-.iconBadge {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: #ffffff;
+/* Icon Container */
+.iconWrapper {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: #eff6ff;
+  border: 1px solid rgba(191, 219, 254, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
-.pill:hover .iconBadge {
-  transform: scale(1.12) rotate(3deg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+.pillCard:hover .iconWrapper {
+  transform: scale(1.08);
+  background: #dbeafe;
 }
 
-.content {
+.iconImg {
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: contain;
+}
+
+/* Text Container */
+.textContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,46 +127,41 @@
 }
 
 .title {
-  font-size: 13.5px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #0f172a;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
   line-height: 1.25;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
 
-.pill:hover .title {
-  color: #090d16;
+.pillCard:hover .title {
+  color: #1d4ed8;
 }
 
 .tag {
-  font-size: 10.5px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.6875rem;
   font-weight: 600;
-  color: #475569;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  color: #2563eb;
   line-height: 1.2;
-  transition: color 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
-.pill:hover .tag {
-  color: #1e293b;
-}
-
+/* Arrow indicator */
 .arrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #334155;
-  opacity: 0.75;
-  margin-left: 4px;
-  font-size: 14px;
-  transition: all 0.25s ease;
+  color: #94a3b8;
+  margin-left: 0.25rem;
+  transition: all 0.2s ease;
 }
 
-.pill:hover .arrow {
-  color: #0f172a;
-  opacity: 1;
-  transform: translateX(3px);
+.pillCard:hover .arrow {
+  color: #2563eb;
+  transform: translate(2px, -1px);
 }

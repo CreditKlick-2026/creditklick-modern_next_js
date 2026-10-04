@@ -17,30 +17,34 @@ export const FooterBrand: React.FC = () => {
         />
       </Link>
 
-      <p className="text-xs text-blue-200 uppercase tracking-widest font-semibold leading-relaxed max-w-xs">
+      <p className="text-xs text-slate-700 uppercase tracking-widest font-semibold leading-relaxed max-w-xs">
         {COMPANY_ADDRESS}
       </p>
 
-      {/* White Square Social Badges */}
+      {/* Professional Social Badges */}
       <div className="flex items-center gap-2.5 my-2">
-        {SOCIAL_LINKS.map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <a
-              key={idx}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.name}
-              className="ck-footer-social-badge"
+        {SOCIAL_LINKS.map((item, idx) => (
+          <a
+            key={idx}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={item.name}
+            className={`ck-footer-social-badge ${item.badgeClass}`}
+          >
+            <svg
+              className="w-4 h-4"
+              viewBox={item.viewBox || "0 0 24 24"}
+              fill="currentColor"
+              aria-hidden="true"
             >
-              <Icon className={`w-5 h-5 ${item.iconColor}`} />
-            </a>
-          );
-        })}
+              <path d={item.svgPath} />
+            </svg>
+          </a>
+        ))}
       </div>
 
-      <p className="text-xs text-gray-400 font-normal">
+      <p className="text-xs text-slate-500 font-normal">
         © 2022-{new Date().getFullYear()} Incredible Management Services PVT. LTD.
       </p>
     </div>

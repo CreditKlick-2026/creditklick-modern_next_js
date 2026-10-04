@@ -4,12 +4,11 @@ import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   HeroSlider,
-  ProductMarquee,
   BenefitsAccordion,
   ServicesGrid,
   CreditReportShowcase,
-  HomeEmiCalculator,
   DataSafeSection,
+  PromoCards,
 } from "@/components/home";
 
 // Client-only dynamic imports for heavy animation & scroll-pinned sections
@@ -28,10 +27,7 @@ const HomeFaqSection = dynamic(
   { ssr: false }
 );
 
-const HeroBanner = dynamic(
-  () => import("@/components/home/HeroBanner"),
-  { ssr: false }
-);
+import HeroBanner from "@/components/home/HeroBanner";
 
 export default function HomeClient() {
   // Smooth scroll handler for anchor links
@@ -54,11 +50,11 @@ export default function HomeClient() {
         <HeroBanner />
       </section>
 
-      {/* 2. Quick product marquee ribbon */}
-      <ProductMarquee />
-
       {/* 3. Benefits of CreditKlick - Accordion + illustration */}
       <BenefitsAccordion />
+
+      {/* Boost Your Credit + Finance Calculators & Tools cards */}
+      <PromoCards />
 
       {/* 4. Download The CreditKlick App (Modular App Showcase Section) */}
       <AppDownload />
@@ -68,11 +64,6 @@ export default function HomeClient() {
 
       {/* 6. Features: "Everything you need to fix your score" + Sticky Showcase Cards */}
       <CreditReportShowcase />
-
-      {/* 8. Interactive EMI Loan Calculator */}
-      <section id="calculator" className="bg-white py-12">
-        <HomeEmiCalculator />
-      </section>
 
       {/* 9. Customer Testimonials */}
       <HappyCustomersSection />

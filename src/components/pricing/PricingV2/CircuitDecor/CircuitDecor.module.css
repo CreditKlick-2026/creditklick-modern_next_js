@@ -1,0 +1,28 @@
+/* ── Dark band + circuit decoration ──────────────────────────────────────── */
+
+.darkBand {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(ellipse 55% 80% at 50% 0%, rgba(37, 99, 235, 0.35), transparent 70%),
+        linear-gradient(180deg, var(--pv-hero) 0%, var(--pv-hero-2) 100%);
+}
+
+.circuit {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    color: #2563eb;
+    opacity: 0.15;
+    pointer-events: none;
+    display: none;
+}
+
+.circuitLeft { left: 0; }
+.circuitRight { right: 0; transform: scaleX(-1); }
+
+@media (min-width: 1024px) {
+    .circuit { display: block; }
+}

@@ -14,7 +14,7 @@ export function ServicesGrid() {
       <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
 
         {/* Section Pill Badge */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-4 sm:mb-6">
           <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-900 bg-blue-100/70 border border-blue-300/60 px-4 py-1.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
             HOW CREDITKLICK HELPS YOU
@@ -28,8 +28,8 @@ export function ServicesGrid() {
             position: "relative",
             width: "100%",
             maxWidth: "1100px",
-            height: "520px",
-            minHeight: "520px",
+            height: "440px",
+            minHeight: "440px",
             margin: "0 auto",
           }}
         >

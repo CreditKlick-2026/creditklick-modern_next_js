@@ -28,7 +28,7 @@
   background-image: radial-gradient(circle, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
   overflow: hidden;
-  padding: 70px 16px 60px;
+  padding: 42px 16px 36px;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -137,7 +137,7 @@
   position: relative;
   width: 100%;
   max-width: 1100px;
-  height: 520px;
+  height: 440px;
   margin: 0 auto;
 }
 
@@ -175,7 +175,7 @@
 }
 
 .dt-bottom-content {
-  margin-top: 55px;
+  margin-top: 32px;
   max-width: 860px;
   margin-left: auto;
   margin-right: auto;
@@ -230,11 +230,11 @@
 
 @media (max-width: 1023px) {
   .dt-circuit-section {
-    padding: 40px 16px 44px;
+    padding: 28px 16px 28px;
   }
 
   .dt-bottom-content {
-    margin-top: 40px;
+    margin-top: 24px;
     padding-left: 8px;
     padding-right: 8px;
   }

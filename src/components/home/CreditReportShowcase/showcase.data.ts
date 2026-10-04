@@ -1,106 +1,100 @@
+import {
+  FileSearch,
+  Target,
+  BellRing,
+  Wallet,
+  LineChart,
+  Headset,
+  type LucideIcon,
+} from "lucide-react";
+
 export interface SlideData {
   id: string;
-  step: string;
+  category: string;
   headline: string;
-  badgeEmoji: string;
-  badgeText: string;
-  badgeClass: string;
-  rightColClass: string;
+  highlightIcon: LucideIcon;
+  highlight: string;
   imageSrc: string;
   points: readonly string[];
 }
 
-export function getSlidesData(styles: Record<string, string>): readonly SlideData[] {
-  return [
-    {
-      id: "credit-usage",
-      step: "CREDIT UTILIZATION • 01 / 06",
-      headline: "Your Credit Report, Finally In Simple Language",
-      badgeEmoji: "😮‍💨",
-      badgeText: "Confused by generic scores and unclear reports?",
-      badgeClass: styles.badgeBlue || "",
-      rightColClass: styles.rightColBlue || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick High Usage Dashboard.png",
-      points: [
-        "Check your credit score instantly and get your full report",
-        "Complex credit metrics, made simple and actionable",
-        "See every loan account and credit card open in your name full visibility of your credit profile, so you can spot an account you never opened and raise a dispute on the spot",
-      ],
-    },
-    {
-      id: "credit-score-dashboard",
-      step: "SCORE IMPROVEMENT • 02 / 06",
-      headline: "Improve Your Credit Score in 6–12 Months",
-      badgeEmoji: "🎯",
-      badgeText: "Personalized roadmap to reach a target score of 800+",
-      badgeClass: styles.badgeBlue || "",
-      rightColClass: styles.rightColBlue || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick Credit Score Dashboard.png",
-      points: [
-        "Personalized task progress tracking to boost your score by +25 points",
-        "Clear step-by-step action plan: clear overdue dues, pay on time, and manage card limits",
-        "Avoid multiple random loan applications that cause hard inquiries on your bureau file",
-      ],
-    },
-    {
-      id: "pending-payments-dashboard",
-      step: "PAYMENT SAFETY • 03 / 06",
-      headline: "Pending Payments & Due Date Protection",
-      badgeEmoji: "⏰",
-      badgeText: "Prevent 75 to 100 points drop caused by delayed payments",
-      badgeClass: styles.badgeRed || "",
-      rightColClass: styles.rightColRed || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick Pending Payments Dashboard.png",
-      points: [
-        "Consolidated overdue dashboard tracking pending dues across HDFC, ICICI, SBI & NBFCs",
-        "Transparent impact breakdown: see exact points at risk before overdue penalties hit",
-        "Quick payment options with potential interest savings of up to 50% on settlements",
-      ],
-    },
-    {
-      id: "loans-cards-dashboard",
-      step: "CREDIT PORTFOLIO • 04 / 06",
-      headline: "All Active Loans & Credit Cards in One Place",
-      badgeEmoji: "💳",
-      badgeText: "Full transparency over active, closed, and disputed accounts",
-      badgeClass: styles.badgeTeal || "",
-      rightColClass: styles.rightColTeal || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick Loans and Cards Dashboard.png",
-      points: [
-        "Complete bird's-eye view of credit limits, loan amounts, and active balances",
-        "One-click 'Raise Dispute' for fraudulent accounts or erroneous bureau entries",
-        "Pre-negotiated 'Settlement Offers' to resolve long-standing debts affordably",
-      ],
-    },
-    {
-      id: "predicted-score-widget",
-      step: "SCORE PREDICTOR • 05 / 06",
-      headline: "AI-Powered Score Simulation & Growth Roadmap",
-      badgeEmoji: "🔮",
-      badgeText: "Predict score changes before applying for any new loan or card",
-      badgeClass: styles.badgeIndigo || "",
-      rightColClass: styles.rightColIndigo || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick Predicted Credit Score Widget.png",
-      points: [
-        "Interactive scenario simulator forecasting your credit score over 12, 24, and 36 months",
-        "See exact score impact (+92 pts on Vehicle Loan, +68 pts on Personal Loan, +54 pts on Cards)",
-        "Plan your financial moves strategically with zero risk of hard inquiries on your report",
-      ],
-    },
-    {
-      id: "expert-connection-ui",
-      step: "EXPERT ADVISORY • 06 / 06",
-      headline: "1-on-1 Dedicated Credit Coaching & Dispute Support",
-      badgeEmoji: "👨‍💼",
-      badgeText: "Connect directly with Certified Financial Planners & credit experts",
-      badgeClass: styles.badgeGreen || "",
-      rightColClass: styles.rightColGreen || "",
-      imageSrc: "/images/ScrollerImage/CreditKlick Expert Connection UI.png",
-      points: [
-        "Direct voice consultation with certified planners available Monday to Saturday",
-        "Personalized credit restoration roadmaps tailored to your unique financial background",
-        "Empathetic, confidential counseling to stop collection calls and eliminate debt stress",
-      ],
-    },
-  ];
-}
+export const SLIDES: readonly SlideData[] = [
+  {
+    id: "credit-usage",
+    category: "Credit Report",
+    headline: "Your credit report, finally in simple language",
+    highlightIcon: FileSearch,
+    highlight: "No more confusing scores and unclear reports",
+    imageSrc: "/images/ScrollerImage/CreditKlick High Usage Dashboard.png",
+    points: [
+      "Check your credit score instantly and get your full report",
+      "Complex credit metrics, explained simply and made actionable",
+      "See every loan and card in your name, and dispute any account you never opened",
+    ],
+  },
+  {
+    id: "credit-score-dashboard",
+    category: "Score Improvement",
+    headline: "Improve your credit score in 6–12 months",
+    highlightIcon: Target,
+    highlight: "A personalised roadmap to a target score of 800+",
+    imageSrc: "/images/ScrollerImage/CreditKlick Credit Score Dashboard.png",
+    points: [
+      "Track task progress and gain up to +25 points",
+      "A clear plan: clear overdue dues, pay on time and manage card limits",
+      "Avoid random loan applications that add hard inquiries to your report",
+    ],
+  },
+  {
+    id: "pending-payments-dashboard",
+    category: "Payment Safety",
+    headline: "Pending payments & due-date protection",
+    highlightIcon: BellRing,
+    highlight: "Avoid the 75–100 point drop a late payment can cause",
+    imageSrc: "/images/ScrollerImage/CreditKlick Pending Payments Dashboard.png",
+    points: [
+      "One dashboard for pending dues across HDFC, ICICI, SBI & NBFCs",
+      "See exactly how many points are at risk before a penalty hits",
+      "Quick payment options, with up to 50% interest savings on settlements",
+    ],
+  },
+  {
+    id: "loans-cards-dashboard",
+    category: "Credit Portfolio",
+    headline: "All your loans & credit cards in one place",
+    highlightIcon: Wallet,
+    highlight: "Full visibility of active, closed and disputed accounts",
+    imageSrc: "/images/ScrollerImage/CreditKlick Loans and Cards Dashboard.png",
+    points: [
+      "Credit limits, loan amounts and balances at a glance",
+      "One-tap dispute for fraudulent accounts or bureau errors",
+      "Pre-negotiated settlement offers to close old debts affordably",
+    ],
+  },
+  {
+    id: "predicted-score-widget",
+    category: "Score Predictor",
+    headline: "AI-powered score simulation",
+    highlightIcon: LineChart,
+    highlight: "Know the score impact before you apply for any loan or card",
+    imageSrc: "/images/ScrollerImage/CreditKlick Predicted Credit Score Widget.png",
+    points: [
+      "Forecast your score over 12, 24 and 36 months",
+      "See the exact impact: +92 on a vehicle loan, +68 on a personal loan",
+      "Plan your next move with zero hard inquiries on your report",
+    ],
+  },
+  {
+    id: "expert-connection-ui",
+    category: "Expert Advisory",
+    headline: "1-on-1 credit coaching & dispute support",
+    highlightIcon: Headset,
+    highlight: "Talk directly to certified financial planners",
+    imageSrc: "/images/ScrollerImage/CreditKlick Expert Connection UI.png",
+    points: [
+      "Voice consultations with certified planners, Monday to Saturday",
+      "A credit restoration plan built around your finances",
+      "Confidential support to stop collection calls and reduce debt stress",
+    ],
+  },
+];

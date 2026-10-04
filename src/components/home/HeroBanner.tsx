@@ -17,38 +17,54 @@ export default function HeroBanner() {
     let mobileAnim: any = null;
     let cancelled = false;
 
-    getLottie().then((lottie) => {
+    getLottie().then(async (lottie) => {
       if (cancelled || !lottie) return;
       const isDesktop = window.innerWidth >= 768;
 
-      const initDesktop = () => {
+      const initDesktop = async () => {
         if (!desktopContainerRef.current || desktopAnim) return;
-        desktopAnim = lottie.loadAnimation({
-          container: desktopContainerRef.current,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-          path: "/animations/SDDesktopBanner.json",
-        });
-        const onLoaded = () => setIsDesktopLoaded(true);
-        desktopAnim.addEventListener("DOMLoaded", onLoaded);
-        desktopAnim.addEventListener("data_ready", onLoaded);
-        setTimeout(onLoaded, 1200);
+        try {
+          const res = await fetch(`/animations/SDDesktopBanner_v3.json?v=4&t=${Date.now()}`, { cache: "no-store" });
+          const animData = await res.json();
+          if (cancelled || !desktopContainerRef.current) return;
+          desktopContainerRef.current.innerHTML = "";
+          desktopAnim = lottie.loadAnimation({
+            container: desktopContainerRef.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: animData,
+          });
+          const onLoaded = () => setIsDesktopLoaded(true);
+          desktopAnim.addEventListener("DOMLoaded", onLoaded);
+          desktopAnim.addEventListener("data_ready", onLoaded);
+          setTimeout(onLoaded, 1200);
+        } catch (e) {
+          console.error("Failed to load desktop banner:", e);
+        }
       };
 
-      const initMobile = () => {
+      const initMobile = async () => {
         if (!mobileContainerRef.current || mobileAnim) return;
-        mobileAnim = lottie.loadAnimation({
-          container: mobileContainerRef.current,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-          path: "/animations/SDMobileBanner.json",
-        });
-        const onLoaded = () => setIsMobileLoaded(true);
-        mobileAnim.addEventListener("DOMLoaded", onLoaded);
-        mobileAnim.addEventListener("data_ready", onLoaded);
-        setTimeout(onLoaded, 1200);
+        try {
+          const res = await fetch(`/animations/SDMobileBanner_v3.json?v=4&t=${Date.now()}`, { cache: "no-store" });
+          const animData = await res.json();
+          if (cancelled || !mobileContainerRef.current) return;
+          mobileContainerRef.current.innerHTML = "";
+          mobileAnim = lottie.loadAnimation({
+            container: mobileContainerRef.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: animData,
+          });
+          const onLoaded = () => setIsMobileLoaded(true);
+          mobileAnim.addEventListener("DOMLoaded", onLoaded);
+          mobileAnim.addEventListener("data_ready", onLoaded);
+          setTimeout(onLoaded, 1200);
+        } catch (e) {
+          console.error("Failed to load mobile banner:", e);
+        }
       };
 
       if (isDesktop) {

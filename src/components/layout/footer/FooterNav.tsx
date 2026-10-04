@@ -7,7 +7,7 @@ export const FooterNav: React.FC = () => {
     <div className="xl:w-[68%] grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
       {FOOTER_SECTIONS.map((section, idx) => (
         <div key={idx} className="text-left">
-          <h4 className="font-semibold text-lg mb-4 text-blue-400">
+          <h4 className="font-bold text-lg mb-4 text-blue-950">
             {section.title}
           </h4>
           <ul className="space-y-2 sm:space-y-2.5">
@@ -17,8 +17,8 @@ export const FooterNav: React.FC = () => {
                   href={link.href}
                   className={`ck-footer-nav-link ${
                     link.isHighlight
-                      ? "text-blue-300 font-medium"
-                      : "text-gray-300"
+                      ? "text-blue-700 font-semibold"
+                      : "text-slate-700 hover:text-blue-700"
                   }`}
                 >
                   {link.name}

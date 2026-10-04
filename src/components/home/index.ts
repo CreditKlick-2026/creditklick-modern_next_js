@@ -42,3 +42,6 @@ export * from "./faq";
 
 // Supporting section for /media route
 export { MediaCoverage } from "./MediaCoverage";
+
+// Credit boost + Finance calculators promo cards
+export { PromoCards } from "./promo-cards";

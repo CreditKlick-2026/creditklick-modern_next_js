@@ -8,19 +8,26 @@ import { BenefitsIllustration } from "./BenefitsIllustration";
 export function BenefitsAccordion() {
   // Allow toggling open/close on click (null means all closed, or index of open card)
   const [open, setOpen] = useState<number | null>(0);
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
   const toggle = (index: number) => {
     setOpen((prev) => (prev === index ? null : index));
+    setActiveImageIndex(index);
   };
+
+  const currentBenefit = BENEFITS[activeImageIndex] || BENEFITS[0];
 
   return (
     <section id="benefits" className="w-full bg-blue-50/60 py-16">
-      <div className="container mx-auto grid items-center gap-12 px-6 lg:grid-cols-2">
+      <div className="max-w-7xl mx-auto grid items-center gap-10 lg:gap-14 px-4 sm:px-6 lg:px-8 lg:grid-cols-2">
         {/* Accordion List */}
-        <div>
+        <div className="w-full">
           <h2 className="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl">
             Benefits of CreditKlick
           </h2>
+          <p className="mt-3 text-base text-slate-600 sm:text-lg">
+            Everything you need to repair your credit, compare offers and get support, in one place.
+          </p>
 
           <div className="mt-8 space-y-3">
             {BENEFITS.map((item, i) => {
@@ -73,9 +80,12 @@ export function BenefitsAccordion() {
           </div>
         </div>
 
-        {/* Illustration */}
-        <div className="flex justify-center">
-          <BenefitsIllustration />
+        {/* Dynamic Illustration */}
+        <div className="flex items-center justify-center lg:justify-end w-full">
+          <BenefitsIllustration
+            imageSrc={currentBenefit.image}
+            imageAlt={currentBenefit.imageAlt}
+          />
         </div>
       </div>
     </section>

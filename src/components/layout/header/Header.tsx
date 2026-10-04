@@ -41,7 +41,7 @@ export function Header() {
     router.push("/");
   };
 
-  const isHome = pathname === "/";
+  const hasColoredHeader = pathname === "/" || pathname === "/pricing" || pathname === "/price" || pathname === "/refine";
 
   return (
     <>
@@ -50,7 +50,7 @@ export function Header() {
         className={cn(
           "hidden lg:block",
           styles.headerOuter,
-          isHome && !isScrolled && styles.headerHome,
+          hasColoredHeader && !isScrolled && styles.headerHome,
           isScrolled && styles.headerOuterScrolled
         )}
       >

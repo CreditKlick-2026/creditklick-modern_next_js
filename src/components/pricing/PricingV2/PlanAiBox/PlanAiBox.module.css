@@ -1,0 +1,105 @@
+/* ── AI Callout Boxes in Plan Cards ──────────────────────────────────────── */
+
+.aiBoxStarter {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 12px 14px;
+    margin: 20px 0 12px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.aiBoxHeaderGray {
+    font-family: var(--pv-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.aiBoxSubGray {
+    font-size: 13px;
+    color: #475569;
+    margin-top: 4px;
+}
+
+.aiBoxPro {
+    background: #ffffff;
+    border: 1px solid #bfdbfe;
+    padding: 14px 16px;
+    margin: 20px 0 12px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.aiBoxEnterprise {
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    padding: 14px 16px;
+    margin: 20px 0 12px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.aiBoxHeaderGreen {
+    font-family: var(--pv-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #1e40af;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.aiBoxEnterprise .aiBoxHeaderGreen {
+    color: #60a5fa;
+}
+
+.aiBoxList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.aiBoxList li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+.aiBoxListDark {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.aiBoxListDark li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.tickGreen {
+    color: #2563eb;
+    flex-shrink: 0;
+}
+
+.aiBoxFootnote {
+    font-family: var(--pv-mono);
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 8px;
+}

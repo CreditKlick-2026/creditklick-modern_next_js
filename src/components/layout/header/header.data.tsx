@@ -21,8 +21,8 @@ import { NavItem } from "@/types";
 
 export const navItems: NavItem[] = [
   {
-    label: "Price",
-    href: "/price",
+    label: "Pricing",
+    href: "/pricing",
   },
   { label: "Credit Refine", href: "/refine" },
   {

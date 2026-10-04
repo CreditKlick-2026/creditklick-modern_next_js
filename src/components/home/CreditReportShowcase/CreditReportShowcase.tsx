@@ -1,28 +1,23 @@
 "use client";
 
 import React from "react";
-import { Sparkles } from "lucide-react";
 import styles from "./CreditReportShowcase.module.css";
-import { getSlidesData } from "./showcase.data";
+import { SLIDES } from "./showcase.data";
 import { StickyCard } from "./StickyCard";
 
 export function CreditReportShowcase() {
-  const slides = getSlidesData(styles);
 
   return (
     <section id="report-showcase" className={styles.section}>
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>
-          <span className={styles.sectionTag}>
-            <Sparkles aria-hidden="true" />
-            Features
-          </span>
+
 
           <h2 className={styles.sectionTitle}>
             Everything you need to fix your{" "}
             <span className={styles.noWrap}>score —</span>{" "}
-            <span className={styles.titleHighlight}>In one app</span>
+            <span className={styles.noWrap}>In one app</span>
           </h2>
 
           <p className={styles.sectionIntro}>
@@ -36,11 +31,12 @@ export function CreditReportShowcase() {
         </div>
 
         <div className={styles.cardsStack}>
-          {slides.map((slide, index) => (
+          {SLIDES.map((slide, index) => (
             <StickyCard
               key={slide.id}
               slide={slide}
               index={index}
+              total={SLIDES.length}
             />
           ))}
         </div>

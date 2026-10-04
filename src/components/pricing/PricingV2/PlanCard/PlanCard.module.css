@@ -1,0 +1,178 @@
+.btnOnDark {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.btnOnDark:hover { background: rgba(255, 255, 255, 0.08); }
+
+.cardPopular { background: var(--pv-beige); }
+
+.cardDark {
+    background: var(--pv-dark);
+    color: #fff;
+}
+
+.cardTier {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 24px;
+    font-family: var(--pv-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badgeCurrent { color: #fff; background: var(--pv-green); border-color: var(--pv-green); }
+
+.priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 18px;
+}
+
+.priceCurrency { font-family: var(--pv-serif); font-size: 22px; align-self: flex-start; margin-top: 8px; }
+
+.priceValue { font-family: var(--pv-serif); font-size: 46px; line-height: 1; letter-spacing: -0.02em; }
+
+.pricePer { font-size: 15px; color: var(--pv-muted); }
+
+.cardDark .pricePer { color: rgba(255, 255, 255, 0.6); }
+
+.priceStrike {
+    margin-left: 6px;
+    font-size: 14px;
+    color: var(--pv-faint);
+    text-decoration: line-through;
+}
+
+.billedNote {
+    margin-top: 8px;
+    min-height: 20px;
+    font-family: var(--pv-mono);
+    font-size: 12px;
+    color: var(--pv-muted);
+}
+
+.cardDark .billedNote { color: rgba(255, 255, 255, 0.55); }
+
+.cardDesc {
+    margin: 14px 0 22px;
+    min-height: 44px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--pv-muted);
+}
+
+.cardDark .cardDesc { color: rgba(255, 255, 255, 0.7); }
+
+.cardDivider {
+    margin: 26px 0 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--pv-beige-line);
+    font-family: var(--pv-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pv-faint);
+}
+
+.cardDark .cardDivider { border-top-color: rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.5); }
+
+.featureList {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.tick { flex: none; margin-top: 2px; color: var(--pv-green); }
+
+.cardDark .tick { color: #60a5fa; }
+
+.proAiToggleRow {
+    margin: 14px 0 6px;
+}
+
+.proAiToggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 14px;
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-family: var(--pv-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e40af;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.08);
+}
+
+.proAiToggleBtn:hover {
+    background: #eff6ff;
+    border-color: #60a5fa;
+}
+
+.proAiActive {
+    background: #eff6ff;
+    border-color: #2563eb;
+    color: #1e3a8a;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.16);
+}
+
+.proAiSwitchTrack {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 18px;
+    background: #cbd5e1;
+    border-radius: 9999px;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.proAiActive .proAiSwitchTrack {
+    background: #2563eb;
+}
+
+.proAiSwitchThumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.proAiActive .proAiSwitchThumb {
+    transform: translateX(14px);
+}
+
+.proAiToggleText {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

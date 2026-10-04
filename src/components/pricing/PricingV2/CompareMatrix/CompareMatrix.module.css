@@ -1,0 +1,111 @@
+.matrix { display: none; }
+
+@media (min-width: 900px) {
+    .matrix { display: block; }
+}
+
+.mRow {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.25fr) repeat(var(--pv-cols, 3), minmax(0, 1fr));
+}
+
+.mHead {
+    position: sticky;
+    top: var(--pv-nav-h);
+    z-index: 3;
+    background: #fff;
+    border-bottom: 1px solid var(--pv-line);
+}
+
+.mHeadTools {
+    display: grid;
+    gap: 10px;
+    align-content: end;
+    padding: 20px;
+}
+
+.mHeadPlan {
+    display: grid;
+    justify-items: center;
+    align-content: end;
+    gap: 6px;
+    padding: 20px;
+    text-align: center;
+}
+
+.mHeadName {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--pv-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.mBand {
+    position: sticky;
+    top: calc(var(--pv-nav-h) + var(--pv-head-h, 150px));
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--pv-beige);
+    border-bottom: 1px solid var(--pv-beige-line);
+}
+
+.addonTag {
+    font-family: var(--pv-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    color: #92400e;
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+}
+
+.mCellLabel,
+.mCell {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--pv-line);
+    font-size: 14.5px;
+}
+
+.mCell {
+    justify-content: center;
+    text-align: center;
+    border-left: 1px solid var(--pv-line);
+}
+
+.mRow:hover .mCellLabel,
+.mRow:hover .mCell { background: #f8faff; }
+
+/* Popular column tint, carried down the whole matrix */
+
+.mColPopular { background: rgba(219, 232, 253, 0.45); }
+
+.infoWrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    cursor: help;
+    color: var(--pv-faint);
+    vertical-align: middle;
+}
+
+.infoIcon {
+    opacity: 0.6;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.infoWrapper:hover .infoIcon {
+    opacity: 1;
+    color: var(--pv-green-ink);
+}

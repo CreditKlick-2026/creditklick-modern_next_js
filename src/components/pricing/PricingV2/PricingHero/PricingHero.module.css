@@ -1,0 +1,72 @@
+.eyebrowOnDark { 
+    color: #1e40af; 
+    background: #dbe8fd;
+    border-color: #bfdbfe;
+}
+
+/* ── Hero (#dbe8fd Soft Theme matching Home Page) ────────────────────────── */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--pv-nav-h) + 28px) 16px 36px;
+    text-align: center;
+    color: #0f172a;
+    background:
+        radial-gradient(ellipse 70% 70% at 50% 20%, rgba(219, 232, 253, 0.95), transparent 75%),
+        linear-gradient(180deg, #f0f7ff 0%, #eff6ff 50%, #ffffff 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+@media (min-width: 768px) {
+    .hero { padding: calc(var(--pv-nav-h) + 36px) 24px 44px; }
+}
+
+.heroInner {
+    position: relative;
+    z-index: 1;
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.heroTitle {
+    text-wrap: balance;
+    margin: 12px auto 10px;
+    font-size: clamp(28px, 3.8vw, 44px);
+    line-height: 1.18;
+    color: #0f172a;
+    font-weight: 800;
+    max-width: 800px;
+    letter-spacing: -0.02em;
+}
+
+.heroSub {
+    margin: 0 auto 20px;
+    max-width: 620px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #475569;
+}
+
+.heroDotStrip {
+    height: 16px;
+    border-top: 1px solid #e2e8f0;
+    background:
+        radial-gradient(rgba(37, 99, 235, 0.14) 0.9px, transparent 0.9px) 0 0 / 6px 6px,
+        #ffffff;
+}
+
+/* ── Hero Controls & AI Switch ───────────────────────────────────────────── */
+
+.heroControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.heroAiSwitchWrapper {
+    display: flex;
+    justify-content: center;
+}

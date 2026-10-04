@@ -1,28 +1,15 @@
-﻿import { Metadata } from "next";
-import PriceClient from "./PriceClient";
+import { Metadata } from "next";
+import PricingPage from "@/components/pricing/PricingPage";
 
 export const metadata: Metadata = {
-  title: "Pricing & CreditKlick Plus Rewards | CreditKlick",
+  title: "Simple & Transparent Pricing Plans | CreditKlick",
   description:
-    "Upgrade your CreditKlick rewards with CreditKlick Plus. Enjoy exclusive benefits on UPI transactions, voucher payments, loan offers, and credit monitoring.",
-  keywords: [
-    "creditklick plus",
-    "creditklick pricing",
-    "credit rewards india",
-    "upi cashbacks",
-    "credit card rewards comparison",
-  ],
-  openGraph: {
-    title: "CreditKlick Plus - Upgrade Your Rewards",
-    description:
-      "Exclusive financial perks, higher rewards on UPI, and priority credit report tracking with CreditKlick Plus.",
-    images: ["/assets/creditklic_next_gen.png"],
-  },
+    "Affordable pricing plans for businesses of all sizes. Starter, Pro, and Enterprise plans with zero setup fees and transparent pricing.",
   alternates: {
-    canonical: "/price",
+    canonical: "/pricing",
   },
 };
 
 export default function PricePage() {
-  return <PriceClient />;
+  return <PricingPage />;
 }

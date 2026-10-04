@@ -5,6 +5,7 @@ export function CircuitTraces() {
     <svg
       className="absolute inset-0 w-full h-full pointer-events-none z-0"
       viewBox="0 0 1100 520"
+      preserveAspectRatio="none"
       fill="none"
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     >

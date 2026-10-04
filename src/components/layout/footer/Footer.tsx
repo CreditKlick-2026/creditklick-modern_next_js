@@ -9,7 +9,7 @@ import { FooterBottom } from "./FooterBottom";
 
 export function Footer() {
   return (
-    <footer className="ck-footer-wrapper font-sans selection:bg-white selection:text-black">
+    <footer className="ck-footer-wrapper font-sans selection:bg-blue-600 selection:text-white">
       {/* 1. Wave Mask Divider */}
       <FooterWave />
 

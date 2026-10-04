@@ -1,0 +1,63 @@
+.mHeadPrice { font-family: var(--pv-serif); font-size: 28px; line-height: 1.15; }
+
+.mHeadPrice small { font-family: inherit; font-size: 14px; color: var(--pv-muted); }
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon { position: absolute; left: 12px; color: var(--pv-faint); pointer-events: none; }
+
+.searchInput {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px 0 36px;
+    font-size: 14px;
+    color: var(--pv-ink);
+    background: #fff;
+    border: 1px solid var(--pv-line);
+    border-radius: 0;
+    outline: none;
+}
+
+.searchInput:focus { border-color: var(--pv-green); box-shadow: 0 0 0 3px rgba(20, 131, 69, 0.12); }
+
+.bandTitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--pv-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bandIcon { color: var(--pv-green-ink); }
+
+.valCheck { color: var(--pv-green); }
+
+.valDash { color: #c4c7cc; }
+
+.valText { font-family: var(--pv-mono); font-size: 13px; color: #3f444b; }
+
+.valAddon {
+    font-family: var(--pv-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    color: #92400e;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+}
+
+.noMatch {
+    padding: 48px 16px;
+    text-align: center;
+    color: var(--pv-muted);
+    border-bottom: 1px solid var(--pv-line);
+}
