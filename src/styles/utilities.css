@@ -6555,6 +6555,51 @@ video {
 }
 
 /* ============================================================
+   MISSING BASE UTILITIES — not in original Tailwind snapshot
+   ============================================================ */
+@layer utilities {
+  /* Sizing — w-11, h-11 (44px = spacing*11) */
+  .w-11 { width: calc(var(--spacing) * 11); }
+  .h-11 { height: calc(var(--spacing) * 11); }
+
+  /* Fractional sizes used for thin decorative lines */
+  .w-0\.5 { width: calc(var(--spacing) * 0.5); }
+  .h-0\.5 { height: calc(var(--spacing) * 0.5); }
+  .w-1\.5 { width: calc(var(--spacing) * 1.5); }
+  .h-1\.5 { height: calc(var(--spacing) * 1.5); }
+
+  /* Flex utilities */
+  .flex-shrink-0 { flex-shrink: 0; }
+  .min-w-0 { min-width: 0; }
+
+  /* Text overflow */
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .whitespace-nowrap { white-space: nowrap; }
+  .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+
+  /* group-hover: interactive states */
+  .group:hover .group-hover\:scale-105 { --tw-scale-x: 1.05; --tw-scale-y: 1.05; transform: scale(1.05); }
+  .group:hover .group-hover\:scale-110 { --tw-scale-x: 1.1; --tw-scale-y: 1.1; transform: scale(1.1); }
+  .group:hover .group-hover\:text-blue-600 { color: #2563eb; }
+  .group:hover .group-hover\:text-blue-700 { color: #1d4ed8; }
+  .group:hover .group-hover\:text-emerald-600 { color: #059669; }
+  .group:hover .group-hover\:text-emerald-700 { color: #047857; }
+  .group:hover .group-hover\:text-white { color: #ffffff; }
+  .group:hover .group-hover\:bg-blue-50 { background-color: #eff6ff; }
+  .group:hover .group-hover\:bg-blue-100 { background-color: #dbeafe; }
+  .group:hover .group-hover\:bg-blue-600 { background-color: #2563eb; }
+  .group:hover .group-hover\:border-gray-400 { border-color: #9ca3af; }
+  .group:hover .group-hover\:opacity-100 { opacity: 1; }
+  .group:hover .group-hover\:visible { visibility: visible; }
+  .group:hover .group-hover\:gap-2 { gap: calc(var(--spacing) * 2); }
+  .group:hover .group-hover\:translate-x-0\.5 { --tw-translate-x: calc(var(--spacing) * 0.5); transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)); }
+  .group:hover .group-hover\:translate-x-1 { --tw-translate-x: calc(var(--spacing) * 1); transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)); }
+  .group:hover .group-hover\:-translate-x-1 { --tw-translate-x: calc(var(--spacing) * -1); transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)); }
+  .group:hover .group-hover\:translate-y-0\.5 { --tw-translate-y: calc(var(--spacing) * 0.5); transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)); }
+}
+
+/* ============================================================
    RESPONSIVE UTILITIES — sm / md / lg / xl breakpoints
    Generated from project component class scan
    ============================================================ */
