@@ -3,6 +3,35 @@
    Modular subfolder CSS for services section
    ========================================================================== */
 
+/* Visibility: desktop-only (≥1024px) / mobile-only (<1024px) */
+.dt-desktop-only {
+  display: none;
+}
+.dt-mobile-only {
+  display: block;
+}
+@media (min-width: 1024px) {
+  .dt-desktop-only {
+    display: block;
+  }
+  .dt-mobile-only {
+    display: none;
+  }
+}
+
+/* Mobile cards grid — 1 col on phones, 2 col on tablets */
+.dt-mobile-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .dt-mobile-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @keyframes circuitPulseAnim {
   0% {
     stroke-dashoffset: 48;

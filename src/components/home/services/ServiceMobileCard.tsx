@@ -6,28 +6,68 @@ export function ServiceMobileCard({ node }: { node: ServiceNode }) {
   const { Icon } = node;
 
   return (
-    <Link href={node.href} className="dt-mobile-node-card group">
-      <div
-        className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105"
-        style={{ backgroundColor: node.iconBg, color: node.iconColor }}
-      >
-        <Icon className="w-5 h-5" aria-hidden="true" />
+    <Link href={node.href} className="dt-mobile-node-card">
+      {/* Icon */}
+      <div style={{
+        width: "44px",
+        height: "44px",
+        minWidth: "44px",
+        borderRadius: "12px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        backgroundColor: node.iconBg,
+        color: node.iconColor,
+        transition: "transform 0.2s ease",
+      }}>
+        <Icon style={{ width: "20px", height: "20px" }} aria-hidden="true" />
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-1.5 mb-0.5">
-          <p className="text-[13px] sm:text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors truncate">
+
+      {/* Text */}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "6px", marginBottom: "2px" }}>
+          <p style={{
+            fontSize: "13px",
+            fontWeight: 700,
+            color: "#1e293b",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            transition: "color 0.2s ease",
+          }}>
             {node.title}
           </p>
           {node.tag && (
-            <span className="text-[9.5px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 flex-shrink-0 whitespace-nowrap">
+            <span style={{
+              fontSize: "9.5px",
+              fontWeight: 600,
+              color: "#2563eb",
+              backgroundColor: "#eff6ff",
+              padding: "2px 8px",
+              borderRadius: "9999px",
+              border: "1px solid #dbeafe",
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+            }}>
               {node.tag}
             </span>
           )}
         </div>
-        <p className="text-xs text-slate-500 leading-snug line-clamp-2">
+        <p style={{
+          fontSize: "12px",
+          color: "#64748b",
+          lineHeight: 1.4,
+          overflow: "hidden",
+          display: "-webkit-box",
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 2,
+        } as React.CSSProperties}>
           {node.desc}
         </p>
       </div>
+
+      {/* Arrow */}
       <svg
         width="15"
         height="15"
@@ -37,7 +77,7 @@ export function ServiceMobileCard({ node }: { node: ServiceNode }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="flex-shrink-0 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all"
+        style={{ flexShrink: 0, transition: "transform 0.2s ease, stroke 0.2s ease" }}
       >
         <path d="m9 18 6-6-6-6" />
       </svg>

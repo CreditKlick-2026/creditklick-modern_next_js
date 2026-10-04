@@ -10,45 +10,55 @@ import { ServicesBottomBanner } from "./ServicesBottomBanner";
 
 export function ServicesGrid() {
   return (
-    <section id="services" className="dt-circuit-section w-full" style={{ backgroundColor: "#ffffff" }}>
-      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
+    <section id="services" className="dt-circuit-section" style={{ backgroundColor: "#ffffff", width: "100%" }}>
+      <div style={{ maxWidth: "80rem", margin: "0 auto", position: "relative", zIndex: 10, paddingLeft: "1rem", paddingRight: "1rem" }}>
 
         {/* Section Pill Badge */}
-        <div className="text-center mb-4 sm:mb-6">
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-900 bg-blue-100/70 border border-blue-300/60 px-4 py-1.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <span style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "11px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "#1e3a8a",
+            backgroundColor: "rgba(219,234,254,0.7)",
+            border: "1px solid rgba(147,197,253,0.6)",
+            padding: "6px 16px",
+            borderRadius: "9999px",
+          }}>
+            <span style={{
+              display: "inline-block",
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              backgroundColor: "#2563eb",
+              animation: "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
+            }} />
             HOW CREDITKLICK HELPS YOU
           </span>
         </div>
 
-        {/* Desktop Interactive Circuit Map */}
-        <div
-          className="hidden lg:block dt-circuit-board"
-          style={{
-            position: "relative",
-            width: "100%",
-            maxWidth: "1100px",
-            height: "440px",
-            minHeight: "440px",
-            margin: "0 auto",
-          }}
-        >
-          {/* Circuit Background Traces */}
+        {/* Desktop Interactive Circuit Map — only visible ≥1024px */}
+        <div className="dt-desktop-only dt-circuit-board" style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "1100px",
+          height: "440px",
+          minHeight: "440px",
+          margin: "0 auto",
+        }}>
           <CircuitTraces />
-
-          {/* Left Column Nodes */}
           <div className="dt-column-left">
             {LEFT_NODES.map((item, idx) => (
               <ServiceNodeCard key={item.title} node={item} index={idx} isRightColumn={false} />
             ))}
           </div>
-
-          {/* Center Hub */}
           <div className="dt-center-hub-pos">
             <div className="dt-hub-card" aria-label="CreditKlick Hub" />
           </div>
-
-          {/* Right Column Nodes */}
           <div className="dt-column-right">
             {RIGHT_NODES.map((item, idx) => (
               <ServiceNodeCard key={item.title} node={item} index={idx} isRightColumn={true} />
@@ -56,20 +66,33 @@ export function ServicesGrid() {
           </div>
         </div>
 
-        {/* Mobile & Tablet Flow (< 1024px) */}
-        <div className="block lg:hidden">
-          <div className="flex flex-col items-center justify-center mb-6">
+        {/* Mobile & Tablet Flow — only visible <1024px */}
+        <div className="dt-mobile-only">
+          {/* Hub + connector */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
             <div className="dt-hub-card" aria-label="CreditKlick Hub" />
-            <div className="flex flex-col items-center mt-3">
-              <span className="w-0.5 h-5 bg-gradient-to-b from-blue-600 to-blue-300" />
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 mt-0.5 shadow-xs">
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "12px" }}>
+              <span style={{ display: "block", width: "2px", height: "20px", background: "linear-gradient(to bottom, #2563eb, #93c5fd)" }} />
+              <span style={{
+                fontSize: "10px",
+                fontWeight: 700,
+                color: "#2563eb",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                backgroundColor: "#eff6ff",
+                padding: "2px 10px",
+                borderRadius: "9999px",
+                border: "1px solid #bfdbfe",
+                marginTop: "2px",
+              }}>
                 8 Integrated Services
               </span>
-              <span className="w-0.5 h-3 bg-gradient-to-b from-blue-200 to-transparent mt-0.5" />
+              <span style={{ display: "block", width: "2px", height: "12px", background: "linear-gradient(to bottom, #bfdbfe, transparent)", marginTop: "2px" }} />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+          {/* Cards Grid */}
+          <div className="dt-mobile-cards-grid">
             {[...LEFT_NODES, ...RIGHT_NODES].map((item) => (
               <ServiceMobileCard key={item.title} node={item} />
             ))}
