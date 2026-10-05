@@ -160,14 +160,6 @@ export default function BlogList() {
                     )}
                 </section>
 
-                {/* Bottom CTA */}
-                <section className={styles.bottomCtaSection}>
-                    <div className={styles.bottomCtaBanner}>
-                        <h2 className={styles.bottomCtaTitle}>Take Control of Your Financial Health with CreditKlick</h2>
-                        <p className={styles.bottomCtaSubtitle}>Check your free CIBIL score, unlock personalized loan offers, and build a stellar credit profile today.</p>
-                        <div><Link href="/credit-score" className={styles.bottomCtaButton}>Check Free Credit Score</Link></div>
-                    </div>
-                </section>
 
                 <BlogSearchModal
                     isOpen={isSearchModalOpen} isMounted={isMounted} inputRef={modalInputRef as any}
