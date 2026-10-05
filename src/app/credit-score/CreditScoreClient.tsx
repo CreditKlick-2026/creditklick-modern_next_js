@@ -60,7 +60,7 @@ function FormDesign() {
 
 function JoinCK() {
     return (
-        <div className="grid sm:grid-cols-2 grid-cols-1 my-5 bg-blue-50">
+        <div style={{ backgroundColor: '#dbe8fd' }} className="grid sm:grid-cols-2 grid-cols-1 my-5">
             <div className="flex flex-col items-center justify-center">
                 <p className="lg:text-4xl md:text-3xl text-2xl text-left my-1 text-blue-700 mx-8 font-semibold italic">
                     Join CREDITKLICK and monitor your <br />Credit Score
@@ -116,7 +116,7 @@ function Testimonials() {
                 <div className="w-full p-4 m-auto">
                     <Image src={testimonial} alt="Testimonial" width={300} height={200} className="lg:w-1/2 w-2/5 m-auto object-contain h-auto" />
                 </div>
-                <div className="w-3/4 p-4 bg-blue-50 mx-auto my-4 shadow-lg rounded-lg">
+                <div style={{ backgroundColor: '#dbe8fd' }} className="w-3/4 p-4 mx-auto my-4 shadow-lg rounded-lg">
                     <div className="flex text-blue-500 my-2">
                         <Star className="w-4 h-4 fill-current" />
                         <Star className="w-4 h-4 fill-current" />
@@ -133,7 +133,7 @@ function Testimonials() {
                         Neha Sharma
                     </p>
                 </div>
-                <div className="w-3/4 p-4 bg-blue-50 mx-auto my-4 shadow-lg rounded-lg">
+                <div style={{ backgroundColor: '#dbe8fd' }} className="w-3/4 p-4 mx-auto my-4 shadow-lg rounded-lg">
                     <div className="flex text-blue-500 my-2">
                         <Star className="w-4 h-4 fill-current" />
                         <Star className="w-4 h-4 fill-current" />
@@ -323,7 +323,7 @@ export default function CreditScoreClient() {
     return (
         <div className="min-h-screen">
             {/* Header - compact on mobile */}
-            <div className="font-semibold text-lg md:text-2xl bg-blue-100 py-3 md:py-6 text-blue-900 text-center tracking-wider">
+            <div style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-lg md:text-2xl py-3 md:py-6 text-blue-900 text-center tracking-wider">
                 <h1>CHECK FREE CREDIT SCORE</h1>
             </div>
 
@@ -450,7 +450,7 @@ export default function CreditScoreClient() {
                         ) : (
                             <div className="max-w-md mx-auto my-4 p-5 md:p-6 bg-white border border-blue-100 rounded-xl shadow-md text-left animate-fadeIn">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 shrink-0">
+                                    <div style={{ backgroundColor: '#dbe8fd' }} className="w-10 h-10 rounded-full flex items-center justify-center text-blue-700 shrink-0">
                                         <CheckCircle2 className="w-6 h-6 text-blue-700" />
                                     </div>
                                     <div>
@@ -463,7 +463,7 @@ export default function CreditScoreClient() {
                                     </div>
                                 </div>
 
-                                <div className="bg-blue-50/70 border border-blue-100 rounded-lg p-3.5 my-4 space-y-2 text-xs">
+                                <div style={{ backgroundColor: 'rgba(219, 232, 253, 0.7)' }} className="border border-blue-100 rounded-lg p-3.5 my-4 space-y-2 text-xs">
                                     {formData.mobile && (
                                         <div className="flex items-center justify-between border-b border-blue-100/80 pb-2">
                                             <span className="text-gray-600 font-medium">Mobile:</span>
@@ -478,7 +478,7 @@ export default function CreditScoreClient() {
                                     )}
                                     <div className="flex items-center justify-between pt-0.5">
                                         <span className="text-gray-600 font-medium">Status:</span>
-                                        <span className="font-semibold text-blue-800 bg-blue-100 px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
+                                        <span style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-blue-800 px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
                                             Under Processing
                                         </span>
                                     </div>
