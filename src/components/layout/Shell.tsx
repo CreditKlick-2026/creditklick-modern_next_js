@@ -24,7 +24,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <div className="min-h-screen flex flex-col w-full max-w-full relative">
                 <ScrollProgress />
                 <Header />
-                <main className="flex-1 pt-16 lg:pt-24 w-full max-w-full">
+                <main className="flex-1 pt-16 lg:pt-16 w-full max-w-full">
                     {children}
                 </main>
                 <Footer />
