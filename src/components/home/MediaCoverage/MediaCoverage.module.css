@@ -6,20 +6,20 @@
 .section {
   position: relative;
   background-color: #ffffff;
-  padding: 4.5rem 1rem;
+  padding: 1.25rem 1rem 4rem;
   overflow: hidden;
   font-family: var(--font-inter), sans-serif;
 }
 
 @media (min-width: 640px) {
   .section {
-    padding: 5.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section {
-    padding: 6.5rem 2rem;
+    padding: 1rem 2rem 6rem;
   }
 }
 
