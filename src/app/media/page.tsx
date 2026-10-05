@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "CreditKlick Media Coverage & Press Room",
     description:
       "Leading national and international media coverage highlighting CreditKlick's digital credit innovation.",
-    images: ["/assets/creditklic_next_gen.png"],
+    images: ["/images/CK.png"],
   },
   alternates: {
     canonical: "/media",

@@ -72,7 +72,11 @@ export function Header() {
       </header>
 
       {/* ── Mobile Header Bar & Drawer ── */}
-      <MobileDrawer isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <MobileDrawer
+        isLoggedIn={isLoggedIn}
+        onLogout={handleLogout}
+        onOpenLogin={() => setShowLoginModal(true)}
+      />
 
       {/* ── Login Modal ── */}
       <LoginModal

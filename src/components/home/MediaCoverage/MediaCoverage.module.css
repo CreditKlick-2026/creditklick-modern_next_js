@@ -294,3 +294,171 @@
 .card:hover .arrowIcon {
   transform: translate(2px, -2px);
 }
+
+/* Layout helpers (project has no Tailwind build, so these replace utility classes) */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.badgeRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Outlet name tile — text wordmark instead of third-party logo files */
+.outlet {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.outletMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #2563eb 0%, #1c398e 100%);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
+
+.outletName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+/* ── Press inquiries block (media page) ── */
+.press {
+  padding: 4rem 1rem;
+  background-color: #f8fafc;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.pressCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .pressCard { padding: 2.5rem 3rem; }
+}
+
+@media (min-width: 900px) {
+  .pressCard {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pressText { max-width: 36rem; }
+
+.pressBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  background: #eff6ff;
+  border: 1px solid rgba(191, 219, 254, 0.8);
+  color: #155dfc;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pressBadge svg { width: 0.875rem; height: 0.875rem; }
+
+.pressTitle {
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.5rem, 3.5vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1c398e;
+}
+
+.pressDesc {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.pressMail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pressMail:hover { text-decoration: underline; }
+.pressMail svg { width: 1rem; height: 1rem; }
+
+.pressActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .pressActions { flex-direction: row; }
+}
+
+.pressBtn,
+.pressBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.pressBtn { background: #f1f5f9; color: #1e293b; }
+.pressBtn:hover { background: #e2e8f0; }
+.pressBtnPrimary { background: #2563eb; color: #ffffff; }
+.pressBtnPrimary:hover { background: #1d4ed8; }

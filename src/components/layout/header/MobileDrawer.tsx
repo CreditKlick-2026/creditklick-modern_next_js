@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronDown } from "lucide-react";
+import { X, ChevronDown, LogIn, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileHamburgerIcon } from "./MobileHamburgerIcon";
 import styles from "./Header.module.css";
@@ -12,6 +12,7 @@ import styles from "./Header.module.css";
 interface MobileDrawerProps {
   isLoggedIn: boolean;
   onLogout: () => void;
+  onOpenLogin?: () => void;
 }
 
 const CALCULATOR_ITEMS = [
@@ -23,7 +24,7 @@ const CALCULATOR_ITEMS = [
   { label: "Yes Bank Value", href: "/calculator/yes" },
 ];
 
-export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
+export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawerProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -322,52 +323,54 @@ export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
                 FAQs
               </Link>
 
-              {/* User Profile / Logout (if logged in) */}
-              {isLoggedIn && (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", marginTop: "4px" }}>
-                  <Link
-                    href="/profile"
-                    className={styles.fixMenuLink}
-                    onClick={() => setIsOpen(false)}
-                    style={{ color: "#2563eb", fontWeight: 600 }}
-                  >
-                    My Profile
-                  </Link>
+              {/* Bottom Login / User Profile CTA Button */}
+              <div style={{ marginTop: "16px", marginBottom: "8px", textAlign: "center" }}>
+                {isLoggedIn ? (
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+                    <Link
+                      href="/profile"
+                      className={styles.btnLoginMobile}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <User style={{ width: "18px", height: "18px" }} />
+                      <span>My Profile</span>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsOpen(false);
+                        onLogout();
+                      }}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#ef4444",
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        padding: "4px 12px",
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                ) : (
                   <button
+                    type="button"
                     onClick={() => {
                       setIsOpen(false);
-                      onLogout();
+                      if (onOpenLogin) {
+                        onOpenLogin();
+                      } else {
+                        window.location.href = "/login";
+                      }
                     }}
-                    className={styles.fixMenuLink}
-                    style={{ color: "#ef4444", fontSize: "15px" }}
+                    className={styles.btnLoginMobile}
                   >
-                    Logout
+                    <LogIn style={{ width: "18px", height: "18px" }} />
+                    <span>Login</span>
                   </button>
-                </div>
-              )}
-
-              {/* Center Bottom: Google Play Store Badge */}
-              <div style={{ marginTop: "16px", textAlign: "center" }}>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.playStoreBadge}
-                  aria-label="Get it on Google Play"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/play-store-icon.svg"
-                    alt="Get it on Google Play"
-                    style={{
-                      height: "44px",
-                      width: "auto",
-                      display: "block",
-                      borderRadius: "8px",
-                      boxShadow: "0 4px 14px rgba(0, 0, 0, 0.12)",
-                    }}
-                  />
-                </a>
+                )}
               </div>
             </div>
           </motion.div>

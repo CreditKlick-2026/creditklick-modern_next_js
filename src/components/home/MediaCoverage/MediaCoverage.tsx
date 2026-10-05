@@ -1,74 +1,80 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import styles from "./MediaCoverage.module.css";
 
 interface MediaItem {
   outlet: string;
+  /** Short initials shown in the outlet tile (we don't ship third-party logos) */
+  mark: string;
   category: string;
   headline: string;
   snippet: string;
   url: string;
-  img: string;
-  date: string;
+  source: string;
 }
+
+// Headlines are the published article titles. ANI, Lokmat Times, ThePrint and Zee5
+// carried the Credit Refine launch story; Fox 40 and KSNT syndicated the EIN Presswire release.
+const CREDIT_REFINE_HEADLINE = "IMS Introduces Credit Refine: A Revolutionary Product by CreditKlick";
+const LAUNCH_HEADLINE =
+  "Incredible Management Service Pvt Ltd Launches New Subsidiary CreditKlick to Revolutionize the Credit Industry";
 
 const mediaArticles: MediaItem[] = [
   {
     outlet: "ANI News",
-    category: "National Wire",
-    headline: "IMS Introduces Credit Refine: A Revolutionary Product by CreditKlick",
-    snippet: "CreditKlick pioneers an algorithmic credit-repair and dispute-management platform designed for millions of Indian borrowers.",
+    mark: "ANI",
+    category: "News agency",
+    headline: CREDIT_REFINE_HEADLINE,
+    snippet: "Coverage of the launch of Credit Refine, CreditKlick's credit score improvement service.",
     url: "https://aninews.in/news/business/business/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick20230530190234/",
-    img: "/assets/heroimages/ani.webp",
-    date: "Press Release",
+    source: "aninews.in",
   },
   {
     outlet: "Lokmat Times",
-    category: "Leading Daily",
-    headline: "Transforming Financial Health with Automated Bureau Audits",
-    snippet: "Spotlighting CreditKlick's dedicated approach to improving creditworthiness and securing prime institutional loan terms.",
+    mark: "LT",
+    category: "Newspaper",
+    headline: CREDIT_REFINE_HEADLINE,
+    snippet: "Lokmat Times business desk on the launch of Credit Refine by CreditKlick.",
     url: "https://www.lokmattimes.com/business/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick/",
-    img: "/assets/heroimages/lokmat.webp",
-    date: "Business News",
+    source: "lokmattimes.com",
   },
   {
     outlet: "ThePrint",
-    category: "Digital Media",
-    headline: "Empowering Borrowers Across India to Take Control of Credit",
-    snippet: "How CreditKlick is disrupting credit reporting errors, unauthorized inquiries, and outdated bureau data in real-time.",
+    mark: "TP",
+    category: "Digital news",
+    headline: CREDIT_REFINE_HEADLINE,
+    snippet: "ThePrint on CreditKlick's new Credit Refine product for Indian borrowers.",
     url: "https://theprint.in/judiciary/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick/1603875/",
-    img: "/assets/heroimages/theprint.webp",
-    date: "Exclusive Report",
+    source: "theprint.in",
   },
   {
     outlet: "Zee5",
-    category: "Broadcast Network",
-    headline: "Democratizing Access to Transparent Digital Lending Solutions",
-    snippet: "CreditKlick's paperless workflow bridges the gap between major Indian banks, NBFCs, and retail borrowers with AI-backed underwriting.",
+    mark: "Z5",
+    category: "News",
+    headline: CREDIT_REFINE_HEADLINE,
+    snippet: "Zee5 news coverage of the Credit Refine launch by CreditKlick.",
     url: "https://www.zee5.com/articles/ims-introduces-credit-refine-a-revolutionary-product-by-creditklick",
-    img: "/assets/heroimages/zee5.webp",
-    date: "Industry Feature",
+    source: "zee5.com",
   },
   {
     outlet: "Fox 40",
-    category: "Global Syndicate",
-    headline: "Revolutionizing Credit Health Ecosystem for Modern India",
-    snippet: "Coverage on CreditKlick's mission to deliver free credit scores, zero-spam loan comparison, and institutional credit repair.",
+    mark: "F40",
+    category: "Press release",
+    headline: LAUNCH_HEADLINE,
+    snippet: "Press release announcing CreditKlick, a new subsidiary of Incredible Management Service Pvt Ltd.",
     url: "https://fox40.com/business/press-releases/ein-presswire/622077441/incredible-management-service-pvt-ltd-launches-new-subsidiary-creditklick-to-revolutionize-the-credit-industry/",
-    img: "/assets/heroimages/fox.webp",
-    date: "Broadcast Feature",
+    source: "via EIN Presswire",
   },
   {
     outlet: "KSNT News",
-    category: "Broadcast Affiliate",
-    headline: "Disrupting Digital Lending & Financial Transparency in India",
-    snippet: "Industry spotlight on CreditKlick's secure 256-bit infrastructure for seamless personal loans, credit cards, and credit health.",
+    mark: "KSNT",
+    category: "Press release",
+    headline: LAUNCH_HEADLINE,
+    snippet: "Press release announcing CreditKlick, a new subsidiary of Incredible Management Service Pvt Ltd.",
     url: "https://www.ksnt.com/business/press-releases/ein-presswire/622077441/incredible-management-service-pvt-ltd-launches-new-subsidiary-creditklick-to-revolutionize-the-credit-industry/",
-    img: "/assets/heroimages/ksnt.webp",
-    date: "Media Spotlight",
+    source: "via EIN Presswire",
   },
 ];
 
@@ -78,9 +84,9 @@ export function MediaCoverage() {
       {/* Ambient background glow */}
       <div className={styles.glowAura} />
 
-      <div className="container mx-auto max-w-7xl relative z-10 px-4">
+      <div className={styles.container}>
         {/* Header Badge */}
-        <div className="flex justify-center mb-4">
+        <div className={styles.badgeRow}>
           <span className={styles.badge}>
             <span className={styles.badgeDot} />
             Press &amp; Acclaim
@@ -94,15 +100,14 @@ export function MediaCoverage() {
 
         {/* Subtitle */}
         <p className={styles.subtitle}>
-          Leading national news agencies and international business networks
-          <br className="hidden sm:inline" /> spotlighting CreditKlick&apos;s digital credit innovation.
+          CreditKlick and the launch of Credit Refine, as covered by national news outlets and syndicated press.
         </p>
 
-        {/* 6 Luxury Interactive Media Cards */}
+        {/* Media cards */}
         <div className={styles.grid}>
-          {mediaArticles.map((item, index) => (
+          {mediaArticles.map((item) => (
             <a
-              key={index}
+              key={item.url}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -111,15 +116,9 @@ export function MediaCoverage() {
             >
               {/* Header: Outlet Logo & Category Tag */}
               <div className={styles.logoWrap}>
-                <div className={styles.logoBox}>
-                  <Image
-                    src={item.img}
-                    alt={`${item.outlet} Coverage`}
-                    fill
-                    sizes="136px"
-                    className={styles.logoImg}
-                    loading="lazy"
-                  />
+                <div className={styles.outlet}>
+                  <span className={styles.outletMark} aria-hidden="true">{item.mark}</span>
+                  <span className={styles.outletName}>{item.outlet}</span>
                 </div>
                 <span className={styles.tagPill}>
                   {item.category}
@@ -131,16 +130,12 @@ export function MediaCoverage() {
                 <h3 className={styles.headline}>
                   {item.headline}
                 </h3>
-                <p className={styles.quote}>
-                  &ldquo;{item.snippet}&rdquo;
-                </p>
+                <p className={styles.quote}>{item.snippet}</p>
               </div>
 
               {/* Footer: Date Tag & Outbound Indicator */}
               <div className={styles.footer}>
-                <span className="text-slate-400 font-medium text-xs">
-                  {item.date}
-                </span>
+                <span className={styles.source}>{item.source}</span>
                 <span className={styles.linkText}>
                   Read Coverage
                   <ExternalLink className={styles.arrowIcon} aria-hidden="true" />
