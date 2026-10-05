@@ -145,14 +145,15 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Drawer - terminates right below Login button */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className={styles.mobileDropdownDrawer}
-            >
+            {/* Clipping wrapper so drawer emerges smoothly from above (header bar) to below */}
+            <div className={styles.mobileDrawerWrapper}>
+              <motion.div
+                initial={{ y: "-100%", opacity: 0.5 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                className={styles.mobileDropdownDrawer}
+              >
               {/* 1. Home */}
               <Link
                 href="/"
@@ -321,7 +322,8 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 )}
               </div>
             </motion.div>
-          </>
+          </div>
+        </>
         )}
       </AnimatePresence>
     </div>
