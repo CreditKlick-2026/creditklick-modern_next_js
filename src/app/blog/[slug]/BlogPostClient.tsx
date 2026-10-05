@@ -458,7 +458,7 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
     return (
         <div className="bg-gray-50 min-h-screen blogPostPageWrapper">
             {/* Hero Heading Section */}
-            <div className="bg-gradient-to-b from-white to-gray-50 border-b border-gray-100 py-6 md:py-8">
+            <div className="bg-gradient-to-b from-white to-gray-50 border-b border-gray-100 pt-3 pb-6 md:py-8">
                 <div className="container mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -662,12 +662,7 @@ export default function BlogPostClient({ post, relatedPosts }: { post: Post, rel
 
             <style jsx global>{`
                 .blogPostPageWrapper {
-                    padding-top: 3.5rem;
-                }
-                @media (min-width: 768px) {
-                    .blogPostPageWrapper {
-                        padding-top: 1rem;
-                    }
+                    padding-top: 0;
                 }
                 .prose iframe, .ql-video {
                     width: 100%;
