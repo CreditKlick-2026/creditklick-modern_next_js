@@ -110,13 +110,13 @@ export function RefineScoreChart() {
             {
                 label: "Credit Score",
                 data: MILESTONES.map((m) => m.score),
-                borderColor: "#2563eb",
+                borderColor: "#1f52db",
                 borderWidth: 3.5,
                 pointBackgroundColor: MILESTONES.map((_, i) =>
-                    i === activeIdx ? "#1d4ed8" : "#ffffff"
+                    i === activeIdx ? "#1f52db" : "#ffffff"
                 ),
                 pointBorderColor: MILESTONES.map((_, i) =>
-                    i === activeIdx ? "#60a5fa" : "#2563eb"
+                    i === activeIdx ? "#dbe8fd" : "#1f52db"
                 ),
                 pointBorderWidth: MILESTONES.map((_, i) => (i === activeIdx ? 4 : 2.5)),
                 pointRadius: MILESTONES.map((_, i) => (i === activeIdx ? 8 : 5)),
@@ -126,9 +126,9 @@ export function RefineScoreChart() {
                 backgroundColor: (context: ScriptableContext<"line">) => {
                     const ctx = context.chart.ctx;
                     const gradient = ctx.createLinearGradient(0, 0, 0, 260);
-                    gradient.addColorStop(0, "rgba(37, 99, 235, 0.32)");
-                    gradient.addColorStop(0.7, "rgba(37, 99, 235, 0.06)");
-                    gradient.addColorStop(1, "rgba(37, 99, 235, 0.0)");
+                    gradient.addColorStop(0, "rgba(31, 82, 219, 0.35)");
+                    gradient.addColorStop(0.7, "rgba(31, 82, 219, 0.08)");
+                    gradient.addColorStop(1, "rgba(219, 232, 253, 0.0)");
                     return gradient;
                 }
             }

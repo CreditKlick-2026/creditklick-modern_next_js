@@ -1,6 +1,6 @@
 /* ==========================================================================
    CREDIT REFINE PRODUCT PAGE (CLEAN, MODERN, SIMPLE + GRAPH & ANIMATED ICONS)
-   Brand Colors: Royal Blue #2563eb, Navy #1e3a8a, Sky Tint #eff6ff
+   Brand Colors: Royal Blue #1f52db, Sky Tint #dbe8fd
    ========================================================================== */
 
 .refineRoot {
@@ -30,7 +30,7 @@
 .hero {
   position: relative;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(219, 234, 254, 0.75), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(219, 232, 253, 0.75), transparent 70%),
     linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   padding: 2.25rem 1.25rem 3rem;
   border-bottom: 1px solid #f1f5f9;
@@ -58,13 +58,13 @@
   padding: 0.4rem 1rem;
   border-radius: 9999px;
   background: #ffffff;
-  border: 1px solid #bfdbfe;
-  color: #1d4ed8;
+  border: 1px solid #dbe8fd;
+  color: #1f52db;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 2px 8px rgba(31, 82, 219, 0.08);
   margin-bottom: 1.25rem;
 }
 
@@ -72,7 +72,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #2563eb;
+  color: #1f52db;
   animation: spinSlow 8s linear infinite;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .heroGradientText {
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #0284c7 100%);
+  background: linear-gradient(135deg, #1f52db 0%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -121,18 +121,18 @@
   gap: 0.5rem;
   padding: 0.75rem 1.6rem;
   border-radius: 8px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #1f52db 0%, #1640b3 100%);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 14px rgba(31, 82, 219, 0.3);
   transition: all 0.2s ease;
 }
 
 .btnPrimary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 6px 20px rgba(31, 82, 219, 0.4);
 }
 
 .btnSecondary {
@@ -142,8 +142,8 @@
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   background: #ffffff;
-  color: #1e40af;
-  border: 1px solid #bfdbfe;
+  color: #1f52db;
+  border: 1px solid #dbe8fd;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
@@ -151,8 +151,8 @@
 }
 
 .btnSecondary:hover {
-  background: #eff6ff;
-  border-color: #60a5fa;
+  background: #dbe8fd;
+  border-color: #1f52db;
 }
 
 /* Trust Strip */
@@ -177,7 +177,7 @@
 }
 
 .trustIcon {
-  color: #2563eb;
+  color: #1f52db;
 }
 
 /* ── 2. Real Interactive Score Trajectory Graph ──── */
@@ -222,7 +222,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #2563eb;
+  color: #1f52db;
   text-transform: uppercase;
   margin-bottom: 0.4rem;
 }
@@ -243,14 +243,14 @@
 
 .liveScoreBadge {
   background: #ffffff;
-  border: 1.5px solid #bfdbfe;
+  border: 1.5px solid #dbe8fd;
   border-radius: 0;
   padding: 0.85rem 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 4px 14px rgba(31, 82, 219, 0.08);
   min-width: 170px;
   align-self: flex-start;
 }
@@ -267,7 +267,7 @@
   font-size: 2.35rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #1d4ed8;
+  color: #1f52db;
   display: flex;
   align-items: baseline;
   gap: 0.2rem;
@@ -341,11 +341,11 @@
 }
 
 .timelineBtnActive .timelineDay {
-  color: #2563eb;
+  color: #1f52db;
 }
 
 .timelineBtnActive .timelineScore {
-  color: #1d4ed8;
+  color: #1f52db;
 }
 
 /* Chart Canvas Box */
@@ -395,9 +395,9 @@
   text-transform: uppercase;
   padding: 0.2rem 0.6rem;
   border-radius: 0;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  color: #1d4ed8;
+  background: #dbe8fd;
+  border: 1px solid #dbe8fd;
+  color: #1f52db;
   margin-bottom: 0.35rem;
 }
 
@@ -502,9 +502,9 @@
 
 /* Shield / Settled Icon */
 .animBoxShield {
-  background: #eff6ff;
-  color: #2563eb;
-  border: 1px solid #bfdbfe;
+  background: #dbe8fd;
+  color: #1f52db;
+  border: 1px solid #dbe8fd;
 }
 
 .animSvgShield {
@@ -512,8 +512,8 @@
 }
 
 @keyframes shieldBreath {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(37, 99, 235, 0)); }
-  50% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.45)); }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(31, 82, 219, 0)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(31, 82, 219, 0.45)); }
 }
 
 .animRadarWave {
@@ -521,7 +521,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(31, 82, 219, 0.25) 0%, transparent 70%);
   animation: wavePulse 2.4s infinite ease-out;
 }
 
@@ -685,7 +685,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #1f52db;
   margin-bottom: 0.5rem;
 }
 
@@ -708,7 +708,7 @@
 .errorsSection {
   padding: 4.5rem 0;
   background:
-    radial-gradient(ellipse 70% 40% at 50% 30%, rgba(219, 234, 254, 0.4), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 50% 30%, rgba(219, 232, 253, 0.5), transparent 70%),
     linear-gradient(180deg, #ffffff 0%, #f8fafc 40%, #f8fafc 80%, #ffffff 100%);
   position: relative;
   border-top: 1px solid #f1f5f9;
@@ -751,7 +751,7 @@
 }
 
 .errorCard:hover {
-  background: #f0f7ff;
+  background: #dbe8fd;
 }
 
 .errorCardTop {
@@ -816,8 +816,8 @@
 
 .stepCard:hover {
   transform: translateY(-2px);
-  border-color: #bfdbfe;
-  box-shadow: 0 10px 20px -8px rgba(37, 99, 235, 0.1);
+  border-color: #dbe8fd;
+  box-shadow: 0 10px 20px -8px rgba(31, 82, 219, 0.12);
 }
 
 .stepHeader {
@@ -828,9 +828,9 @@
   display: inline-block;
   font-size: 0.85rem;
   font-weight: 800;
-  color: #2563eb;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: #1f52db;
+  background: #dbe8fd;
+  border: 1px solid #dbe8fd;
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
 }
@@ -856,10 +856,10 @@
 
 .planCard {
   background: #ffffff;
-  border: 2px solid #3b82f6;
+  border: 2px solid #1f52db;
   border-radius: 16px;
   padding: 2rem 1.5rem;
-  box-shadow: 0 16px 36px -12px rgba(37, 99, 235, 0.16);
+  box-shadow: 0 16px 36px -12px rgba(31, 82, 219, 0.16);
   position: relative;
 }
 
@@ -879,13 +879,13 @@
   gap: 0.4rem;
   padding: 0.3rem 1rem;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #1f52db 0%, #1640b3 100%);
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 4px 10px rgba(31, 82, 219, 0.35);
   white-space: nowrap;
 }
 
@@ -977,18 +977,18 @@
   gap: 0.5rem;
   height: 46px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #1f52db 0%, #1640b3 100%);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(31, 82, 219, 0.3);
   transition: all 0.2s ease;
 }
 
 .planBtnPrimary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 6px 18px rgba(31, 82, 219, 0.4);
 }
 
 .planBtnOutline {
@@ -999,8 +999,8 @@
   padding: 0 1.25rem;
   border-radius: 8px;
   background: #ffffff;
-  border: 1px solid #bfdbfe;
-  color: #1e40af;
+  border: 1px solid #dbe8fd;
+  color: #1f52db;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
@@ -1008,8 +1008,8 @@
 }
 
 .planBtnOutline:hover {
-  background: #eff6ff;
-  border-color: #60a5fa;
+  background: #dbe8fd;
+  border-color: #1f52db;
 }
 
 /* ── 6. Testimonials ────────────────────────────── */
@@ -1075,7 +1075,7 @@
 .testimonialOutcome {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #2563eb;
+  color: #1f52db;
   padding-top: 0.75rem;
   border-top: 1px solid #f1f5f9;
 }
@@ -1131,12 +1131,12 @@
 }
 
 .ctaBox {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%);
+  background: linear-gradient(135deg, #0d2875 0%, #1f52db 100%);
   border-radius: 18px;
   padding: 2.5rem 1.5rem;
   text-align: center;
   color: #ffffff;
-  box-shadow: 0 20px 40px -15px rgba(29, 78, 216, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(31, 82, 219, 0.35);
 }
 
 @media (min-width: 768px) {
@@ -1177,7 +1177,7 @@
   padding: 0.8rem 1.8rem;
   border-radius: 8px;
   background: #ffffff;
-  color: #1e40af;
+  color: #1f52db;
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
