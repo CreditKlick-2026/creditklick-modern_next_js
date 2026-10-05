@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronDown, LogIn, User } from "lucide-react";
+import { X, ChevronDown, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileHamburgerIcon } from "./MobileHamburgerIcon";
 import styles from "./Header.module.css";
@@ -264,16 +264,16 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
               </Link>
 
 
-              {/* Bottom Login / User Profile CTA Button */}
-              <div style={{ marginTop: "12px", textAlign: "center" }}>
+              {/* Bottom CTA Button - Same as Pricing Get Started */}
+              <div style={{ marginTop: "8px", width: "100%", display: "flex", justifyContent: "center" }}>
                 {isLoggedIn ? (
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", maxWidth: "280px" }}>
                     <Link
                       href="/profile"
-                      className={styles.btnLoginMobile}
+                      className={styles.btnGetStartedMobile}
                       onClick={() => setIsOpen(false)}
                     >
-                      <User style={{ width: "18px", height: "18px" }} />
+                      <User style={{ width: "16px", height: "16px" }} />
                       <span>My Profile</span>
                     </Link>
                     <button
@@ -286,7 +286,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                         background: "transparent",
                         border: "none",
                         color: "#ef4444",
-                        fontSize: "14px",
+                        fontSize: "13px",
                         fontWeight: 600,
                         cursor: "pointer",
                         padding: "4px 12px",
@@ -306,10 +306,9 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                         window.location.href = "/login";
                       }
                     }}
-                    className={styles.btnLoginMobile}
+                    className={styles.btnGetStartedMobile}
                   >
-                    <LogIn style={{ width: "18px", height: "18px" }} />
-                    <span>Login</span>
+                    <span>Get started</span>
                   </button>
                 )}
               </div>
