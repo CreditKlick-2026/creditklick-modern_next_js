@@ -2,13 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Zap } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button, GlobalButton } from "@/components/ui";
-import { navItems, getNavSvgIcon, getSubNavSvgIcon } from "./header.data";
 import { MobileHamburgerIcon } from "./MobileHamburgerIcon";
 import styles from "./Header.module.css";
 
@@ -17,11 +14,20 @@ interface MobileDrawerProps {
   onLogout: () => void;
 }
 
+const CALCULATOR_ITEMS = [
+  { label: "EMI Calculator", href: "/emi" },
+  { label: "AU Value Calculator", href: "/calculator/au" },
+  { label: "IDFC Value Calculator", href: "/calculator/idfc" },
+  { label: "SBI Simply Save", href: "/calculator/sbi-save" },
+  { label: "SBI Simply Click", href: "/calculator/sbi-click" },
+  { label: "Yes Bank Value", href: "/calculator/yes" },
+];
+
 export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [calculatorsOpen, setCalculatorsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -31,9 +37,10 @@ export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
 
   useEffect(() => {
     setIsOpen(false);
-    setExpandedItem(null);
+    setCalculatorsOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -45,217 +52,320 @@ export function MobileDrawer({ isLoggedIn, onLogout }: MobileDrawerProps) {
     };
   }, [isOpen]);
 
-  const hasColoredHeader = pathname === "/" || pathname === "/pricing" || pathname === "/price" || pathname === "/refine";
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    if (href.startsWith("/#")) {
+      const id = href.replace("/#", "");
+      if (pathname === "/") {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 80);
+      }
+    }
+  };
+
+  const hasColoredHeader =
+    pathname === "/" || pathname === "/pricing" || pathname === "/price" || pathname === "/refine";
 
   return (
     <div className="lg:hidden">
-      {/* Mobile Top Bar */}
+      {/* ── Normal Mobile Sticky/Fixed Top Bar (When Closed) ── */}
       <header
         className={cn(
           styles.mobileHeaderBar,
           hasColoredHeader && !isScrolled && styles.mobileHeaderHome
         )}
       >
-        <Link href="/" className="flex items-center flex-shrink-0">
+        <Link href="/" className="flex items-center flex-shrink-0" onClick={() => setIsOpen(false)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/Logo.avif"
             alt="CreditKlick"
-            style={{ height: "38px", width: "auto", display: "block" }}
+            style={{ height: "36px", width: "auto", display: "block" }}
           />
         </Link>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-1 cursor-pointer text-gray-700 hover:text-blue-600 transition-colors flex items-center justify-center rounded-lg"
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? (
-            <X className="h-6 w-6 text-gray-800" />
-          ) : (
-            <MobileHamburgerIcon className="w-8 h-8" />
-          )}
-        </button>
+
+        {/* Right side: Google Play badge + Hamburger icon */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.playStoreBadge}
+            aria-label="Get it on Google Play"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/play-store-icon.svg"
+              alt="Google Play"
+              style={{ height: "30px", width: "auto", display: "block", borderRadius: "5px" }}
+            />
+          </a>
+
+          <button
+            onClick={() => setIsOpen(true)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "40px",
+              height: "40px",
+              padding: "6px",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "8px",
+              color: "#1e293b",
+            }}
+            aria-label="Open Menu"
+          >
+            <MobileHamburgerIcon className="w-7 h-7" />
+          </button>
+        </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* ── FixMyScore-Style Fullscreen Mobile Menu Overlay ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className={styles.mobileMenuDrawer}
+            className={styles.mobileFullscreenOverlay}
           >
-            <div className={cn(styles.mobileMenuScroll, "space-y-2")}>
-              {/* About Us */}
-              <Link
-                href="/about"
-                className="flex items-center gap-3 px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
-                onClick={() => setIsOpen(false)}
-              >
-                <span className={styles.navIconWrap}>{getNavSvgIcon("About Us")}</span>
-                <span>About Us</span>
+            {/* Overlay Top Bar: Logo on Left, Google Play + Close X on Right */}
+            <div className={styles.mobileOverlayHeader}>
+              <Link href="/" onClick={() => setIsOpen(false)} style={{ display: "flex", alignItems: "center" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Logo.avif"
+                  alt="CreditKlick"
+                  style={{ height: "36px", width: "auto", display: "block" }}
+                />
               </Link>
 
-              {/* Nav Items */}
-              {navItems.map((item) => (
-                <div key={item.label}>
-                  {item.children ? (
-                    <>
-                      <button
-                        onClick={() =>
-                          setExpandedItem(expandedItem === item.label ? null : item.label)
-                        }
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className={styles.navIconWrap}>{getNavSvgIcon(item.label)}</span>
-                          <span>{item.label}</span>
-                        </div>
-                        <ChevronDown
-                          className={cn(
-                            "w-4 h-4 transition-transform",
-                            expandedItem === item.label && "rotate-180 text-blue-600"
-                          )}
-                        />
-                      </button>
-                      {expandedItem === item.label && (
-                        <div
-                          className={cn(
-                            "ml-4 border-l-2 border-blue-100 pl-4 py-2",
-                            item.label === "Calculators" ? "grid grid-cols-2 gap-2 pr-2" : "space-y-1.5"
-                          )}
-                        >
-                          {item.children.map((child) => {
-                            const sub = getSubNavSvgIcon(child.label);
-                            return (
-                              <Link
-                                key={child.label}
-                                href={child.href}
-                                className={
-                                  item.label === "Calculators"
-                                    ? "flex flex-col items-center justify-center gap-1.5 p-2 bg-gray-50 rounded-xl border border-gray-100 hover:bg-blue-50 transition-colors"
-                                    : "flex items-center gap-3 px-3 py-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all"
-                                }
-                                onClick={() => setIsOpen(false)}
-                              >
-                                <div
-                                  className={cn(
-                                    styles.dropdownIconBox,
-                                    sub.bg,
-                                    item.label === "Calculators" ? "w-8 h-8" : "w-7 h-7"
-                                  )}
-                                >
-                                  {sub.icon}
-                                </div>
-                                <span
-                                  className={
-                                    item.label === "Calculators"
-                                      ? "text-[10px] font-bold text-center leading-tight uppercase text-gray-700"
-                                      : "text-sm font-medium"
-                                  }
-                                >
-                                  {item.label === "Calculators"
-                                    ? child.label.replace(/Calculator|Value/g, "").trim()
-                                    : child.label}
-                                </span>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-3 px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <span className={styles.navIconWrap}>{getNavSvgIcon(item.label)}</span>
-                      <span>{item.label}</span>
-                    </Link>
-                  )}
-                </div>
-              ))}
-
-              {/* Mobile Blog Link */}
-              <div>
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span className={styles.navIconWrap}>{getNavSvgIcon("Blog")}</span>
-                  <span>Blog</span>
-                </Link>
-              </div>
-
-              {/* Mobile Media Link */}
-              <div>
-                <Link
-                  href="/media"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg font-semibold hover:bg-gray-50 text-gray-900"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span className={styles.navIconWrap}>{getNavSvgIcon("Media")}</span>
-                  <span>Media</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Mobile Bottom CTA */}
-            <div className={styles.mobileMenuBottom}>
-              {isLoggedIn ? (
-                <>
-                  <Link href="/profile" onClick={() => setIsOpen(false)}>
-                    <Button variant="default" className="w-full mb-2 bg-blue-600 hover:bg-blue-700 text-white">
-                      Go to Profile
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="default"
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
-                    onClick={() => {
-                      setIsOpen(false);
-                      onLogout();
-                    }}
-                  >
-                    Logout
-                  </Button>
-                </>
-              ) : (
-                <GlobalButton
-                  href="/credit-score"
-                  color="blue"
-                  variant="shine"
-                  size="lg"
-                  fullWidth
-                  onClick={() => setIsOpen(false)}
-                  className="gap-2 font-bold relative overflow-hidden shadow-md shadow-blue-500/20"
-                >
-                  <Zap className="w-4 h-4 text-white fill-white flex-shrink-0 relative z-10" />
-                  <span className="relative z-10">Check Free Credit Score</span>
-                  <span className={styles.btnSparkShimmer} aria-hidden="true" />
-                  <span className={styles.btnSparkStar} aria-hidden="true" />
-                </GlobalButton>
-              )}
-
-              {/* Google Play Store Badge */}
-              <div className="mt-3 flex items-center justify-center">
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <a
                   href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-transform hover:scale-105 active:scale-95 inline-flex items-center justify-center drop-shadow-md"
+                  className={styles.playStoreBadge}
                   aria-label="Get it on Google Play"
                 >
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/play-store-icon.svg"
+                    alt="Google Play"
+                    style={{ height: "32px", width: "auto", display: "block", borderRadius: "6px" }}
+                  />
+                </a>
+
+                <button
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "36px",
+                    height: "36px",
+                    padding: "4px",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    color: "#334155",
+                  }}
+                  aria-label="Close Menu"
+                >
+                  <X style={{ width: "24px", height: "24px" }} />
+                </button>
+              </div>
+            </div>
+
+            {/* Overlay Center Content: Centered Minimalist Navigation Links */}
+            <div className={styles.mobileOverlayBody}>
+              {/* 1. Home */}
+              <Link
+                href="/"
+                className={cn(styles.fixMenuLink, pathname === "/" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/")}
+              >
+                Home
+              </Link>
+
+              {/* 2. How It Works */}
+              <Link
+                href="/#services"
+                className={styles.fixMenuLink}
+                onClick={() => handleNavClick("/#services")}
+              >
+                How It Works
+              </Link>
+
+              {/* 3. Credit Journey (Credit Refine) */}
+              <Link
+                href="/refine"
+                className={cn(styles.fixMenuLink, pathname === "/refine" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/refine")}
+              >
+                Credit Journey
+              </Link>
+
+              {/* 4. Pricing */}
+              <Link
+                href="/pricing"
+                className={cn(styles.fixMenuLink, pathname === "/pricing" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/pricing")}
+              >
+                Pricing
+              </Link>
+
+              {/* 5. Calculators (Accordion) */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+                <button
+                  type="button"
+                  onClick={() => setCalculatorsOpen(!calculatorsOpen)}
+                  className={cn(
+                    styles.fixMenuLink,
+                    (calculatorsOpen || pathname.includes("/calculator") || pathname === "/emi") &&
+                      styles.fixMenuLinkActive
+                  )}
+                >
+                  <span>Calculators</span>
+                  <ChevronDown
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      transition: "transform 0.2s ease",
+                      transform: calculatorsOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </button>
+
+                {calculatorsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.18 }}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "8px",
+                      marginTop: "8px",
+                      width: "100%",
+                    }}
+                  >
+                    {CALCULATOR_ITEMS.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        onClick={() => setIsOpen(false)}
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          color: "#64748b",
+                          textDecoration: "none",
+                          padding: "6px 16px",
+                          borderRadius: "9999px",
+                          backgroundColor: "#f8fafc",
+                          border: "1px solid #f1f5f9",
+                          textAlign: "center",
+                          maxWidth: "240px",
+                          width: "80%",
+                          transition: "all 0.15s ease",
+                        }}
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+
+              {/* 6. Newsroom (Media) */}
+              <Link
+                href="/media"
+                className={cn(styles.fixMenuLink, pathname === "/media" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/media")}
+              >
+                Newsroom
+              </Link>
+
+              {/* 7. About Us */}
+              <Link
+                href="/about"
+                className={cn(styles.fixMenuLink, pathname === "/about" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/about")}
+              >
+                About Us
+              </Link>
+
+              {/* 8. Blogs */}
+              <Link
+                href="/blog"
+                className={cn(styles.fixMenuLink, pathname.startsWith("/blog") && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/blog")}
+              >
+                Blogs
+              </Link>
+
+              {/* 9. FAQs */}
+              <Link
+                href="/#faq"
+                className={styles.fixMenuLink}
+                onClick={() => handleNavClick("/#faq")}
+              >
+                FAQs
+              </Link>
+
+              {/* User Profile / Logout (if logged in) */}
+              {isLoggedIn && (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", marginTop: "4px" }}>
+                  <Link
+                    href="/profile"
+                    className={styles.fixMenuLink}
+                    onClick={() => setIsOpen(false)}
+                    style={{ color: "#2563eb", fontWeight: 600 }}
+                  >
+                    My Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      onLogout();
+                    }}
+                    className={styles.fixMenuLink}
+                    style={{ color: "#ef4444", fontSize: "15px" }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+
+              {/* Center Bottom: Google Play Store Badge */}
+              <div style={{ marginTop: "16px", textAlign: "center" }}>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.playStoreBadge}
+                  aria-label="Get it on Google Play"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src="/images/play-store-icon.svg"
                     alt="Get it on Google Play"
-                    width={140}
-                    height={42}
-                    className="h-10 w-auto object-contain rounded-xl"
+                    style={{
+                      height: "44px",
+                      width: "auto",
+                      display: "block",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 14px rgba(0, 0, 0, 0.12)",
+                    }}
                   />
                 </a>
               </div>

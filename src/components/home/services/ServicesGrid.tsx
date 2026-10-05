@@ -10,7 +10,8 @@ import { ServicesBottomBanner } from "./ServicesBottomBanner";
 
 export function ServicesGrid() {
   return (
-    <section id="services" className="dt-circuit-section" style={{ backgroundColor: "#ffffff", width: "100%" }}>
+    <section id="services" className="dt-circuit-section" style={{ backgroundColor: "#ffffff", width: "100%", position: "relative" }}>
+      <div id="how-it-works" style={{ position: "absolute", top: "-80px", left: 0 }} aria-hidden="true" />
       <div style={{ maxWidth: "80rem", margin: "0 auto", position: "relative", zIndex: 10, paddingLeft: "1rem", paddingRight: "1rem" }}>
 
         {/* Section Pill Badge */}
