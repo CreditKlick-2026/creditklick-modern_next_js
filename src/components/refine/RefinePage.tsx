@@ -6,7 +6,6 @@ import {
     ShieldCheck,
     TrendingUp,
     CheckCircle2,
-    AlertTriangle,
     ArrowRight,
     Award,
     ChevronDown,
@@ -15,42 +14,68 @@ import {
     UserCheck,
     Check,
     Clock,
-    FileText,
-    Headphones,
-    CheckCircle
+    ShieldAlert,
+    Search,
+    CreditCard,
+    Landmark,
+    Fingerprint,
+    CheckCircle,
+    Activity,
+    FileCheck2
 } from "lucide-react";
 import styles from "./RefinePage.module.css";
+import { RefineScoreChart } from "./RefineScoreChart";
 
-const ERROR_ITEMS = [
+interface ErrorItem {
+    id: string;
+    title: string;
+    desc: string;
+    fix: string;
+    iconType: "clock" | "shield" | "scan" | "radar" | "card" | "bank";
+}
+
+const ERROR_ITEMS: ErrorItem[] = [
     {
+        id: "dpd",
         title: "Wrong DPD & Late Payments",
         desc: "Banks mistakenly reporting 30+, 60+, or 90+ Days Past Due (DPD) on accounts that were cleared on time.",
-        fix: "Deleted via Bureau Dispute"
+        fix: "Deleted via Bureau Dispute",
+        iconType: "clock"
     },
     {
+        id: "settled",
         title: "Settled / Written-Off Status",
         desc: "Settled accounts remain toxic on your report for 7 years. Lenders treat settlement as a partial default.",
-        fix: "Rectified to Closed / Clean NOC"
+        fix: "Rectified to Closed / Clean NOC",
+        iconType: "shield"
     },
     {
+        id: "identity",
         title: "PAN & Identity Mix-ups",
         desc: "A clerical error by a lender linking someone else's default, overdue loan, or card to your PAN or Aadhaar.",
-        fix: "Complete Bureau Scrub & De-link"
+        fix: "Complete Bureau Scrub & De-link",
+        iconType: "scan"
     },
     {
+        id: "inquiry",
         title: "Unauthorized Hard Inquiries",
         desc: "Aggressive DSA agents or unapproved lenders pulling your credit report repeatedly, dragging your score down.",
-        fix: "Fraudulent Inquiries Removed"
+        fix: "Fraudulent Inquiries Removed",
+        iconType: "radar"
     },
     {
+        id: "zombie",
         title: "Zombie Overdue on Closed Cards",
         desc: "Cards closed years ago showing residual interest or annual fee dues that silently destroy your credit score.",
-        fix: "Zero-Due Bank NOC Procured"
+        fix: "Zero-Due Bank NOC Procured",
+        iconType: "card"
     },
     {
+        id: "loan-status",
         title: "Wrong Loan Account Status",
         desc: "Fully repaid vehicle, personal, or education loans still reported as 'Active' or 'Overdue' by banks.",
-        fix: "Updated to 'Closed with 0 Overdue'"
+        fix: "Updated to 'Closed with 0 Overdue'",
+        iconType: "bank"
     }
 ];
 
@@ -133,6 +158,55 @@ const FAQS = [
     }
 ];
 
+function RenderAnimatedIcon({ type }: { type: ErrorItem["iconType"] }) {
+    switch (type) {
+        case "clock":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxClock}`}>
+                    <Clock className={styles.animSvgClock} size={22} />
+                    <span className={styles.animPulseRing} />
+                </div>
+            );
+        case "shield":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxShield}`}>
+                    <ShieldAlert className={styles.animSvgShield} size={22} />
+                    <span className={styles.animRadarWave} />
+                </div>
+            );
+        case "scan":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxScan}`}>
+                    <Fingerprint className={styles.animSvgScan} size={22} />
+                    <span className={styles.animLaserBeam} />
+                </div>
+            );
+        case "radar":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxRadar}`}>
+                    <Search className={styles.animSvgRadar} size={22} />
+                    <span className={styles.animRadarSweep} />
+                </div>
+            );
+        case "card":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxCard}`}>
+                    <CreditCard className={styles.animSvgCard} size={22} />
+                    <span className={styles.animCardShine} />
+                </div>
+            );
+        case "bank":
+            return (
+                <div className={`${styles.animIconBox} ${styles.animBoxBank}`}>
+                    <Landmark className={styles.animSvgBank} size={22} />
+                    <CheckCircle2 className={styles.animCheckBadge} size={13} />
+                </div>
+            );
+        default:
+            return <Activity size={22} />;
+    }
+}
+
 export default function RefinePage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -142,7 +216,9 @@ export default function RefinePage() {
             <section className={styles.hero}>
                 <div className={styles.heroInner}>
                     <div className={styles.badgePill}>
-                        <Sparkles size={14} className="text-blue-600" />
+                        <span className={styles.badgeGlowIcon}>
+                            <Sparkles size={14} />
+                        </span>
                         <span>CREDIT REFINE™ • CREDIT SCORE IMPROVEMENT</span>
                     </div>
 
@@ -156,6 +232,7 @@ export default function RefinePage() {
 
                     <div className={styles.heroCtas}>
                         <Link href="/credit-score" className={styles.btnPrimary}>
+                            <FileCheck2 size={18} />
                             <span>Check Credit Score Free</span>
                             <ArrowRight size={17} />
                         </Link>
@@ -186,60 +263,11 @@ export default function RefinePage() {
                 </div>
             </section>
 
-            {/* ── 2. Real Transformation Spotlight ─────── */}
+            {/* ── 2. Real Interactive Graph Showcase ───── */}
             <section className={styles.showcaseSection}>
                 <div className={styles.container}>
-                    <div className={styles.showcaseCard}>
-                        <div className={styles.showcaseTop}>
-                            <span className={styles.showcaseBadge}>VERIFIED BORROWER CASE STUDY</span>
-                            <div className={styles.showcaseGain}>
-                                <TrendingUp size={16} />
-                                <span>+182 PTS GAINED</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.showcaseBody}>
-                            {/* Score Before/After */}
-                            <div className={styles.scoreRow}>
-                                <div className={styles.scoreCol}>
-                                    <span className={styles.scoreTagRed}>Initial Score</span>
-                                    <div className={styles.scoreValueRed}>592</div>
-                                    <span className={styles.scoreStatus}>High Interest / Rejected</span>
-                                </div>
-
-                                <div className={styles.scoreArrow}>
-                                    <ArrowRight size={24} />
-                                    <span className={styles.scoreTime}>In 75 Days</span>
-                                </div>
-
-                                <div className={styles.scoreCol}>
-                                    <span className={styles.scoreTagGreen}>After Refine</span>
-                                    <div className={styles.scoreValueGreen}>774</div>
-                                    <span className={styles.scoreStatusSuccess}>Prime Approval Unlocked</span>
-                                </div>
-                            </div>
-
-                            {/* Key Highlights */}
-                            <div className={styles.showcaseList}>
-                                <div className={styles.showcaseListItem}>
-                                    <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
-                                    <span>2 Wrong Late Payments (60+ DPD) Deleted from CIBIL & Experian</span>
-                                </div>
-                                <div className={styles.showcaseListItem}>
-                                    <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
-                                    <span>Toxic &apos;Settled&apos; Remark converted to Clean &apos;Closed with NOC&apos;</span>
-                                </div>
-                                <div className={styles.showcaseListItem}>
-                                    <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
-                                    <span>8 Fraudulent Hard Inquiries successfully purged</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={styles.showcaseFooter}>
-                            ★ Result: Home loan sanctioned at 8.40% interest (saving ₹8,40,000 across tenure)
-                        </div>
-                    </div>
+                    {/* Render Real Animated Chart.js Graph */}
+                    <RefineScoreChart />
                 </div>
             </section>
 
@@ -255,10 +283,10 @@ export default function RefinePage() {
                     </div>
 
                     <div className={styles.errorGrid}>
-                        {ERROR_ITEMS.map((item, idx) => (
-                            <div key={idx} className={styles.errorCard}>
-                                <div className={styles.errorIconWrap}>
-                                    <AlertTriangle size={20} />
+                        {ERROR_ITEMS.map((item) => (
+                            <div key={item.id} className={styles.errorCard}>
+                                <div className={styles.errorCardTop}>
+                                    <RenderAnimatedIcon type={item.iconType} />
                                 </div>
                                 <h3 className={styles.errorTitle}>{item.title}</h3>
                                 <p className={styles.errorDesc}>{item.desc}</p>
