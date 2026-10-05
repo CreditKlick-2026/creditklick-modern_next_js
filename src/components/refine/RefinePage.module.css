@@ -189,7 +189,7 @@
 .chartComponentWrap {
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 0;
   padding: 1.5rem 1.25rem;
   box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.06), 0 4px 12px -4px rgba(0, 0, 0, 0.03);
 }
@@ -244,7 +244,7 @@
 .liveScoreBadge {
   background: #ffffff;
   border: 1.5px solid #bfdbfe;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 0.85rem 1.25rem;
   display: flex;
   flex-direction: column;
@@ -305,7 +305,7 @@
   margin-bottom: 1.5rem;
   background: #f1f5f9;
   padding: 0.35rem;
-  border-radius: 10px;
+  border-radius: 0;
   overflow-x: auto;
 }
 
@@ -315,7 +315,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.25rem;
-  border-radius: 8px;
+  border-radius: 0;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -366,7 +366,7 @@
 .milestoneCard {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -394,7 +394,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 0.2rem 0.6rem;
-  border-radius: 6px;
+  border-radius: 0;
   background: #eff6ff;
   border: 1px solid #bfdbfe;
   color: #1d4ed8;

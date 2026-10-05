@@ -7,7 +7,6 @@ import {
     TrendingUp,
     CheckCircle2,
     ArrowRight,
-    Award,
     ChevronDown,
     Building2,
     Sparkles,
@@ -19,7 +18,6 @@ import {
     CreditCard,
     Landmark,
     Fingerprint,
-    CheckCircle,
     Activity,
     FileCheck2
 } from "lucide-react";
@@ -215,7 +213,6 @@ export default function RefinePage() {
             {/* ── 1. Hero Section ──────────────────────── */}
             <section className={styles.hero}>
                 <div className={styles.heroInner}>
-
                     <div className={styles.badgePill}>
                         <span className={styles.badgeGlowIcon}>
                             <Sparkles size={14} />
@@ -326,73 +323,7 @@ export default function RefinePage() {
                 </div>
             </section>
 
-            {/* ── 5. Simple Refine Plan Card ───────────── */}
-            <section className={styles.section} id="plan">
-                <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
-                        <span className={styles.sectionEyebrow}>RECOMMENDED PROGRAM</span>
-                        <h2 className={styles.sectionTitle}>Start Credit Refine with Our PRO Plan</h2>
-                        <p className={styles.sectionDesc}>
-                            Everything you need to challenge incorrect remarks, dispute false DPDs, and restore your credit health.
-                        </p>
-                    </div>
 
-                    <div className={styles.planCardWrapper}>
-                        <div className={styles.planCard}>
-                            <div className={styles.planBadge}>
-                                <Award size={15} />
-                                <span>MOST POPULAR FOR CREDIT REPAIR</span>
-                            </div>
-
-                            <div className={styles.planHeader}>
-                                <div>
-                                    <h3 className={styles.planName}>Credit Refine PRO</h3>
-                                    <p className={styles.planTagline}>Dedicated 1-on-1 human Credit Guru assistance</p>
-                                </div>
-                                <div className={styles.planPrice}>
-                                    <span className={styles.planAmount}>₹300</span>
-                                    <span className={styles.planPeriod}>/ month</span>
-                                </div>
-                            </div>
-
-                            <div className={styles.planDivider} />
-
-                            <div className={styles.planFeatures}>
-                                <div className={styles.planFeatureItem}>
-                                    <CheckCircle size={17} className="text-blue-600 flex-shrink-0" />
-                                    <span><strong>4-Bureau In-depth Audit:</strong> CIBIL, Experian, Equifax & CRIF</span>
-                                </div>
-                                <div className={styles.planFeatureItem}>
-                                    <CheckCircle size={17} className="text-blue-600 flex-shrink-0" />
-                                    <span><strong>Assisted Dispute Filing:</strong> Formal Section 17 bank notices</span>
-                                </div>
-                                <div className={styles.planFeatureItem}>
-                                    <CheckCircle size={17} className="text-blue-600 flex-shrink-0" />
-                                    <span><strong>Dedicated Credit Guru:</strong> Personal expert assigned to your case</span>
-                                </div>
-                                <div className={styles.planFeatureItem}>
-                                    <CheckCircle size={17} className="text-blue-600 flex-shrink-0" />
-                                    <span><strong>Bank Nodal Desk Escalation:</strong> Rapid clearance of false DPDs & settlement tags</span>
-                                </div>
-                                <div className={styles.planFeatureItem}>
-                                    <CheckCircle size={17} className="text-blue-600 flex-shrink-0" />
-                                    <span><strong>Monthly Progress Re-pulls:</strong> Real-time score recovery tracking</span>
-                                </div>
-                            </div>
-
-                            <div className={styles.planActions}>
-                                <Link href="/contact?plan=pro" className={styles.planBtnPrimary}>
-                                    <span>Get Started with Refine PRO</span>
-                                    <ArrowRight size={17} />
-                                </Link>
-                                <Link href="/pricing" className={styles.planBtnOutline}>
-                                    <span>Compare All Membership Plans</span>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* ── 6. Proven Results (Testimonials) ─────── */}
             <section className={styles.sectionAlt}>
@@ -463,29 +394,6 @@ export default function RefinePage() {
                                 </div>
                             );
                         })}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── 8. Bottom CTA Banner ─────────────────── */}
-            <section className={styles.ctaSection}>
-                <div className={styles.container}>
-                    <div className={styles.ctaBox}>
-                        <h2 className={styles.ctaTitle}>
-                            Stop Letting Bureau Errors Cost You Extra Interest
-                        </h2>
-                        <p className={styles.ctaText}>
-                            Join over 2,00,000+ borrowers who trusted CreditKlick Credit Refine™ to fix negative remarks and regain financial freedom.
-                        </p>
-                        <div className={styles.ctaBtnRow}>
-                            <Link href="/credit-score" className={styles.ctaBtnPrimary}>
-                                <span>Check Free Credit Score</span>
-                                <ArrowRight size={17} />
-                            </Link>
-                            <Link href="/pricing" className={styles.ctaBtnSecondary}>
-                                <span>Explore Pricing Plans</span>
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </section>
