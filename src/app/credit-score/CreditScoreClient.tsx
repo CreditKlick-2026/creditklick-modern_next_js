@@ -477,11 +477,11 @@ export default function CreditScoreClient() {
                                     </span>
                                 </div>
 
-                                {/* Responsive Form Grid: 1 col on mobile, 2 cols on tablet/desktop */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                                {/* 2 Columns per row across mobile and desktop */}
+                                <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
                                     {/* Full Name */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Full Name <span className="text-rose-500">*</span>
                                         </label>
                                         <input
@@ -489,18 +489,18 @@ export default function CreditScoreClient() {
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            placeholder="As per PAN card"
-                                            className="w-full h-11 sm:h-12 px-3.5 text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                            placeholder="As per PAN"
+                                            className="w-full h-10 sm:h-12 px-2.5 sm:px-3.5 text-xs sm:text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                             required
                                         />
                                         {formErrors.name && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.name}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.name}</p>
                                         )}
                                     </div>
 
                                     {/* Email */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Email Address <span className="text-rose-500">*</span>
                                         </label>
                                         <input
@@ -509,17 +509,17 @@ export default function CreditScoreClient() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             placeholder="name@example.com"
-                                            className="w-full h-11 sm:h-12 px-3.5 text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                            className="w-full h-10 sm:h-12 px-2.5 sm:px-3.5 text-xs sm:text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                             required
                                         />
                                         {formErrors.email && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.email}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.email}</p>
                                         )}
                                     </div>
 
                                     {/* Date of Birth */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Date of Birth <span className="text-rose-500">*</span>
                                         </label>
                                         <input
@@ -529,17 +529,17 @@ export default function CreditScoreClient() {
                                             onInput={handleDateDigit}
                                             maxLength={10}
                                             placeholder="DD-MM-YYYY"
-                                            className="w-full h-11 sm:h-12 px-3.5 text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                            className="w-full h-10 sm:h-12 px-2.5 sm:px-3.5 text-xs sm:text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                             required
                                         />
                                         {formErrors.dob && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.dob}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.dob}</p>
                                         )}
                                     </div>
 
                                     {/* Pincode */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Pincode <span className="text-rose-500">*</span>
                                         </label>
                                         <input
@@ -549,17 +549,17 @@ export default function CreditScoreClient() {
                                             onInput={handlePinDigit}
                                             maxLength={6}
                                             placeholder="e.g. 110001"
-                                            className="w-full h-11 sm:h-12 px-3.5 text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                            className="w-full h-10 sm:h-12 px-2.5 sm:px-3.5 text-xs sm:text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                             required
                                         />
                                         {formErrors.pin && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.pin}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.pin}</p>
                                         )}
                                     </div>
 
                                     {/* PAN Number */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             PAN Number <span className="text-rose-500">*</span>
                                         </label>
                                         <input
@@ -569,21 +569,21 @@ export default function CreditScoreClient() {
                                             onChange={handleChange}
                                             maxLength={10}
                                             placeholder="ABCDE1234F"
-                                            className="w-full h-11 sm:h-12 px-3.5 text-sm font-bold uppercase rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                            className="w-full h-10 sm:h-12 px-2.5 sm:px-3.5 text-xs sm:text-sm font-bold uppercase rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                             required
                                         />
                                         {formErrors.pan && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.pan}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.pan}</p>
                                         )}
                                     </div>
 
                                     {/* Mobile Number */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Mobile Number <span className="text-rose-500">*</span>
                                         </label>
                                         <div className="relative">
-                                            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500">
+                                            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[11px] sm:text-xs font-bold text-slate-500">
                                                 +91
                                             </span>
                                             <input
@@ -592,32 +592,32 @@ export default function CreditScoreClient() {
                                                 value={formData.mobile}
                                                 onInput={handleMobileDigit}
                                                 maxLength={10}
-                                                placeholder="10-digit number"
-                                                className="w-full h-11 sm:h-12 pl-12 pr-3.5 text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
+                                                placeholder="10 digits"
+                                                className="w-full h-10 sm:h-12 pl-9 sm:pl-12 pr-2 sm:pr-3.5 text-xs sm:text-sm font-medium rounded-lg border border-slate-300 focus:border-[#1f52db] focus:ring-2 focus:ring-blue-100 outline-none transition text-slate-800 placeholder:text-slate-400 bg-white"
                                                 required
                                             />
                                         </div>
                                         {formErrors.mobile && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.mobile}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.mobile}</p>
                                         )}
                                     </div>
 
-                                    {/* Gender (Comfortable Pill Radios) */}
+                                    {/* Gender (Comfortable Pill Radios in Col 1) */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
                                             Gender <span className="text-rose-500">*</span>
                                         </label>
-                                        <div className="grid grid-cols-3 gap-2">
+                                        <div className="grid grid-cols-3 gap-1 sm:gap-2">
                                             {[
                                                 { label: 'Male', val: 'male' },
                                                 { label: 'Female', val: 'female' },
-                                                { label: 'Others', val: 'others' }
+                                                { label: 'Other', val: 'others' }
                                             ].map((g) => (
                                                 <button
                                                     key={g.val}
                                                     type="button"
                                                     onClick={() => handleGender(g.val)}
-                                                    className={`h-11 rounded-lg text-xs font-semibold transition border flex items-center justify-center ${
+                                                    className={`h-10 sm:h-11 rounded-lg text-[11px] sm:text-xs font-semibold transition border flex items-center justify-center px-0.5 ${
                                                         gender === g.val
                                                             ? 'bg-[#dbe8fd] border-[#1f52db] text-[#1f52db] shadow-xs'
                                                             : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -628,36 +628,37 @@ export default function CreditScoreClient() {
                                             ))}
                                         </div>
                                         {formErrors.selectedError && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.selectedError}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.selectedError}</p>
                                         )}
                                     </div>
 
-                                    {/* Employment Status (Comfortable Pill Radios) */}
+                                    {/* Employment Status (Comfortable Pill Radios in Col 2) */}
                                     <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                                            Employment Status <span className="text-rose-500">*</span>
+                                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1 truncate">
+                                            Status <span className="text-rose-500">*</span>
                                         </label>
-                                        <div className="grid grid-cols-2 gap-2">
+                                        <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                                             {[
-                                                { label: 'Salaried', val: 'Salaried' },
-                                                { label: 'Self Employed', val: 'Self Employed' }
+                                                { labelMobile: 'Salaried', labelDesktop: 'Salaried', val: 'Salaried' },
+                                                { labelMobile: 'Self-Emp', labelDesktop: 'Self Employed', val: 'Self Employed' }
                                             ].map((s) => (
                                                 <button
                                                     key={s.val}
                                                     type="button"
                                                     onClick={() => handleStatus(s.val)}
-                                                    className={`h-11 rounded-lg text-xs font-semibold transition border flex items-center justify-center ${
+                                                    className={`h-10 sm:h-11 rounded-lg text-[11px] sm:text-xs font-semibold transition border flex items-center justify-center px-1 ${
                                                         status === s.val
                                                             ? 'bg-[#dbe8fd] border-[#1f52db] text-[#1f52db] shadow-xs'
                                                             : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                                                     }`}
                                                 >
-                                                    {s.label}
+                                                    <span className="sm:hidden">{s.labelMobile}</span>
+                                                    <span className="hidden sm:inline">{s.labelDesktop}</span>
                                                 </button>
                                             ))}
                                         </div>
                                         {formErrors.status && (
-                                            <p className="text-xs text-rose-500 font-medium mt-1">{formErrors.status}</p>
+                                            <p className="text-[10px] sm:text-xs text-rose-500 font-medium mt-0.5 leading-tight">{formErrors.status}</p>
                                         )}
                                     </div>
                                 </div>
