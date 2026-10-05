@@ -22,7 +22,7 @@ function FormDesign() {
     return (
         <div className="pl-4">
             <div>
-                <Image src={scoremeter} alt="Score Meter" width={280} height={140} className="flex pl-10 object-contain w-auto h-auto" />
+                <Image src={scoremeter} alt="Score Meter" width={150} height={150} className="flex pl-10 object-contain w-auto h-auto" />
             </div>
             <div>
                 <h1 className="lg:text-5xl text-3xl text-blue-900 font-thin">
@@ -113,8 +113,8 @@ function Testimonials() {
                 Trusted by 200K+ users like you
             </p>
             <div className="grid lg:grid-cols-3 grid-cols-1">
-                <div className="w-full p-4 m-auto">
-                    <Image src={testimonial} alt="Testimonial" width={300} height={200} className="lg:w-1/2 w-2/5 m-auto object-contain h-auto" />
+                <div className="w-full p-4 m-auto flex justify-center items-center">
+                    <Image src={testimonial} alt="Testimonial" width={300} height={300} className="w-48 lg:w-60 max-w-full m-auto object-contain h-auto" />
                 </div>
                 <div style={{ backgroundColor: '#dbe8fd' }} className="w-3/4 p-4 mx-auto my-4 shadow-lg rounded-lg">
                     <div className="flex text-blue-500 my-2">
