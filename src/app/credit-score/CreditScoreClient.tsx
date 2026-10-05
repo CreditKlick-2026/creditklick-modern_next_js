@@ -184,7 +184,8 @@ function Switch({ checked, onChange, children }: { checked: boolean, onChange: (
             <button
                 type="button"
                 onClick={() => onChange(!checked)}
-                className={`flex w-8 mr-3 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out mt-0.5 ${checked ? 'bg-indigo-600' : 'bg-gray-200'}`}
+                style={checked ? { backgroundColor: '#155dfc' } : undefined}
+                className={`flex w-8 mr-3 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out mt-0.5 ${checked ? '' : 'bg-gray-200'}`}
             >
                 <span className="sr-only">Agree to policies</span>
                 <span
@@ -429,7 +430,7 @@ export default function CreditScoreClient() {
                                 {/* Terms and Submit - full width */}
                                 <div className="col-span-2 px-1">
                                     <Switch checked={agreed} onChange={setAgreed}>
-                                        <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" className="font-semibold text-indigo-600">Privacy Policy</Link> and <Link href="/terms-conditions" className="font-semibold text-indigo-600">Terms &amp; Conditions</Link>.</span>
+                                        <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" style={{ color: '#155dfc' }} className="font-semibold underline">Privacy Policy</Link> and <Link href="/terms-conditions" style={{ color: '#155dfc' }} className="font-semibold underline">Terms &amp; Conditions</Link>.</span>
                                     </Switch>
                                     <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
                                 </div>
@@ -438,7 +439,8 @@ export default function CreditScoreClient() {
                                     <button
                                         type="submit"
                                         disabled={isLoading}
-                                        className="block w-full rounded-md bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50 cursor-pointer"
+                                        style={{ backgroundColor: '#155dfc' }}
+                                        className="block w-full rounded-md px-4 py-3 text-center text-sm font-semibold text-white shadow-sm hover:opacity-90 disabled:opacity-50 cursor-pointer transition"
                                         onClick={handleSubmit}
                                     >
                                         {isLoading ? <span className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Processing...</span> : 'Check Credit Score Now'}
@@ -494,7 +496,8 @@ export default function CreditScoreClient() {
                                             setStatus('')
                                             setAgreed(false)
                                         }}
-                                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-xs shadow-sm transition-all text-center"
+                                        style={{ backgroundColor: '#155dfc' }}
+                                        className="w-full text-white font-semibold py-2.5 rounded-lg text-xs shadow-sm transition hover:opacity-90 text-center cursor-pointer"
                                     >
                                         Check Another Credit Score
                                     </button>
