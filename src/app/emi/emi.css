@@ -1,0 +1,358 @@
+/* EMI calculator page — plain CSS (project has no Tailwind build). Soft brand blue: #dbe8fd */
+
+.emi {
+  --emi-soft: #dbe8fd;
+  --emi-softer: #eff5fe;
+  --emi-blue: #2563eb;
+  --emi-blue-dark: #1d4ed8;
+  --emi-navy: #1c398e;
+  --emi-ink: #0f172a;
+  --emi-slate: #475569;
+  --emi-muted: #64748b;
+  --emi-line: #e5eaf3;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: var(--emi-ink);
+}
+
+.emi *,
+.emi *::before,
+.emi *::after { box-sizing: border-box; }
+
+.emi-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .emi-wrap { padding: 0 24px; }
+}
+
+/* ---------- Hero ---------- */
+.emi-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 36px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--emi-soft) 0%, var(--emi-softer) 70%, #f8fafc 100%);
+}
+
+.emi-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.emi-hero > * { position: relative; }
+
+.emi-eyebrow {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #c7d9fb;
+  color: var(--emi-blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.emi-title {
+  margin: 14px 0 0;
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--emi-navy);
+}
+
+.emi-lead {
+  margin: 8px auto 0;
+  max-width: 560px;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--emi-slate);
+}
+
+/* ---------- Loan type tabs ---------- */
+.emi-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 24px auto 0;
+  padding: 6px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--emi-soft);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.emi-tabs::-webkit-scrollbar { display: none; }
+
+.emi-tab {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--emi-slate);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.emi-tab:hover { color: var(--emi-blue); background: var(--emi-softer); }
+
+.emi-tab.is-active {
+  background: var(--emi-blue);
+  color: #ffffff;
+}
+
+@media (max-width: 420px) {
+  .emi-tab { padding: 9px 12px; font-size: 13px; }
+}
+
+/* ---------- Main ---------- */
+.emi-main { padding: 28px 0 56px; }
+
+.emi-grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .emi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+}
+
+.emi-card {
+  min-width: 0;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--emi-line);
+  background: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .emi-card { padding: 28px; }
+}
+
+.emi-card--spaced { margin-top: 20px; }
+
+@media (min-width: 1024px) {
+  .emi-card--spaced { margin-top: 24px; }
+}
+
+.emi-card-title {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--emi-navy);
+}
+
+/* ---------- Sliders ---------- */
+.emi-field + .emi-field { margin-top: 28px; }
+
+.emi-field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.emi-field-head label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.emi-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--emi-muted);
+  font-size: 0.875rem;
+}
+
+.emi-input input {
+  width: 8rem;
+  padding: 6px 10px;
+  border: 1px solid var(--emi-soft);
+  border-radius: 10px;
+  background: var(--emi-softer);
+  color: var(--emi-navy);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.emi-input input.is-short { width: 5rem; }
+
+.emi-input input:focus {
+  border-color: var(--emi-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.emi-range {
+  width: 100%;
+  height: 8px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--emi-soft);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  accent-color: var(--emi-blue);
+}
+
+.emi-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: var(--emi-blue);
+  box-shadow: 0 2px 6px rgba(28, 57, 142, 0.35);
+}
+
+.emi-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: var(--emi-blue);
+  box-shadow: 0 2px 6px rgba(28, 57, 142, 0.35);
+}
+
+.emi-range:focus-visible {
+  outline: 2px solid var(--emi-blue);
+  outline-offset: 4px;
+}
+
+.emi-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* ---------- Results ---------- */
+.emi-breakup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .emi-breakup { flex-direction: row; }
+}
+
+.emi-donut {
+  width: 15rem;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.emi-stats {
+  display: grid;
+  gap: 12px;
+  flex: 1;
+  width: 100%;
+}
+
+.emi-stat {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid var(--emi-line);
+}
+
+.emi-stat p { margin: 0; }
+.emi-stat-label { font-size: 0.85rem; color: var(--emi-muted); }
+.emi-stat .emi-stat-value { margin-top: 2px; font-size: 1.2rem; font-weight: 700; color: var(--emi-ink); }
+
+.emi-stat--main {
+  background: var(--emi-soft);
+  border-color: #c7d9fb;
+}
+
+.emi-stat--main .emi-stat-label { color: var(--emi-navy); }
+.emi-stat--main .emi-stat-value { font-size: 1.6rem; color: var(--emi-navy); }
+
+.emi-chart { position: relative; height: 20rem; }
+
+/* ---------- Amortization table ---------- */
+.emi-table-wrap { overflow-x: auto; }
+
+.emi-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+
+.emi-table th {
+  padding: 12px 14px;
+  background: var(--emi-soft);
+  color: var(--emi-navy);
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.emi-table th:first-child { text-align: left; border-radius: 10px 0 0 10px; }
+.emi-table th:last-child { border-radius: 0 10px 10px 0; }
+
+.emi-table td {
+  padding: 12px 14px;
+  text-align: right;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.emi-table td:first-child { text-align: left; font-weight: 600; color: var(--emi-ink); }
+.emi-table tbody tr:nth-child(even) td { background: #fafcff; }
+.emi-table tbody tr:hover td { background: var(--emi-softer); }
+
+.emi-paid { color: var(--emi-blue); font-weight: 600; }
+
+/* ---------- CTA ---------- */
+.emi-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.emi-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--emi-blue);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -10px rgba(37, 99, 235, 0.6);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.emi-cta a:hover { background: var(--emi-blue-dark); transform: translateY(-2px); }
+.emi-cta svg { width: 18px; height: 18px; }

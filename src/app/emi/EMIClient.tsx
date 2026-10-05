@@ -4,17 +4,20 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title, TooltipItem, LegendItem } from 'chart.js'
 import { Doughnut, Bar } from 'react-chartjs-2'
+import './emi.css'
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title)
 
-const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+// Brand palette shared by both charts
+const COLORS = {
+    principal: '#2563eb',
+    principalBorder: '#1d4ed8',
+    interest: '#dbe8fd',
+    interestBorder: '#93c5fd',
+    balance: '#1c398e',
 }
 
 // Loan Types Configuration
@@ -117,8 +120,8 @@ export default function EMIClient() {
         labels: ['Principal Loan Amount', 'Total Interest'],
         datasets: [{
             data: [loanAmount, calculations.totalInterest],
-            backgroundColor: ['#3B82F6', '#93C5FD'],
-            borderColor: ['#2563EB', '#60A5FA'],
+            backgroundColor: [COLORS.principal, COLORS.interest],
+            borderColor: [COLORS.principalBorder, COLORS.interestBorder],
             borderWidth: 2,
         }],
     }
@@ -151,17 +154,22 @@ export default function EMIClient() {
             {
                 label: 'Principal',
                 data: calculations.yearlyData.map(d => d.principal),
-                backgroundColor: '#3B82F6',
+                backgroundColor: COLORS.principal,
+                borderRadius: 4,
             },
             {
                 label: 'Interest',
                 data: calculations.yearlyData.map(d => d.interest),
-                backgroundColor: '#93C5FD',
+                backgroundColor: COLORS.interest,
+                borderColor: COLORS.interestBorder,
+                borderWidth: 1,
+                borderRadius: 4,
             },
             {
                 label: 'Balance',
                 data: calculations.yearlyData.map(d => d.balance),
-                backgroundColor: '#E5E7EB',
+                backgroundColor: COLORS.balance,
+                borderRadius: 4,
             }
         ],
     }
@@ -175,13 +183,16 @@ export default function EMIClient() {
             },
             title: {
                 display: true,
-                text: 'EMI Payment / Year'
+                text: 'EMI Payment / Year',
+                color: '#1c398e',
+                font: { size: 15, weight: '700' }
             }
         },
         scales: {
-            x: { stacked: false },
+            x: { stacked: false, grid: { display: false } },
             y: {
                 beginAtZero: true,
+                grid: { color: '#eef2f8' },
                 ticks: {
                     callback: (value: number) => '₹' + (value / 100000).toFixed(0) + 'L'
                 }
@@ -204,33 +215,28 @@ export default function EMIClient() {
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="emi">
             {/* Hero */}
-            <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-8">
-                <div className="container mx-auto px-4 text-center">
+            <section className="emi-hero">
+                <div className="emi-wrap">
                     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
-                        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                            EMI Calculator
-                        </h1>
-                        <p className="text-blue-100">
-                            Calculate your EMI For Personal Loan, Business Loan & Car Loan
+                        <span className="emi-eyebrow">Free tool</span>
+                        <h1 className="emi-title">EMI Calculator</h1>
+                        <p className="emi-lead">
+                            Calculate your EMI for Home Loan, Personal Loan, Business Loan &amp; Car Loan
                         </p>
                     </motion.div>
-                </div>
-            </section>
 
-            {/* Loan Type Tabs */}
-            <section className="bg-white border-b">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-wrap justify-center">
+                    {/* Loan Type Tabs */}
+                    <div className="emi-tabs" role="tablist">
                         {loanTypes.map((loan) => (
                             <button
                                 key={loan.id}
+                                type="button"
+                                role="tab"
+                                aria-selected={activeLoanType === loan.id}
                                 onClick={() => setActiveLoanType(loan.id)}
-                                className={`px-6 py-4 font-medium transition-all border-b-2 ${activeLoanType === loan.id
-                                    ? 'border-blue-600 text-blue-600 bg-blue-50'
-                                    : 'border-transparent text-gray-600 hover:text-blue-600'
-                                    }`}
+                                className={`emi-tab ${activeLoanType === loan.id ? 'is-active' : ''}`}
                             >
                                 {loan.name}
                             </button>
@@ -240,35 +246,36 @@ export default function EMIClient() {
             </section>
 
             {/* Calculator Section */}
-            <section className="py-8 px-4">
-                <div className="container mx-auto max-w-6xl">
-                    <div className="grid lg:grid-cols-2 gap-8">
+            <section className="emi-main">
+                <div className="emi-wrap">
+                    <div className="emi-grid">
                         {/* Left - Sliders */}
-                        <Card className="p-6">
+                        <div className="emi-card">
                             {/* Loan Amount */}
-                            <div className="mb-8">
-                                <div className="flex justify-between mb-2">
-                                    <label className="font-semibold text-gray-700">{currentLoanConfig?.name} Amount</label>
-                                    <div className="flex items-center gap-2">
+                            <div className="emi-field">
+                                <div className="emi-field-head">
+                                    <label htmlFor="emi-amount">{currentLoanConfig?.name} Amount</label>
+                                    <div className="emi-input">
+                                        <span>₹</span>
                                         <input
+                                            id="emi-amount"
                                             type="number"
                                             value={loanAmount}
                                             onChange={(e) => setLoanAmount(Number(e.target.value))}
-                                            className="w-32 text-right font-bold text-blue-600 border rounded px-2 py-1"
                                         />
-                                        <span className="text-gray-500">₹</span>
                                     </div>
                                 </div>
                                 <input
                                     type="range"
+                                    aria-label="Loan amount"
                                     min={currentLoanConfig?.minAmount || 100000}
                                     max={currentLoanConfig?.maxAmount || 20000000}
                                     step={10000}
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                    className="emi-range"
                                 />
-                                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                                <div className="emi-ticks">
                                     {getAmountTicks().map((tick, i) => (
                                         <span key={i}>{tick}</span>
                                     ))}
@@ -276,30 +283,32 @@ export default function EMIClient() {
                             </div>
 
                             {/* Interest Rate */}
-                            <div className="mb-8">
-                                <div className="flex justify-between mb-2">
-                                    <label className="font-semibold text-gray-700">Interest Rate</label>
-                                    <div className="flex items-center gap-2">
+                            <div className="emi-field">
+                                <div className="emi-field-head">
+                                    <label htmlFor="emi-rate">Interest Rate</label>
+                                    <div className="emi-input">
                                         <input
+                                            id="emi-rate"
                                             type="number"
                                             value={interestRate}
                                             onChange={(e) => setInterestRate(Number(e.target.value))}
-                                            className="w-20 text-right font-bold text-blue-600 border rounded px-2 py-1"
+                                            className="is-short"
                                             step="0.1"
                                         />
-                                        <span className="text-gray-500">%</span>
+                                        <span>%</span>
                                     </div>
                                 </div>
                                 <input
                                     type="range"
+                                    aria-label="Interest rate"
                                     min={5}
                                     max={20}
                                     step={0.1}
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                    className="emi-range"
                                 />
-                                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                                <div className="emi-ticks">
                                     {[5, 7.5, 10, 12.5, 15, 17.5, 20].map((val) => (
                                         <span key={val}>{val}</span>
                                     ))}
@@ -307,29 +316,31 @@ export default function EMIClient() {
                             </div>
 
                             {/* Loan Tenure */}
-                            <div className="mb-8">
-                                <div className="flex justify-between mb-2">
-                                    <label className="font-semibold text-gray-700">Loan Tenure</label>
-                                    <div className="flex items-center gap-2">
+                            <div className="emi-field">
+                                <div className="emi-field-head">
+                                    <label htmlFor="emi-tenure">Loan Tenure</label>
+                                    <div className="emi-input">
                                         <input
+                                            id="emi-tenure"
                                             type="number"
                                             value={tenureYears}
                                             onChange={(e) => setTenureYears(Number(e.target.value))}
-                                            className="w-20 text-right font-bold text-blue-600 border rounded px-2 py-1"
+                                            className="is-short"
                                         />
-                                        <span className="text-gray-500">Years</span>
+                                        <span>Years</span>
                                     </div>
                                 </div>
                                 <input
                                     type="range"
+                                    aria-label="Loan tenure"
                                     min={currentLoanConfig?.minTenure || 1}
                                     max={currentLoanConfig?.maxTenure || 30}
                                     step={1}
                                     value={tenureYears}
                                     onChange={(e) => setTenureYears(Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                    className="emi-range"
                                 />
-                                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                                <div className="emi-ticks">
                                     {Array.from({ length: 7 }, (_, i) => {
                                         const max = currentLoanConfig?.maxTenure || 30
                                         return Math.round((max / 6) * i)
@@ -338,82 +349,78 @@ export default function EMIClient() {
                                     ))}
                                 </div>
                             </div>
-                        </Card>
+                        </div>
 
                         {/* Right - Results & Pie Chart */}
-                        <Card className="p-6">
-                            <h3 className="text-lg font-semibold text-gray-800 mb-4">Break-up of Total Payment</h3>
+                        <div className="emi-card">
+                            <h3 className="emi-card-title">Break-up of Total Payment</h3>
 
-                            <div className="flex flex-col md:flex-row items-center gap-8">
-                                {/* Pie Chart */}
-                                <div className="w-64 h-64">
+                            <div className="emi-breakup">
+                                <div className="emi-donut">
                                     <Doughnut data={pieData} options={pieOptions} />
                                 </div>
 
-                                {/* EMI Results */}
-                                <div className="flex-1 space-y-4">
-                                    <div className="bg-blue-50 rounded-lg p-4">
-                                        <p className="text-sm text-gray-600">Loan EMI</p>
-                                        <p className="text-2xl font-bold text-blue-600">{formatCurrency(calculations.emi)}</p>
+                                <div className="emi-stats">
+                                    <div className="emi-stat emi-stat--main">
+                                        <p className="emi-stat-label">Loan EMI</p>
+                                        <p className="emi-stat-value">{formatCurrency(calculations.emi)}</p>
                                     </div>
-                                    <div className="bg-gray-50 rounded-lg p-4">
-                                        <p className="text-sm text-gray-600">Total Interest Payable</p>
-                                        <p className="text-xl font-bold text-gray-800">{formatCurrency(calculations.totalInterest)}</p>
+                                    <div className="emi-stat">
+                                        <p className="emi-stat-label">Total Interest Payable</p>
+                                        <p className="emi-stat-value">{formatCurrency(calculations.totalInterest)}</p>
                                     </div>
-                                    <div className="bg-gray-50 rounded-lg p-4">
-                                        <p className="text-sm text-gray-600">Total (Principal + Interest)</p>
-                                        <p className="text-xl font-bold text-gray-800">{formatCurrency(calculations.totalAmount)}</p>
+                                    <div className="emi-stat">
+                                        <p className="emi-stat-label">Total (Principal + Interest)</p>
+                                        <p className="emi-stat-value">{formatCurrency(calculations.totalAmount)}</p>
                                     </div>
                                 </div>
                             </div>
-                        </Card>
+                        </div>
                     </div>
 
                     {/* Bar Chart */}
-                    <Card className="p-6 mt-8">
-                        <div className="h-80">
+                    <div className="emi-card emi-card--spaced">
+                        <div className="emi-chart">
                             <Bar data={barData} options={barOptions} />
                         </div>
-                    </Card>
+                    </div>
 
                     {/* Amortization Table */}
-                    <Card className="p-6 mt-8 overflow-x-auto">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Year-wise Amortization Schedule</h3>
-                        <table className="w-full min-w-[600px]">
-                            <thead>
-                                <tr className="bg-blue-50">
-                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">Year</th>
-                                    <th className="px-4 py-3 text-right font-semibold text-gray-700">Principal (A)</th>
-                                    <th className="px-4 py-3 text-right font-semibold text-gray-700">Interest (B)</th>
-                                    <th className="px-4 py-3 text-right font-semibold text-gray-700">Total Payment (A+B)</th>
-                                    <th className="px-4 py-3 text-right font-semibold text-gray-700">Balance</th>
-                                    <th className="px-4 py-3 text-right font-semibold text-gray-700">Loan Paid To Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {calculations.amortization.map((row, index) => (
-                                    <tr key={row.year} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                        <td className="px-4 py-3 font-medium">{row.year}</td>
-                                        <td className="px-4 py-3 text-right">{formatCurrency(row.principal)}</td>
-                                        <td className="px-4 py-3 text-right">{formatCurrency(row.interest)}</td>
-                                        <td className="px-4 py-3 text-right">{formatCurrency(row.total)}</td>
-                                        <td className="px-4 py-3 text-right">{formatCurrency(row.balance)}</td>
-                                        <td className="px-4 py-3 text-right">
-                                            <span className="text-blue-600">{row.percentPaid}%</span>
-                                        </td>
+                    <div className="emi-card emi-card--spaced">
+                        <h3 className="emi-card-title">Year-wise Amortization Schedule</h3>
+                        <div className="emi-table-wrap">
+                            <table className="emi-table">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Principal (A)</th>
+                                        <th>Interest (B)</th>
+                                        <th>Total Payment (A+B)</th>
+                                        <th>Balance</th>
+                                        <th>Loan Paid To Date</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </Card>
+                                </thead>
+                                <tbody>
+                                    {calculations.amortization.map((row) => (
+                                        <tr key={row.year}>
+                                            <td>{row.year}</td>
+                                            <td>{formatCurrency(row.principal)}</td>
+                                            <td>{formatCurrency(row.interest)}</td>
+                                            <td>{formatCurrency(row.total)}</td>
+                                            <td>{formatCurrency(row.balance)}</td>
+                                            <td><span className="emi-paid">{row.percentPaid}%</span></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     {/* Apply Button */}
-                    <div className="text-center mt-8">
+                    <div className="emi-cta">
                         <Link href="/credit-score">
-                            <Button variant="gradient" size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600">
-                                Apply for {currentLoanConfig?.name}
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
+                            Apply for {currentLoanConfig?.name}
+                            <ArrowRight />
                         </Link>
                     </div>
                 </div>
