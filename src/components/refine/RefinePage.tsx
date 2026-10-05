@@ -215,6 +215,7 @@ export default function RefinePage() {
             {/* ── 1. Hero Section ──────────────────────── */}
             <section className={styles.hero}>
                 <div className={styles.heroInner}>
+
                     <div className={styles.badgePill}>
                         <span className={styles.badgeGlowIcon}>
                             <Sparkles size={14} />
