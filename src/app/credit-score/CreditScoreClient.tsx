@@ -16,7 +16,7 @@ const badge = '/images/Cibil/badge.png'
 const calendar = '/images/Cibil/calendar.png'
 const graph = '/images/Cibil/graph.png'
 const testimonial = '/images/Cibil/testimonial.png'
-const joinck = '/images/Refine/refineProgram2.png'
+const joinck = '/images/App.png'
 
 function FormDesign() {
     return (
@@ -180,11 +180,11 @@ function CScontent() {
 
 function Switch({ checked, onChange, children }: { checked: boolean, onChange: (checked: boolean) => void, children: React.ReactNode }) {
     return (
-        <div className="flex h-6 items-center my-4 justify-center">
+        <div className="flex items-start my-3 text-left">
             <button
                 type="button"
                 onClick={() => onChange(!checked)}
-                className={`flex w-8 mr-3 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out ${checked ? 'bg-indigo-600' : 'bg-gray-200'}`}
+                className={`flex w-8 mr-3 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out mt-0.5 ${checked ? 'bg-indigo-600' : 'bg-gray-200'}`}
             >
                 <span className="sr-only">Agree to policies</span>
                 <span
@@ -192,7 +192,7 @@ function Switch({ checked, onChange, children }: { checked: boolean, onChange: (
                     className={`h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out ${checked ? 'translate-x-3.5' : 'translate-x-0'}`}
                 />
             </button>
-            <span className="text-sm leading-6 text-gray-600">{children}</span>
+            <span className="text-xs leading-5 text-gray-600">{children}</span>
         </div>
     )
 }
@@ -343,70 +343,70 @@ export default function CreditScoreClient() {
                             <div className="grid grid-cols-2 m-auto gap-2 md:gap-4 py-2 md:py-4">
                                 {/* Full Name */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Full Name</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.name}</div>
                                 </div>
 
                                 {/* Email */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Email</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email Id" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.email}</div>
                                 </div>
 
                                 {/* Date of Birth */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">D.O.B</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">D.O.B</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                        <input type="tel" name="dob" value={formData.dob} onInput={handleDateDigit} maxLength={10} placeholder="DD-MM-YYYY" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-700 shadow-sm ring-1 ring-inset font-semibold ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.dob}</div>
                                 </div>
 
                                 {/* Pincode */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Pincode</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                        <input type="number" name="pin" value={formData.pin} onInput={handlePinDigit} maxLength={6} placeholder="eg:110001" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.pin}</div>
                                 </div>
 
                                 {/* PAN */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">PAN</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="AAAAA1214J" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6 uppercase" required />
+                                        <input type="text" name="pan" value={formData.pan} onChange={handleChange} maxLength={10} placeholder="AAAAA1234F" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6 uppercase" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.pan}</div>
                                 </div>
 
                                 {/* Mobile Number */}
                                 <div className="p-1 md:p-2 h-auto">
-                                    <label className="block text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Mobile</label>
+                                    <label className="block text-xs sm:text-sm md:text-lg uppercase font-semibold leading-6 text-gray-900">Mobile</label>
                                     <div className="mt-1 md:mt-2.5">
-                                        <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-sm sm:leading-6" required />
+                                        <input type="number" name="mobile" value={formData.mobile} onInput={handleMobileDigit} maxLength={10} placeholder="10 digit" className="block w-full rounded-md border-0 py-2 px-2 md:px-3.5 text-gray-600 font-semibold shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 text-xs sm:text-sm sm:leading-6" required />
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.mobile}</div>
                                 </div>
 
                                 {/* Gender - inline on mobile */}
                                 <div className="p-1 md:p-2">
-                                    <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">GENDER</label>
-                                    <div className="flex gap-3 mt-1 flex-wrap">
-                                        <label className="text-xs md:text-sm flex items-center gap-1">
-                                            <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} className="w-3 h-3" /> Male
+                                    <label className="block text-xs sm:text-sm md:text-lg font-semibold leading-6 text-gray-900 uppercase">GENDER</label>
+                                    <div className="flex gap-2 sm:gap-3 mt-1 flex-wrap">
+                                        <label className="text-xs sm:text-sm flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGender} className="w-3.5 h-3.5" /> Male
                                         </label>
-                                        <label className="text-xs md:text-sm flex items-center gap-1">
-                                            <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} className="w-3 h-3" /> Female
+                                        <label className="text-xs sm:text-sm flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGender} className="w-3.5 h-3.5" /> Female
                                         </label>
-                                        <label className="text-xs md:text-sm flex items-center gap-1">
-                                            <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} className="w-3 h-3" /> Others
+                                        <label className="text-xs sm:text-sm flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="gender" value="others" checked={gender === 'others'} onChange={handleGender} className="w-3.5 h-3.5" /> Others
                                         </label>
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.selectedError}</div>
@@ -414,13 +414,13 @@ export default function CreditScoreClient() {
 
                                 {/* Employment Status - inline on mobile */}
                                 <div className="p-1 md:p-2">
-                                    <label className="block text-sm md:text-lg font-semibold leading-6 text-gray-900">STATUS</label>
-                                    <div className="flex gap-3 mt-1 flex-wrap">
-                                        <label className="text-xs md:text-sm flex items-center gap-1">
-                                            <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} className="w-3 h-3" /> Salaried
+                                    <label className="block text-xs sm:text-sm md:text-lg font-semibold leading-6 text-gray-900 uppercase">STATUS</label>
+                                    <div className="flex gap-2 sm:gap-3 mt-1 flex-wrap">
+                                        <label className="text-xs sm:text-sm flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="status" value="Salaried" checked={status === 'Salaried'} onChange={handleStatus} className="w-3.5 h-3.5" /> Salaried
                                         </label>
-                                        <label className="text-xs md:text-sm flex items-center gap-1">
-                                            <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} className="w-3 h-3" /> Self-Employed
+                                        <label className="text-xs sm:text-sm flex items-center gap-1 cursor-pointer">
+                                            <input type="radio" name="status" value="Self Employed" checked={status === 'Self Employed'} onChange={handleStatus} className="w-3.5 h-3.5" /> Self-Employed
                                         </label>
                                     </div>
                                     <div className="text-xs text-red-500">{formErrors.status}</div>
@@ -434,17 +434,17 @@ export default function CreditScoreClient() {
                                     <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
                                 </div>
 
-                                <div className="col-span-2 mt-2 mx-auto flex flex-col text-center px-4">
+                                <div className="col-span-2 mt-2 mx-auto flex flex-col text-center px-2 sm:px-4 w-full">
                                     <button
                                         type="submit"
                                         disabled={isLoading}
-                                        className="block w-full rounded-md bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
+                                        className="block w-full rounded-md bg-indigo-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50 cursor-pointer"
                                         onClick={handleSubmit}
                                     >
                                         {isLoading ? <span className="flex items-center justify-center gap-2"><Loader2 className="animate-spin w-4 h-4" /> Processing...</span> : 'Check Credit Score Now'}
                                     </button>
-                                    <p className="text-[10px] text-center mt-1 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
-                                    <p className="text-[10px] text-center text-green-400">Receive updates via Whatsapp</p>
+                                    <p className="text-[10px] text-center mt-1.5 text-gray-400">CreditKlick uses 128-bit encryption to secure your information</p>
+                                    <p className="text-[10px] text-center text-green-500 font-medium">Receive updates via Whatsapp</p>
                                 </div>
                             </div>
                         ) : (
