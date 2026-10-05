@@ -263,14 +263,6 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Blogs
               </Link>
 
-              {/* 7. FAQs */}
-              <Link
-                href="/#faq"
-                className={styles.fixMenuLink}
-                onClick={() => handleNavClick("/#faq")}
-              >
-                FAQs
-              </Link>
 
               {/* Bottom Login / User Profile CTA Button */}
               <div style={{ marginTop: "12px", textAlign: "center" }}>
