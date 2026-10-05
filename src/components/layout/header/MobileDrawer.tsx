@@ -196,23 +196,6 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Home
               </Link>
 
-              {/* 2. How It Works */}
-              <Link
-                href="/#services"
-                className={styles.fixMenuLink}
-                onClick={() => handleNavClick("/#services")}
-              >
-                How It Works
-              </Link>
-
-              {/* 3. Credit Journey (Credit Refine) */}
-              <Link
-                href="/refine"
-                className={cn(styles.fixMenuLink, pathname === "/refine" && styles.fixMenuLinkActive)}
-                onClick={() => handleNavClick("/refine")}
-              >
-                Credit Journey
-              </Link>
 
               {/* 4. Pricing */}
               <Link
