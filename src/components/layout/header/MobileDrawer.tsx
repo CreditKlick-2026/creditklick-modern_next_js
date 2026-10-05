@@ -71,12 +71,13 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
 
   return (
     <div className="lg:hidden">
-      {/* ── Normal Mobile Sticky/Fixed Top Bar (When Closed) ── */}
+      {/* ── Mobile Top Header Bar ── */}
       <header
         className={cn(
           styles.mobileHeaderBar,
           hasColoredHeader && !isScrolled && styles.mobileHeaderHome
         )}
+        style={{ zIndex: 10001 }}
       >
         <Link href="/" className="flex items-center flex-shrink-0" onClick={() => setIsOpen(false)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -87,7 +88,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
           />
         </Link>
 
-        {/* Right side: Google Play badge + Hamburger icon */}
+        {/* Right side: Google Play badge + Hamburger or X button */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <a
             href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
@@ -105,7 +106,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
           </a>
 
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsOpen(!isOpen)}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -119,74 +120,39 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
               borderRadius: "8px",
               color: "#1e293b",
             }}
-            aria-label="Open Menu"
+            aria-label={isOpen ? "Close Menu" : "Open Menu"}
           >
-            <MobileHamburgerIcon className="w-7 h-7" />
+            {isOpen ? (
+              <X style={{ width: "24px", height: "24px", color: "#334155" }} />
+            ) : (
+              <MobileHamburgerIcon className="w-7 h-7" />
+            )}
           </button>
         </div>
       </header>
 
-      {/* ── FixMyScore-Style Fullscreen Mobile Menu Overlay ── */}
+      {/* ── Dropdown Menu (Only opens up to Login button) ── */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className={styles.mobileFullscreenOverlay}
-          >
-            {/* Overlay Top Bar: Logo on Left, Google Play + Close X on Right */}
-            <div className={styles.mobileOverlayHeader}>
-              <Link href="/" onClick={() => setIsOpen(false)} style={{ display: "flex", alignItems: "center" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/Logo.avif"
-                  alt="CreditKlick"
-                  style={{ height: "36px", width: "auto", display: "block" }}
-                />
-              </Link>
+          <>
+            {/* Dark Backdrop Dimmer below the drawer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className={styles.mobileBackdrop}
+              onClick={() => setIsOpen(false)}
+            />
 
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.creditklick.creditklick"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.playStoreBadge}
-                  aria-label="Get it on Google Play"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/play-store-icon.svg"
-                    alt="Google Play"
-                    style={{ height: "32px", width: "auto", display: "block", borderRadius: "6px" }}
-                  />
-                </a>
-
-                <button
-                  onClick={() => setIsOpen(false)}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "36px",
-                    height: "36px",
-                    padding: "4px",
-                    background: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    borderRadius: "8px",
-                    color: "#334155",
-                  }}
-                  aria-label="Close Menu"
-                >
-                  <X style={{ width: "24px", height: "24px" }} />
-                </button>
-              </div>
-            </div>
-
-            {/* Overlay Center Content: Centered Minimalist Navigation Links */}
-            <div className={styles.mobileOverlayBody}>
+            {/* Menu Drawer - terminates right below Login button */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className={styles.mobileDropdownDrawer}
+            >
               {/* 1. Home */}
               <Link
                 href="/"
@@ -196,8 +162,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Home
               </Link>
 
-
-              {/* 4. Pricing */}
+              {/* 2. Pricing */}
               <Link
                 href="/pricing"
                 className={cn(styles.fixMenuLink, pathname === "/pricing" && styles.fixMenuLinkActive)}
@@ -206,7 +171,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Pricing
               </Link>
 
-              {/* 5. Calculators (Accordion) */}
+              {/* 3. Calculators (Accordion) */}
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
                 <button
                   type="button"
@@ -270,7 +235,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 )}
               </div>
 
-              {/* 6. Newsroom (Media) */}
+              {/* 4. Newsroom (Media) */}
               <Link
                 href="/media"
                 className={cn(styles.fixMenuLink, pathname === "/media" && styles.fixMenuLinkActive)}
@@ -279,7 +244,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Newsroom
               </Link>
 
-              {/* 7. About Us */}
+              {/* 5. About Us */}
               <Link
                 href="/about"
                 className={cn(styles.fixMenuLink, pathname === "/about" && styles.fixMenuLinkActive)}
@@ -288,7 +253,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 About Us
               </Link>
 
-              {/* 8. Blogs */}
+              {/* 6. Blogs */}
               <Link
                 href="/blog"
                 className={cn(styles.fixMenuLink, pathname.startsWith("/blog") && styles.fixMenuLinkActive)}
@@ -297,7 +262,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Blogs
               </Link>
 
-              {/* 9. FAQs */}
+              {/* 7. FAQs */}
               <Link
                 href="/#faq"
                 className={styles.fixMenuLink}
@@ -307,7 +272,7 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
               </Link>
 
               {/* Bottom Login / User Profile CTA Button */}
-              <div style={{ marginTop: "16px", marginBottom: "8px", textAlign: "center" }}>
+              <div style={{ marginTop: "12px", textAlign: "center" }}>
                 {isLoggedIn ? (
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                     <Link
@@ -355,8 +320,8 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                   </button>
                 )}
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
