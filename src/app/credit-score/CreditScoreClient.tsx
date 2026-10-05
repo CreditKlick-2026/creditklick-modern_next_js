@@ -60,16 +60,20 @@ function FormDesign() {
 
 function JoinCK() {
     return (
-        <div style={{ backgroundColor: '#dbe8fd' }} className="grid sm:grid-cols-2 grid-cols-1 my-5">
-            <div className="flex flex-col items-center justify-center">
+        <div style={{ backgroundColor: '#dbe8fd' }} className="grid sm:grid-cols-2 grid-cols-1 my-5 items-center">
+            <div className="flex flex-col items-center justify-center py-6">
                 <p className="lg:text-4xl md:text-3xl text-2xl text-left my-1 text-blue-700 mx-8 font-semibold italic">
                     Join CREDITKLICK and monitor your <br />Credit Score
                 </p>
             </div>
-            <div className="my-10">
-                <div className="relative md:w-2/4 w-2/3 m-auto rounded-3xl shadow-xl overflow-hidden aspect-[4/3] bg-white">
-                    <Image src={joinck} alt="Join CK" fill className="object-contain" sizes="(max-width: 768px) 66vw, 50vw" />
-                </div>
+            <div className="py-6 flex justify-center items-center">
+                <Image
+                    src={joinck}
+                    alt="CreditKlick Mobile App"
+                    width={280}
+                    height={615}
+                    className="w-44 sm:w-52 md:w-64 max-w-full h-auto object-contain drop-shadow-xl"
+                />
             </div>
         </div>
     )
