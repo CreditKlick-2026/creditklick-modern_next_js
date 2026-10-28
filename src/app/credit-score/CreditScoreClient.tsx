@@ -5,10 +5,21 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Star, StarHalf, Loader2, CheckCircle2 } from 'lucide-react'
+import {
+    Star,
+    StarHalf,
+    Loader2,
+    CheckCircle2,
+    CheckCircle,
+    Gauge,
+    GraduationCap,
+    CreditCard,
+    Smartphone,
+} from 'lucide-react'
 import toast from 'react-hot-toast'
 import { verificationAPI } from '@/services/api'
 import Cookies from 'js-cookie'
+import './credit-score.css'
 
 
 const scoremeter = '/images/Cibil/scoremeter.png'
@@ -17,6 +28,7 @@ const calendar = '/images/Cibil/calendar.png'
 const graph = '/images/Cibil/graph.png'
 const testimonial = '/images/Cibil/testimonial.png'
 const joinck = '/images/App.png'
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.creditklick.creditklick'
 
 function FormDesign() {
     return (
@@ -25,10 +37,10 @@ function FormDesign() {
                 <Image src={scoremeter} alt="Score Meter" width={150} height={150} className="flex pl-10 object-contain w-auto h-auto" />
             </div>
             <div>
-                <h1 className="lg:text-5xl text-3xl text-blue-900 font-thin">
+                <h1 className="lg:text-5xl text-3xl text-brand font-thin">
                     Get Your FREE <br /> CRIF Credit Report{" "}
                 </h1>
-                <p className="text-sm font-thin text-blue-900">
+                <p className="text-sm font-thin text-brand">
                     When you ask a bank for a loan or credit card, they want to know
                     your credit score.
                 </p>
@@ -52,7 +64,7 @@ function FormDesign() {
 
             <span className="flex text-xs gap-x-1 mt-10 items-center text-gray-500 font-medium">
                 {" "}
-                powered by <span className="font-bold text-blue-800">CRIF High Mark</span>
+                powered by <span className="font-bold text-brand">CRIF High Mark</span>
             </span>
         </div>
     )
@@ -60,102 +72,99 @@ function FormDesign() {
 
 function JoinCK() {
     return (
-        <div style={{ backgroundColor: '#dbe8fd' }} className="grid sm:grid-cols-2 grid-cols-1 my-5 items-center">
-            <div className="flex flex-col items-center justify-center py-6">
-                <p className="lg:text-4xl md:text-3xl text-2xl text-left my-1 text-blue-700 mx-8 font-semibold italic">
-                    Join CREDITKLICK and monitor your <br />Credit Score
-                </p>
+        <section className="cs-join">
+            <div className="cs-wrap cs-join-inner">
+                <div className="cs-join-copy">
+                    <p className="cs-eyebrow">CreditKlick App</p>
+                    <h2 style={{ marginTop: '0.4rem' }}>
+                        Join <span>CREDITKLICK</span> and monitor your Credit Score
+                    </h2>
+                    <p className="cs-join-sub">
+                        Track your score, read your full report and get tools to improve it &mdash; all in one app.
+                    </p>
+                    <ul className="cs-join-list">
+                        <li><CheckCircle aria-hidden="true" /> Free credit score &amp; report</li>
+                        <li><CheckCircle aria-hidden="true" /> Score insights and improvement tools</li>
+                        <li><CheckCircle aria-hidden="true" /> Loan &amp; credit card offers</li>
+                    </ul>
+                    <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="cs-join-cta">
+                        <Smartphone aria-hidden="true" />
+                        Get it on Google Play
+                    </a>
+                </div>
+                <div className="cs-join-art">
+                    <Image src={joinck} alt="CreditKlick mobile app" width={280} height={615} />
+                </div>
             </div>
-            <div className="py-6 flex justify-center items-center">
-                <Image
-                    src={joinck}
-                    alt="CreditKlick Mobile App"
-                    width={280}
-                    height={615}
-                    className="w-44 sm:w-52 md:w-64 max-w-full h-auto object-contain drop-shadow-xl"
-                />
-            </div>
-        </div>
+        </section>
     )
 }
 
 function HowitWorks() {
+    const steps = [
+        { icon: Gauge, title: 'Credit Monitoring', text: 'You can monitor your credit score and credit report for free.' },
+        { icon: GraduationCap, title: 'Credit Education', text: 'With insights and alerts tailored to your needs, stay on top of your score.' },
+        { icon: CreditCard, title: 'Credit Offers', text: 'Discover and review which credit cards meet your financial needs.' },
+    ]
     return (
-        <div className="my-16 container mx-auto">
-            <h1 className="text-3xl text-blue-900 my-5 text-center">How it works?</h1>
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-x-8 gap-y-6 my-4 w-3/4 mx-auto">
-                <div className="my-auto py-8 text-center bg-gradient-to-tr from-white to-blue-50 rounded-md shadow-md w-full">
-                    <p className="text-2xl text-blue-500">Credit Monitoring</p>
-                    <p className="text-xs text-blue-800 my-2">
-                        You can monitor your credit score and credit report for free.
-                    </p>
+        <section className="cs-section">
+            <div className="cs-wrap">
+                <div className="cs-center">
+                    <p className="cs-eyebrow">How it works</p>
+                    <h2 className="cs-h2">How it works?</h2>
                 </div>
-                <div className="my-auto py-8 text-center bg-gradient-to-tr from-white to-blue-50 rounded-md shadow-md w-full">
-                    <p className="text-2xl text-blue-500">Credit Education</p>
-                    <p className="text-xs text-blue-800 my-2">
-                        With insights and alerts tailored to your needs, stay on top of your score.
-                    </p>
-                </div>
-                <div className="my-auto py-8 text-center bg-gradient-to-tr from-white to-blue-50 rounded-md shadow-md w-full">
-                    <p className="text-2xl text-blue-500">Credit Offers</p>
-                    <p className="text-xs text-blue-800 my-2">
-                        Discover and review which credit cards meet your financial needs.
-                    </p>
+                <div className="cs-steps">
+                    {steps.map(({ icon: Icon, title, text }, i) => (
+                        <div key={title} className="cs-step">
+                            <span className="cs-step-num" aria-hidden="true">0{i + 1}</span>
+                            <span className="cs-step-icon"><Icon aria-hidden="true" /></span>
+                            <h3>{title}</h3>
+                            <p>{text}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
 function Testimonials() {
     return (
-        <div className="px-4 my-10">
-            <p className="lg:text-xl text-base font-bold text-gray-600 uppercase">
-                testimonials
-            </p>
-            <p className="lg:text-3xl md:text-xl text-lg font-bold">
-                Trusted by 200K+ users like you
-            </p>
-            <div className="grid lg:grid-cols-3 grid-cols-1">
-                <div className="w-full p-4 m-auto flex justify-center items-center">
-                    <Image src={testimonial} alt="Testimonial" width={300} height={300} className="w-48 lg:w-60 max-w-full m-auto object-contain h-auto" />
+        <section className="cs-section" style={{ paddingTop: 0 }}>
+            <div className="cs-wrap">
+                <div className="cs-center">
+                    <p className="cs-eyebrow">Testimonials</p>
+                    <h2 className="cs-h2">Trusted by 200K+ users like you</h2>
                 </div>
-                <div style={{ backgroundColor: '#dbe8fd' }} className="w-3/4 p-4 mx-auto my-4 shadow-lg rounded-lg">
-                    <div className="flex text-blue-500 my-2">
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
+                <div className="cs-reviews">
+                    <div className="cs-review-photo">
+                        <Image src={testimonial} alt="Happy CreditKlick customer" width={300} height={300} />
                     </div>
-                    <p className="md:text-lg text-sm my-2">
-                        My scores have improved significantly in a period of 1 year. My
-                        heartfelt thanks for your support and I am pleased with your
-                        professional approach.
-                    </p>
-                    <p className="text-lg font-semibold text-blue-500 uppercase">
-                        Neha Sharma
-                    </p>
-                </div>
-                <div style={{ backgroundColor: '#dbe8fd' }} className="w-3/4 p-4 mx-auto my-4 shadow-lg rounded-lg">
-                    <div className="flex text-blue-500 my-2">
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <StarHalf className="w-4 h-4 fill-current" />
-                    </div>
-                    <p className="md:text-lg text-sm my-2">
-                        I am very happy to tell you that my Axis Bank credit card problem
-                        has been solved and there is no outstanding amount to be paid from
-                        my side. thanks for your help
-                    </p>
-                    <p className="text-lg font-semibold text-blue-500 uppercase">
-                        pawan kohli
-                    </p>
+                    <figure className="cs-review" style={{ margin: 0 }}>
+                        <div className="cs-stars" aria-label="5 out of 5 stars">
+                            <Star /><Star /><Star /><Star /><Star />
+                        </div>
+                        <blockquote>
+                            My scores have improved significantly in a period of 1 year. My
+                            heartfelt thanks for your support and I am pleased with your
+                            professional approach.
+                        </blockquote>
+                        <figcaption className="cs-review-name">Neha Sharma</figcaption>
+                    </figure>
+                    <figure className="cs-review" style={{ margin: 0 }}>
+                        <div className="cs-stars" aria-label="4.5 out of 5 stars">
+                            <Star /><Star /><Star /><Star /><StarHalf />
+                        </div>
+                        <blockquote>
+                            I am very happy to tell you that my Axis Bank credit card problem
+                            has been solved and there is no outstanding amount to be paid from
+                            my side. thanks for your help
+                        </blockquote>
+                        <figcaption className="cs-review-name">Pawan Kohli</figcaption>
+                    </figure>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
@@ -170,15 +179,22 @@ function CScontent() {
     ]
 
     return (
-        <div className="py-4 bg-gray-100">
-            <div className="container mx-auto px-6 md:px-12 lg:px-20">
-                {content.map((items, index) => (
-                    <div key={index} className="font-semibold md:text-lg text-base text-gray-700">
-                        <li className="mb-4">{items.text}</li>
-                    </div>
-                ))}
+        <section className="cs-section cs-why">
+            <div className="cs-wrap">
+                <div className="cs-center">
+                    <p className="cs-eyebrow">Know your score</p>
+                    <h2 className="cs-h2">Why check your credit score?</h2>
+                </div>
+                <ul className="cs-why-list">
+                    {content.map((item) => (
+                        <li key={item.text}>
+                            <CheckCircle2 aria-hidden="true" />
+                            <span>{item.text}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
-        </div>
+        </section>
     )
 }
 
@@ -328,7 +344,7 @@ export default function CreditScoreClient() {
     return (
         <div className="min-h-screen">
             {/* Header - compact on mobile */}
-            <div style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-lg md:text-2xl py-3 md:py-6 text-blue-900 text-center tracking-wider">
+            <div style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-lg md:text-2xl py-3 md:py-6 text-brand text-center tracking-wider">
                 <h1>CHECK FREE CREDIT SCORE</h1>
             </div>
 
@@ -456,11 +472,11 @@ export default function CreditScoreClient() {
                         ) : (
                             <div className="max-w-md mx-auto my-4 p-5 md:p-6 bg-white border border-blue-100 rounded-xl shadow-md text-left animate-fadeIn">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <div style={{ backgroundColor: '#dbe8fd' }} className="w-10 h-10 rounded-full flex items-center justify-center text-blue-700 shrink-0">
-                                        <CheckCircle2 className="w-6 h-6 text-blue-700" />
+                                    <div style={{ backgroundColor: '#dbe8fd' }} className="w-10 h-10 rounded-full flex items-center justify-center text-brand shrink-0">
+                                        <CheckCircle2 className="w-6 h-6 text-brand" />
                                     </div>
                                     <div>
-                                        <h3 className="text-base md:text-lg font-bold text-blue-900 leading-snug">
+                                        <h3 className="text-base md:text-lg font-bold text-brand leading-snug">
                                             Form Submitted Successfully! 🎉
                                         </h3>
                                         <p className="text-xs text-gray-600 mt-0.5">
@@ -484,7 +500,7 @@ export default function CreditScoreClient() {
                                     )}
                                     <div className="flex items-center justify-between pt-0.5">
                                         <span className="text-gray-600 font-medium">Status:</span>
-                                        <span style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-blue-800 px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
+                                        <span style={{ backgroundColor: '#dbe8fd' }} className="font-semibold text-brand px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
                                             Under Processing
                                         </span>
                                     </div>
@@ -512,10 +528,12 @@ export default function CreditScoreClient() {
                 </div>
             </div>
 
-            <JoinCK />
-            <HowitWorks />
-            <Testimonials />
-            <CScontent />
+            <div className="cs">
+                <JoinCK />
+                <HowitWorks />
+                <Testimonials />
+                <CScontent />
+            </div>
         </div>
     )
 }

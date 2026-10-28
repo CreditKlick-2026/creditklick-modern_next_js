@@ -1,0 +1,509 @@
+/* Register a Complaint page — plain CSS (project has no Tailwind build).
+   Brand: #155dfc (primary) and #dbe8fd (soft). */
+
+.rc {
+  --rc-primary: #155dfc;
+  --rc-primary-dark: #0f4ad1;
+  --rc-soft: #dbe8fd;
+  --rc-tint: #f3f7ff;
+  --rc-ink: #0f1f4b;
+  --rc-text: #334155;
+  --rc-muted: #64748b;
+  --rc-line: #e2e8f0;
+  --rc-warn: #b45309;
+  background: #ffffff;
+  color: var(--rc-ink);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.rc *,
+.rc *::before,
+.rc *::after {
+  box-sizing: border-box;
+}
+
+:where(.rc) h1,
+:where(.rc) h2,
+:where(.rc) h3,
+:where(.rc) p,
+:where(.rc) ol,
+:where(.rc) form {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.rc) ol {
+  list-style: none;
+}
+
+.rc-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Hero ---------- */
+
+.rc-hero {
+  background: var(--rc-soft);
+  padding: 2.5rem 0 2.25rem;
+  text-align: center;
+}
+
+.rc-hero-icon {
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: var(--rc-primary);
+}
+
+.rc-hero-icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.rc-eyebrow {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rc-primary);
+}
+
+.rc-hero h1 {
+  margin-top: 0.4rem;
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--rc-ink);
+}
+
+.rc-hero-sub {
+  max-width: 38rem;
+  margin: 0.75rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rc-text);
+}
+
+/* ---------- Body ---------- */
+
+.rc-body {
+  padding: 2.5rem 0 4rem;
+}
+
+.rc-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.rc-card {
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--rc-line);
+  background: #ffffff;
+  box-shadow: 0 10px 30px -18px rgba(21, 93, 252, 0.35);
+}
+
+.rc-card-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--rc-ink);
+}
+
+.rc-card-sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  color: var(--rc-muted);
+}
+
+.rc-fields {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.rc-field > label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--rc-ink);
+}
+
+.rc-field > label span {
+  color: var(--rc-primary);
+}
+
+.rc-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--rc-line);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: var(--rc-ink);
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rc-input::placeholder {
+  color: #94a3b8;
+}
+
+.rc-input:focus {
+  outline: none;
+  border-color: var(--rc-primary);
+  box-shadow: 0 0 0 3px var(--rc-soft);
+}
+
+textarea.rc-input {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+select.rc-input {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23155dfc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
+
+.rc-hint {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--rc-muted);
+}
+
+.rc-hint.is-short {
+  color: var(--rc-warn);
+}
+
+.rc-submit {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: var(--rc-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.rc-submit:hover:not(:disabled) {
+  background: var(--rc-primary-dark);
+}
+
+.rc-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rc-submit:focus-visible,
+.rc-btn:focus-visible {
+  outline: 2px solid var(--rc-primary);
+  outline-offset: 2px;
+}
+
+.rc-submit svg,
+.rc-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.rc-note {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--rc-muted);
+}
+
+.rc-note svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--rc-primary);
+}
+
+/* success */
+.rc-success {
+  text-align: center;
+}
+
+.rc-success-icon {
+  display: inline-flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--rc-soft);
+  color: var(--rc-primary);
+}
+
+.rc-success-icon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.rc-success h2 {
+  margin-top: 0.9rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.rc-success > p {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  color: var(--rc-text);
+}
+
+.rc-ticket {
+  margin-top: 1.25rem;
+  padding: 0.4rem 1rem;
+  border-radius: 0.9rem;
+  background: var(--rc-tint);
+  text-align: left;
+}
+
+.rc-ticket div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  font-size: 0.92rem;
+}
+
+.rc-ticket div + div {
+  border-top: 1px solid var(--rc-soft);
+}
+
+.rc-ticket span {
+  color: var(--rc-muted);
+}
+
+.rc-ticket strong {
+  color: var(--rc-ink);
+}
+
+.rc-ticket .rc-ticket-id {
+  color: var(--rc-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.rc-actions {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.rc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 0;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.rc-btn-soft {
+  background: var(--rc-soft);
+  color: var(--rc-primary);
+}
+
+.rc-btn-soft:hover {
+  background: #c9dcfc;
+}
+
+.rc-btn-primary {
+  background: var(--rc-primary);
+  color: #ffffff;
+}
+
+.rc-btn-primary:hover {
+  background: var(--rc-primary-dark);
+}
+
+/* ---------- Side panel ---------- */
+
+.rc-side {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.rc-panel {
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  background: var(--rc-tint);
+}
+
+.rc-panel h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--rc-ink);
+}
+
+.rc-steps {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+
+.rc-step {
+  display: flex;
+  gap: 0.85rem;
+}
+
+.rc-step-num {
+  display: flex;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  background: var(--rc-primary);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.rc-step h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rc-ink);
+}
+
+.rc-step p {
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--rc-text);
+}
+
+.rc-contacts {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.rc-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.8rem;
+  background: #ffffff;
+  text-decoration: none;
+  transition: box-shadow 0.15s;
+}
+
+.rc-contact:hover {
+  box-shadow: 0 0 0 2px var(--rc-soft);
+}
+
+.rc-contact-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  background: var(--rc-soft);
+  color: var(--rc-primary);
+}
+
+.rc-contact-icon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.rc-contact small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--rc-muted);
+}
+
+.rc-contact strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--rc-ink);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (min-width: 640px) {
+  .rc-hero {
+    padding: 3.25rem 0 3rem;
+  }
+
+  .rc-hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .rc-card {
+    padding: 2rem;
+  }
+
+  .rc-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .rc-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .rc-row {
+    display: grid;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .rc-grid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .rc-side {
+    position: sticky;
+    top: 6rem;
+  }
+}

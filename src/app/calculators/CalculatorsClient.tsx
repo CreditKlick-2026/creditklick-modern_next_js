@@ -96,78 +96,6 @@ const faqs = [
     },
 ]
 
-const formatINR = (n: number) => '₹' + Math.round(n).toLocaleString('en-IN')
-
-function QuickEmi() {
-    const [amount, setAmount] = useState(500000)
-    const [rate, setRate] = useState(11)
-    const [years, setYears] = useState(3)
-
-    const { emi, interest, total } = useMemo(() => {
-        const r = rate / 12 / 100
-        const n = years * 12
-        const emi = r === 0 ? amount / n : (amount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
-        const total = emi * n
-        return { emi, interest: total - amount, total }
-    }, [amount, rate, years])
-
-    const sliders = [
-        { label: 'Loan amount', value: amount, set: setAmount, min: 50000, max: 5000000, step: 10000, display: formatINR(amount) },
-        { label: 'Interest rate (p.a.)', value: rate, set: setRate, min: 5, max: 30, step: 0.25, display: `${rate}%` },
-        { label: 'Tenure', value: years, set: setYears, min: 1, max: 30, step: 1, display: `${years} yr${years > 1 ? 's' : ''}` },
-    ]
-
-    return (
-        <div className="cp-emi">
-            <div className="cp-emi-head">
-                <h2>Quick EMI check</h2>
-                <span className="cp-live">Live</span>
-            </div>
-
-            <div className="cp-sliders">
-                {sliders.map((s) => (
-                    <label key={s.label}>
-                        <div className="cp-slider-row">
-                            <span>{s.label}</span>
-                            <b>{s.display}</b>
-                        </div>
-                        <input
-                            type="range"
-                            min={s.min}
-                            max={s.max}
-                            step={s.step}
-                            value={s.value}
-                            onChange={(e) => s.set(Number(e.target.value))}
-                        />
-                    </label>
-                ))}
-            </div>
-
-            <div className="cp-result">
-                <p className="cp-result-label">Monthly EMI</p>
-                <p className="cp-result-value">{formatINR(emi)}</p>
-                <div className="cp-bar">
-                    <div style={{ width: `${(amount / total) * 100}%` }} />
-                </div>
-                <div className="cp-legend">
-                    <div>
-                        <span className="cp-dot" style={{ background: '#2563eb' }} />
-                        Principal <b>{formatINR(amount)}</b>
-                    </div>
-                    <div>
-                        <span className="cp-dot" style={{ background: '#93c5fd' }} />
-                        Interest <b>{formatINR(interest)}</b>
-                    </div>
-                </div>
-            </div>
-
-            <Link href="/emi" className="cp-btn">
-                See full breakdown <ArrowRight />
-            </Link>
-        </div>
-    )
-}
-
 export default function CalculatorsClient() {
     const [category, setCategory] = useState<Category>('All')
     const [query, setQuery] = useState('')
@@ -181,76 +109,116 @@ export default function CalculatorsClient() {
 
     return (
         <div className="cp">
-            {/* Hero */}
-            <section className="cp-hero">
-                <div className="cp-blob cp-blob--a" />
-                <div className="cp-blob cp-blob--b" />
+            {/* Header & Filter Controls */}
+            <div className="cp-wrap" style={{ paddingTop: '44px', paddingBottom: '28px', textAlign: 'center' }}>
+                <h1 style={{
+                    fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+                    fontWeight: 800,
+                    color: 'var(--cp-blue-900)',
+                    margin: 0,
+                    letterSpacing: '-0.02em',
+                }}>
+                    Finance Calculators &amp; Tools
+                </h1>
+                <p style={{
+                    fontSize: '15px',
+                    color: 'var(--cp-slate-600)',
+                    marginTop: '8px',
+                    marginBottom: '24px',
+                    maxWidth: '560px',
+                    marginInline: 'auto',
+                }}>
+                    Plan loan EMIs, calculate credit card reward savings, and make informed financial decisions.
+                </p>
 
-                <div className="cp-wrap cp-hero-grid">
-                    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                        <span className="cp-eyebrow">
-                            <Calculator size={14} /> Free finance tools
-                        </span>
-                        <h1 className="cp-title">
-                            Finance Calculators <span>&amp; Tools</span>
-                        </h1>
-                        <p className="cp-lead">
-                            Get the expert edge you need to reach your financial goals. Plan loan EMIs and find out what your credit card really earns you, in seconds.
-                        </p>
+                {/* Search Bar & Tabs Container */}
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '16px',
+                    maxWidth: '520px',
+                    margin: '0 auto',
+                }}>
+                    {/* Search Bar */}
+                    <div style={{
+                        position: 'relative',
+                        width: '100%',
+                    }}>
+                        <Search style={{
+                            position: 'absolute',
+                            left: '14px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            width: '16px',
+                            height: '16px',
+                            color: '#64748b',
+                            pointerEvents: 'none',
+                        }} />
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Search calculators (e.g. EMI, AU, SBI)..."
+                            aria-label="Search calculators"
+                            style={{
+                                width: '100%',
+                                padding: '11px 16px 11px 42px',
+                                fontSize: '14px',
+                                border: '1px solid #cbd5e1',
+                                borderRadius: '0px',
+                                outline: 'none',
+                                backgroundColor: '#fff',
+                                color: '#0f172a',
+                                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
+                            }}
+                        />
+                    </div>
 
-                        <div className="cp-search">
-                            <Search />
-                            <input
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                placeholder="Search calculators, e.g. EMI, SBI…"
-                                aria-label="Search calculators"
-                                onKeyDown={(e) => e.key === 'Enter' && document.getElementById('all-calculators')?.scrollIntoView({ behavior: 'smooth' })}
-                            />
-                        </div>
-
-                        <dl className="cp-stats">
-                            {[
-                                ['6+', 'Calculators'],
-                                ['0', 'Sign-ups needed'],
-                                ['100%', 'Free'],
-                            ].map(([v, l]) => (
-                                <div key={l}>
-                                    <dt>{v}</dt>
-                                    <dd>{l}</dd>
-                                </div>
-                            ))}
-                        </dl>
-                    </motion.div>
-
-                    <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
-                        <QuickEmi />
-                    </motion.div>
+                    {/* Category Tabs */}
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        flexWrap: 'wrap',
+                        width: '100%',
+                    }}>
+                        {categories.map(({ name, icon: Icon }) => {
+                            const isActive = category === name;
+                            return (
+                                <button
+                                    key={name}
+                                    type="button"
+                                    onClick={() => setCategory(name)}
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        padding: '8px 16px',
+                                        fontSize: '13px',
+                                        fontWeight: 600,
+                                        borderRadius: '0px',
+                                        border: isActive ? '1px solid #155dfc' : '1px solid #cbd5e1',
+                                        backgroundColor: isActive ? '#155dfc' : '#ffffff',
+                                        color: isActive ? '#ffffff' : '#475569',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.15s ease',
+                                        boxShadow: isActive ? '0 2px 6px rgba(21, 93, 252, 0.2)' : 'none',
+                                    }}
+                                >
+                                    <Icon style={{ width: '14px', height: '14px' }} />
+                                    <span>{name}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
-            </section>
+            </div>
 
             {/* Calculators */}
             <section id="all-calculators" className="cp-list">
                 <div className="cp-wrap">
-                    <div className="cp-tabs" role="tablist">
-                        {categories.map(({ name, icon: Icon }) => (
-                            <button
-                                key={name}
-                                type="button"
-                                role="tab"
-                                aria-selected={category === name}
-                                onClick={() => setCategory(name)}
-                                className={`cp-tab ${category === name ? 'is-active' : ''}`}
-                            >
-                                {category === name && (
-                                    <motion.span layoutId="cat-pill" className="cp-tab-pill" transition={{ type: 'spring', duration: 0.4 }} />
-                                )}
-                                <Icon />
-                                <span>{name}</span>
-                            </button>
-                        ))}
-                    </div>
-
                     <motion.div layout className="cp-grid">
                         <AnimatePresence mode="popLayout">
                             {filtered.map((calc) => (
@@ -365,19 +333,6 @@ export default function CalculatorsClient() {
                                 </div>
                             )
                         })}
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA */}
-            <section style={{ paddingBottom: 80 }}>
-                <div className="cp-wrap">
-                    <div className="cp-cta">
-                        <h2>A better credit score means lower EMIs</h2>
-                        <p>Check your credit score for free and see the loan and card offers you’re likely to get.</p>
-                        <Link href="/credit-score">
-                            Get your FREE Credit Score <ArrowRight />
-                        </Link>
                     </div>
                 </div>
             </section>

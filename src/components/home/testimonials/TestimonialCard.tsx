@@ -50,7 +50,7 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({ item }) => {
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
+                className="w-3.5 h-3.5 fill-brand text-brand"
               />
             ))}
           </div>

@@ -60,8 +60,8 @@
   gap: 0.5rem;
   padding: 0.375rem 0.875rem;
   border-radius: 9999px;
-  border: 1px solid rgba(147, 197, 253, 0.6);
-  background-color: rgba(219, 234, 254, 0.7);
+  border: 1px solid rgba(21, 93, 252, 0.6);
+  background-color: rgba(219, 232, 253, 0.7);
   color: #1c398e;
   font-size: 0.875rem;
   font-weight: 600;
@@ -93,7 +93,7 @@
 
 .titleHighlight {
   display: block;
-  color: #2563eb;
+  color: #155dfc;
 }
 
 .sectionIntro {
@@ -125,7 +125,7 @@
   overflow: hidden;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 1px solid #e5eaf3;
+  border: 1px solid #dbe8fd;
   background: #ffffff;
   box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.05), 0 4px 20px -4px rgba(15, 23, 42, 0.08);
 }
@@ -217,7 +217,7 @@
   color: #155dfc;
   padding: 0.2rem 0.5rem;
   border-radius: 8px;
-  background: #eff4ff;
+  background: #dbe8fd;
 }
 
 @media (min-width: 640px) {
@@ -293,8 +293,8 @@
   gap: 0.55rem;
   padding: 0.45rem 0.65rem;
   border-radius: 12px;
-  border: 1px solid #e3ebfd;
-  background: linear-gradient(90deg, #f3f7ff 0%, #ffffff 100%);
+  border: 1px solid #dbe8fd;
+  background: linear-gradient(90deg, #dbe8fd 0%, #ffffff 100%);
   color: #1c398e;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -377,7 +377,7 @@
   height: 17px;
   margin-top: 2px;
   border-radius: 50%;
-  background: #e8f0ff;
+  background: #dbe8fd;
   color: #155dfc;
 }
 
@@ -414,7 +414,7 @@
   box-sizing: border-box;
   background:
     radial-gradient(circle at 50% 40%, rgba(21, 93, 252, 0.18) 0%, rgba(21, 93, 252, 0) 60%),
-    linear-gradient(160deg, #f5f8ff 0%, #e6eeff 100%);
+    linear-gradient(160deg, #f5f8ff 0%, #dbe8fd 100%);
 }
 
 .rightCol::before {

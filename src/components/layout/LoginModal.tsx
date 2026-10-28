@@ -123,7 +123,7 @@ export function LoginModal({ showLoginModal, setShowLoginModal, setIsLoggedIn }:
                     className="bg-white rounded-none shadow-2xl max-w-md md:max-w-3xl lg:max-w-4xl w-full overflow-hidden border border-gray-200"
                 >
                     <div className="flex flex-col md:flex-row">
-                        <div className="md:w-1/2 bg-gradient-to-br from-blue-50/80 via-indigo-50/40 to-blue-100/60 flex flex-col items-center justify-center p-8 hidden md:flex border-r border-blue-100/60">
+                        <div className="md:w-1/2 bg-gradient-to-br from-brand-soft via-brand-soft to-brand-soft flex flex-col items-center justify-center p-8 hidden md:flex border-r border-brand-soft">
                             <div className="relative w-full max-w-xs aspect-square flex items-center justify-center">
                                 <Image 
                                     src="/assets/credit_login_3d.png" 

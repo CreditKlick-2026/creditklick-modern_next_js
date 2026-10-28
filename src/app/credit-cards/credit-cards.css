@@ -1,0 +1,195 @@
+/* Credit Cards page — plain CSS (project has no Tailwind build) */
+
+/* Bank tiles */
+.cc-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cc-tile:hover {
+  border-color: #155dfc;
+  box-shadow: 0 20px 40px -20px rgba(11, 47, 138, 0.35);
+}
+
+.cc-tile:focus-visible {
+  outline: 2px solid #155dfc;
+  outline-offset: 3px;
+}
+
+.cc-tile-name {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1c398e;
+}
+
+/* CSS credit card face (replaces the missing bank images) */
+.cc-face {
+  position: relative;
+  width: 100%;
+  max-width: 15rem;
+  aspect-ratio: 1.586;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  color: #ffffff;
+  text-align: left;
+  background: var(--cc-bg);
+  box-shadow: 0 16px 30px -16px rgba(15, 23, 42, 0.55);
+  transition: transform 0.3s;
+}
+
+.cc-tile:hover .cc-face {
+  transform: translateY(-4px) rotate(-1deg);
+}
+
+.cc-face::before,
+.cc-face::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cc-face::before {
+  width: 10rem;
+  height: 10rem;
+  right: -4rem;
+  top: -5rem;
+}
+
+.cc-face::after {
+  width: 7rem;
+  height: 7rem;
+  right: 1rem;
+  bottom: -4.5rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cc-face-bank {
+  position: relative;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cc-face-chip {
+  position: relative;
+  z-index: 1;
+  width: 2rem;
+  height: 1.45rem;
+  margin-top: 0.9rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(135deg, #fde68a, #d4a017);
+}
+
+.cc-face-number {
+  position: absolute;
+  z-index: 1;
+  left: 1rem;
+  bottom: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+
+.cc-face-net {
+  position: absolute;
+  z-index: 1;
+  right: 1rem;
+  bottom: 0.8rem;
+  display: flex;
+}
+
+.cc-face-net span {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.cc-face-net span + span {
+  margin-left: -0.5rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Button colors - change these four to recolor every button on the page */
+:root {
+  --cc-btn-bg: #155dfc;
+  --cc-btn-bg-hover: #1d4ed8;
+  --cc-btn-border: #1d4ed8;
+  --cc-btn-border-hover: #1e40af;
+}
+
+/* Link styled as a button (avoids <button> nested inside <a>).
+   Design ported from Wapine's pricing "Current plan" CTA (.btn + .btnProHighlight). */
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 2px;
+  border: 1px solid var(--cc-btn-border);
+  background: var(--cc-btn-bg);
+  color: #ffffff;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cc-btn:hover {
+  background: var(--cc-btn-bg-hover);
+  border-color: var(--cc-btn-border-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.cc-btn:focus-visible {
+  outline: 2px solid var(--cc-btn-bg);
+  outline-offset: 2px;
+}
+
+.cc-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cc-btn-lg {
+  height: 48px;
+  padding: 0 22px;
+  font-size: 14px;
+}
+
+/* Inside a tile the "button" is just a styled span — the whole tile is the link */
+.cc-btn-block {
+  width: 100%;
+  margin-top: auto;
+}
+
+.cc-tile:hover .cc-btn-block {
+  background: var(--cc-btn-bg-hover);
+  border-color: var(--cc-btn-border-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-btn { transition: none; }
+}

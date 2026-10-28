@@ -1,0 +1,93 @@
+/* Grievance Redressal page — builds on the shared .rc-* styles from
+   register-complaint.css; only the level tabs and level cards live here. */
+
+.gr-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  margin-top: 1.25rem;
+  padding: 0.3rem;
+  border-radius: 0.85rem;
+  background: var(--rc-tint);
+}
+
+.gr-tab {
+  padding: 0.65rem 0.5rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: var(--rc-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.gr-tab:hover {
+  color: var(--rc-ink);
+}
+
+.gr-tab[aria-selected="true"] {
+  background: #ffffff;
+  color: var(--rc-primary);
+  box-shadow: 0 2px 8px -3px rgba(21, 93, 252, 0.35);
+}
+
+.gr-tab:focus-visible {
+  outline: 2px solid var(--rc-primary);
+  outline-offset: 2px;
+}
+
+.gr-escalate-note {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--rc-muted);
+}
+
+/* level cards in the side panel */
+.gr-level + .gr-level {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rc-soft);
+}
+
+.gr-level-head {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.gr-level-head h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--rc-ink);
+}
+
+.gr-level-head p {
+  margin-top: 0.1rem;
+  font-size: 0.82rem;
+  color: var(--rc-muted);
+}
+
+.gr-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: var(--rc-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--rc-primary);
+}
+
+.gr-time svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.rc-panel h2 + .gr-level {
+  margin-top: 1.1rem;
+}

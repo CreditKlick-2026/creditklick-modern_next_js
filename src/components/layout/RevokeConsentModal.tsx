@@ -197,7 +197,7 @@ export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps)
                                     </div>
                                     <button
                                         onClick={handleFinish}
-                                        className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-colors shadow-md"
+                                        className="w-full py-2.5 px-4 bg-brand hover:bg-brand-dark text-white rounded-xl font-semibold text-sm transition-colors shadow-md"
                                     >
                                         Return to Homepage
                                     </button>

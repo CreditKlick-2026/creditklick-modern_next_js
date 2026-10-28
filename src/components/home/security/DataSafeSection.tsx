@@ -15,7 +15,7 @@ export function DataSafeSection() {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-blue-900 leading-tight">
               Your Data is in Safe Hands
             </h2>
-            <p className="mt-1 text-base sm:text-lg font-semibold text-blue-600">
+            <p className="mt-1 text-base sm:text-lg font-semibold text-brand">
               We&apos;ve got it covered.
             </p>
           </div>
@@ -45,9 +45,9 @@ export function DataSafeSection() {
               {ACCREDITATIONS.map((item) => (
                 <li
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-blue-200/90 bg-blue-50/90 px-3 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-wide text-blue-900 shadow-sm"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-brand-soft bg-brand-soft px-3 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-wide text-blue-900 shadow-sm"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand" />
                   {item}
                 </li>
               ))}

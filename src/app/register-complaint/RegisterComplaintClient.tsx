@@ -1,14 +1,11 @@
 "use client"
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, ArrowLeft, Mail, Phone, MessageSquareWarning, Send } from 'lucide-react'
+import { CheckCircle2, ArrowLeft, Mail, Phone, MessageSquareWarning, Send, Lock } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import toast from 'react-hot-toast'
 import { contactsAPI } from '@/services/api'
-
-const complaintImg = "/images/Images/register_complaint.png"
+import './register-complaint.css'
 
 const COMPLAINT_CATEGORIES = [
     'Credit Report Error / Discrepancy',
@@ -18,6 +15,12 @@ const COMPLAINT_CATEGORIES = [
     'Billing or Payment Issue',
     'Website Technical Glitch',
     'Other General Complaint'
+]
+
+const STEPS = [
+    { title: 'Submit your complaint', text: 'Share your details and describe the issue. You get a ticket ID instantly.' },
+    { title: 'We review it', text: 'Our grievance team looks into your case and may contact you for more details.' },
+    { title: 'Resolution in 24–48 hrs', text: 'We get back to you with a resolution within 24–48 business hours.' },
 ]
 
 export default function RegisterComplaintClient() {
@@ -88,156 +91,166 @@ export default function RegisterComplaintClient() {
         }
     }
 
+    const detailsShort = details.trim().length < 20
+
     return (
-        <div className="min-h-[80vh] bg-slate-50 pt-8 pb-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full space-y-10">
+        <div className="rc">
+            <section className="rc-hero">
+                <div className="rc-wrap">
+                    <span className="rc-hero-icon"><MessageSquareWarning aria-hidden="true" /></span>
+                    <p className="rc-eyebrow">Grievance Portal</p>
+                    <h1>Register a Complaint</h1>
+                    <p className="rc-hero-sub">
+                        We take every complaint seriously. Submit your grievance below and our team will investigate and resolve it within 24–48 business hours.
+                    </p>
+                </div>
+            </section>
 
-                {/* Hero Banner */}
-                <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="w-full bg-[#f4f8fb] mb-10 rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row items-start"
-                >
-                    {/* Left side: Text + Contact + Form */}
-                    <div className="w-full lg:w-3/5 pt-6 md:pt-10 pb-8 md:pb-12 px-6 md:px-12 text-center md:text-left order-2 md:order-1 self-start">
-                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#2b7fff] tracking-tight mb-3 sm:mb-4 flex items-center justify-center md:justify-start gap-2 sm:gap-3">
-                            <MessageSquareWarning className="w-7 h-7 sm:w-12 sm:h-12 text-[#2b7fff] shrink-0" />
-                            Register a Complaint
-                        </h1>
-                        <p className="text-gray-700 text-sm md:text-lg max-w-2xl mx-auto md:mx-0 font-medium mb-8">
-                            We take every complaint seriously. Submit your grievance below and our team will investigate and resolve it within 24–48 business hours.
-                        </p>
+            <div className="rc-body">
+                <div className="rc-wrap rc-grid">
+                    <div className="rc-card">
+                        {submittedTicket ? (
+                            <div className="rc-success" role="status">
+                                <span className="rc-success-icon"><CheckCircle2 aria-hidden="true" /></span>
+                                <h2>Complaint Registered!</h2>
+                                <p>Our team will reach out to you within 24–48 business hours.</p>
 
-                        {/* Complaint Form */}
-                        <div className="mt-8 max-w-2xl mx-auto md:mx-0 text-left">
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6">
-                                <h3 className="text-base sm:text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5">
-                                    Submit Complaint
-                                </h3>
+                                <div className="rc-ticket">
+                                    <div><span>Ticket ID</span><strong className="rc-ticket-id">{submittedTicket.ticketId}</strong></div>
+                                    <div><span>Date</span><strong>{submittedTicket.date}</strong></div>
+                                    <div><span>Resolution ETA</span><strong>24–48 hrs</strong></div>
+                                </div>
 
-                                <AnimatePresence mode="wait">
-                                    {submittedTicket ? (
-                                        <motion.div
-                                            key="success"
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.95 }}
-                                            className="text-center py-4 space-y-3"
+                                <div className="rc-actions">
+                                    <button type="button" onClick={resetForm} className="rc-btn rc-btn-soft">
+                                        <ArrowLeft aria-hidden="true" /> Submit Another
+                                    </button>
+                                    <Link href="/" className="rc-btn rc-btn-primary">Back to Home</Link>
+                                </div>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} noValidate>
+                                <h2 className="rc-card-title">Submit Complaint</h2>
+                                <p className="rc-card-sub">Fields marked * are required.</p>
+
+                                <div className="rc-fields">
+                                    <div className="rc-row">
+                                        <div className="rc-field">
+                                            <label htmlFor="rc-name">Full Name <span>*</span></label>
+                                            <input
+                                                id="rc-name"
+                                                type="text"
+                                                autoComplete="name"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                placeholder="Your full name"
+                                                className="rc-input"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="rc-field">
+                                            <label htmlFor="rc-phone">Mobile Number <span>*</span></label>
+                                            <input
+                                                id="rc-phone"
+                                                type="tel"
+                                                inputMode="numeric"
+                                                autoComplete="tel-national"
+                                                maxLength={10}
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+                                                placeholder="10 digit mobile number"
+                                                className="rc-input"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="rc-field">
+                                        <label htmlFor="rc-category">Complaint Category</label>
+                                        <select
+                                            id="rc-category"
+                                            value={category}
+                                            onChange={(e) => setCategory(e.target.value)}
+                                            className="rc-input"
                                         >
-                                            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                                                <CheckCircle2 className="w-6 h-6" />
-                                            </div>
-                                            <h2 className="text-lg font-bold text-gray-900">Complaint Registered!</h2>
-                                            <p className="text-xs sm:text-sm text-gray-600">Our team will reach out to you within 24–48 business hours.</p>
+                                            {COMPLAINT_CATEGORIES.map((cat) => (
+                                                <option key={cat} value={cat}>{cat}</option>
+                                            ))}
+                                        </select>
+                                    </div>
 
-                                            <div className="bg-slate-50 border border-gray-200 rounded-xl p-3 mt-3 text-left space-y-2">
-                                                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
-                                                    <span className="text-[10px] sm:text-xs font-semibold text-gray-500 uppercase">Ticket ID</span>
-                                                    <span className="text-xs sm:text-sm font-bold text-[#2b7fff] font-mono">{submittedTicket.ticketId}</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-xs sm:text-sm">
-                                                    <span className="text-gray-500 font-medium">Date</span>
-                                                    <span className="text-gray-800 font-semibold">{submittedTicket.date}</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-xs sm:text-sm">
-                                                    <span className="text-gray-500 font-medium">Resolution ETA</span>
-                                                    <span className="text-green-700 font-bold bg-green-50 px-2 py-0.5 rounded border border-green-200 text-[11px]">24–48 hrs</span>
-                                                </div>
-                                            </div>
+                                    <div className="rc-field">
+                                        <label htmlFor="rc-details">Complaint Details <span>*</span></label>
+                                        <textarea
+                                            id="rc-details"
+                                            rows={5}
+                                            minLength={20}
+                                            value={details}
+                                            onChange={(e) => setDetails(e.target.value)}
+                                            placeholder="Describe your complaint in detail..."
+                                            className="rc-input"
+                                            aria-describedby="rc-details-hint"
+                                            required
+                                        />
+                                        <p id="rc-details-hint" className={`rc-hint${details.length > 0 && detailsShort ? ' is-short' : ''}`}>
+                                            <span>
+                                                {details.length > 0 && detailsShort
+                                                    ? `Enter ${20 - details.trim().length} more character(s)`
+                                                    : 'Minimum 20 characters'}
+                                            </span>
+                                            <span>{details.trim().length}</span>
+                                        </p>
+                                    </div>
+                                </div>
 
-                                            <div className="pt-3 flex flex-col sm:flex-row gap-2">
-                                                <button onClick={resetForm} className="py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-bold text-xs sm:text-sm w-full transition-colors flex justify-center items-center gap-2">
-                                                    <ArrowLeft className="w-4 h-4" /> Submit Another
-                                                </button>
-                                                <Link href="/" className="py-2 px-4 bg-[#2b7fff] hover:bg-blue-600 text-white rounded-xl font-bold text-xs sm:text-sm w-full transition-colors flex justify-center items-center gap-2">
-                                                    Back to Home
-                                                </Link>
-                                            </div>
-                                        </motion.div>
-                                    ) : (
-                                        <form key="form" onSubmit={handleSubmit} className="space-y-4">
-                                            <div className="space-y-3">
-                                                <div>
-                                                    <input
-                                                        type="text"
-                                                        value={name}
-                                                        onChange={(e) => setName(e.target.value)}
-                                                        placeholder="Your Full Name *"
-                                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#2b7fff] focus:bg-white focus:ring-2 focus:ring-[#2b7fff]/20 transition-all"
-                                                        required
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        type="tel"
-                                                        maxLength={10}
-                                                        value={phone}
-                                                        onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                                                        placeholder="Mobile Number *"
-                                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#2b7fff] focus:bg-white focus:ring-2 focus:ring-[#2b7fff]/20 transition-all"
-                                                        required
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <select
-                                                        value={category}
-                                                        onChange={(e) => setCategory(e.target.value)}
-                                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#2b7fff] focus:bg-white focus:ring-2 focus:ring-[#2b7fff]/20 transition-all"
-                                                    >
-                                                        {COMPLAINT_CATEGORIES.map((cat, idx) => (
-                                                            <option key={idx} value={cat}>{cat}</option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <textarea
-                                                        rows={3}
-                                                        minLength={20}
-                                                        value={details}
-                                                        onChange={(e) => setDetails(e.target.value)}
-                                                        placeholder="Describe your complaint in detail (min. 20 characters)..."
-                                                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:border-[#2b7fff] focus:bg-white focus:ring-2 focus:ring-[#2b7fff]/20 transition-all resize-none"
-                                                        required
-                                                    />
-                                                    {details.length > 0 && details.trim().length < 20 && (
-                                                        <p className="text-[10px] text-amber-600 font-medium mt-1 pl-1">
-                                                            Enter {20 - details.trim().length} more character(s)
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <button
-                                                type="submit"
-                                                disabled={isLoading || details.trim().length < 20 || phone.length !== 10}
-                                                className="w-full py-2.5 px-5 bg-[#2b7fff] hover:bg-blue-600 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2 mt-1 disabled:opacity-50 disabled:cursor-not-allowed"
-                                            >
-                                                {isLoading ? 'Submitting...' : (
-                                                    <>
-                                                        <Send className="w-4 h-4" />
-                                                        Submit Complaint Ticket
-                                                    </>
-                                                )}
-                                            </button>
-                                        </form>
+                                <button
+                                    type="submit"
+                                    disabled={isLoading || detailsShort || phone.length !== 10}
+                                    className="rc-submit"
+                                >
+                                    {isLoading ? 'Submitting...' : (
+                                        <>
+                                            <Send aria-hidden="true" />
+                                            Submit Complaint Ticket
+                                        </>
                                     )}
-                                </AnimatePresence>
+                                </button>
+                                <p className="rc-note"><Lock aria-hidden="true" /> Your details are used only to resolve this complaint.</p>
+                            </form>
+                        )}
+                    </div>
+
+                    <aside className="rc-side">
+                        <div className="rc-panel">
+                            <h2>What happens next?</h2>
+                            <ol className="rc-steps">
+                                {STEPS.map((step, i) => (
+                                    <li key={step.title} className="rc-step">
+                                        <span className="rc-step-num" aria-hidden="true">{i + 1}</span>
+                                        <div>
+                                            <h3>{step.title}</h3>
+                                            <p>{step.text}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ol>
+                        </div>
+
+                        <div className="rc-panel">
+                            <h2>Need help right away?</h2>
+                            <div className="rc-contacts">
+                                <a href="mailto:support@creditklick.com" className="rc-contact">
+                                    <span className="rc-contact-icon"><Mail aria-hidden="true" /></span>
+                                    <span><small>Email us</small><strong>support@creditklick.com</strong></span>
+                                </a>
+                                <a href="tel:8800367367" className="rc-contact">
+                                    <span className="rc-contact-icon"><Phone aria-hidden="true" /></span>
+                                    <span><small>Call us</small><strong>8800 367 367</strong></span>
+                                </a>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Right side: Image */}
-                    <div className="w-full lg:w-2/5 flex justify-center items-center order-1 md:order-2 p-2 pt-4 md:pt-36 self-stretch">
-                        <Image
-                            src={complaintImg}
-                            alt="Register Complaint"
-                            width={500}
-                            height={500}
-                            className="w-auto h-auto object-contain max-h-[150px] max-w-[220px] md:max-h-[900px] md:max-w-none mix-blend-multiply"
-                            priority
-                        />
-                    </div>
-                </motion.div>
-
+                    </aside>
+                </div>
             </div>
         </div>
     )

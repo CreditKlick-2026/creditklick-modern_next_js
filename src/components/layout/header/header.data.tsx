@@ -62,19 +62,19 @@ export const tickerItems = [
 export function getNavSvgIcon(label: string, className = "w-3.5 h-3.5") {
   switch (label) {
     case "About Us":
-      return <Users className={cn(className, "text-blue-600")} />;
+      return <Users className={cn(className, "text-brand")} />;
     case "Price":
-      return <BadgePercent className={cn(className, "text-blue-600")} />;
+      return <BadgePercent className={cn(className, "text-brand")} />;
     case "Credit Refine":
-      return <ShieldCheck className={cn(className, "text-blue-600")} />;
+      return <ShieldCheck className={cn(className, "text-brand")} />;
     case "Calculators":
-      return <Calculator className={cn(className, "text-blue-600")} />;
+      return <Calculator className={cn(className, "text-brand")} />;
     case "Blog":
-      return <BookOpen className={cn(className, "text-blue-600")} />;
+      return <BookOpen className={cn(className, "text-brand")} />;
     case "Media":
-      return <Newspaper className={cn(className, "text-blue-600")} />;
+      return <Newspaper className={cn(className, "text-brand")} />;
     default:
-      return <Zap className={cn(className, "text-blue-600")} />;
+      return <Zap className={cn(className, "text-brand")} />;
   }
 }
 
@@ -82,13 +82,13 @@ export function getSubNavSvgIcon(label: string) {
   switch (label) {
     case "EMI Calculator":
       return {
-        icon: <Calculator className="w-4 h-4 text-purple-600" />,
-        bg: "bg-purple-50/80 text-purple-600 border border-purple-100",
+        icon: <Calculator className="w-4 h-4 text-brand" />,
+        bg: "bg-brand-soft text-brand border border-brand-soft",
       };
     case "AU Value Calculator":
       return {
-        icon: <Percent className="w-4 h-4 text-indigo-600" />,
-        bg: "bg-indigo-50/80 text-indigo-600 border border-indigo-100",
+        icon: <Percent className="w-4 h-4 text-brand" />,
+        bg: "bg-brand-soft text-brand border border-brand-soft",
       };
     case "IDFC Value Calculator":
       return {
@@ -97,8 +97,8 @@ export function getSubNavSvgIcon(label: string) {
       };
     case "SBI Simply Save":
       return {
-        icon: <PiggyBank className="w-4 h-4 text-emerald-600" />,
-        bg: "bg-emerald-50/80 text-emerald-600 border border-emerald-100",
+        icon: <PiggyBank className="w-4 h-4 text-brand" />,
+        bg: "bg-brand-soft text-brand border border-brand-soft",
       };
     case "SBI Simply Click":
       return {
@@ -107,13 +107,13 @@ export function getSubNavSvgIcon(label: string) {
       };
     case "Yes Bank Value":
       return {
-        icon: <TrendingUp className="w-4 h-4 text-sky-600" />,
-        bg: "bg-sky-50/80 text-sky-600 border border-sky-100",
+        icon: <TrendingUp className="w-4 h-4 text-brand" />,
+        bg: "bg-brand-soft text-brand border border-brand-soft",
       };
     default:
       return {
-        icon: <Zap className="w-4 h-4 text-blue-600" />,
-        bg: "bg-blue-50/80 text-blue-600 border border-blue-100",
+        icon: <Zap className="w-4 h-4 text-brand" />,
+        bg: "bg-brand-soft text-brand border border-brand-soft",
       };
   }
 }

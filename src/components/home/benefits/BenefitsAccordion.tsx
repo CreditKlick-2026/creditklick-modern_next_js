@@ -18,7 +18,7 @@ export function BenefitsAccordion() {
   const currentBenefit = BENEFITS[activeImageIndex] || BENEFITS[0];
 
   return (
-    <section id="benefits" className="w-full bg-blue-50/60 py-16">
+    <section id="benefits" className="w-full bg-brand-soft/60 py-16">
       <div className="max-w-7xl mx-auto grid items-center gap-10 lg:gap-14 px-4 sm:px-6 lg:px-8 lg:grid-cols-2">
         {/* Accordion List */}
         <div className="w-full">
@@ -26,7 +26,7 @@ export function BenefitsAccordion() {
             Benefits of CreditKlick
           </h2>
           <p className="mt-3 text-base text-slate-600 sm:text-lg">
-            Everything you need to repair your credit, compare offers and get support, in one place.
+            Everything you need to improve your credit score, maintain a healthy profile, and stay eligible for the best offers.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -46,13 +46,13 @@ export function BenefitsAccordion() {
                   >
                     <span
                       className={`text-base font-semibold transition-colors ${
-                        isOpen ? "text-blue-600" : "text-blue-900"
+                        isOpen ? "text-brand" : "text-blue-900"
                       }`}
                     >
                       {item.title}
                     </span>
                     <span
-                      className="shrink-0 text-xl font-bold leading-none text-blue-600"
+                      className="shrink-0 text-xl font-bold leading-none text-brand"
                       style={{
                         display: "inline-block",
                         transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",

@@ -11,7 +11,7 @@ export const AppPitch: React.FC = () => {
       {/* Top Pill Tag */}
       <div>
         <span className="ck-pill-tag">
-          <Smartphone size={13} className="text-blue-600" />
+          <Smartphone size={13} className="text-brand" />
           <span>CreditKlick Mobile App</span>
         </span>
       </div>
@@ -32,7 +32,7 @@ export const AppPitch: React.FC = () => {
           <div className="flex items-center justify-between gap-2 mb-2">
             <div className="flex items-center gap-2">
               <span className="ck-crif-icon-circle">
-                <Sparkles size={16} className="text-blue-600" />
+                <Sparkles size={16} className="text-brand" />
               </span>
               <h3 className="ck-crif-title">{feat.title}</h3>
             </div>
@@ -87,7 +87,7 @@ export const AppPitch: React.FC = () => {
           const IconComponent = pill.icon;
           return (
             <div key={i} className="ck-trust-pill-item">
-              <IconComponent size={15} className="text-emerald-600 flex-shrink-0" />
+              <IconComponent size={15} className="text-brand flex-shrink-0" />
               <span>{pill.label}</span>
             </div>
           );

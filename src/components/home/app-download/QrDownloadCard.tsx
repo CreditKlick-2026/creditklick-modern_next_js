@@ -23,7 +23,7 @@ export const QrDownloadCard: React.FC = () => {
         {/* Heading & Subtitle */}
         <div className="text-center">
           <div className="flex items-center justify-center gap-1.5 mb-0.5">
-            <QrCode size={16} className="text-blue-600" />
+            <QrCode size={16} className="text-brand" />
             <h3 className="ck-qr-main-title">Scan to Download</h3>
           </div>
           <p className="ck-qr-main-subtitle">
@@ -67,7 +67,7 @@ export const QrDownloadCard: React.FC = () => {
 
         {/* Verified Badge Footnote */}
         <div className="flex items-center justify-center gap-1 text-[10px] font-medium text-slate-500">
-          <CheckCircle2 size={11} className="text-blue-600 shrink-0" />
+          <CheckCircle2 size={11} className="text-brand shrink-0" />
           <span>Verified Safe APK &bull; Play Store</span>
         </div>
       </div>

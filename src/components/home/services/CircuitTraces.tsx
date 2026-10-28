@@ -32,15 +32,15 @@ export function CircuitTraces() {
       <path d="M 830 485 H 730 L 620 310" className="dt-circuit-line-pulse" />
 
       {/* DoubleTick-style Accent Pills on Circuit Traces */}
-      <rect x="335" y="32" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="365" y="167" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="365" y="347" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="335" y="482" width="20" height="6" rx="3" fill="#2563eb" />
+      <rect x="335" y="32" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="365" y="167" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="365" y="347" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="335" y="482" width="20" height="6" rx="3" fill="#155dfc" />
 
-      <rect x="745" y="32" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="715" y="167" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="715" y="347" width="20" height="6" rx="3" fill="#2563eb" />
-      <rect x="745" y="482" width="20" height="6" rx="3" fill="#2563eb" />
+      <rect x="745" y="32" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="715" y="167" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="715" y="347" width="20" height="6" rx="3" fill="#155dfc" />
+      <rect x="745" y="482" width="20" height="6" rx="3" fill="#155dfc" />
     </svg>
   );
 }

@@ -20,7 +20,7 @@
   display: block;
   user-select: none;
   pointer-events: none;
-  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.5));
+  filter: drop-shadow(0 0 10px rgba(21, 93, 252, 0.5));
 }
 
 .ck-app-showcase-grid {
@@ -47,8 +47,8 @@
   gap: 0.45rem;
   padding: 4px 12px;
   border-radius: 9999px;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #dbe8fd;
+  border: 1px solid #dbe8fd;
   color: #1c398e;
   font-size: 0.76rem;
   font-weight: 700;
@@ -76,11 +76,11 @@
 
 /* CRIF Highlight Box */
 .ck-crif-highlight-card {
-  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #eff6ff 100%);
-  border: 1px solid #bfdbfe;
+  background: linear-gradient(135deg, #dbe8fd 0%, #ffffff 50%, #dbe8fd 100%);
+  border: 1px solid #dbe8fd;
   border-radius: 16px;
   padding: 1.1rem 1.25rem;
-  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px -2px rgba(21, 93, 252, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
 }
@@ -89,7 +89,7 @@
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: #dbeafe;
+  background: #dbe8fd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,9 +107,9 @@
 .ck-crif-badge {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #1d4ed8;
-  background: #dbeafe;
-  border: 1px solid #bfdbfe;
+  color: #155dfc;
+  background: #dbe8fd;
+  border: 1px solid #dbe8fd;
   padding: 2px 8px;
   border-radius: 9999px;
   white-space: nowrap;
@@ -145,7 +145,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #dcfce7;
+  background: #dbe8fd;
   color: #15803d;
   display: flex;
   align-items: center;
@@ -213,7 +213,7 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(21, 93, 252, 0.15) 0%, rgba(21, 93, 252, 0.08) 50%, transparent 70%);
   filter: blur(40px);
   z-index: 0;
 }
@@ -292,11 +292,11 @@
 }
 
 .ck-qr-card-pro {
-  background: linear-gradient(145deg, #ffffff 0%, #f8fbff 50%, #eff6ff 100%);
+  background: linear-gradient(145deg, #ffffff 0%, #f8fbff 50%, #dbe8fd 100%);
   border-radius: 18px;
   padding: 1.15rem 1rem 1rem;
-  box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.1),
-              0 0 0 1px rgba(191, 219, 254, 0.6),
+  box-shadow: 0 12px 30px -8px rgba(21, 93, 252, 0.1),
+              0 0 0 1px rgba(219, 232, 253, 0.6),
               0 2px 5px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
@@ -310,8 +310,8 @@
 
 .ck-qr-card-pro:hover {
   transform: translateY(-3px);
-  box-shadow: 0 18px 38px -8px rgba(37, 99, 235, 0.16),
-              0 0 0 1px rgba(59, 130, 246, 0.8),
+  box-shadow: 0 18px 38px -8px rgba(21, 93, 252, 0.16),
+              0 0 0 1px rgba(21, 93, 252, 0.8),
               0 3px 8px rgba(0, 0, 0, 0.04);
 }
 
@@ -320,19 +320,19 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #dbe8fd;
+  border: 1px solid #dbe8fd;
   padding: 2px 8px;
   border-radius: 9999px;
-  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.05);
+  box-shadow: 0 1px 2px rgba(21, 93, 252, 0.05);
 }
 
 .ck-qr-pulsing-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #2563eb;
-  box-shadow: 0 0 6px #2563eb;
+  background: #155dfc;
+  box-shadow: 0 0 6px #155dfc;
   animation: qrPulseDot 1.8s infinite;
 }
 
@@ -351,7 +351,7 @@
   font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: #1d4ed8;
+  color: #155dfc;
   text-transform: uppercase;
 }
 
@@ -388,7 +388,7 @@
   position: absolute;
   width: 13px;
   height: 13px;
-  border-color: #2563eb;
+  border-color: #155dfc;
   border-style: solid;
   pointer-events: none;
   z-index: 5;
@@ -424,8 +424,8 @@
 }
 
 .ck-qr-card-pro:hover .ck-corner {
-  border-color: #1d4ed8;
-  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.7));
+  border-color: #155dfc;
+  filter: drop-shadow(0 0 5px rgba(21, 93, 252, 0.7));
 }
 
 /* Animated Laser Scanner Line */
@@ -434,9 +434,9 @@
   left: 6px;
   right: 6px;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #38bdf8 25%, #2563eb 50%, #38bdf8 75%, transparent 100%);
-  box-shadow: 0 0 10px 2px rgba(37, 99, 235, 0.85),
-              0 0 3px 1px #38bdf8;
+  background: linear-gradient(90deg, transparent 0%, #155dfc 25%, #155dfc 50%, #155dfc 75%, transparent 100%);
+  box-shadow: 0 0 10px 2px rgba(21, 93, 252, 0.85),
+              0 0 3px 1px #155dfc;
   z-index: 6;
   pointer-events: none;
   animation: laserScan 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
@@ -517,7 +517,7 @@
   padding: 0.55rem 0.85rem;
   border-radius: 10px;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 15px rgba(21, 93, 252, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
   box-sizing: border-box;
@@ -526,7 +526,7 @@
 .ck-qr-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 8px 20px rgba(21, 93, 252, 0.35);
 }
 
 /* ── Responsive Adaptations ── */

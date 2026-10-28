@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import RegisterComplaintClient from './RegisterComplaintClient'
 
 export const metadata: Metadata = {
-    title: 'Register a Complaint | Customer Grievance Portal | CreditKlick',
+    title: 'Register a Complaint - Customer Grievance Portal',
     description: 'Submit your complaint or grievance directly to CreditKlick. 24-48 Hour resolution guarantee under RBI & DPDP regulatory guidelines.',
     keywords: ['creditklick complaint', 'register complaint', 'grievance redressal', 'creditklick support ticket', 'credit score complaint'],
     openGraph: {

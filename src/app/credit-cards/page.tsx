@@ -1,29 +1,26 @@
 // SSG - Static page (no dynamic data)
-import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
 import { Metadata } from 'next'
 
 // Client component for animations
 import CreditCardsClient from '@/app/credit-cards/CreditCardsClient'
 
 export const metadata: Metadata = {
-    title: 'Top Credit Cards in India - Compare & Apply Online | CreditKlick',
+    title: 'Top Credit Cards in India - Compare & Apply Online',
     description: 'Compare and apply for top credit cards from leading banks in India. Get instant approval on rewards, cashback, and travel credit cards through CreditKlick.',
     keywords: ['best credit cards india', 'apply for credit card online', 'cashback credit cards', 'reward points credit card', 'lounge access credit card', 'credit card comparison'],
     openGraph: {
         title: 'Compare & Apply for Best Credit Cards Online | CreditKlick',
         description: 'Choose from a wide range of credit cards tailored to your lifestyle. Instant digital application for AU, IDFC, SBI, and more.',
-        images: ['/assets/cards/aum.png'],
+        images: ['/assets/heroimages/ccgifw.webp'],
     }
 }
 
-// Static data
+// Static data - `bank` and `bg` drive the CSS card face (no bank image assets exist)
 const creditCards = [
-    { name: 'AU Bank Credit Cards', image: '/assets/cards/aum.png', href: '/credit-card/au-bank' },
-    { name: 'IDFC First Credit Cards', image: '/assets/cards/idfcm.png', href: '/credit-card/idfc-bank' },
-    { name: 'SBI Credit Cards', image: '/assets/cards/sbim.png', href: '/credit-card/sbi-bank' },
-    { name: 'Yes Bank Credit Cards', image: '/assets/cards/yesm.png', href: '/credit-card/yes-bank' }
+    { name: 'AU Bank Credit Cards', bank: 'AU Small Finance Bank', bg: 'linear-gradient(135deg, #f59e0b, #b45309 60%, #7c2d12)', href: '/credit-card/au-bank' },
+    { name: 'IDFC First Credit Cards', bank: 'IDFC FIRST Bank', bg: 'linear-gradient(135deg, #b91c1c, #7f1d1d 65%, #450a0a)', href: '/credit-card/idfc-bank' },
+    { name: 'SBI Credit Cards', bank: 'SBI Card', bg: 'linear-gradient(135deg, #3b82f6, #1e40af 60%, #1e1b4b)', href: '/credit-card/sbi-bank' },
+    { name: 'Yes Bank Credit Cards', bank: 'YES BANK', bg: 'linear-gradient(135deg, #0ea5e9, #1d4ed8 55%, #172554)', href: '/credit-card/yes-bank' }
 ]
 
 const creditTable = [

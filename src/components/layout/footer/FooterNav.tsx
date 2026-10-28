@@ -17,8 +17,8 @@ export const FooterNav: React.FC = () => {
                   href={link.href}
                   className={`ck-footer-nav-link ${
                     link.isHighlight
-                      ? "text-blue-700 font-semibold"
-                      : "text-slate-700 hover:text-blue-700"
+                      ? "text-brand font-semibold"
+                      : "text-slate-700 hover:text-brand-dark"
                   }`}
                 >
                   {link.name}

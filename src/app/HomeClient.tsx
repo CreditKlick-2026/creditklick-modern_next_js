@@ -53,7 +53,7 @@ export default function HomeClient() {
       {/* 3. Benefits of CreditKlick - Accordion + illustration */}
       <BenefitsAccordion />
 
-      {/* Boost Your Credit + Finance Calculators & Tools cards */}
+      {/* Boost Your Credit promo card */}
       <PromoCards />
 
       {/* 4. Download The CreditKlick App (Modular App Showcase Section) */}

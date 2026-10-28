@@ -26,8 +26,8 @@ export const LEFT_NODES: readonly ServiceNode[] = [
     href: "/contact",
     tag: "1-on-1 Session",
     Icon: DebtCounselingIcon,
-    iconColor: "#2563eb",
-    iconBg: "rgba(37, 99, 235, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
   {
     title: "Debt Management",
@@ -35,8 +35,8 @@ export const LEFT_NODES: readonly ServiceNode[] = [
     href: "/contact",
     tag: "Lower Interest",
     Icon: DebtManagementIcon,
-    iconColor: "#d97706",
-    iconBg: "rgba(217, 119, 6, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
   {
     title: "Financial Empowerment",
@@ -53,8 +53,8 @@ export const LEFT_NODES: readonly ServiceNode[] = [
     href: "/refine",
     tag: "Score Audit",
     Icon: CustomerPortalIcon,
-    iconColor: "#dc2626",
-    iconBg: "rgba(220, 38, 38, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
 ] as const;
 
@@ -66,8 +66,8 @@ export const RIGHT_NODES: readonly ServiceNode[] = [
     href: "/register-complaint",
     tag: "Anti-Harassment",
     Icon: LegalSolutionsIcon,
-    iconColor: "#e11d48",
-    iconBg: "rgba(225, 29, 72, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
   {
     title: "Customer App / Portal",
@@ -75,8 +75,8 @@ export const RIGHT_NODES: readonly ServiceNode[] = [
     href: "/login",
     tag: "Real-Time Tracking",
     Icon: CustomerPortalIcon,
-    iconColor: "#7c3aed",
-    iconBg: "rgba(124, 58, 237, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
   {
     title: "Community Forum",
@@ -84,8 +84,8 @@ export const RIGHT_NODES: readonly ServiceNode[] = [
     href: "/blog",
     tag: "Peer Community",
     Icon: DfiForumIcon,
-    iconColor: "#0891b2",
-    iconBg: "rgba(8, 145, 178, 0.08)",
+    iconColor: "#155dfc",
+    iconBg: "rgba(21, 93, 252, 0.08)",
   },
   {
     title: "Repayment Calculators",

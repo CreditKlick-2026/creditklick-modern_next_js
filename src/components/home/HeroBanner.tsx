@@ -94,7 +94,7 @@ export default function HeroBanner() {
 
   return (
     <section
-      className="relative w-full bg-gradient-to-b from-[#f0f7ff] via-[#f0f7ff] to-white overflow-hidden py-3 sm:py-6"
+      className="relative w-full bg-white overflow-hidden py-3 sm:py-6"
       style={{ minHeight: `calc(min(100vw, 1300px) * ${DESKTOP_RATIO} + 48px)` }}
     >
       <div className="container mx-auto px-2 sm:px-4 max-w-[1300px]">
@@ -103,8 +103,8 @@ export default function HeroBanner() {
           style={{ paddingBottom: `${DESKTOP_RATIO * 100}%` }}
         >
           {!isDesktopLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 animate-pulse">
-              <svg className="w-10 h-10 text-blue-300 animate-spin" fill="none" viewBox="0 0 24 24">
+            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-soft via-brand-soft to-brand-soft animate-pulse">
+              <svg className="w-10 h-10 text-brand animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
               </svg>
@@ -122,8 +122,8 @@ export default function HeroBanner() {
           style={{ maxWidth: MOBILE_SIZE, height: MOBILE_SIZE }}
         >
           {!isMobileLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 animate-pulse">
-              <svg className="w-8 h-8 text-blue-300 animate-spin" fill="none" viewBox="0 0 24 24">
+            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-soft via-brand-soft to-brand-soft animate-pulse">
+              <svg className="w-8 h-8 text-brand animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
               </svg>

@@ -99,7 +99,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
                                 <p className="text-sm font-semibold text-gray-900 mb-1">We value your privacy</p>
                                 <p className="text-xs text-gray-600 leading-relaxed">
                                     We use cookies to enhance your browsing experience, serve personalised ads or content, and analyse our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.{' '}
-                                    <Link href="/cookies-policy" className="text-blue-600 hover:underline font-semibold inline-block">
+                                    <Link href="/cookies-policy" className="text-brand hover:underline font-semibold inline-block">
                                         Learn more
                                     </Link>
                                 </p>

@@ -1,0 +1,814 @@
+/* Credit Score page — plain CSS (project has no Tailwind build).
+   Brand: #155dfc (primary) and #dbe8fd (soft). */
+
+.cs {
+  --cs-primary: #155dfc;
+  --cs-primary-dark: #0f4ad1;
+  --cs-soft: #dbe8fd;
+  --cs-tint: #f3f7ff;
+  --cs-ink: #0f1f4b;
+  --cs-text: #334155;
+  --cs-muted: #64748b;
+  --cs-line: #e2e8f0;
+  --cs-danger: #dc2626;
+  background: #ffffff;
+  color: var(--cs-ink);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.cs *,
+.cs *::before,
+.cs *::after {
+  box-sizing: border-box;
+}
+
+/* Zero-specificity resets so .cs-* classes always win */
+:where(.cs) h1,
+:where(.cs) h2,
+:where(.cs) h3,
+:where(.cs) p,
+:where(.cs) ul,
+:where(.cs) form {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.cs) ul {
+  list-style: none;
+}
+
+.cs-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.cs-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cs-primary);
+}
+
+.cs-h2 {
+  margin-top: 0.4rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--cs-ink);
+}
+
+.cs-center {
+  text-align: center;
+}
+
+/* ---------- Page title band ---------- */
+
+.cs-band {
+  background: var(--cs-soft);
+  padding: 1.1rem 1rem;
+  text-align: center;
+}
+
+.cs-band h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cs-ink);
+}
+
+/* ---------- Main: info panel + form ---------- */
+
+.cs-main {
+  padding: 1.5rem 0 3rem;
+}
+
+.cs-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Info panel (left on desktop, after the form on mobile) */
+.cs-info {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--cs-soft);
+}
+
+.cs-meter {
+  width: 7.5rem;
+  height: auto;
+}
+
+.cs-info h2 {
+  margin-top: 1rem;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--cs-ink);
+}
+
+.cs-info h2 span {
+  color: var(--cs-primary);
+}
+
+.cs-info-sub {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cs-text);
+}
+
+.cs-perks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.cs-perk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 0.6rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.cs-perk img {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+}
+
+.cs-perk p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--cs-ink);
+}
+
+.cs-powered {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--cs-muted);
+}
+
+.cs-powered strong {
+  color: var(--cs-primary);
+}
+
+/* Form card */
+.cs-card {
+  order: 1;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--cs-line);
+  background: #ffffff;
+  box-shadow: 0 24px 48px -28px rgba(15, 31, 75, 0.35);
+}
+
+.cs-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--cs-ink);
+}
+
+.cs-card-sub {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--cs-muted);
+}
+
+.cs-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+}
+
+.cs-field > label,
+.cs-legend {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cs-ink);
+}
+
+.cs-input {
+  display: block;
+  width: 100%;
+  height: 2.9rem;
+  padding: 0 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--cs-ink);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cs-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.cs-input:focus {
+  border-color: var(--cs-primary);
+  box-shadow: 0 0 0 4px rgba(21, 93, 252, 0.15);
+}
+
+.cs-input.is-invalid {
+  border-color: var(--cs-danger);
+}
+
+.cs-input-upper {
+  text-transform: uppercase;
+}
+
+/* hide number spinners on pincode / mobile */
+.cs-input[type="number"]::-webkit-outer-spin-button,
+.cs-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cs-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.cs-error {
+  min-height: 1rem;
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--cs-danger);
+}
+
+/* Radio groups as pill toggles (native radios stay for accessibility) */
+.cs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cs-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cs-text);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.cs-pill input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.cs-pill:hover {
+  border-color: var(--cs-primary);
+}
+
+.cs-pill:has(input:checked) {
+  background: var(--cs-soft);
+  border-color: var(--cs-primary);
+  color: var(--cs-primary);
+}
+
+.cs-pill:has(input:focus-visible) {
+  outline: 2px solid var(--cs-primary);
+  outline-offset: 2px;
+}
+
+/* Consent switch */
+.cs-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.9rem;
+  border-radius: 0.8rem;
+  background: var(--cs-tint);
+}
+
+.cs-switch {
+  position: relative;
+  flex: none;
+  width: 2.5rem;
+  height: 1.4rem;
+  margin-top: 0.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cs-switch span {
+  position: absolute;
+  top: 0.15rem;
+  left: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.cs-switch[aria-checked="true"] {
+  background: var(--cs-primary);
+}
+
+.cs-switch[aria-checked="true"] span {
+  transform: translateX(1.1rem);
+}
+
+.cs-switch:focus-visible {
+  outline: 2px solid var(--cs-primary);
+  outline-offset: 2px;
+}
+
+.cs-consent-text {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--cs-text);
+}
+
+.cs-consent-text a {
+  font-weight: 600;
+  color: var(--cs-primary);
+  text-decoration: underline;
+}
+
+/* Submit */
+.cs-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 3.1rem;
+  margin-top: 0.75rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: var(--cs-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px -12px rgba(21, 93, 252, 0.7);
+  transition: background-color 0.15s;
+}
+
+.cs-submit:hover {
+  background: var(--cs-primary-dark);
+}
+
+.cs-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.cs-submit svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.cs-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.25rem;
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--cs-muted);
+}
+
+.cs-trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cs-trust svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--cs-primary);
+}
+
+/* Success state */
+.cs-success-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.cs-success-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--cs-soft);
+  color: var(--cs-primary);
+}
+
+.cs-success-head h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--cs-ink);
+}
+
+.cs-success-head p {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: var(--cs-muted);
+}
+
+.cs-summary {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 0.8rem;
+  background: var(--cs-tint);
+}
+
+.cs-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.cs-summary div + div {
+  border-top: 1px solid var(--cs-soft);
+}
+
+.cs-summary span:first-child {
+  color: var(--cs-muted);
+}
+
+.cs-summary strong {
+  color: var(--cs-ink);
+  word-break: break-all;
+}
+
+.cs-status-tag {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--cs-soft);
+  color: var(--cs-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Join CreditKlick (app) ---------- */
+
+.cs-join {
+  background: var(--cs-soft);
+}
+
+.cs-join-inner {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 0;
+}
+
+.cs-join h2 {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--cs-ink);
+}
+
+.cs-join h2 span {
+  color: var(--cs-primary);
+}
+
+.cs-join-sub {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cs-text);
+}
+
+.cs-join-list {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.cs-join-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cs-ink);
+}
+
+.cs-join-list svg {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--cs-primary);
+}
+
+.cs-join-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 0.75rem;
+  background: var(--cs-primary);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.cs-join-cta:hover {
+  background: var(--cs-primary-dark);
+}
+
+.cs-join-cta svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.cs-join-art {
+  display: flex;
+  justify-content: center;
+  align-self: end;
+}
+
+/* the phone sits on the bottom edge of the band */
+.cs-join-art img {
+  display: block;
+  width: 13rem;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(15, 31, 75, 0.25));
+}
+
+/* ---------- How it works ---------- */
+
+.cs-section {
+  padding: 3.5rem 0;
+}
+
+.cs-steps {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cs-step {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--cs-line);
+  background: #ffffff;
+}
+
+.cs-step-icon {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  background: var(--cs-soft);
+  color: var(--cs-primary);
+}
+
+.cs-step-icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.cs-step-num {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--cs-soft);
+}
+
+.cs-step h3 {
+  margin-top: 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cs-ink);
+}
+
+.cs-step p {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--cs-text);
+}
+
+/* ---------- Testimonials ---------- */
+
+.cs-reviews {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.cs-review-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.cs-review-photo img {
+  width: 13rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.cs-review {
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  background: var(--cs-soft);
+}
+
+.cs-stars {
+  display: flex;
+  gap: 0.15rem;
+  color: var(--cs-primary);
+}
+
+.cs-stars svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.cs-review blockquote {
+  margin: 0.85rem 0 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--cs-ink);
+}
+
+.cs-review-name {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cs-primary);
+}
+
+/* ---------- Why check ---------- */
+
+.cs-why {
+  background: var(--cs-tint);
+}
+
+.cs-why-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.cs-why-list li {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--cs-text);
+}
+
+.cs-why-list svg {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.15rem;
+  color: var(--cs-primary);
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (min-width: 640px) {
+  .cs-band h1 {
+    font-size: 1.5rem;
+  }
+
+  .cs-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+  }
+
+  .cs-span-2 {
+    grid-column: span 2;
+  }
+
+  .cs-card {
+    padding: 2rem;
+  }
+
+  .cs-h2 {
+    font-size: 2.1rem;
+  }
+
+  .cs-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cs-why-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .cs-main {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .cs-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 2rem;
+  }
+
+  .cs-info,
+  .cs-card {
+    order: 0;
+  }
+
+  .cs-info {
+    padding: 2.5rem;
+  }
+
+  .cs-info h2 {
+    font-size: 2.4rem;
+  }
+
+  .cs-join-inner {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 3.5rem;
+  }
+
+  .cs-join-copy {
+    padding-bottom: 3.5rem;
+  }
+
+  .cs-join h2 {
+    font-size: 2.3rem;
+  }
+
+  .cs-join-art img {
+    width: 16rem;
+  }
+
+  .cs-section {
+    padding: 4.5rem 0;
+  }
+
+  .cs-reviews {
+    grid-template-columns: 1fr 1.3fr 1.3fr;
+    gap: 1.5rem;
+  }
+}

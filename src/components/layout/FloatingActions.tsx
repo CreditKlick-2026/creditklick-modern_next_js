@@ -38,7 +38,7 @@ export function FloatingActions() {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: 20, opacity: 0 }}
                             onClick={scrollToTop}
-                            className="bg-blue-100 text-blue-600 border border-blue-200 p-3 rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center"
+                            className="bg-brand-soft text-brand border border-brand-soft p-3 rounded-full shadow-lg hover:bg-brand hover:text-white transition-all flex items-center justify-center"
                             aria-label="Scroll to top"
                         >
                             <ArrowUp className="w-5 h-5" />

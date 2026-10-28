@@ -69,7 +69,7 @@ export function DesktopNav({ isLoggedIn, onLogout }: DesktopNavProps) {
               <ChevronDown
                 className={cn(
                   "h-3.5 w-3.5 transition-transform duration-200 text-gray-400 ml-0.5",
-                  openDropdown === item.label && "rotate-180 text-blue-600"
+                  openDropdown === item.label && "rotate-180 text-brand"
                 )}
               />
             )}

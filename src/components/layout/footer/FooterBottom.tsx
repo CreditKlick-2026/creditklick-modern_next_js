@@ -24,7 +24,7 @@ export const FooterBottom: React.FC = () => {
           <Link
             key={idx}
             href={link.href}
-            className="hover:text-blue-600 hover:underline underline-offset-[3px] decoration-blue-500 transition-colors"
+            className="hover:text-brand hover:underline underline-offset-[3px] decoration-blue-500 transition-colors"
           >
             {link.name}
           </Link>
@@ -32,7 +32,7 @@ export const FooterBottom: React.FC = () => {
         <button
           type="button"
           onClick={handleOpenCookieConsent}
-          className="hover:text-blue-600 hover:underline underline-offset-[3px] decoration-blue-500 transition-colors"
+          className="hover:text-brand hover:underline underline-offset-[3px] decoration-blue-500 transition-colors"
         >
           Cookie Settings
         </button>

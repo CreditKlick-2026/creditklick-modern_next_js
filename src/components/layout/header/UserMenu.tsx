@@ -42,8 +42,8 @@ export function UserMenu({ isLoggedIn, onLogout }: UserMenuProps) {
           onMouseLeave={() => setProfileDropdown(false)}
         >
           <Link href="/profile" className="flex items-center cursor-pointer">
-            <div className="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
-              <User className="h-4 w-4 text-blue-600" />
+            <div className="w-9 h-9 bg-brand-soft rounded-full flex items-center justify-center hover:bg-brand-soft transition-colors">
+              <User className="h-4 w-4 text-brand" />
             </div>
           </Link>
           <AnimatePresence>
@@ -56,12 +56,12 @@ export function UserMenu({ isLoggedIn, onLogout }: UserMenuProps) {
               >
                 <ul className="py-2 text-xs font-semibold">
                   <li>
-                    <Link href="/profile" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                    <Link href="/profile" className="block px-4 py-2 hover:bg-brand-soft hover:text-brand transition-colors">
                       PROFILE
                     </Link>
                   </li>
                   <li>
-                    <Link href="/report-analysis" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                    <Link href="/report-analysis" className="block px-4 py-2 hover:bg-brand-soft hover:text-brand transition-colors">
                       REPORT ANALYSIS
                     </Link>
                   </li>

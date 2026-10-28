@@ -20,12 +20,12 @@ export function BenefitsIllustration({
         aria-hidden="true"
       >
         <path
-          fill="#eff6ff"
+          fill="#dbe8fd"
           d="M44 196c-30-46-12-108 38-132 36-18 64 4 100-8 40-14 60-48 100-34 46 16 64 78 50 126-12 44-54 64-96 76-48 14-102 24-134 2-26-18-38-14-58-30z"
         />
-        <circle cx="342" cy="64" r="24" fill="#dbeafe" />
-        <circle cx="46" cy="232" r="16" fill="#dbeafe" />
-        <circle cx="196" cy="52" r="10" fill="#dbeafe" />
+        <circle cx="342" cy="64" r="24" fill="#dbe8fd" />
+        <circle cx="46" cy="232" r="16" fill="#dbe8fd" />
+        <circle cx="196" cy="52" r="10" fill="#dbe8fd" />
       </svg>
 
       {/* Dynamic Animated Badge */}

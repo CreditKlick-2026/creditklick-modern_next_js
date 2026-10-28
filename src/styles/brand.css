@@ -1,0 +1,53 @@
+/* CreditKlick brand colors — the two colors the site uses for accents.
+   Plain CSS: the project has no Tailwind build, so these utilities are hand-written
+   (same shape as the generated ones in utilities.css). */
+
+:root {
+  --ck-primary: #155dfc;
+  --ck-primary-dark: #0f4ad1;
+  --ck-soft: #dbe8fd;
+}
+
+@layer utilities {
+  .text-brand { color: var(--ck-primary); }
+  .hover\:text-brand:hover { color: var(--ck-primary); }
+  .hover\:bg-brand:hover { background-color: var(--ck-primary); }
+  .hover\:bg-brand-dark:hover { background-color: var(--ck-primary-dark); }
+  .hover\:bg-brand-soft:hover { background-color: var(--ck-soft); }
+  .hover\:text-brand-dark:hover { color: var(--ck-primary-dark); }
+  .fill-brand { fill: var(--ck-primary); }
+
+  .bg-brand { background-color: var(--ck-primary); }
+  .bg-brand-soft { background-color: var(--ck-soft); }
+  .bg-brand-soft\/60 { background-color: rgb(219 232 253 / 0.6); }
+
+  .border-brand-soft { border-color: var(--ck-soft); }
+
+  .from-brand-soft {
+    --tw-gradient-from: var(--ck-soft);
+    --tw-gradient-stops: var(
+      --tw-gradient-via-stops,
+      var(--tw-gradient-position),
+      var(--tw-gradient-from) var(--tw-gradient-from-position),
+      var(--tw-gradient-to) var(--tw-gradient-to-position)
+    );
+  }
+  .via-brand-soft {
+    --tw-gradient-via: var(--ck-soft);
+    --tw-gradient-via-stops:
+      var(--tw-gradient-position),
+      var(--tw-gradient-from) var(--tw-gradient-from-position),
+      var(--tw-gradient-via) var(--tw-gradient-via-position),
+      var(--tw-gradient-to) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-via-stops);
+  }
+  .to-brand-soft {
+    --tw-gradient-to: var(--ck-soft);
+    --tw-gradient-stops: var(
+      --tw-gradient-via-stops,
+      var(--tw-gradient-position),
+      var(--tw-gradient-from) var(--tw-gradient-from-position),
+      var(--tw-gradient-to) var(--tw-gradient-to-position)
+    );
+  }
+}

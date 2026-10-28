@@ -1,0 +1,549 @@
+/* Bank credit card value calculators — plain CSS (project has no Tailwind build).
+   Brand: #155dfc (primary) and #dbe8fd (soft). */
+
+.vc {
+  --vc-primary: #155dfc;
+  --vc-primary-dark: #0f4ad1;
+  --vc-soft: #dbe8fd;
+  --vc-tint: #f3f7ff;
+  --vc-ink: #0f1f4b;
+  --vc-text: #334155;
+  --vc-muted: #64748b;
+  --vc-line: #e2e8f0;
+  background: #ffffff;
+  color: var(--vc-ink);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.vc *,
+.vc *::before,
+.vc *::after {
+  box-sizing: border-box;
+}
+
+:where(.vc) h1,
+:where(.vc) h2,
+:where(.vc) h3,
+:where(.vc) p {
+  margin: 0;
+  padding: 0;
+}
+
+.vc-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Hero ---------- */
+
+.vc-hero {
+  background: var(--vc-soft);
+  padding: 2.5rem 0 2.25rem;
+  text-align: center;
+}
+
+.vc-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vc-primary);
+}
+
+.vc-hero h1 {
+  margin-top: 0.5rem;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--vc-ink);
+}
+
+.vc-hero-sub {
+  max-width: 38rem;
+  margin: 0.75rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--vc-text);
+}
+
+/* ---------- Calculator ---------- */
+
+.vc-body {
+  padding: 2.5rem 0 4rem;
+}
+
+.vc-top {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.vc-panel {
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--vc-line);
+  background: #ffffff;
+  box-shadow: 0 10px 30px -18px rgba(21, 93, 252, 0.35);
+}
+
+.vc-panel-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--vc-ink);
+}
+
+.vc-panel-sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  color: var(--vc-muted);
+}
+
+.vc-field {
+  margin-top: 1.4rem;
+}
+
+.vc-field > label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--vc-ink);
+}
+
+.vc-money {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--vc-line);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.vc-money:focus-within {
+  border-color: var(--vc-primary);
+  box-shadow: 0 0 0 3px var(--vc-soft);
+}
+
+.vc-money > span {
+  padding: 0 0.25rem 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--vc-primary);
+}
+
+.vc-money input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.8rem 1rem 0.8rem 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--vc-ink);
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.vc-money input:focus {
+  outline: none;
+}
+
+.vc-money input::placeholder {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.vc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.vc-chip {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--vc-soft);
+  border-radius: 999px;
+  background: var(--vc-tint);
+  color: var(--vc-primary);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.vc-chip:hover {
+  background: var(--vc-soft);
+}
+
+.vc-chip[aria-pressed="true"] {
+  background: var(--vc-primary);
+  border-color: var(--vc-primary);
+  color: #ffffff;
+}
+
+.vc-chip:focus-visible,
+.vc-btn:focus-visible {
+  outline: 2px solid var(--vc-primary);
+  outline-offset: 2px;
+}
+
+.vc-annual {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.8rem;
+  background: var(--vc-tint);
+}
+
+.vc-annual span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--vc-text);
+}
+
+.vc-annual strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--vc-ink);
+}
+
+.vc-notes {
+  display: grid;
+  gap: 0.45rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vc-notes li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--vc-muted);
+}
+
+.vc-notes svg {
+  flex-shrink: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--vc-primary);
+}
+
+/* result */
+.vc-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1.1rem;
+  background: var(--vc-primary);
+  color: #ffffff;
+}
+
+.vc-result-label {
+  font-size: 1rem;
+  color: var(--vc-soft);
+}
+
+.vc-result-total {
+  margin-top: 0.35rem;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.vc-result-note {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--vc-soft);
+}
+
+.vc-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.vc-hint svg {
+  flex-shrink: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.vc-face {
+  position: relative;
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 1.586;
+  margin: 1.4rem auto 0;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  color: #ffffff;
+  text-align: left;
+  background: var(--vc-card-bg);
+  box-shadow: 0 18px 34px -16px rgba(2, 6, 23, 0.6);
+}
+
+.vc-face::before {
+  content: "";
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  right: -4rem;
+  top: -5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.vc-face-bank {
+  position: relative;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vc-face-name {
+  position: relative;
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.vc-face-chip {
+  width: 2rem;
+  height: 1.45rem;
+  margin-top: 0.7rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(135deg, #fde68a, #d4a017);
+}
+
+.vc-face-number {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+
+.vc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 0.75rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.vc-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.vc-btn-light {
+  margin-top: 1.4rem;
+  background: #ffffff;
+  color: var(--vc-primary);
+}
+
+.vc-btn-light:hover {
+  background: var(--vc-soft);
+}
+
+.vc-btn-primary {
+  background: var(--vc-primary);
+  color: #ffffff;
+}
+
+.vc-btn-primary:hover {
+  background: var(--vc-primary-dark);
+}
+
+/* ---------- Breakdown ---------- */
+
+.vc-breakdown {
+  margin-top: 2.5rem;
+}
+
+.vc-breakdown-head h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--vc-ink);
+}
+
+.vc-breakdown-head p {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--vc-muted);
+}
+
+.vc-cats {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.vc-cat {
+  display: flex;
+  flex-direction: column;
+  padding: 1.15rem;
+  border-radius: 1rem;
+  border: 1px solid var(--vc-line);
+  background: #ffffff;
+}
+
+.vc-cat-head {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.vc-cat-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.7rem;
+  background: var(--vc-soft);
+  color: var(--vc-primary);
+}
+
+.vc-cat-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* two icons in one badge (e.g. train + plane) */
+.vc-cat-icon:has(svg + svg) {
+  width: auto;
+  gap: 0.25rem;
+  padding: 0 0.6rem;
+}
+
+.vc-cat-head .vc-cat-sub {
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vc-primary);
+}
+
+.vc-cat h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--vc-ink);
+}
+
+.vc-cat-head p {
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--vc-text);
+}
+
+.vc-cat-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.vc-cat-stats div {
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.7rem;
+  background: var(--vc-tint);
+}
+
+.vc-cat-stats span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vc-muted);
+}
+
+.vc-cat-stats strong {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--vc-ink);
+}
+
+.vc-cat-stats .vc-benefit {
+  color: var(--vc-primary);
+}
+
+.vc-cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.vc-disclaimer {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--vc-muted);
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (min-width: 640px) {
+  .vc-hero {
+    padding: 3.25rem 0 3rem;
+  }
+
+  .vc-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .vc-panel {
+    padding: 2rem;
+  }
+
+  .vc-cats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .vc-top {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* 6-track grid: normal cards take 2 (3 per row), wide cards take 3 (2 per row) */
+  .vc-cats {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .vc-cat {
+    grid-column: span 2;
+  }
+
+  .vc-cat.is-wide {
+    grid-column: span 3;
+  }
+}

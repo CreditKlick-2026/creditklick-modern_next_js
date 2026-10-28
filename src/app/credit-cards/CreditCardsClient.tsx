@@ -1,10 +1,11 @@
 "use client"
 
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { Button, Card } from '@/components/ui'
+import './credit-cards.css'
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
@@ -18,7 +19,8 @@ const staggerContainer = {
 
 interface CreditCard {
     name: string
-    image: string
+    bank: string
+    bg: string
     href: string
 }
 
@@ -78,11 +80,9 @@ export default function CreditCardsClient({ creditCards, creditTable, feesCharge
                                 with the help of rewards points, cashback and discounts. We&apos;ve covered essential details
                                 on credit card options on this webpage, you can also compare different benefits by various cards.
                             </p>
-                            <Link href="/credit-score">
-                                <Button variant="gradient" size="lg" className="group">
-                                    Apply Now
-                                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                </Button>
+                            <Link href="/credit-score" className="cc-btn cc-btn-lg">
+                                Apply Now
+                                <ArrowRight aria-hidden="true" />
                             </Link>
                         </motion.div>
 
@@ -119,21 +119,15 @@ export default function CreditCardsClient({ creditCards, creditTable, feesCharge
                     >
                         {creditCards.map((card) => (
                             <motion.div key={card.name} variants={fadeInUp}>
-                                <Link href={card.href}>
-                                    <Card className="text-center p-6 h-full hover:border-blue-500 hover:shadow-xl transition-all group">
-                                        <div className="relative h-40 w-full mb-6 group-hover:scale-105 transition-transform">
-                                            <Image
-                                                src={card.image}
-                                                alt={card.name}
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                        <h3 className="text-lg font-bold text-blue-900 mb-4 uppercase">{card.name}</h3>
-                                        <Button variant="default" className="w-full bg-blue-600 hover:bg-blue-700">
-                                            Check Now
-                                        </Button>
-                                    </Card>
+                                <Link href={card.href} className="cc-tile">
+                                    <div className="cc-face" style={{ '--cc-bg': card.bg } as CSSProperties} aria-hidden="true">
+                                        <p className="cc-face-bank">{card.bank}</p>
+                                        <div className="cc-face-chip" />
+                                        <p className="cc-face-number">•••• •••• 4321</p>
+                                        <div className="cc-face-net"><span /><span /></div>
+                                    </div>
+                                    <h3 className="cc-tile-name">{card.name}</h3>
+                                    <span className="cc-btn cc-btn-block">Check Now</span>
                                 </Link>
                             </motion.div>
                         ))}
@@ -172,11 +166,9 @@ export default function CreditCardsClient({ creditCards, creditTable, feesCharge
                             </table>
                         </div>
                         <div className="text-center mt-8">
-                            <Link href="/credit-score">
-                                <Button variant="gradient">
-                                    Apply for Credit Card
-                                    <ArrowRight className="ml-2 h-5 w-5" />
-                                </Button>
+                            <Link href="/credit-score" className="cc-btn">
+                                Apply for Credit Card
+                                <ArrowRight aria-hidden="true" />
                             </Link>
                         </div>
                     </motion.div>

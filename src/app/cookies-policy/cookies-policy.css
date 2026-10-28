@@ -1,0 +1,409 @@
+/* Cookies Policy page — plain CSS (project has no Tailwind build).
+   Brand: #155dfc (primary) and #dbe8fd (soft). */
+
+.cp-pol {
+  --pol-primary: #155dfc;
+  --pol-primary-dark: #0f4ad1;
+  --pol-soft: #dbe8fd;
+  --pol-tint: #f3f7ff;
+  --pol-ink: #0f1f4b;
+  --pol-text: #334155;
+  --pol-muted: #64748b;
+  --pol-line: #e2e8f0;
+  background: #ffffff;
+  color: var(--pol-ink);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.cp-pol *,
+.cp-pol *::before,
+.cp-pol *::after {
+  box-sizing: border-box;
+}
+
+:where(.cp-pol) h1,
+:where(.cp-pol) h2,
+:where(.cp-pol) h3,
+:where(.cp-pol) p,
+:where(.cp-pol) ul,
+:where(.cp-pol) ol {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.cp-pol) ul,
+:where(.cp-pol) ol {
+  list-style: none;
+}
+
+.pol-wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Hero ---------- */
+
+.pol-hero {
+  background: var(--pol-soft);
+  padding: 2.75rem 0 2.5rem;
+  text-align: center;
+}
+
+.pol-hero-icon {
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: var(--pol-primary);
+}
+
+.pol-hero-icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.pol-eyebrow {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pol-primary);
+}
+
+.pol-hero h1 {
+  margin-top: 0.4rem;
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--pol-ink);
+}
+
+.pol-hero-sub {
+  max-width: 38rem;
+  margin: 0.75rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--pol-text);
+}
+
+.pol-updated {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--pol-muted);
+}
+
+/* ---------- Body: TOC + content ---------- */
+
+.pol-body {
+  padding: 2.5rem 0 4rem;
+}
+
+.pol-layout {
+  display: grid;
+  gap: 2rem;
+}
+
+.pol-toc {
+  display: none;
+}
+
+.pol-content {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.pol-section {
+  scroll-margin-top: 6rem;
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--pol-line);
+  background: #ffffff;
+}
+
+.pol-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--pol-ink);
+}
+
+.pol-num {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  background: var(--pol-soft);
+  color: var(--pol-primary);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.pol-section > p {
+  margin-top: 0.85rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--pol-text);
+}
+
+.pol-section a {
+  font-weight: 600;
+  color: var(--pol-primary);
+}
+
+/* cookie purpose cards */
+.pol-kinds {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pol-kind {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  background: var(--pol-tint);
+}
+
+.pol-kind-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.7rem;
+  background: var(--pol-soft);
+  color: var(--pol-primary);
+}
+
+.pol-kind-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.pol-kind h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--pol-ink);
+}
+
+.pol-kind p {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--pol-text);
+}
+
+/* cookie table */
+.pol-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--pol-line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+.pol-table th {
+  padding: 0.8rem 1rem;
+  background: var(--pol-soft);
+  color: var(--pol-ink);
+  font-weight: 700;
+  text-align: left;
+}
+
+.pol-table td {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--pol-line);
+  color: var(--pol-text);
+  vertical-align: top;
+}
+
+.pol-table code {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.4rem;
+  background: var(--pol-tint);
+  color: var(--pol-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Mobile: each row becomes a small card */
+@media (max-width: 639px) {
+  .pol-table,
+  .pol-table tbody,
+  .pol-table tr,
+  .pol-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .pol-table {
+    border: 0;
+  }
+
+  .pol-table thead {
+    display: none;
+  }
+
+  .pol-table tr {
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0;
+    border: 1px solid var(--pol-line);
+    border-radius: 0.8rem;
+  }
+
+  .pol-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0.9rem;
+    border-top: 0;
+    text-align: right;
+  }
+
+  .pol-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--pol-muted);
+    text-align: left;
+  }
+}
+
+.pol-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+  padding: 0.75rem 1.25rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: var(--pol-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.pol-btn:hover {
+  background: var(--pol-primary-dark);
+}
+
+.pol-btn:focus-visible {
+  outline: 2px solid var(--pol-primary);
+  outline-offset: 2px;
+}
+
+.pol-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.pol-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.75rem;
+  background: var(--pol-soft);
+  color: var(--pol-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pol-mail svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (min-width: 640px) {
+  .pol-hero {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .pol-hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .pol-section {
+    padding: 2rem;
+  }
+
+  .pol-kinds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .pol-layout {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .pol-toc {
+    display: block;
+    position: sticky;
+    top: 6rem;
+    padding: 1.25rem;
+    border-radius: 1.1rem;
+    background: var(--pol-tint);
+  }
+
+  .pol-toc p {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pol-muted);
+  }
+
+  .pol-toc ol {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 0.75rem;
+  }
+
+  .pol-toc a {
+    display: block;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0.55rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--pol-text);
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .pol-toc a:hover {
+    background: var(--pol-soft);
+    color: var(--pol-primary);
+  }
+}

@@ -26,7 +26,7 @@ export function ServicesBottomBanner() {
 
       {/* 3 Interactive Feature Badges */}
       <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-        <span className="dt-feature-badge">
+        <span className="dt-feature-badge" style={{ borderRadius: "0px" }}>
           <svg
             width="14"
             height="14"
@@ -42,7 +42,7 @@ export function ServicesBottomBanner() {
           REAL TIME SYNC
         </span>
 
-        <span className="dt-feature-badge">
+        <span className="dt-feature-badge" style={{ borderRadius: "0px" }}>
           <svg
             width="14"
             height="14"
@@ -58,7 +58,7 @@ export function ServicesBottomBanner() {
           100% CONFIDENTIAL &amp; SAFE
         </span>
 
-        <span className="dt-feature-badge">
+        <span className="dt-feature-badge" style={{ borderRadius: "0px" }}>
           <svg
             width="14"
             height="14"

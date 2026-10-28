@@ -15,28 +15,26 @@ export function ServicesGrid() {
       <div style={{ maxWidth: "80rem", margin: "0 auto", position: "relative", zIndex: 10, paddingLeft: "1rem", paddingRight: "1rem" }}>
 
         {/* Section Pill Badge */}
-        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+        <div style={{ textAlign: "center", marginBottom: "0.75rem" }}>
           <span style={{
             display: "inline-flex",
-
             alignItems: "center",
             gap: "8px",
             fontSize: "11px",
             fontWeight: 700,
-            letterSpacing: "0.2em",
+            letterSpacing: "0.15em",
             textTransform: "uppercase",
             color: "#1e3a8a",
-            backgroundColor: "rgba(219,234,254,0.7)",
-            border: "1px solid rgba(147,197,253,0.6)",
-            padding: "6px 16px",
-            borderRadius: "9999px",
+            backgroundColor: "rgba(219, 232, 253, 0.7)",
+            border: "1px solid rgba(21, 93, 252, 0.6)",
+            padding: "5px 14px",
+            borderRadius: "0px",
           }}>
             <span style={{
               display: "inline-block",
               width: "6px",
               height: "6px",
-              borderRadius: "50%",
-              backgroundColor: "#2563eb",
+              backgroundColor: "#155dfc",
               animation: "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
             }} />
             HOW CREDITKLICK HELPS YOU
@@ -70,27 +68,26 @@ export function ServicesGrid() {
 
         {/* Mobile & Tablet Flow — only visible <1024px */}
         <div className="dt-mobile-only">
-          {/* Hub + connector */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
-            <div className="dt-hub-card" aria-label="CreditKlick Hub" />
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "12px" }}>
-              <span style={{ display: "block", width: "2px", height: "20px", background: "linear-gradient(to bottom, #2563eb, #93c5fd)" }} />
-              <span style={{
-                fontSize: "10px",
-                fontWeight: 700,
-                color: "#2563eb",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                backgroundColor: "#eff6ff",
-                padding: "2px 10px",
-                borderRadius: "9999px",
-                border: "1px solid #bfdbfe",
-                marginTop: "2px",
-              }}>
-                8 Integrated Services
-              </span>
-              <span style={{ display: "block", width: "2px", height: "12px", background: "linear-gradient(to bottom, #bfdbfe, transparent)", marginTop: "2px" }} />
-            </div>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "18px", marginTop: "4px" }}>
+            <h3 style={{
+              fontSize: "18px",
+              fontWeight: 800,
+              color: "#0f172a",
+              letterSpacing: "-0.02em",
+              margin: 0,
+            }}>
+              8 Integrated Services
+            </h3>
+            <p style={{
+              fontSize: "12px",
+              color: "#64748b",
+              marginTop: "4px",
+              maxWidth: "380px",
+              marginInline: "auto",
+            }}>
+              Personalized solutions to repair credit, reduce EMIs, and become debt-free.
+            </p>
           </div>
 
           {/* Cards Grid */}

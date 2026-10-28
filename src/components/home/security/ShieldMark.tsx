@@ -14,7 +14,7 @@ export function ShieldMark({ size = 96, className = "" }: ShieldMarkProps) {
       role="img"
       aria-label="Data security illustration"
     >
-      <circle cx="110" cy="110" r="100" fill="#eff6ff" />
+      <circle cx="110" cy="110" r="100" fill="#dbe8fd" />
       <path
         d="M110 26l62 24v54c0 42-26 76-62 90-36-14-62-48-62-90V50z"
         fill="#ffffff"

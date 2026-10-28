@@ -13,10 +13,10 @@ export const BENEFITS: readonly BenefitItem[] = [
     imageAlt: "Credit Score Boost badge",
   },
   {
-    title: "Compare Multiple Options",
-    body: "Evaluate loan offers and credit cards from top RBI-registered banks and NBFCs side by side. Compare interest rates, processing fees, and perks transparently to secure the best financial deal.",
+    title: "Maintain Score & Qualify for Best Offers",
+    body: "Regularly track and maintain a healthy credit profile with continuous bureau monitoring. A strong score ensures you stay pre-qualified to apply for the best loan and credit card offers with minimal interest rates.",
     image: "/images/benefits/compare-options.png",
-    imageAlt: "Compare multiple options and affordable payments badge",
+    imageAlt: "Maintain credit score and qualify for best offers badge",
   },
   {
     title: "Clear Financial Roadmap",
