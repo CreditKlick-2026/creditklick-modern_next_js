@@ -88,6 +88,26 @@ export default function PoshPolicyClient() {
                         <a href="mailto:support@creditklick.com" className="text-blue-600 hover:underline">support@creditklick.com</a>
                     </p>
 
+                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
+                        Gender Neutral POSH Policy 2026
+                    </h3>
+                    <div className="mb-4">
+                        <a
+                            href="/documents/gender-neutral-posh-policy-2026.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="inline-block rounded-lg bg-[#155dfc] px-5 py-2.5 text-white font-medium hover:opacity-90 no-underline"
+                        >
+                            Download PDF
+                        </a>
+                    </div>
+                    <iframe
+                        src="/documents/gender-neutral-posh-policy-2026.pdf"
+                        title="Gender Neutral POSH Policy 2026"
+                        className="w-full h-[600px] md:h-[900px] border border-gray-200 rounded-lg mb-8"
+                    />
+
                     <p className="text-sm text-gray-500 italic">
                         Last updated: January 2026
                     </p>
