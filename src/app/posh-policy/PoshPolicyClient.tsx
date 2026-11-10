@@ -23,63 +23,6 @@ export default function PoshPolicyClient() {
                     transition={{ duration: 0.5 }}
                     className="prose prose-lg max-w-none"
                 >
-                    <h2 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Prevention of Sexual Harassment (POSH)
-                    </h2>
-                    <p className="text-base md:text-lg text-gray-700 mb-8">
-                        CreditKlick (IMSPL) is committed to providing a safe working environment, free from sexual harassment
-                        or any form of workplace discrimination. This policy is in compliance with the Sexual Harassment of
-                        Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.
-                    </p>
-
-
-
-                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Policy Statement
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
-                        We have zero tolerance for sexual harassment in any form at the workplace. All employees, contractors,
-                        vendors, and visitors are expected to conduct themselves professionally and respectfully at all times.
-                    </p>
-
-                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        What Constitutes Sexual Harassment
-                    </h3>
-                    <ul className="list-disc pl-6 text-gray-700 mb-8 space-y-2">
-                        <li>Physical contact and advances</li>
-                        <li>A demand or request for sexual favors</li>
-                        <li>Sexually colored remarks</li>
-                        <li>Showing pornography</li>
-                        <li>Any other unwelcome physical, verbal or non-verbal conduct of sexual nature</li>
-                    </ul>
-
-                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Internal Complaints Committee (ICC)
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
-                        We have constituted an Internal Complaints Committee (ICC) as per the statutory requirements to address
-                        complaints of sexual harassment. The ICC comprises of senior employees and an external member to ensure
-                        fair and impartial handling of complaints.
-                    </p>
-
-                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Complaint Process
-                    </h3>
-                    <ol className="list-decimal pl-6 text-gray-700 mb-8 space-y-2">
-                        <li>Written complaint to be submitted to the ICC within 3 months of the incident</li>
-                        <li>ICC will complete the inquiry within 90 days</li>
-                        <li>Report to be submitted within 10 days of completion of inquiry</li>
-                        <li>Action to be taken within 60 days of receiving the report</li>
-                    </ol>
-
-                    <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
-                        Confidentiality
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
-                        All complaints and proceedings are kept strictly confidential. Any breach of confidentiality will be
-                        treated as misconduct and disciplinary action will be taken.
-                    </p>
-
                     <h3 className="text-lg md:text-2xl font-semibold text-blue-400 mb-4 uppercase">
                         Contact
                     </h3>
