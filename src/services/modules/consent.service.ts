@@ -12,7 +12,7 @@ export const consentAPI = {
 }
 
 export const userAPI = {
-    revokeConsent: (data: { phone?: string; email?: string; reason?: string }) =>
+    revokeConsent: (data: { reason?: string }) =>
         api.post('/consent/withdraw', data),
     logConsent: (data: {
         phone: string

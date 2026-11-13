@@ -130,7 +130,8 @@ const nextConfig: NextConfig = {
       fallback: [
         {
           source: '/api/v1/:path*',
-          destination: 'https://betaversion-creditklickapp.onrender.com/api/v1/:path*',
+          // Production API (HTTPS). Override per environment with BACKEND_API_URL.
+          destination: `${(process.env.BACKEND_API_URL || 'https://api.creditklick.com/api/v1').replace(/\/+$/, '')}/:path*`,
         },
       ],
     };

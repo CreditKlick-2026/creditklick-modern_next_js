@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 const isClient = typeof window !== 'undefined'
 export const API_BASE_URL = isClient
     ? '/api/v1'
-    : (process.env.NEXT_PUBLIC_API_URL || 'https://betaversion-creditklickapp.onrender.com/api/v1')
+    : (process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_API_URL || 'https://api.creditklick.com/api/v1')
 
 // Create axios instance for main CreditKlick backend
 export const api: AxiosInstance = axios.create({

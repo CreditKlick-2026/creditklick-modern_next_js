@@ -7,11 +7,9 @@ try {
     // Ignore in environments where setServers is restricted
 }
 
-const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://creditklick_app:6WypM1v30l7ITfo0@cluster0.lyksmnj.mongodb.net/creditklick?retryWrites=true&w=majority&appName=Cluster0'
+// Never hardcode credentials: MONGODB_URL must come from the environment
+const MONGODB_URL = process.env.MONGODB_URL as string
 
-if (!MONGODB_URL) {
-    throw new Error('Please define the MONGODB_URL environment variable inside .env')
-}
 
 interface MongooseCache {
     conn: typeof mongoose | null
@@ -30,6 +28,10 @@ if (!cached) {
 }
 
 export async function connectToDatabase(): Promise<typeof mongoose> {
+    // Checked at call time (not import time) so `next build` works without DB credentials
+    if (!MONGODB_URL) {
+        throw new Error('MONGODB_URL environment variable is not set')
+    }
     if (cached!.conn) {
         return cached!.conn
     }

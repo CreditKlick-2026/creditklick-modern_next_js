@@ -322,7 +322,9 @@ export default function CreditScoreClient() {
                 dob: formData.dob,
                 profession: status,
                 gender: gender,
-                isLogin: false
+                isLogin: false,
+                consent: agreed === true,
+                consentVersion: 'v1.0_2026'
             })
             const data = response.data
 
@@ -450,7 +452,7 @@ export default function CreditScoreClient() {
                                 {/* Terms and Submit - full width */}
                                 <div className="col-span-2 px-1">
                                     <Switch checked={agreed} onChange={setAgreed}>
-                                        <span className="text-xs">By clicking/proceeding, you voluntarily agree to provide your personal details, and you authorize &lsquo;Creditklick Services Private Limited&rsquo; to obtain your credit profile/score from CRIF Highmark. You also agree to our <Link href="/privacy-policy" style={{ color: '#155dfc' }} className="font-semibold underline">Privacy Policy</Link> and <Link href="/terms-conditions" style={{ color: '#155dfc' }} className="font-semibold underline">Terms &amp; Conditions</Link>.</span>
+                                        <span className="text-xs">By proceeding, I voluntarily agree to provide my personal details and I authorise &lsquo;Creditklick Services Private Limited&rsquo; to obtain my credit profile / score from CRIF High Mark Credit Information Services Pvt. Ltd. for checking my credit score and providing credit advisory services. My credit information will not be shared with anyone else and will be deleted within 6 months or as soon as I withdraw this consent. I also agree to the <Link href="/privacy-policy" style={{ color: '#155dfc' }} className="font-semibold underline">Privacy Policy</Link> and <Link href="/terms-conditions" style={{ color: '#155dfc' }} className="font-semibold underline">Terms &amp; Conditions</Link>.</span>
                                     </Switch>
                                     <div className="text-xs text-red-500 text-center">{formErrors.agree}</div>
                                 </div>

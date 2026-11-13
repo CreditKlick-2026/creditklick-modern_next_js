@@ -172,6 +172,15 @@ export function MobileDrawer({ isLoggedIn, onLogout, onOpenLogin }: MobileDrawer
                 Pricing
               </Link>
 
+              {/* 2b. Personal Loan */}
+              <Link
+                href="/loan/personal-loan"
+                className={cn(styles.fixMenuLink, pathname === "/loan/personal-loan" && styles.fixMenuLinkActive)}
+                onClick={() => handleNavClick("/loan/personal-loan")}
+              >
+                Personal Loan
+              </Link>
+
               {/* 3. Calculators (Accordion) */}
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
                 <button

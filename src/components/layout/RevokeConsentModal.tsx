@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldAlert, Trash2, X, Loader2, CheckCircle2, Phone, AlertTriangle } from 'lucide-react'
+import Link from 'next/link'
+import { ShieldAlert, Trash2, X, Loader2, CheckCircle2, AlertTriangle, LogIn } from 'lucide-react'
 import Cookies from 'js-cookie'
 import toast from 'react-hot-toast'
 import { userAPI } from '@/services/api'
@@ -13,63 +14,51 @@ interface RevokeConsentModalProps {
 }
 
 export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps) {
-    const [phone, setPhone] = useState('')
     const [reason, setReason] = useState('no_longer_needed')
     const [isLoading, setIsLoading] = useState(false)
     const [isDone, setIsDone] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [error, setError] = useState<string | null>(null)
+    const [referenceId, setReferenceId] = useState<string | null>(null)
 
     useEffect(() => {
         if (isOpen) {
             setIsDone(false)
-            const userStr = Cookies.get('user')
-            if (userStr) {
-                try {
-                    const u = JSON.parse(userStr)
-                    setPhone(u.mobile || u.phone || '')
-                    setIsLoggedIn(true)
-                } catch (e) {
-                    setIsLoggedIn(false)
-                }
-            } else {
-                setIsLoggedIn(false)
-            }
+            setError(null)
+            setReferenceId(null)
+            // Withdrawal acts on the logged-in account only (the server identifies the user from the token)
+            setIsLoggedIn(!!(Cookies.get('accessToken') || Cookies.get('token')))
         }
     }, [isOpen])
 
     const handleRevokeSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-
-        if (!phone || phone.length < 10) {
-            toast.error('Please enter a valid 10-digit mobile number')
-            return
-        }
-
         setIsLoading(true)
+        setError(null)
         try {
-            // Attempt API call to backend consent revocation endpoint
-            try {
-                await userAPI.revokeConsent({ phone, reason })
-            } catch (err) {
-                console.warn('Backend consent API call completed with fallback:', err)
-            }
+            const res = await userAPI.revokeConsent({ reason })
+            const body = res?.data
+            if (!body?.success) throw new Error(body?.message || 'Withdrawal could not be completed')
 
-            // Wipe all stored user cookies & session data
-            Cookies.remove('user', { path: '/' })
+            // Remove cached credit data from this browser too
             Cookies.remove('cibil', { path: '/' })
-            Cookies.remove('token', { path: '/' })
-            Cookies.remove('accessToken', { path: '/' })
-            Cookies.remove('refreshToken', { path: '/' })
-            Cookies.remove('cookie_consent', { path: '/' })
             if (typeof window !== 'undefined') {
-                localStorage.clear()
-                sessionStorage.clear()
+                try {
+                    Object.keys(localStorage).filter((k) => /report|cibil|credit/i.test(k)).forEach((k) => localStorage.removeItem(k))
+                } catch { /* ignore */ }
             }
 
+            setReferenceId(body?.details?.referenceId || null)
             setIsDone(true)
-            toast.success('Consent revoked & personal data deleted successfully')
-        } catch (error) {
-            toast.error('Failed to revoke consent. Please try again.')
+            toast.success('Consent withdrawn. Your credit information has been deleted.')
+        } catch (err: unknown) {
+            const status = (err as { response?: { status?: number } })?.response?.status
+            const msg = status === 401
+                ? 'Your session has expired. Please log in again to withdraw consent.'
+                : ((err as { response?: { data?: { message?: string } } })?.response?.data?.message
+                    || (err as Error)?.message || 'Withdrawal failed. Please try again.')
+            setError(msg)
+            toast.error(msg)
         } finally {
             setIsLoading(false)
         }
@@ -119,30 +108,19 @@ export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps)
                                     <div className="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-start gap-3">
                                         <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                                         <p className="text-xs text-amber-800 leading-relaxed">
-                                            Revoking consent will <strong>permanently erase</strong> your credit score records, personal profile, mobile number, and session history from CreditKlick.
+                                            Withdrawing consent <strong>permanently deletes your credit information</strong> (credit score, report, accounts, enquiries and your credit video) from CreditKlick within minutes. As required by law, a record of your consent and its withdrawal is kept for 2 years — it contains no credit information.
                                         </p>
                                     </div>
 
-                                    <div>
-                                        <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                                            Registered Mobile Number
-                                        </label>
-                                        <div className="relative">
-                                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                                            <input
-                                                type="tel"
-                                                maxLength={10}
-                                                value={phone}
-                                                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                                                placeholder="Enter 10-digit mobile number"
-                                                className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500 focus:bg-white transition-all"
-                                                required
-                                            />
+                                    {!isLoggedIn && (
+                                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3.5 text-xs text-blue-900 flex items-start gap-3">
+                                            <LogIn className="w-5 h-5 shrink-0 mt-0.5" />
+                                            <p>
+                                                Please <Link href="/login" className="font-bold underline" onClick={onClose}>log in</Link> with your registered mobile number to withdraw consent.
+                                                If you cannot log in, raise a request on our <Link href="/grievance-redressal" className="font-bold underline" onClick={onClose}>grievance page</Link>.
+                                            </p>
                                         </div>
-                                        {isLoggedIn && (
-                                            <p className="text-[11px] text-green-600 font-medium mt-1">✓ Logged-in phone number detected</p>
-                                        )}
-                                    </div>
+                                    )}
 
                                     <div>
                                         <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
@@ -160,6 +138,10 @@ export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps)
                                         </select>
                                     </div>
 
+                                    {error && (
+                                        <p className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg p-2.5">{error}</p>
+                                    )}
+
                                     <div className="pt-2 flex items-center gap-3">
                                         <button
                                             type="button"
@@ -170,7 +152,7 @@ export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps)
                                         </button>
                                         <button
                                             type="submit"
-                                            disabled={isLoading}
+                                            disabled={isLoading || !isLoggedIn}
                                             className="flex-1 py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold text-sm transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
                                         >
                                             {isLoading ? (
@@ -190,9 +172,10 @@ export function RevokeConsentModal({ isOpen, onClose }: RevokeConsentModalProps)
                                         <CheckCircle2 className="w-7 h-7" />
                                     </div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-gray-900">Consent Revoked Successfully</h4>
+                                        <h4 className="text-lg font-bold text-gray-900">Consent Withdrawn</h4>
                                         <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">
-                                            Your personal information and credit data have been completely deleted from this device and session.
+                                            Your credit information has been deleted from CreditKlick&apos;s systems.
+                                            {referenceId && <> Reference ID: <span className="font-mono">{referenceId}</span></>}
                                         </p>
                                     </div>
                                     <button

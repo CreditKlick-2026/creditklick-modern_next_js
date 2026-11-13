@@ -113,13 +113,13 @@ export default function RootLayout({
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://betaversion-creditklickapp.onrender.com" />
+        <link rel="preconnect" href="https://api.creditklick.com" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
 
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://betaversion-creditklickapp.onrender.com" />
+        <link rel="dns-prefetch" href="https://api.creditklick.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
 
         {/* Structured Data - Organization Schema */}

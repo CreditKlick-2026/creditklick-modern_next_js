@@ -1,0 +1,35 @@
+name: Website CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit -p .
+      - name: Production build
+        run: npx next build
+        env:
+          # build must not need real secrets; runtime values come from the hosting env
+          BACKEND_API_URL: https://api.creditklick.com/api/v1
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

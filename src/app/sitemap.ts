@@ -21,6 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
         { path: '/refine', priority: 0.8 },
         { path: '/loan/gold-loan', priority: 0.9 },
+        { path: '/loan/personal-loan', priority: 0.9 },
         { path: '/credit-card/au-bank', priority: 0.8 },
         { path: '/credit-card/idfc-bank', priority: 0.8 },
         { path: '/credit-card/sbi-bank', priority: 0.8 },

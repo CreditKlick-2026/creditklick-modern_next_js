@@ -25,6 +25,7 @@ export const navItems: NavItem[] = [
     href: "/pricing",
   },
   { label: "Credit Refine", href: "/refine" },
+  { label: "Personal Loan", href: "/loan/personal-loan" },
   {
     label: "Calculators",
     href: "/calculators",
