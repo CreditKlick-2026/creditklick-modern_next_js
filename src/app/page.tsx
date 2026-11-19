@@ -1,5 +1,14 @@
 import { Metadata } from 'next'
-import HomeClient from './HomeClient'
+import {
+  HomeHero,
+  HomeServices,
+  HomeHowItWorks,
+  HomeReportShowcase,
+  HomeApp,
+  HomeTestimonials,
+  HomeSecurity,
+  HomeFaq,
+} from '@/components/home-v2'
 import { getAIOKnowledgeGraphSchema, getAEOFAQSchema } from '@/lib/seo'
 
 // Dynamic rendering
@@ -40,7 +49,14 @@ export default function HomePage() {
           __html: JSON.stringify(faqSchema),
         }}
       />
-      <HomeClient />
+      <HomeHero />
+      <HomeServices />
+      <HomeHowItWorks />
+      <HomeReportShowcase />
+      <HomeApp />
+      <HomeTestimonials />
+      <HomeSecurity />
+      <HomeFaq />
     </>
   )
 }

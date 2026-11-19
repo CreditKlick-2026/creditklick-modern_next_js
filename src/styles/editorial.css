@@ -1,0 +1,39 @@
+/* CreditKlick editorial design tokens.
+   Layout language: mono eyebrow, serif headline, sharp 1px bordered grids, warm paper bands and
+   deep-navy feature bands. Brand colours stay the CreditKlick blues from brand.css. */
+
+:root {
+  --ed-ink: #0f172a;
+  --ed-ink-2: #334155;
+  --ed-muted: #5b6577;
+  --ed-faint: #94a3b8;
+  --ed-line: #e5e7eb;
+  --ed-line-strong: #d4d4d8;
+
+  --ed-paper: #ffffff;
+  --ed-beige: #f6f5ef;
+  --ed-beige-line: #e7e4d8;
+
+  --ed-brand: var(--ck-primary, #155dfc);
+  --ed-brand-hover: var(--ck-primary-dark, #0f4ad1);
+  --ed-brand-soft: var(--ck-soft, #dbe8fd);
+  --ed-brand-tint: #f3f7ff;
+
+  --ed-dark: #0a1834;
+  --ed-dark-2: #102551;
+  --ed-ondark-text: rgba(255, 255, 255, 0.74);
+  --ed-ondark-line: rgba(255, 255, 255, 0.14);
+  --ed-ondark-accent: #a9c6ff;
+  --ed-ondark-eyebrow: #7fa9ff;
+
+  --ed-success: #047857;
+  --ed-warn: #b45309;
+  --ed-danger: #b91c1c;
+
+  --ed-serif: var(--font-serif-display), Georgia, "Times New Roman", serif;
+  --ed-mono: var(--font-mono), "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --ed-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --ed-header-h: 64px;
+  --ed-max: 1200px;
+}

@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from 'react-hot-toast'
@@ -21,6 +21,22 @@ const inter = Inter({
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
+  display: 'swap',
+});
+
+// Editorial kit: serif headlines + mono eyebrows/buttons (see src/styles/editorial.css)
+const serifDisplay = Source_Serif_4({
+  variable: "--font-serif-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: 'swap',
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: 'swap',
 });
 
@@ -108,7 +124,7 @@ export default function RootLayout({
   const websiteSchema = getWebsiteSchema()
 
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable} ${serifDisplay.variable} ${mono.variable}`}>
       <head>
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -138,7 +154,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <ScrollTop />
         <Shell>
           {children}
@@ -155,13 +171,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `window.Tawk_API=window.Tawk_API||{};window.Tawk_API.hideWidget=function(){};window.Tawk_API.onLoad=function(){if(window.Tawk_API&&typeof window.Tawk_API.hideWidget==='function'){window.Tawk_API.hideWidget();}};`,
           }}
-        />
-
-        {/* Lottie — loaded locally to avoid Turbopack HMR module-factory bug */}
-        <Script
-          id="lottie-global"
-          src="/js/lottie.min.js"
-          strategy="beforeInteractive"
         />
 
         {/* Google Tag Manager - Non-blocking script loading */}
